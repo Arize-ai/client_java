@@ -30,13 +30,20 @@ public class RecordUtil {
     }
 
     protected static Record decoratePrediction(Record.Builder builder, final String modelVersion, final Label label,
-            final Map<String, Value> features) {
-        Prediction.Builder pBuilder = Prediction.newBuilder().setTimestamp(getCurrentTime());
+            final Map<String, Value> features, final Long timeOverwrite) {
+        Prediction.Builder pBuilder = Prediction.newBuilder();
         if (modelVersion != null) {
             pBuilder.setModelVersion(modelVersion);
         }
         if (features != null) {
             pBuilder.putAllFeatures(features);
+        }
+        if (timeOverwrite != null) {
+            int nanos = (int) ((timeOverwrite % 1000) * 1000000);
+            pBuilder.setTimestamp(Timestamp.newBuilder().setSeconds(timeOverwrite)
+                    .setNanos(nanos).build());
+        } else {
+            pBuilder.setTimestamp(getCurrentTime());
         }
         return builder.setPrediction(pBuilder.setLabel(label)).build();
     }

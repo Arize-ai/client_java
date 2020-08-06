@@ -67,7 +67,7 @@ public class BuildRecordTest {
     @Test
     @SuppressWarnings("unchecked")
     public void testBuildPrediction() {
-        Record prediction = client.buildPrediction("modelId", "modelVersion", "predictionId", 20.20, intFeatures,
+        Record prediction = client.buildPrediction("modelId", "modelVersion", "predictionId", 20.20, null, intFeatures,
                 doubleFeatures, stringFeatures);
 
         builder = prediction.toBuilder();
@@ -91,8 +91,8 @@ public class BuildRecordTest {
     @Test
     @SuppressWarnings("unchecked")
     public void testPredictionNullModelVersion() {
-        Record prediction = client.buildPrediction("modelId", null, "predictionId", 20.20, intFeatures, doubleFeatures,
-                stringFeatures);
+        Record prediction = client.buildPrediction("modelId", null, "predictionId", 20.20, null, intFeatures,
+                doubleFeatures, stringFeatures);
 
         // Clear Timestamp
         builder = prediction.toBuilder();
@@ -136,11 +136,23 @@ public class BuildRecordTest {
 
         Record prediction = null;
         try {
-            prediction = client.buildPrediction("modelId", "modelVersion", "predictionId", 20.20, brokenMap,
+            prediction = client.buildPrediction("modelId", "modelVersion", "predictionId", 20.20, null, brokenMap,
                     intFeatures, null);
         } catch (Exception ex) {
             assertNull(prediction);
             assertTrue(ex instanceof IllegalArgumentException);
         }
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testPredictionTimeOverwrite() {
+        Record prediction = client.buildPrediction("modelId", null, "predictionId", 20.20, 1596560235L, intFeatures,
+                doubleFeatures, stringFeatures);
+
+        long seconds = 1596560235L;
+        int nanos = (int) ((1596560235L % 1000) * 1000000);
+        Timestamp expectedTime = Timestamp.newBuilder().setSeconds(seconds).setNanos(nanos).build();
+        assertEquals(prediction.getPrediction().getTimestamp(), expectedTime);
     }
 }
