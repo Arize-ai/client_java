@@ -5534,6 +5534,21 @@ public final class Public {
      */
     double getDouble();
 
+    /**
+     * <code>.public.MultiValue multi_value = 4;</code>
+     * @return Whether the multiValue field is set.
+     */
+    boolean hasMultiValue();
+    /**
+     * <code>.public.MultiValue multi_value = 4;</code>
+     * @return The multiValue.
+     */
+    com.arize.protocol.Public.MultiValue getMultiValue();
+    /**
+     * <code>.public.MultiValue multi_value = 4;</code>
+     */
+    com.arize.protocol.Public.MultiValueOrBuilder getMultiValueOrBuilder();
+
     public com.arize.protocol.Public.Value.DataCase getDataCase();
   }
   /**
@@ -5601,6 +5616,20 @@ public final class Public {
               data_ = input.readDouble();
               break;
             }
+            case 34: {
+              com.arize.protocol.Public.MultiValue.Builder subBuilder = null;
+              if (dataCase_ == 4) {
+                subBuilder = ((com.arize.protocol.Public.MultiValue) data_).toBuilder();
+              }
+              data_ =
+                  input.readMessage(com.arize.protocol.Public.MultiValue.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.arize.protocol.Public.MultiValue) data_);
+                data_ = subBuilder.buildPartial();
+              }
+              dataCase_ = 4;
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -5641,6 +5670,7 @@ public final class Public {
       STRING(1),
       INT(2),
       DOUBLE(3),
+      MULTI_VALUE(4),
       DATA_NOT_SET(0);
       private final int value;
       private DataCase(int value) {
@@ -5661,6 +5691,7 @@ public final class Public {
           case 1: return STRING;
           case 2: return INT;
           case 3: return DOUBLE;
+          case 4: return MULTI_VALUE;
           case 0: return DATA_NOT_SET;
           default: return null;
         }
@@ -5745,6 +5776,34 @@ public final class Public {
       return 0D;
     }
 
+    public static final int MULTI_VALUE_FIELD_NUMBER = 4;
+    /**
+     * <code>.public.MultiValue multi_value = 4;</code>
+     * @return Whether the multiValue field is set.
+     */
+    public boolean hasMultiValue() {
+      return dataCase_ == 4;
+    }
+    /**
+     * <code>.public.MultiValue multi_value = 4;</code>
+     * @return The multiValue.
+     */
+    public com.arize.protocol.Public.MultiValue getMultiValue() {
+      if (dataCase_ == 4) {
+         return (com.arize.protocol.Public.MultiValue) data_;
+      }
+      return com.arize.protocol.Public.MultiValue.getDefaultInstance();
+    }
+    /**
+     * <code>.public.MultiValue multi_value = 4;</code>
+     */
+    public com.arize.protocol.Public.MultiValueOrBuilder getMultiValueOrBuilder() {
+      if (dataCase_ == 4) {
+         return (com.arize.protocol.Public.MultiValue) data_;
+      }
+      return com.arize.protocol.Public.MultiValue.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -5770,6 +5829,9 @@ public final class Public {
         output.writeDouble(
             3, (double)((java.lang.Double) data_));
       }
+      if (dataCase_ == 4) {
+        output.writeMessage(4, (com.arize.protocol.Public.MultiValue) data_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -5791,6 +5853,10 @@ public final class Public {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(
               3, (double)((java.lang.Double) data_));
+      }
+      if (dataCase_ == 4) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, (com.arize.protocol.Public.MultiValue) data_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5822,6 +5888,10 @@ public final class Public {
               != java.lang.Double.doubleToLongBits(
                   other.getDouble())) return false;
           break;
+        case 4:
+          if (!getMultiValue()
+              .equals(other.getMultiValue())) return false;
+          break;
         case 0:
         default:
       }
@@ -5850,6 +5920,10 @@ public final class Public {
           hash = (37 * hash) + DOUBLE_FIELD_NUMBER;
           hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
               java.lang.Double.doubleToLongBits(getDouble()));
+          break;
+        case 4:
+          hash = (37 * hash) + MULTI_VALUE_FIELD_NUMBER;
+          hash = (53 * hash) + getMultiValue().hashCode();
           break;
         case 0:
         default:
@@ -6028,6 +6102,13 @@ public final class Public {
         if (dataCase_ == 3) {
           result.data_ = data_;
         }
+        if (dataCase_ == 4) {
+          if (multiValueBuilder_ == null) {
+            result.data_ = data_;
+          } else {
+            result.data_ = multiValueBuilder_.build();
+          }
+        }
         result.dataCase_ = dataCase_;
         onBuilt();
         return result;
@@ -6090,6 +6171,10 @@ public final class Public {
           }
           case DOUBLE: {
             setDouble(other.getDouble());
+            break;
+          }
+          case MULTI_VALUE: {
+            mergeMultiValue(other.getMultiValue());
             break;
           }
           case DATA_NOT_SET: {
@@ -6294,6 +6379,144 @@ public final class Public {
         }
         return this;
       }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.MultiValue, com.arize.protocol.Public.MultiValue.Builder, com.arize.protocol.Public.MultiValueOrBuilder> multiValueBuilder_;
+      /**
+       * <code>.public.MultiValue multi_value = 4;</code>
+       * @return Whether the multiValue field is set.
+       */
+      public boolean hasMultiValue() {
+        return dataCase_ == 4;
+      }
+      /**
+       * <code>.public.MultiValue multi_value = 4;</code>
+       * @return The multiValue.
+       */
+      public com.arize.protocol.Public.MultiValue getMultiValue() {
+        if (multiValueBuilder_ == null) {
+          if (dataCase_ == 4) {
+            return (com.arize.protocol.Public.MultiValue) data_;
+          }
+          return com.arize.protocol.Public.MultiValue.getDefaultInstance();
+        } else {
+          if (dataCase_ == 4) {
+            return multiValueBuilder_.getMessage();
+          }
+          return com.arize.protocol.Public.MultiValue.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.public.MultiValue multi_value = 4;</code>
+       */
+      public Builder setMultiValue(com.arize.protocol.Public.MultiValue value) {
+        if (multiValueBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          data_ = value;
+          onChanged();
+        } else {
+          multiValueBuilder_.setMessage(value);
+        }
+        dataCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.public.MultiValue multi_value = 4;</code>
+       */
+      public Builder setMultiValue(
+          com.arize.protocol.Public.MultiValue.Builder builderForValue) {
+        if (multiValueBuilder_ == null) {
+          data_ = builderForValue.build();
+          onChanged();
+        } else {
+          multiValueBuilder_.setMessage(builderForValue.build());
+        }
+        dataCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.public.MultiValue multi_value = 4;</code>
+       */
+      public Builder mergeMultiValue(com.arize.protocol.Public.MultiValue value) {
+        if (multiValueBuilder_ == null) {
+          if (dataCase_ == 4 &&
+              data_ != com.arize.protocol.Public.MultiValue.getDefaultInstance()) {
+            data_ = com.arize.protocol.Public.MultiValue.newBuilder((com.arize.protocol.Public.MultiValue) data_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            data_ = value;
+          }
+          onChanged();
+        } else {
+          if (dataCase_ == 4) {
+            multiValueBuilder_.mergeFrom(value);
+          }
+          multiValueBuilder_.setMessage(value);
+        }
+        dataCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.public.MultiValue multi_value = 4;</code>
+       */
+      public Builder clearMultiValue() {
+        if (multiValueBuilder_ == null) {
+          if (dataCase_ == 4) {
+            dataCase_ = 0;
+            data_ = null;
+            onChanged();
+          }
+        } else {
+          if (dataCase_ == 4) {
+            dataCase_ = 0;
+            data_ = null;
+          }
+          multiValueBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.public.MultiValue multi_value = 4;</code>
+       */
+      public com.arize.protocol.Public.MultiValue.Builder getMultiValueBuilder() {
+        return getMultiValueFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.public.MultiValue multi_value = 4;</code>
+       */
+      public com.arize.protocol.Public.MultiValueOrBuilder getMultiValueOrBuilder() {
+        if ((dataCase_ == 4) && (multiValueBuilder_ != null)) {
+          return multiValueBuilder_.getMessageOrBuilder();
+        } else {
+          if (dataCase_ == 4) {
+            return (com.arize.protocol.Public.MultiValue) data_;
+          }
+          return com.arize.protocol.Public.MultiValue.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.public.MultiValue multi_value = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.MultiValue, com.arize.protocol.Public.MultiValue.Builder, com.arize.protocol.Public.MultiValueOrBuilder> 
+          getMultiValueFieldBuilder() {
+        if (multiValueBuilder_ == null) {
+          if (!(dataCase_ == 4)) {
+            data_ = com.arize.protocol.Public.MultiValue.getDefaultInstance();
+          }
+          multiValueBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.arize.protocol.Public.MultiValue, com.arize.protocol.Public.MultiValue.Builder, com.arize.protocol.Public.MultiValueOrBuilder>(
+                  (com.arize.protocol.Public.MultiValue) data_,
+                  getParentForChildren(),
+                  isClean());
+          data_ = null;
+        }
+        dataCase_ = 4;
+        onChanged();;
+        return multiValueBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -6342,6 +6565,644 @@ public final class Public {
 
     @java.lang.Override
     public com.arize.protocol.Public.Value getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface MultiValueOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:public.MultiValue)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated string values = 1;</code>
+     * @return A list containing the values.
+     */
+    java.util.List<java.lang.String>
+        getValuesList();
+    /**
+     * <code>repeated string values = 1;</code>
+     * @return The count of values.
+     */
+    int getValuesCount();
+    /**
+     * <code>repeated string values = 1;</code>
+     * @param index The index of the element to return.
+     * @return The values at the given index.
+     */
+    java.lang.String getValues(int index);
+    /**
+     * <code>repeated string values = 1;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the values at the given index.
+     */
+    com.google.protobuf.ByteString
+        getValuesBytes(int index);
+  }
+  /**
+   * Protobuf type {@code public.MultiValue}
+   */
+  public  static final class MultiValue extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:public.MultiValue)
+      MultiValueOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use MultiValue.newBuilder() to construct.
+    private MultiValue(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private MultiValue() {
+      values_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new MultiValue();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private MultiValue(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                values_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              values_.add(s);
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          values_ = values_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.arize.protocol.Public.internal_static_public_MultiValue_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.arize.protocol.Public.internal_static_public_MultiValue_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.arize.protocol.Public.MultiValue.class, com.arize.protocol.Public.MultiValue.Builder.class);
+    }
+
+    public static final int VALUES_FIELD_NUMBER = 1;
+    private com.google.protobuf.LazyStringList values_;
+    /**
+     * <code>repeated string values = 1;</code>
+     * @return A list containing the values.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getValuesList() {
+      return values_;
+    }
+    /**
+     * <code>repeated string values = 1;</code>
+     * @return The count of values.
+     */
+    public int getValuesCount() {
+      return values_.size();
+    }
+    /**
+     * <code>repeated string values = 1;</code>
+     * @param index The index of the element to return.
+     * @return The values at the given index.
+     */
+    public java.lang.String getValues(int index) {
+      return values_.get(index);
+    }
+    /**
+     * <code>repeated string values = 1;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the values at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getValuesBytes(int index) {
+      return values_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < values_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, values_.getRaw(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < values_.size(); i++) {
+          dataSize += computeStringSizeNoTag(values_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getValuesList().size();
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.arize.protocol.Public.MultiValue)) {
+        return super.equals(obj);
+      }
+      com.arize.protocol.Public.MultiValue other = (com.arize.protocol.Public.MultiValue) obj;
+
+      if (!getValuesList()
+          .equals(other.getValuesList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getValuesCount() > 0) {
+        hash = (37 * hash) + VALUES_FIELD_NUMBER;
+        hash = (53 * hash) + getValuesList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.arize.protocol.Public.MultiValue parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.MultiValue parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.MultiValue parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.MultiValue parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.MultiValue parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.MultiValue parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.MultiValue parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.MultiValue parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.MultiValue parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.MultiValue parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.MultiValue parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.MultiValue parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.arize.protocol.Public.MultiValue prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code public.MultiValue}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:public.MultiValue)
+        com.arize.protocol.Public.MultiValueOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.arize.protocol.Public.internal_static_public_MultiValue_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.arize.protocol.Public.internal_static_public_MultiValue_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.arize.protocol.Public.MultiValue.class, com.arize.protocol.Public.MultiValue.Builder.class);
+      }
+
+      // Construct using com.arize.protocol.Public.MultiValue.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        values_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.arize.protocol.Public.internal_static_public_MultiValue_descriptor;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.MultiValue getDefaultInstanceForType() {
+        return com.arize.protocol.Public.MultiValue.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.MultiValue build() {
+        com.arize.protocol.Public.MultiValue result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.MultiValue buildPartial() {
+        com.arize.protocol.Public.MultiValue result = new com.arize.protocol.Public.MultiValue(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          values_ = values_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.values_ = values_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.arize.protocol.Public.MultiValue) {
+          return mergeFrom((com.arize.protocol.Public.MultiValue)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.arize.protocol.Public.MultiValue other) {
+        if (other == com.arize.protocol.Public.MultiValue.getDefaultInstance()) return this;
+        if (!other.values_.isEmpty()) {
+          if (values_.isEmpty()) {
+            values_ = other.values_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureValuesIsMutable();
+            values_.addAll(other.values_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.arize.protocol.Public.MultiValue parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.arize.protocol.Public.MultiValue) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.LazyStringList values_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureValuesIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          values_ = new com.google.protobuf.LazyStringArrayList(values_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated string values = 1;</code>
+       * @return A list containing the values.
+       */
+      public com.google.protobuf.ProtocolStringList
+          getValuesList() {
+        return values_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string values = 1;</code>
+       * @return The count of values.
+       */
+      public int getValuesCount() {
+        return values_.size();
+      }
+      /**
+       * <code>repeated string values = 1;</code>
+       * @param index The index of the element to return.
+       * @return The values at the given index.
+       */
+      public java.lang.String getValues(int index) {
+        return values_.get(index);
+      }
+      /**
+       * <code>repeated string values = 1;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the values at the given index.
+       */
+      public com.google.protobuf.ByteString
+          getValuesBytes(int index) {
+        return values_.getByteString(index);
+      }
+      /**
+       * <code>repeated string values = 1;</code>
+       * @param index The index to set the value at.
+       * @param value The values to set.
+       * @return This builder for chaining.
+       */
+      public Builder setValues(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureValuesIsMutable();
+        values_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string values = 1;</code>
+       * @param value The values to add.
+       * @return This builder for chaining.
+       */
+      public Builder addValues(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureValuesIsMutable();
+        values_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string values = 1;</code>
+       * @param values The values to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllValues(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureValuesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, values_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string values = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearValues() {
+        values_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string values = 1;</code>
+       * @param value The bytes of the values to add.
+       * @return This builder for chaining.
+       */
+      public Builder addValuesBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureValuesIsMutable();
+        values_.add(value);
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:public.MultiValue)
+    }
+
+    // @@protoc_insertion_point(class_scope:public.MultiValue)
+    private static final com.arize.protocol.Public.MultiValue DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.arize.protocol.Public.MultiValue();
+    }
+
+    public static com.arize.protocol.Public.MultiValue getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<MultiValue>
+        PARSER = new com.google.protobuf.AbstractParser<MultiValue>() {
+      @java.lang.Override
+      public MultiValue parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new MultiValue(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<MultiValue> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<MultiValue> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.arize.protocol.Public.MultiValue getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -7204,6 +8065,11 @@ public final class Public {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_public_Value_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_MultiValue_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_MultiValue_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_public_Actual_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -7235,13 +8101,15 @@ public final class Public {
       "\0132\r.public.Label\0222\n\010features\030\004 \003(\0132 .pub" +
       "lic.Prediction.FeaturesEntry\032>\n\rFeatures" +
       "Entry\022\013\n\003key\030\001 \001(\t\022\034\n\005value\030\002 \001(\0132\r.publ" +
-      "ic.Value:\0028\001\"B\n\005Value\022\020\n\006string\030\001 \001(\tH\000\022" +
-      "\r\n\003int\030\002 \001(\003H\000\022\020\n\006double\030\003 \001(\001H\000B\006\n\004data" +
-      "\"U\n\006Actual\022-\n\ttimestamp\030\001 \001(\0132\032.google.p" +
-      "rotobuf.Timestamp\022\034\n\005label\030\002 \001(\0132\r.publi" +
-      "c.LabelBO\n\022com.arize.protocolZ9github.co" +
-      "m/Arize-ai/arize/go/pkg/receiver/protoco" +
-      "l/publicb\006proto3"
+      "ic.Value:\0028\001\"m\n\005Value\022\020\n\006string\030\001 \001(\tH\000\022" +
+      "\r\n\003int\030\002 \001(\003H\000\022\020\n\006double\030\003 \001(\001H\000\022)\n\013mult" +
+      "i_value\030\004 \001(\0132\022.public.MultiValueH\000B\006\n\004d" +
+      "ata\"\034\n\nMultiValue\022\016\n\006values\030\001 \003(\t\"U\n\006Act" +
+      "ual\022-\n\ttimestamp\030\001 \001(\0132\032.google.protobuf" +
+      ".Timestamp\022\034\n\005label\030\002 \001(\0132\r.public.Label" +
+      "BO\n\022com.arize.protocolZ9github.com/Arize" +
+      "-ai/arize/go/pkg/receiver/protocol/publi" +
+      "cb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -7283,9 +8151,15 @@ public final class Public {
     internal_static_public_Value_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Value_descriptor,
-        new java.lang.String[] { "String", "Int", "Double", "Data", });
-    internal_static_public_Actual_descriptor =
+        new java.lang.String[] { "String", "Int", "Double", "MultiValue", "Data", });
+    internal_static_public_MultiValue_descriptor =
       getDescriptor().getMessageTypes().get(5);
+    internal_static_public_MultiValue_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_MultiValue_descriptor,
+        new java.lang.String[] { "Values", });
+    internal_static_public_Actual_descriptor =
+      getDescriptor().getMessageTypes().get(6);
     internal_static_public_Actual_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Actual_descriptor,

@@ -27,7 +27,7 @@ public class Response {
     private HttpResponse response;
 
     /**
-     * Wrapper for a Future<HttpResponse> to abstract away the underlying protocol
+     * Wrapper for a Future HttpResponse to abstract away the underlying protocol
      * 
      * @param future
      */

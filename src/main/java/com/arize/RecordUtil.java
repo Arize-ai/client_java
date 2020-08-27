@@ -1,11 +1,17 @@
 package com.arize;
 
+import static com.google.protobuf.util.Timestamps.fromMillis;
+
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.arize.protocol.Public.Actual;
+import com.arize.protocol.Public.BulkRecord;
 import com.arize.protocol.Public.Label;
+import com.arize.protocol.Public.MultiValue;
 import com.arize.protocol.Public.Prediction;
 import com.arize.protocol.Public.Record;
 import com.arize.protocol.Public.Value;
@@ -23,33 +29,80 @@ public class RecordUtil {
         }
     }
 
+    protected static String recordToJson(final BulkRecord record) throws IOException {
+        try {
+            return JsonFormat.printer().print(record);
+        } catch (InvalidProtocolBufferException e) {
+            throw new IOException("Exception serializing record: " + e.getMessage());
+        }
+    }
+
     protected static Record.Builder initializeRecord(final String organizationKey, final String modelId,
-            final String predictionId) {
-        return Record.newBuilder().setOrganizationKey(organizationKey).setModelId(modelId)
-                .setPredictionId(predictionId);
+            final String predictionId) throws IllegalArgumentException {
+        if (predictionId == null || predictionId.length() == 0) {
+            throw new IllegalArgumentException("Invalid predictionId, must be a String");
+        }
+        Record.Builder builder = Record.newBuilder().setPredictionId(predictionId);
+        if (organizationKey != null) {
+            builder.setOrganizationKey(organizationKey);
+        }
+        if (modelId != null) {
+            builder.setModelId(modelId);
+        }
+        return builder;
+    }
+
+    protected static BulkRecord.Builder initializeBulkRecord(final String organizationKey, final String modelId,
+            final String modelVersion) {
+        BulkRecord.Builder builder = BulkRecord.newBuilder();
+        if (organizationKey != null) {
+            builder.setOrganizationKey(organizationKey);
+        }
+        if (modelId != null) {
+            builder.setModelId(modelId);
+        }
+        if (modelVersion != null) {
+            builder.setModelVersion(modelVersion);
+        }
+        return builder.setTimestamp(getTimestamp(System.currentTimeMillis()));
+    }
+
+    protected static Map<String, Value> getFeatureMap(final List<Map<String, ?>> features) {
+        final Map<String, Value> feature = new HashMap<>();
+        if (features != null) {
+            for (final Map<String, ?> featureMap : features) {
+                if (featureMap != null) {
+                    feature.putAll(RecordUtil.convertFeatures(featureMap));
+                }
+            }
+            return feature;
+        }
+        return null;
     }
 
     protected static Record decoratePrediction(Record.Builder builder, final String modelVersion, final Label label,
-            final Map<String, Value> features, final Long timeOverwrite) {
-        Prediction.Builder pBuilder = Prediction.newBuilder();
+            final Map<String, Value> features, final Timestamp timestampMillis) {
+        Prediction.Builder prediction = Prediction.newBuilder();
+        prediction.setLabel(label);
         if (modelVersion != null) {
-            pBuilder.setModelVersion(modelVersion);
+            prediction.setModelVersion(modelVersion);
         }
         if (features != null) {
-            pBuilder.putAllFeatures(features);
+            prediction.putAllFeatures(features);
         }
-        if (timeOverwrite != null) {
-            int nanos = (int) ((timeOverwrite % 1000) * 1000000);
-            pBuilder.setTimestamp(Timestamp.newBuilder().setSeconds(timeOverwrite)
-                    .setNanos(nanos).build());
-        } else {
-            pBuilder.setTimestamp(getCurrentTime());
+        if (timestampMillis != null) {
+            prediction.setTimestamp(timestampMillis);
         }
-        return builder.setPrediction(pBuilder.setLabel(label)).build();
+        return builder.setPrediction(prediction).build();
     }
 
-    protected static Record decorateActual(Record.Builder builder, final Label label) {
-        return builder.setActual(Actual.newBuilder().setTimestamp(getCurrentTime()).setLabel(label)).build();
+    protected static Record decorateActual(Record.Builder builder, final Label label, final Timestamp timestampMillis) {
+        Actual.Builder actual = Actual.newBuilder();
+        actual.setLabel(label);
+        if (timestampMillis != null) {
+            actual.setTimestamp(timestampMillis);
+        }
+        return builder.setActual(actual).build();
     }
 
     protected static <T> Map<String, Value> convertFeatures(final Map<String, T> features)
@@ -67,10 +120,10 @@ public class RecordUtil {
             return label.setCategorical((String) rawLabel).build();
         } else if (rawLabel instanceof Integer || rawLabel instanceof Long || rawLabel instanceof Short
                 || rawLabel instanceof Float || rawLabel instanceof Double) {
-            return label.setNumeric((Double) rawLabel).build();
+            return label.setNumeric(Double.parseDouble(String.valueOf(rawLabel))).build();
         }
         throw new IllegalArgumentException(
-                "Illegal label type: " + rawLabel.getClass().getSimpleName() + " for label: " + rawLabel);
+                "Illegal label " + rawLabel + ", must be oneof: boolean, String, int, long, short, float, double");
     }
 
     protected static <T> void validateInputs(final String modelId, final String predictionId, final T label)
@@ -87,14 +140,47 @@ public class RecordUtil {
         }
     }
 
+    protected static <T> void validateBulkInputs(final String modelId, final List<String> predictionIds,
+            final List<T> labels) throws IllegalArgumentException {
+        if (modelId == null || modelId.isEmpty()) {
+            throw new IllegalArgumentException("modelId is null or empty, but must be present.");
+        }
+        if (predictionIds == null || predictionIds.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "predictionIds is null or empty, but must consist of a list of Strings.");
+        }
+        if (labels == null || labels.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "labels is null or empty, but a List of supported label types must be present. "
+                            + "Supported types are: boolean, string, int, long, short, float, double.");
+        }
+        if (labels.size() != predictionIds.size()) {
+            throw new IllegalArgumentException("PredictionIds, size: " + String.valueOf(predictionIds.size())
+                    + ", but must be same size as labels, size: " + String.valueOf(labels.size()));
+        }
+    }
+
+    @SuppressWarnings({ "unchecked" })
     private static <T> Value convertValue(final String name, final T rawValue) throws IllegalArgumentException {
         Value.Builder val = Value.newBuilder();
         if (rawValue instanceof String) {
             return val.setString((String) rawValue).build();
         } else if (rawValue instanceof Integer || rawValue instanceof Long || rawValue instanceof Short) {
             return val.setInt(((Number) rawValue).longValue()).build();
-        } else if (rawValue instanceof Double || rawValue instanceof Float) {
+        } else if (rawValue instanceof Double) {
             return val.setDouble((Double) rawValue).build();
+        } else if (rawValue instanceof Float) {
+            return val.setDouble(((Float)rawValue).doubleValue()).build();
+        } else if (rawValue instanceof Collection) {
+            MultiValue.Builder values = MultiValue.newBuilder();
+            for (T value : (List<T>) rawValue) {
+                if (value instanceof String) {
+                    values.addValues((String) value);
+                } else {
+                    throw new IllegalArgumentException("Elements of multivalue feature " + name + " must be Strings");
+                }
+            }
+            return val.setMultiValue(values).build();
         } else if (rawValue == null) {
             throw new IllegalArgumentException("Feature " + name + " has a null value");
         }
@@ -102,8 +188,7 @@ public class RecordUtil {
                 "Illegal feature type: " + rawValue.getClass().getSimpleName() + " for feature: " + name);
     }
 
-    private static Timestamp getCurrentTime() {
-        long millis = System.currentTimeMillis();
-        return Timestamp.newBuilder().setSeconds(millis / 1000).setNanos((int) ((millis % 1000) * 1000000)).build();
+    protected static Timestamp getTimestamp(final long timestampMillis) {
+        return fromMillis(timestampMillis);
     }
 }
