@@ -131,9 +131,8 @@ public class ArizeClient implements ArizeAPI {
         for (final Map<String, ?> feature : features) {
             feats.add(feature);
         }
-        final long currentTimeMillis = System.currentTimeMillis();
         final Record record = this.buildPrediction(modelId, modelVersion, predictionId, predictionLabel,
-                currentTimeMillis, feats);
+                null, feats);
         final HttpPost request = buildRequest(RecordUtil.recordToJson(record), this.host, this.apiKey);
         final Future<HttpResponse> future = client.execute(request, null);
         return new Response(future);
@@ -173,8 +172,7 @@ public class ArizeClient implements ArizeAPI {
     public <T> Response logActual(final String modelId, final String predictionId, final T actualLabel)
             throws IOException, IllegalArgumentException {
         RecordUtil.validateInputs(modelId, predictionId, actualLabel);
-        long currentTimeMillis = System.currentTimeMillis();
-        final Record record = this.buildActual(modelId, predictionId, actualLabel, currentTimeMillis);
+        final Record record = this.buildActual(modelId, predictionId, actualLabel, null);
         final HttpPost request = buildRequest(RecordUtil.recordToJson(record), this.host, this.apiKey);
         final Future<HttpResponse> future = client.execute(request, null);
         return new Response(future);
@@ -324,7 +322,6 @@ public class ArizeClient implements ArizeAPI {
     protected <T> BulkRecord buildBulkActuals(final String modelId, final List<String> predictionIds,
             final List<T> actualLabels) {
         final BulkRecord.Builder builder = RecordUtil.initializeBulkRecord(this.organizationKey, modelId, null);
-        builder.setTimestamp(RecordUtil.getTimestamp(System.currentTimeMillis()));
         for (int index = 0; index < predictionIds.size(); index++) {
             final String predictionId = predictionIds.get(index);
             final T actualLabel = actualLabels.get(index);

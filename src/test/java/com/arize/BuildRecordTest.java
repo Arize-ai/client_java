@@ -165,7 +165,7 @@ public class BuildRecordTest {
 
         assertEquals("modelId", bulk.getModelId());
         assertEquals("orgKey", bulk.getOrganizationKey());
-        assertTrue(bulk.getTimestamp().isInitialized());
+        assertFalse(bulk.hasTimestamp());
         assertEquals(3, bulk.getRecordsCount());
         List<Record> records = bulk.getRecordsList();
         for (Record record : records) {
@@ -186,7 +186,7 @@ public class BuildRecordTest {
         assertEquals("modelId", bulk.getModelId());
         assertEquals("orgKey", bulk.getOrganizationKey());
         assertEquals("modelVersion", bulk.getModelVersion());
-        assertTrue(bulk.getTimestamp().isInitialized());
+        assertFalse(bulk.hasTimestamp());
         assertEquals(3, bulk.getRecordsCount());
 
         List<Record> records = bulk.getRecordsList();

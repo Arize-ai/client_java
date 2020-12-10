@@ -64,7 +64,7 @@ public class RecordUtil {
         if (modelVersion != null) {
             builder.setModelVersion(modelVersion);
         }
-        return builder.setTimestamp(getTimestamp(System.currentTimeMillis()));
+        return builder;
     }
 
     protected static Map<String, Value> getFeatureMap(final List<Map<String, ?>> features) {
