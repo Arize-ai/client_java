@@ -2,11 +2,7 @@ package com.arize.examples;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import com.arize.ArizeClient;
@@ -19,15 +15,20 @@ public class SendBulkPrediction {
 
         final ArizeClient arize = new ArizeClient(System.getenv("ARIZE_API_KEY"), System.getenv("ARIZE_ORG_KEY"));
 
-        final Map<String, String> rawFeatures = new HashMap<>();
-        rawFeatures.put("key", "value");
         final List<Map<String, ?>> features = new ArrayList<Map<String, ?>>();
-        features.add(rawFeatures);
-        
-        final List<String> labels = new ArrayList<String>(Arrays.asList("Categorical Label"));
-        final List<String> predictionIds = new ArrayList<String>(Arrays.asList("id_12345"));
+        features.add(new HashMap<String, Object>() {{ put("days", 5); put("is_organic", 1);}});
+        features.add(new HashMap<String, Object>() {{ put("days", 3); put("is_organic", 0);}});
+        features.add(new HashMap<String, Object>() {{ put("days", 7); put("is_organic", 0);}});
 
-        final Response asyncResponse = arize.logBulkPrediction("modelId", "modelVersion", predictionIds, labels, null, features);
+        final List<Map<String, Double>> shapValues = new ArrayList<>();
+        shapValues.add(new HashMap<String, Double>(){{ put("days", 1.0); put("is_organic", -1.5);}});
+        shapValues.add(new HashMap<String, Double>(){{ put("days", 1.0); put("is_organic", -1.1);}});
+        shapValues.add(new HashMap<String, Double>(){{ put("days", 1.0); put("is_organic", -1.1);}});
+
+        final List<String> labels = new ArrayList<String>(Arrays.asList("pear", "banana", "apple"));
+        final List<String> predictionIds = new ArrayList<String>(Arrays.asList(UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString()));
+
+        final Response asyncResponse = arize.bulkLog("exampleModelId", "v1", predictionIds, features, labels, null, shapValues,null);
 
         // This is a blocking call similar to future.get()
         asyncResponse.resolve();

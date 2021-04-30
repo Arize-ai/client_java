@@ -1,26 +1,29 @@
 package com.arize.examples;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ExecutionException;
-
 import com.arize.ArizeClient;
 import com.arize.Response;
 
-public class SendPrediction {
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 
-    @SuppressWarnings("unchecked")
-    public static void main(String[] args)
-            throws IOException, InterruptedException, ExecutionException, URISyntaxException {
-        Map<String, String> rawFeatures = new HashMap<>();
-        rawFeatures.put("key", "value");
+public class SendTrainingRecords {
 
-        ArizeClient arize = new ArizeClient(System.getenv("ARIZE_API_KEY"), System.getenv("ARIZE_ORG_KEY"));
+    public static void main(final String[] args)
+            throws IOException, URISyntaxException, InterruptedException, ExecutionException {
 
-        Response asyncResponse = arize.log("exampleModelId", "v1", UUID.randomUUID().toString(), rawFeatures, "pear", null, null, 0);
+        final ArizeClient arize = new ArizeClient(System.getenv("ARIZE_API_KEY"), System.getenv("ARIZE_ORG_KEY"));
+
+        final List<Map<String, ?>> features = new ArrayList<Map<String, ?>>();
+        features.add(new HashMap<String, Object>() {{ put("days", 5); put("is_organic", 1);}});
+        features.add(new HashMap<String, Object>() {{ put("days", 3); put("is_organic", 0);}});
+        features.add(new HashMap<String, Object>() {{ put("days", 7); put("is_organic", 0);}});
+
+        final List<String> predictionLabels = new ArrayList<String>(Arrays.asList("pear", "banana", "apple"));
+        final List<String> actualLabels = new ArrayList<String>(Arrays.asList("pear", "strawberry", "apple"));
+
+        final Response asyncResponse = arize.logTrainingRecords("exampleModelId", "v1", features, predictionLabels, actualLabels);
 
         // This is a blocking call similar to future.get()
         asyncResponse.resolve();
@@ -46,6 +49,9 @@ public class SendPrediction {
                 System.out.println("Failure Reason: " + asyncResponse.getResponseBody());
                 break;
         }
+
+        System.out.println("Response Code: " + asyncResponse.getResponseCode());
+        System.out.println("Response Body: " + asyncResponse.getResponseBody());
 
         // Don't forget to shutdown the client with your application shutdown hook.
         arize.close();

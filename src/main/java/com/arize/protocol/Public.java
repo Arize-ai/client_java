@@ -14,6 +14,123 @@ public final class Public {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+  /**
+   * <pre>
+   *TODO: Remove this once new Pre-Production proto is changed in all downstream services.
+   * </pre>
+   *
+   * Protobuf enum {@code public.Environment}
+   */
+  public enum Environment
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>UNKNOWN = 0;</code>
+     */
+    UNKNOWN(0),
+    /**
+     * <code>TRAINING = 1;</code>
+     */
+    TRAINING(1),
+    /**
+     * <code>VALIDATION = 2;</code>
+     */
+    VALIDATION(2),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>UNKNOWN = 0;</code>
+     */
+    public static final int UNKNOWN_VALUE = 0;
+    /**
+     * <code>TRAINING = 1;</code>
+     */
+    public static final int TRAINING_VALUE = 1;
+    /**
+     * <code>VALIDATION = 2;</code>
+     */
+    public static final int VALIDATION_VALUE = 2;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Environment valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static Environment forNumber(int value) {
+      switch (value) {
+        case 0: return UNKNOWN;
+        case 1: return TRAINING;
+        case 2: return VALIDATION;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Environment>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Environment> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Environment>() {
+            public Environment findValueByNumber(int number) {
+              return Environment.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.arize.protocol.Public.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final Environment[] VALUES = values();
+
+    public static Environment valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private Environment(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:public.Environment)
+  }
+
   public interface BulkRecordOrBuilder extends
       // @@protoc_insertion_point(interface_extends:public.BulkRecord)
       com.google.protobuf.MessageOrBuilder {
@@ -81,36 +198,6 @@ public final class Public {
      */
     com.google.protobuf.ByteString
         getModelVersionBytes();
-
-    /**
-     * <pre>
-     * timestamp of the bulk prediction.  If not set this will default to the time
-     * of receipt
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-     * @return Whether the timestamp field is set.
-     */
-    boolean hasTimestamp();
-    /**
-     * <pre>
-     * timestamp of the bulk prediction.  If not set this will default to the time
-     * of receipt
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-     * @return The timestamp.
-     */
-    com.google.protobuf.Timestamp getTimestamp();
-    /**
-     * <pre>
-     * timestamp of the bulk prediction.  If not set this will default to the time
-     * of receipt
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-     */
-    com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder();
 
     /**
      * <code>repeated .public.Record records = 5;</code>
@@ -207,19 +294,6 @@ public final class Public {
               java.lang.String s = input.readStringRequireUtf8();
 
               modelVersion_ = s;
-              break;
-            }
-            case 34: {
-              com.google.protobuf.Timestamp.Builder subBuilder = null;
-              if (timestamp_ != null) {
-                subBuilder = timestamp_.toBuilder();
-              }
-              timestamp_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(timestamp_);
-                timestamp_ = subBuilder.buildPartial();
-              }
-
               break;
             }
             case 42: {
@@ -402,44 +476,6 @@ public final class Public {
       }
     }
 
-    public static final int TIMESTAMP_FIELD_NUMBER = 4;
-    private com.google.protobuf.Timestamp timestamp_;
-    /**
-     * <pre>
-     * timestamp of the bulk prediction.  If not set this will default to the time
-     * of receipt
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-     * @return Whether the timestamp field is set.
-     */
-    public boolean hasTimestamp() {
-      return timestamp_ != null;
-    }
-    /**
-     * <pre>
-     * timestamp of the bulk prediction.  If not set this will default to the time
-     * of receipt
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-     * @return The timestamp.
-     */
-    public com.google.protobuf.Timestamp getTimestamp() {
-      return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
-    }
-    /**
-     * <pre>
-     * timestamp of the bulk prediction.  If not set this will default to the time
-     * of receipt
-     * </pre>
-     *
-     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-     */
-    public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
-      return getTimestamp();
-    }
-
     public static final int RECORDS_FIELD_NUMBER = 5;
     private java.util.List<com.arize.protocol.Public.Record> records_;
     /**
@@ -498,9 +534,6 @@ public final class Public {
       if (!getModelVersionBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, modelVersion_);
       }
-      if (timestamp_ != null) {
-        output.writeMessage(4, getTimestamp());
-      }
       for (int i = 0; i < records_.size(); i++) {
         output.writeMessage(5, records_.get(i));
       }
@@ -521,10 +554,6 @@ public final class Public {
       }
       if (!getModelVersionBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, modelVersion_);
-      }
-      if (timestamp_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getTimestamp());
       }
       for (int i = 0; i < records_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -551,11 +580,6 @@ public final class Public {
           .equals(other.getModelId())) return false;
       if (!getModelVersion()
           .equals(other.getModelVersion())) return false;
-      if (hasTimestamp() != other.hasTimestamp()) return false;
-      if (hasTimestamp()) {
-        if (!getTimestamp()
-            .equals(other.getTimestamp())) return false;
-      }
       if (!getRecordsList()
           .equals(other.getRecordsList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -575,10 +599,6 @@ public final class Public {
       hash = (53 * hash) + getModelId().hashCode();
       hash = (37 * hash) + MODEL_VERSION_FIELD_NUMBER;
       hash = (53 * hash) + getModelVersion().hashCode();
-      if (hasTimestamp()) {
-        hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
-        hash = (53 * hash) + getTimestamp().hashCode();
-      }
       if (getRecordsCount() > 0) {
         hash = (37 * hash) + RECORDS_FIELD_NUMBER;
         hash = (53 * hash) + getRecordsList().hashCode();
@@ -728,12 +748,6 @@ public final class Public {
 
         modelVersion_ = "";
 
-        if (timestampBuilder_ == null) {
-          timestamp_ = null;
-        } else {
-          timestamp_ = null;
-          timestampBuilder_ = null;
-        }
         if (recordsBuilder_ == null) {
           records_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
@@ -770,11 +784,6 @@ public final class Public {
         result.organizationKey_ = organizationKey_;
         result.modelId_ = modelId_;
         result.modelVersion_ = modelVersion_;
-        if (timestampBuilder_ == null) {
-          result.timestamp_ = timestamp_;
-        } else {
-          result.timestamp_ = timestampBuilder_.build();
-        }
         if (recordsBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
             records_ = java.util.Collections.unmodifiableList(records_);
@@ -843,9 +852,6 @@ public final class Public {
         if (!other.getModelVersion().isEmpty()) {
           modelVersion_ = other.modelVersion_;
           onChanged();
-        }
-        if (other.hasTimestamp()) {
-          mergeTimestamp(other.getTimestamp());
         }
         if (recordsBuilder_ == null) {
           if (!other.records_.isEmpty()) {
@@ -1199,170 +1205,6 @@ public final class Public {
         modelVersion_ = value;
         onChanged();
         return this;
-      }
-
-      private com.google.protobuf.Timestamp timestamp_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timestampBuilder_;
-      /**
-       * <pre>
-       * timestamp of the bulk prediction.  If not set this will default to the time
-       * of receipt
-       * </pre>
-       *
-       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-       * @return Whether the timestamp field is set.
-       */
-      public boolean hasTimestamp() {
-        return timestampBuilder_ != null || timestamp_ != null;
-      }
-      /**
-       * <pre>
-       * timestamp of the bulk prediction.  If not set this will default to the time
-       * of receipt
-       * </pre>
-       *
-       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-       * @return The timestamp.
-       */
-      public com.google.protobuf.Timestamp getTimestamp() {
-        if (timestampBuilder_ == null) {
-          return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
-        } else {
-          return timestampBuilder_.getMessage();
-        }
-      }
-      /**
-       * <pre>
-       * timestamp of the bulk prediction.  If not set this will default to the time
-       * of receipt
-       * </pre>
-       *
-       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-       */
-      public Builder setTimestamp(com.google.protobuf.Timestamp value) {
-        if (timestampBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          timestamp_ = value;
-          onChanged();
-        } else {
-          timestampBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * timestamp of the bulk prediction.  If not set this will default to the time
-       * of receipt
-       * </pre>
-       *
-       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-       */
-      public Builder setTimestamp(
-          com.google.protobuf.Timestamp.Builder builderForValue) {
-        if (timestampBuilder_ == null) {
-          timestamp_ = builderForValue.build();
-          onChanged();
-        } else {
-          timestampBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * timestamp of the bulk prediction.  If not set this will default to the time
-       * of receipt
-       * </pre>
-       *
-       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-       */
-      public Builder mergeTimestamp(com.google.protobuf.Timestamp value) {
-        if (timestampBuilder_ == null) {
-          if (timestamp_ != null) {
-            timestamp_ =
-              com.google.protobuf.Timestamp.newBuilder(timestamp_).mergeFrom(value).buildPartial();
-          } else {
-            timestamp_ = value;
-          }
-          onChanged();
-        } else {
-          timestampBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * timestamp of the bulk prediction.  If not set this will default to the time
-       * of receipt
-       * </pre>
-       *
-       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-       */
-      public Builder clearTimestamp() {
-        if (timestampBuilder_ == null) {
-          timestamp_ = null;
-          onChanged();
-        } else {
-          timestamp_ = null;
-          timestampBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * timestamp of the bulk prediction.  If not set this will default to the time
-       * of receipt
-       * </pre>
-       *
-       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-       */
-      public com.google.protobuf.Timestamp.Builder getTimestampBuilder() {
-        
-        onChanged();
-        return getTimestampFieldBuilder().getBuilder();
-      }
-      /**
-       * <pre>
-       * timestamp of the bulk prediction.  If not set this will default to the time
-       * of receipt
-       * </pre>
-       *
-       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-       */
-      public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
-        if (timestampBuilder_ != null) {
-          return timestampBuilder_.getMessageOrBuilder();
-        } else {
-          return timestamp_ == null ?
-              com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
-        }
-      }
-      /**
-       * <pre>
-       * timestamp of the bulk prediction.  If not set this will default to the time
-       * of receipt
-       * </pre>
-       *
-       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-          getTimestampFieldBuilder() {
-        if (timestampBuilder_ == null) {
-          timestampBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                  getTimestamp(),
-                  getParentForChildren(),
-                  isClean());
-          timestamp_ = null;
-        }
-        return timestampBuilder_;
       }
 
       private java.util.List<com.arize.protocol.Public.Record> records_ =
@@ -1728,36 +1570,64 @@ public final class Public {
         getPredictionIdBytes();
 
     /**
-     * <code>.public.Prediction prediction = 4;</code>
+     * <code>.public.Prediction prediction = 8;</code>
      * @return Whether the prediction field is set.
      */
     boolean hasPrediction();
     /**
-     * <code>.public.Prediction prediction = 4;</code>
+     * <code>.public.Prediction prediction = 8;</code>
      * @return The prediction.
      */
     com.arize.protocol.Public.Prediction getPrediction();
     /**
-     * <code>.public.Prediction prediction = 4;</code>
+     * <code>.public.Prediction prediction = 8;</code>
      */
     com.arize.protocol.Public.PredictionOrBuilder getPredictionOrBuilder();
 
     /**
-     * <code>.public.Actual actual = 5;</code>
+     * <code>.public.Actual actual = 9;</code>
      * @return Whether the actual field is set.
      */
     boolean hasActual();
     /**
-     * <code>.public.Actual actual = 5;</code>
+     * <code>.public.Actual actual = 9;</code>
      * @return The actual.
      */
     com.arize.protocol.Public.Actual getActual();
     /**
-     * <code>.public.Actual actual = 5;</code>
+     * <code>.public.Actual actual = 9;</code>
      */
     com.arize.protocol.Public.ActualOrBuilder getActualOrBuilder();
 
-    public com.arize.protocol.Public.Record.PredictionOrActualCase getPredictionOrActualCase();
+    /**
+     * <code>.public.FeatureImportances feature_importances = 10;</code>
+     * @return Whether the featureImportances field is set.
+     */
+    boolean hasFeatureImportances();
+    /**
+     * <code>.public.FeatureImportances feature_importances = 10;</code>
+     * @return The featureImportances.
+     */
+    com.arize.protocol.Public.FeatureImportances getFeatureImportances();
+    /**
+     * <code>.public.FeatureImportances feature_importances = 10;</code>
+     */
+    com.arize.protocol.Public.FeatureImportancesOrBuilder getFeatureImportancesOrBuilder();
+
+    /**
+     * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+     * @return Whether the predictionAndActual field is set.
+     */
+    boolean hasPredictionAndActual();
+    /**
+     * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+     * @return The predictionAndActual.
+     */
+    com.arize.protocol.Public.PredictionAndActual getPredictionAndActual();
+    /**
+     * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+     */
+    com.arize.protocol.Public.PredictionAndActualOrBuilder getPredictionAndActualOrBuilder();
   }
   /**
    * <pre>
@@ -1830,32 +1700,56 @@ public final class Public {
               predictionId_ = s;
               break;
             }
-            case 34: {
+            case 66: {
               com.arize.protocol.Public.Prediction.Builder subBuilder = null;
-              if (predictionOrActualCase_ == 4) {
-                subBuilder = ((com.arize.protocol.Public.Prediction) predictionOrActual_).toBuilder();
+              if (prediction_ != null) {
+                subBuilder = prediction_.toBuilder();
               }
-              predictionOrActual_ =
-                  input.readMessage(com.arize.protocol.Public.Prediction.parser(), extensionRegistry);
+              prediction_ = input.readMessage(com.arize.protocol.Public.Prediction.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((com.arize.protocol.Public.Prediction) predictionOrActual_);
-                predictionOrActual_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(prediction_);
+                prediction_ = subBuilder.buildPartial();
               }
-              predictionOrActualCase_ = 4;
+
               break;
             }
-            case 42: {
+            case 74: {
               com.arize.protocol.Public.Actual.Builder subBuilder = null;
-              if (predictionOrActualCase_ == 5) {
-                subBuilder = ((com.arize.protocol.Public.Actual) predictionOrActual_).toBuilder();
+              if (actual_ != null) {
+                subBuilder = actual_.toBuilder();
               }
-              predictionOrActual_ =
-                  input.readMessage(com.arize.protocol.Public.Actual.parser(), extensionRegistry);
+              actual_ = input.readMessage(com.arize.protocol.Public.Actual.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((com.arize.protocol.Public.Actual) predictionOrActual_);
-                predictionOrActual_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(actual_);
+                actual_ = subBuilder.buildPartial();
               }
-              predictionOrActualCase_ = 5;
+
+              break;
+            }
+            case 82: {
+              com.arize.protocol.Public.FeatureImportances.Builder subBuilder = null;
+              if (featureImportances_ != null) {
+                subBuilder = featureImportances_.toBuilder();
+              }
+              featureImportances_ = input.readMessage(com.arize.protocol.Public.FeatureImportances.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(featureImportances_);
+                featureImportances_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 90: {
+              com.arize.protocol.Public.PredictionAndActual.Builder subBuilder = null;
+              if (predictionAndActual_ != null) {
+                subBuilder = predictionAndActual_.toBuilder();
+              }
+              predictionAndActual_ = input.readMessage(com.arize.protocol.Public.PredictionAndActual.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(predictionAndActual_);
+                predictionAndActual_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -1888,47 +1782,6 @@ public final class Public {
       return com.arize.protocol.Public.internal_static_public_Record_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.arize.protocol.Public.Record.class, com.arize.protocol.Public.Record.Builder.class);
-    }
-
-    private int predictionOrActualCase_ = 0;
-    private java.lang.Object predictionOrActual_;
-    public enum PredictionOrActualCase
-        implements com.google.protobuf.Internal.EnumLite,
-            com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-      PREDICTION(4),
-      ACTUAL(5),
-      PREDICTIONORACTUAL_NOT_SET(0);
-      private final int value;
-      private PredictionOrActualCase(int value) {
-        this.value = value;
-      }
-      /**
-       * @param value The number of the enum to look for.
-       * @return The enum associated with the given number.
-       * @deprecated Use {@link #forNumber(int)} instead.
-       */
-      @java.lang.Deprecated
-      public static PredictionOrActualCase valueOf(int value) {
-        return forNumber(value);
-      }
-
-      public static PredictionOrActualCase forNumber(int value) {
-        switch (value) {
-          case 4: return PREDICTION;
-          case 5: return ACTUAL;
-          case 0: return PREDICTIONORACTUAL_NOT_SET;
-          default: return null;
-        }
-      }
-      public int getNumber() {
-        return this.value;
-      }
-    };
-
-    public PredictionOrActualCase
-    getPredictionOrActualCase() {
-      return PredictionOrActualCase.forNumber(
-          predictionOrActualCase_);
     }
 
     public static final int ORGANIZATION_KEY_FIELD_NUMBER = 1;
@@ -2069,60 +1922,96 @@ public final class Public {
       }
     }
 
-    public static final int PREDICTION_FIELD_NUMBER = 4;
+    public static final int PREDICTION_FIELD_NUMBER = 8;
+    private com.arize.protocol.Public.Prediction prediction_;
     /**
-     * <code>.public.Prediction prediction = 4;</code>
+     * <code>.public.Prediction prediction = 8;</code>
      * @return Whether the prediction field is set.
      */
     public boolean hasPrediction() {
-      return predictionOrActualCase_ == 4;
+      return prediction_ != null;
     }
     /**
-     * <code>.public.Prediction prediction = 4;</code>
+     * <code>.public.Prediction prediction = 8;</code>
      * @return The prediction.
      */
     public com.arize.protocol.Public.Prediction getPrediction() {
-      if (predictionOrActualCase_ == 4) {
-         return (com.arize.protocol.Public.Prediction) predictionOrActual_;
-      }
-      return com.arize.protocol.Public.Prediction.getDefaultInstance();
+      return prediction_ == null ? com.arize.protocol.Public.Prediction.getDefaultInstance() : prediction_;
     }
     /**
-     * <code>.public.Prediction prediction = 4;</code>
+     * <code>.public.Prediction prediction = 8;</code>
      */
     public com.arize.protocol.Public.PredictionOrBuilder getPredictionOrBuilder() {
-      if (predictionOrActualCase_ == 4) {
-         return (com.arize.protocol.Public.Prediction) predictionOrActual_;
-      }
-      return com.arize.protocol.Public.Prediction.getDefaultInstance();
+      return getPrediction();
     }
 
-    public static final int ACTUAL_FIELD_NUMBER = 5;
+    public static final int ACTUAL_FIELD_NUMBER = 9;
+    private com.arize.protocol.Public.Actual actual_;
     /**
-     * <code>.public.Actual actual = 5;</code>
+     * <code>.public.Actual actual = 9;</code>
      * @return Whether the actual field is set.
      */
     public boolean hasActual() {
-      return predictionOrActualCase_ == 5;
+      return actual_ != null;
     }
     /**
-     * <code>.public.Actual actual = 5;</code>
+     * <code>.public.Actual actual = 9;</code>
      * @return The actual.
      */
     public com.arize.protocol.Public.Actual getActual() {
-      if (predictionOrActualCase_ == 5) {
-         return (com.arize.protocol.Public.Actual) predictionOrActual_;
-      }
-      return com.arize.protocol.Public.Actual.getDefaultInstance();
+      return actual_ == null ? com.arize.protocol.Public.Actual.getDefaultInstance() : actual_;
     }
     /**
-     * <code>.public.Actual actual = 5;</code>
+     * <code>.public.Actual actual = 9;</code>
      */
     public com.arize.protocol.Public.ActualOrBuilder getActualOrBuilder() {
-      if (predictionOrActualCase_ == 5) {
-         return (com.arize.protocol.Public.Actual) predictionOrActual_;
-      }
-      return com.arize.protocol.Public.Actual.getDefaultInstance();
+      return getActual();
+    }
+
+    public static final int FEATURE_IMPORTANCES_FIELD_NUMBER = 10;
+    private com.arize.protocol.Public.FeatureImportances featureImportances_;
+    /**
+     * <code>.public.FeatureImportances feature_importances = 10;</code>
+     * @return Whether the featureImportances field is set.
+     */
+    public boolean hasFeatureImportances() {
+      return featureImportances_ != null;
+    }
+    /**
+     * <code>.public.FeatureImportances feature_importances = 10;</code>
+     * @return The featureImportances.
+     */
+    public com.arize.protocol.Public.FeatureImportances getFeatureImportances() {
+      return featureImportances_ == null ? com.arize.protocol.Public.FeatureImportances.getDefaultInstance() : featureImportances_;
+    }
+    /**
+     * <code>.public.FeatureImportances feature_importances = 10;</code>
+     */
+    public com.arize.protocol.Public.FeatureImportancesOrBuilder getFeatureImportancesOrBuilder() {
+      return getFeatureImportances();
+    }
+
+    public static final int PREDICTION_AND_ACTUAL_FIELD_NUMBER = 11;
+    private com.arize.protocol.Public.PredictionAndActual predictionAndActual_;
+    /**
+     * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+     * @return Whether the predictionAndActual field is set.
+     */
+    public boolean hasPredictionAndActual() {
+      return predictionAndActual_ != null;
+    }
+    /**
+     * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+     * @return The predictionAndActual.
+     */
+    public com.arize.protocol.Public.PredictionAndActual getPredictionAndActual() {
+      return predictionAndActual_ == null ? com.arize.protocol.Public.PredictionAndActual.getDefaultInstance() : predictionAndActual_;
+    }
+    /**
+     * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+     */
+    public com.arize.protocol.Public.PredictionAndActualOrBuilder getPredictionAndActualOrBuilder() {
+      return getPredictionAndActual();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2148,11 +2037,17 @@ public final class Public {
       if (!getPredictionIdBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, predictionId_);
       }
-      if (predictionOrActualCase_ == 4) {
-        output.writeMessage(4, (com.arize.protocol.Public.Prediction) predictionOrActual_);
+      if (prediction_ != null) {
+        output.writeMessage(8, getPrediction());
       }
-      if (predictionOrActualCase_ == 5) {
-        output.writeMessage(5, (com.arize.protocol.Public.Actual) predictionOrActual_);
+      if (actual_ != null) {
+        output.writeMessage(9, getActual());
+      }
+      if (featureImportances_ != null) {
+        output.writeMessage(10, getFeatureImportances());
+      }
+      if (predictionAndActual_ != null) {
+        output.writeMessage(11, getPredictionAndActual());
       }
       unknownFields.writeTo(output);
     }
@@ -2172,13 +2067,21 @@ public final class Public {
       if (!getPredictionIdBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, predictionId_);
       }
-      if (predictionOrActualCase_ == 4) {
+      if (prediction_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, (com.arize.protocol.Public.Prediction) predictionOrActual_);
+          .computeMessageSize(8, getPrediction());
       }
-      if (predictionOrActualCase_ == 5) {
+      if (actual_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, (com.arize.protocol.Public.Actual) predictionOrActual_);
+          .computeMessageSize(9, getActual());
+      }
+      if (featureImportances_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, getFeatureImportances());
+      }
+      if (predictionAndActual_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, getPredictionAndActual());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2201,18 +2104,25 @@ public final class Public {
           .equals(other.getModelId())) return false;
       if (!getPredictionId()
           .equals(other.getPredictionId())) return false;
-      if (!getPredictionOrActualCase().equals(other.getPredictionOrActualCase())) return false;
-      switch (predictionOrActualCase_) {
-        case 4:
-          if (!getPrediction()
-              .equals(other.getPrediction())) return false;
-          break;
-        case 5:
-          if (!getActual()
-              .equals(other.getActual())) return false;
-          break;
-        case 0:
-        default:
+      if (hasPrediction() != other.hasPrediction()) return false;
+      if (hasPrediction()) {
+        if (!getPrediction()
+            .equals(other.getPrediction())) return false;
+      }
+      if (hasActual() != other.hasActual()) return false;
+      if (hasActual()) {
+        if (!getActual()
+            .equals(other.getActual())) return false;
+      }
+      if (hasFeatureImportances() != other.hasFeatureImportances()) return false;
+      if (hasFeatureImportances()) {
+        if (!getFeatureImportances()
+            .equals(other.getFeatureImportances())) return false;
+      }
+      if (hasPredictionAndActual() != other.hasPredictionAndActual()) return false;
+      if (hasPredictionAndActual()) {
+        if (!getPredictionAndActual()
+            .equals(other.getPredictionAndActual())) return false;
       }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -2231,17 +2141,21 @@ public final class Public {
       hash = (53 * hash) + getModelId().hashCode();
       hash = (37 * hash) + PREDICTION_ID_FIELD_NUMBER;
       hash = (53 * hash) + getPredictionId().hashCode();
-      switch (predictionOrActualCase_) {
-        case 4:
-          hash = (37 * hash) + PREDICTION_FIELD_NUMBER;
-          hash = (53 * hash) + getPrediction().hashCode();
-          break;
-        case 5:
-          hash = (37 * hash) + ACTUAL_FIELD_NUMBER;
-          hash = (53 * hash) + getActual().hashCode();
-          break;
-        case 0:
-        default:
+      if (hasPrediction()) {
+        hash = (37 * hash) + PREDICTION_FIELD_NUMBER;
+        hash = (53 * hash) + getPrediction().hashCode();
+      }
+      if (hasActual()) {
+        hash = (37 * hash) + ACTUAL_FIELD_NUMBER;
+        hash = (53 * hash) + getActual().hashCode();
+      }
+      if (hasFeatureImportances()) {
+        hash = (37 * hash) + FEATURE_IMPORTANCES_FIELD_NUMBER;
+        hash = (53 * hash) + getFeatureImportances().hashCode();
+      }
+      if (hasPredictionAndActual()) {
+        hash = (37 * hash) + PREDICTION_AND_ACTUAL_FIELD_NUMBER;
+        hash = (53 * hash) + getPredictionAndActual().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -2387,8 +2301,30 @@ public final class Public {
 
         predictionId_ = "";
 
-        predictionOrActualCase_ = 0;
-        predictionOrActual_ = null;
+        if (predictionBuilder_ == null) {
+          prediction_ = null;
+        } else {
+          prediction_ = null;
+          predictionBuilder_ = null;
+        }
+        if (actualBuilder_ == null) {
+          actual_ = null;
+        } else {
+          actual_ = null;
+          actualBuilder_ = null;
+        }
+        if (featureImportancesBuilder_ == null) {
+          featureImportances_ = null;
+        } else {
+          featureImportances_ = null;
+          featureImportancesBuilder_ = null;
+        }
+        if (predictionAndActualBuilder_ == null) {
+          predictionAndActual_ = null;
+        } else {
+          predictionAndActual_ = null;
+          predictionAndActualBuilder_ = null;
+        }
         return this;
       }
 
@@ -2418,21 +2354,26 @@ public final class Public {
         result.organizationKey_ = organizationKey_;
         result.modelId_ = modelId_;
         result.predictionId_ = predictionId_;
-        if (predictionOrActualCase_ == 4) {
-          if (predictionBuilder_ == null) {
-            result.predictionOrActual_ = predictionOrActual_;
-          } else {
-            result.predictionOrActual_ = predictionBuilder_.build();
-          }
+        if (predictionBuilder_ == null) {
+          result.prediction_ = prediction_;
+        } else {
+          result.prediction_ = predictionBuilder_.build();
         }
-        if (predictionOrActualCase_ == 5) {
-          if (actualBuilder_ == null) {
-            result.predictionOrActual_ = predictionOrActual_;
-          } else {
-            result.predictionOrActual_ = actualBuilder_.build();
-          }
+        if (actualBuilder_ == null) {
+          result.actual_ = actual_;
+        } else {
+          result.actual_ = actualBuilder_.build();
         }
-        result.predictionOrActualCase_ = predictionOrActualCase_;
+        if (featureImportancesBuilder_ == null) {
+          result.featureImportances_ = featureImportances_;
+        } else {
+          result.featureImportances_ = featureImportancesBuilder_.build();
+        }
+        if (predictionAndActualBuilder_ == null) {
+          result.predictionAndActual_ = predictionAndActual_;
+        } else {
+          result.predictionAndActual_ = predictionAndActualBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -2493,18 +2434,17 @@ public final class Public {
           predictionId_ = other.predictionId_;
           onChanged();
         }
-        switch (other.getPredictionOrActualCase()) {
-          case PREDICTION: {
-            mergePrediction(other.getPrediction());
-            break;
-          }
-          case ACTUAL: {
-            mergeActual(other.getActual());
-            break;
-          }
-          case PREDICTIONORACTUAL_NOT_SET: {
-            break;
-          }
+        if (other.hasPrediction()) {
+          mergePrediction(other.getPrediction());
+        }
+        if (other.hasActual()) {
+          mergeActual(other.getActual());
+        }
+        if (other.hasFeatureImportances()) {
+          mergeFeatureImportances(other.getFeatureImportances());
+        }
+        if (other.hasPredictionAndActual()) {
+          mergePredictionAndActual(other.getPredictionAndActual());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2534,21 +2474,6 @@ public final class Public {
         }
         return this;
       }
-      private int predictionOrActualCase_ = 0;
-      private java.lang.Object predictionOrActual_;
-      public PredictionOrActualCase
-          getPredictionOrActualCase() {
-        return PredictionOrActualCase.forNumber(
-            predictionOrActualCase_);
-      }
-
-      public Builder clearPredictionOrActual() {
-        predictionOrActualCase_ = 0;
-        predictionOrActual_ = null;
-        onChanged();
-        return this;
-      }
-
 
       private java.lang.Object organizationKey_ = "";
       /**
@@ -2853,280 +2778,480 @@ public final class Public {
         return this;
       }
 
+      private com.arize.protocol.Public.Prediction prediction_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.arize.protocol.Public.Prediction, com.arize.protocol.Public.Prediction.Builder, com.arize.protocol.Public.PredictionOrBuilder> predictionBuilder_;
       /**
-       * <code>.public.Prediction prediction = 4;</code>
+       * <code>.public.Prediction prediction = 8;</code>
        * @return Whether the prediction field is set.
        */
       public boolean hasPrediction() {
-        return predictionOrActualCase_ == 4;
+        return predictionBuilder_ != null || prediction_ != null;
       }
       /**
-       * <code>.public.Prediction prediction = 4;</code>
+       * <code>.public.Prediction prediction = 8;</code>
        * @return The prediction.
        */
       public com.arize.protocol.Public.Prediction getPrediction() {
         if (predictionBuilder_ == null) {
-          if (predictionOrActualCase_ == 4) {
-            return (com.arize.protocol.Public.Prediction) predictionOrActual_;
-          }
-          return com.arize.protocol.Public.Prediction.getDefaultInstance();
+          return prediction_ == null ? com.arize.protocol.Public.Prediction.getDefaultInstance() : prediction_;
         } else {
-          if (predictionOrActualCase_ == 4) {
-            return predictionBuilder_.getMessage();
-          }
-          return com.arize.protocol.Public.Prediction.getDefaultInstance();
+          return predictionBuilder_.getMessage();
         }
       }
       /**
-       * <code>.public.Prediction prediction = 4;</code>
+       * <code>.public.Prediction prediction = 8;</code>
        */
       public Builder setPrediction(com.arize.protocol.Public.Prediction value) {
         if (predictionBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          predictionOrActual_ = value;
+          prediction_ = value;
           onChanged();
         } else {
           predictionBuilder_.setMessage(value);
         }
-        predictionOrActualCase_ = 4;
+
         return this;
       }
       /**
-       * <code>.public.Prediction prediction = 4;</code>
+       * <code>.public.Prediction prediction = 8;</code>
        */
       public Builder setPrediction(
           com.arize.protocol.Public.Prediction.Builder builderForValue) {
         if (predictionBuilder_ == null) {
-          predictionOrActual_ = builderForValue.build();
+          prediction_ = builderForValue.build();
           onChanged();
         } else {
           predictionBuilder_.setMessage(builderForValue.build());
         }
-        predictionOrActualCase_ = 4;
+
         return this;
       }
       /**
-       * <code>.public.Prediction prediction = 4;</code>
+       * <code>.public.Prediction prediction = 8;</code>
        */
       public Builder mergePrediction(com.arize.protocol.Public.Prediction value) {
         if (predictionBuilder_ == null) {
-          if (predictionOrActualCase_ == 4 &&
-              predictionOrActual_ != com.arize.protocol.Public.Prediction.getDefaultInstance()) {
-            predictionOrActual_ = com.arize.protocol.Public.Prediction.newBuilder((com.arize.protocol.Public.Prediction) predictionOrActual_)
-                .mergeFrom(value).buildPartial();
+          if (prediction_ != null) {
+            prediction_ =
+              com.arize.protocol.Public.Prediction.newBuilder(prediction_).mergeFrom(value).buildPartial();
           } else {
-            predictionOrActual_ = value;
+            prediction_ = value;
           }
           onChanged();
         } else {
-          if (predictionOrActualCase_ == 4) {
-            predictionBuilder_.mergeFrom(value);
-          }
-          predictionBuilder_.setMessage(value);
+          predictionBuilder_.mergeFrom(value);
         }
-        predictionOrActualCase_ = 4;
+
         return this;
       }
       /**
-       * <code>.public.Prediction prediction = 4;</code>
+       * <code>.public.Prediction prediction = 8;</code>
        */
       public Builder clearPrediction() {
         if (predictionBuilder_ == null) {
-          if (predictionOrActualCase_ == 4) {
-            predictionOrActualCase_ = 0;
-            predictionOrActual_ = null;
-            onChanged();
-          }
+          prediction_ = null;
+          onChanged();
         } else {
-          if (predictionOrActualCase_ == 4) {
-            predictionOrActualCase_ = 0;
-            predictionOrActual_ = null;
-          }
-          predictionBuilder_.clear();
+          prediction_ = null;
+          predictionBuilder_ = null;
         }
+
         return this;
       }
       /**
-       * <code>.public.Prediction prediction = 4;</code>
+       * <code>.public.Prediction prediction = 8;</code>
        */
       public com.arize.protocol.Public.Prediction.Builder getPredictionBuilder() {
+        
+        onChanged();
         return getPredictionFieldBuilder().getBuilder();
       }
       /**
-       * <code>.public.Prediction prediction = 4;</code>
+       * <code>.public.Prediction prediction = 8;</code>
        */
       public com.arize.protocol.Public.PredictionOrBuilder getPredictionOrBuilder() {
-        if ((predictionOrActualCase_ == 4) && (predictionBuilder_ != null)) {
+        if (predictionBuilder_ != null) {
           return predictionBuilder_.getMessageOrBuilder();
         } else {
-          if (predictionOrActualCase_ == 4) {
-            return (com.arize.protocol.Public.Prediction) predictionOrActual_;
-          }
-          return com.arize.protocol.Public.Prediction.getDefaultInstance();
+          return prediction_ == null ?
+              com.arize.protocol.Public.Prediction.getDefaultInstance() : prediction_;
         }
       }
       /**
-       * <code>.public.Prediction prediction = 4;</code>
+       * <code>.public.Prediction prediction = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.arize.protocol.Public.Prediction, com.arize.protocol.Public.Prediction.Builder, com.arize.protocol.Public.PredictionOrBuilder> 
           getPredictionFieldBuilder() {
         if (predictionBuilder_ == null) {
-          if (!(predictionOrActualCase_ == 4)) {
-            predictionOrActual_ = com.arize.protocol.Public.Prediction.getDefaultInstance();
-          }
           predictionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.arize.protocol.Public.Prediction, com.arize.protocol.Public.Prediction.Builder, com.arize.protocol.Public.PredictionOrBuilder>(
-                  (com.arize.protocol.Public.Prediction) predictionOrActual_,
+                  getPrediction(),
                   getParentForChildren(),
                   isClean());
-          predictionOrActual_ = null;
+          prediction_ = null;
         }
-        predictionOrActualCase_ = 4;
-        onChanged();;
         return predictionBuilder_;
       }
 
+      private com.arize.protocol.Public.Actual actual_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.arize.protocol.Public.Actual, com.arize.protocol.Public.Actual.Builder, com.arize.protocol.Public.ActualOrBuilder> actualBuilder_;
       /**
-       * <code>.public.Actual actual = 5;</code>
+       * <code>.public.Actual actual = 9;</code>
        * @return Whether the actual field is set.
        */
       public boolean hasActual() {
-        return predictionOrActualCase_ == 5;
+        return actualBuilder_ != null || actual_ != null;
       }
       /**
-       * <code>.public.Actual actual = 5;</code>
+       * <code>.public.Actual actual = 9;</code>
        * @return The actual.
        */
       public com.arize.protocol.Public.Actual getActual() {
         if (actualBuilder_ == null) {
-          if (predictionOrActualCase_ == 5) {
-            return (com.arize.protocol.Public.Actual) predictionOrActual_;
-          }
-          return com.arize.protocol.Public.Actual.getDefaultInstance();
+          return actual_ == null ? com.arize.protocol.Public.Actual.getDefaultInstance() : actual_;
         } else {
-          if (predictionOrActualCase_ == 5) {
-            return actualBuilder_.getMessage();
-          }
-          return com.arize.protocol.Public.Actual.getDefaultInstance();
+          return actualBuilder_.getMessage();
         }
       }
       /**
-       * <code>.public.Actual actual = 5;</code>
+       * <code>.public.Actual actual = 9;</code>
        */
       public Builder setActual(com.arize.protocol.Public.Actual value) {
         if (actualBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          predictionOrActual_ = value;
+          actual_ = value;
           onChanged();
         } else {
           actualBuilder_.setMessage(value);
         }
-        predictionOrActualCase_ = 5;
+
         return this;
       }
       /**
-       * <code>.public.Actual actual = 5;</code>
+       * <code>.public.Actual actual = 9;</code>
        */
       public Builder setActual(
           com.arize.protocol.Public.Actual.Builder builderForValue) {
         if (actualBuilder_ == null) {
-          predictionOrActual_ = builderForValue.build();
+          actual_ = builderForValue.build();
           onChanged();
         } else {
           actualBuilder_.setMessage(builderForValue.build());
         }
-        predictionOrActualCase_ = 5;
+
         return this;
       }
       /**
-       * <code>.public.Actual actual = 5;</code>
+       * <code>.public.Actual actual = 9;</code>
        */
       public Builder mergeActual(com.arize.protocol.Public.Actual value) {
         if (actualBuilder_ == null) {
-          if (predictionOrActualCase_ == 5 &&
-              predictionOrActual_ != com.arize.protocol.Public.Actual.getDefaultInstance()) {
-            predictionOrActual_ = com.arize.protocol.Public.Actual.newBuilder((com.arize.protocol.Public.Actual) predictionOrActual_)
-                .mergeFrom(value).buildPartial();
+          if (actual_ != null) {
+            actual_ =
+              com.arize.protocol.Public.Actual.newBuilder(actual_).mergeFrom(value).buildPartial();
           } else {
-            predictionOrActual_ = value;
+            actual_ = value;
           }
           onChanged();
         } else {
-          if (predictionOrActualCase_ == 5) {
-            actualBuilder_.mergeFrom(value);
-          }
-          actualBuilder_.setMessage(value);
+          actualBuilder_.mergeFrom(value);
         }
-        predictionOrActualCase_ = 5;
+
         return this;
       }
       /**
-       * <code>.public.Actual actual = 5;</code>
+       * <code>.public.Actual actual = 9;</code>
        */
       public Builder clearActual() {
         if (actualBuilder_ == null) {
-          if (predictionOrActualCase_ == 5) {
-            predictionOrActualCase_ = 0;
-            predictionOrActual_ = null;
-            onChanged();
-          }
+          actual_ = null;
+          onChanged();
         } else {
-          if (predictionOrActualCase_ == 5) {
-            predictionOrActualCase_ = 0;
-            predictionOrActual_ = null;
-          }
-          actualBuilder_.clear();
+          actual_ = null;
+          actualBuilder_ = null;
         }
+
         return this;
       }
       /**
-       * <code>.public.Actual actual = 5;</code>
+       * <code>.public.Actual actual = 9;</code>
        */
       public com.arize.protocol.Public.Actual.Builder getActualBuilder() {
+        
+        onChanged();
         return getActualFieldBuilder().getBuilder();
       }
       /**
-       * <code>.public.Actual actual = 5;</code>
+       * <code>.public.Actual actual = 9;</code>
        */
       public com.arize.protocol.Public.ActualOrBuilder getActualOrBuilder() {
-        if ((predictionOrActualCase_ == 5) && (actualBuilder_ != null)) {
+        if (actualBuilder_ != null) {
           return actualBuilder_.getMessageOrBuilder();
         } else {
-          if (predictionOrActualCase_ == 5) {
-            return (com.arize.protocol.Public.Actual) predictionOrActual_;
-          }
-          return com.arize.protocol.Public.Actual.getDefaultInstance();
+          return actual_ == null ?
+              com.arize.protocol.Public.Actual.getDefaultInstance() : actual_;
         }
       }
       /**
-       * <code>.public.Actual actual = 5;</code>
+       * <code>.public.Actual actual = 9;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.arize.protocol.Public.Actual, com.arize.protocol.Public.Actual.Builder, com.arize.protocol.Public.ActualOrBuilder> 
           getActualFieldBuilder() {
         if (actualBuilder_ == null) {
-          if (!(predictionOrActualCase_ == 5)) {
-            predictionOrActual_ = com.arize.protocol.Public.Actual.getDefaultInstance();
-          }
           actualBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.arize.protocol.Public.Actual, com.arize.protocol.Public.Actual.Builder, com.arize.protocol.Public.ActualOrBuilder>(
-                  (com.arize.protocol.Public.Actual) predictionOrActual_,
+                  getActual(),
                   getParentForChildren(),
                   isClean());
-          predictionOrActual_ = null;
+          actual_ = null;
         }
-        predictionOrActualCase_ = 5;
-        onChanged();;
         return actualBuilder_;
+      }
+
+      private com.arize.protocol.Public.FeatureImportances featureImportances_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.FeatureImportances, com.arize.protocol.Public.FeatureImportances.Builder, com.arize.protocol.Public.FeatureImportancesOrBuilder> featureImportancesBuilder_;
+      /**
+       * <code>.public.FeatureImportances feature_importances = 10;</code>
+       * @return Whether the featureImportances field is set.
+       */
+      public boolean hasFeatureImportances() {
+        return featureImportancesBuilder_ != null || featureImportances_ != null;
+      }
+      /**
+       * <code>.public.FeatureImportances feature_importances = 10;</code>
+       * @return The featureImportances.
+       */
+      public com.arize.protocol.Public.FeatureImportances getFeatureImportances() {
+        if (featureImportancesBuilder_ == null) {
+          return featureImportances_ == null ? com.arize.protocol.Public.FeatureImportances.getDefaultInstance() : featureImportances_;
+        } else {
+          return featureImportancesBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.public.FeatureImportances feature_importances = 10;</code>
+       */
+      public Builder setFeatureImportances(com.arize.protocol.Public.FeatureImportances value) {
+        if (featureImportancesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          featureImportances_ = value;
+          onChanged();
+        } else {
+          featureImportancesBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.FeatureImportances feature_importances = 10;</code>
+       */
+      public Builder setFeatureImportances(
+          com.arize.protocol.Public.FeatureImportances.Builder builderForValue) {
+        if (featureImportancesBuilder_ == null) {
+          featureImportances_ = builderForValue.build();
+          onChanged();
+        } else {
+          featureImportancesBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.FeatureImportances feature_importances = 10;</code>
+       */
+      public Builder mergeFeatureImportances(com.arize.protocol.Public.FeatureImportances value) {
+        if (featureImportancesBuilder_ == null) {
+          if (featureImportances_ != null) {
+            featureImportances_ =
+              com.arize.protocol.Public.FeatureImportances.newBuilder(featureImportances_).mergeFrom(value).buildPartial();
+          } else {
+            featureImportances_ = value;
+          }
+          onChanged();
+        } else {
+          featureImportancesBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.FeatureImportances feature_importances = 10;</code>
+       */
+      public Builder clearFeatureImportances() {
+        if (featureImportancesBuilder_ == null) {
+          featureImportances_ = null;
+          onChanged();
+        } else {
+          featureImportances_ = null;
+          featureImportancesBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.FeatureImportances feature_importances = 10;</code>
+       */
+      public com.arize.protocol.Public.FeatureImportances.Builder getFeatureImportancesBuilder() {
+        
+        onChanged();
+        return getFeatureImportancesFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.public.FeatureImportances feature_importances = 10;</code>
+       */
+      public com.arize.protocol.Public.FeatureImportancesOrBuilder getFeatureImportancesOrBuilder() {
+        if (featureImportancesBuilder_ != null) {
+          return featureImportancesBuilder_.getMessageOrBuilder();
+        } else {
+          return featureImportances_ == null ?
+              com.arize.protocol.Public.FeatureImportances.getDefaultInstance() : featureImportances_;
+        }
+      }
+      /**
+       * <code>.public.FeatureImportances feature_importances = 10;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.FeatureImportances, com.arize.protocol.Public.FeatureImportances.Builder, com.arize.protocol.Public.FeatureImportancesOrBuilder> 
+          getFeatureImportancesFieldBuilder() {
+        if (featureImportancesBuilder_ == null) {
+          featureImportancesBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.arize.protocol.Public.FeatureImportances, com.arize.protocol.Public.FeatureImportances.Builder, com.arize.protocol.Public.FeatureImportancesOrBuilder>(
+                  getFeatureImportances(),
+                  getParentForChildren(),
+                  isClean());
+          featureImportances_ = null;
+        }
+        return featureImportancesBuilder_;
+      }
+
+      private com.arize.protocol.Public.PredictionAndActual predictionAndActual_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.PredictionAndActual, com.arize.protocol.Public.PredictionAndActual.Builder, com.arize.protocol.Public.PredictionAndActualOrBuilder> predictionAndActualBuilder_;
+      /**
+       * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+       * @return Whether the predictionAndActual field is set.
+       */
+      public boolean hasPredictionAndActual() {
+        return predictionAndActualBuilder_ != null || predictionAndActual_ != null;
+      }
+      /**
+       * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+       * @return The predictionAndActual.
+       */
+      public com.arize.protocol.Public.PredictionAndActual getPredictionAndActual() {
+        if (predictionAndActualBuilder_ == null) {
+          return predictionAndActual_ == null ? com.arize.protocol.Public.PredictionAndActual.getDefaultInstance() : predictionAndActual_;
+        } else {
+          return predictionAndActualBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+       */
+      public Builder setPredictionAndActual(com.arize.protocol.Public.PredictionAndActual value) {
+        if (predictionAndActualBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          predictionAndActual_ = value;
+          onChanged();
+        } else {
+          predictionAndActualBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+       */
+      public Builder setPredictionAndActual(
+          com.arize.protocol.Public.PredictionAndActual.Builder builderForValue) {
+        if (predictionAndActualBuilder_ == null) {
+          predictionAndActual_ = builderForValue.build();
+          onChanged();
+        } else {
+          predictionAndActualBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+       */
+      public Builder mergePredictionAndActual(com.arize.protocol.Public.PredictionAndActual value) {
+        if (predictionAndActualBuilder_ == null) {
+          if (predictionAndActual_ != null) {
+            predictionAndActual_ =
+              com.arize.protocol.Public.PredictionAndActual.newBuilder(predictionAndActual_).mergeFrom(value).buildPartial();
+          } else {
+            predictionAndActual_ = value;
+          }
+          onChanged();
+        } else {
+          predictionAndActualBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+       */
+      public Builder clearPredictionAndActual() {
+        if (predictionAndActualBuilder_ == null) {
+          predictionAndActual_ = null;
+          onChanged();
+        } else {
+          predictionAndActual_ = null;
+          predictionAndActualBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+       */
+      public com.arize.protocol.Public.PredictionAndActual.Builder getPredictionAndActualBuilder() {
+        
+        onChanged();
+        return getPredictionAndActualFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+       */
+      public com.arize.protocol.Public.PredictionAndActualOrBuilder getPredictionAndActualOrBuilder() {
+        if (predictionAndActualBuilder_ != null) {
+          return predictionAndActualBuilder_.getMessageOrBuilder();
+        } else {
+          return predictionAndActual_ == null ?
+              com.arize.protocol.Public.PredictionAndActual.getDefaultInstance() : predictionAndActual_;
+        }
+      }
+      /**
+       * <code>.public.PredictionAndActual prediction_and_actual = 11;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.PredictionAndActual, com.arize.protocol.Public.PredictionAndActual.Builder, com.arize.protocol.Public.PredictionAndActualOrBuilder> 
+          getPredictionAndActualFieldBuilder() {
+        if (predictionAndActualBuilder_ == null) {
+          predictionAndActualBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.arize.protocol.Public.PredictionAndActual, com.arize.protocol.Public.PredictionAndActual.Builder, com.arize.protocol.Public.PredictionAndActualOrBuilder>(
+                  getPredictionAndActual(),
+                  getParentForChildren(),
+                  isClean());
+          predictionAndActual_ = null;
+        }
+        return predictionAndActualBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -3181,6 +3306,3013 @@ public final class Public {
 
   }
 
+  public interface PreProductionRecordOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:public.PreProductionRecord)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+     * @return Whether the trainingRecord field is set.
+     */
+    boolean hasTrainingRecord();
+    /**
+     * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+     * @return The trainingRecord.
+     */
+    com.arize.protocol.Public.PreProductionRecord.TrainingRecord getTrainingRecord();
+    /**
+     * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+     */
+    com.arize.protocol.Public.PreProductionRecord.TrainingRecordOrBuilder getTrainingRecordOrBuilder();
+
+    /**
+     * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+     * @return Whether the validationRecord field is set.
+     */
+    boolean hasValidationRecord();
+    /**
+     * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+     * @return The validationRecord.
+     */
+    com.arize.protocol.Public.PreProductionRecord.ValidationRecord getValidationRecord();
+    /**
+     * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+     */
+    com.arize.protocol.Public.PreProductionRecord.ValidationRecordOrBuilder getValidationRecordOrBuilder();
+
+    public com.arize.protocol.Public.PreProductionRecord.RecordTypeCase getRecordTypeCase();
+  }
+  /**
+   * Protobuf type {@code public.PreProductionRecord}
+   */
+  public  static final class PreProductionRecord extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:public.PreProductionRecord)
+      PreProductionRecordOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use PreProductionRecord.newBuilder() to construct.
+    private PreProductionRecord(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private PreProductionRecord() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new PreProductionRecord();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PreProductionRecord(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.arize.protocol.Public.PreProductionRecord.TrainingRecord.Builder subBuilder = null;
+              if (recordTypeCase_ == 1) {
+                subBuilder = ((com.arize.protocol.Public.PreProductionRecord.TrainingRecord) recordType_).toBuilder();
+              }
+              recordType_ =
+                  input.readMessage(com.arize.protocol.Public.PreProductionRecord.TrainingRecord.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.arize.protocol.Public.PreProductionRecord.TrainingRecord) recordType_);
+                recordType_ = subBuilder.buildPartial();
+              }
+              recordTypeCase_ = 1;
+              break;
+            }
+            case 18: {
+              com.arize.protocol.Public.PreProductionRecord.ValidationRecord.Builder subBuilder = null;
+              if (recordTypeCase_ == 2) {
+                subBuilder = ((com.arize.protocol.Public.PreProductionRecord.ValidationRecord) recordType_).toBuilder();
+              }
+              recordType_ =
+                  input.readMessage(com.arize.protocol.Public.PreProductionRecord.ValidationRecord.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.arize.protocol.Public.PreProductionRecord.ValidationRecord) recordType_);
+                recordType_ = subBuilder.buildPartial();
+              }
+              recordTypeCase_ = 2;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.arize.protocol.Public.internal_static_public_PreProductionRecord_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.arize.protocol.Public.internal_static_public_PreProductionRecord_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.arize.protocol.Public.PreProductionRecord.class, com.arize.protocol.Public.PreProductionRecord.Builder.class);
+    }
+
+    public interface ValidationRecordOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:public.PreProductionRecord.ValidationRecord)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <pre>
+       * Unique identifier for a cohort of validation records
+       * </pre>
+       *
+       * <code>string batch_id = 1;</code>
+       * @return The batchId.
+       */
+      java.lang.String getBatchId();
+      /**
+       * <pre>
+       * Unique identifier for a cohort of validation records
+       * </pre>
+       *
+       * <code>string batch_id = 1;</code>
+       * @return The bytes for batchId.
+       */
+      com.google.protobuf.ByteString
+          getBatchIdBytes();
+
+      /**
+       * <code>.public.Record record = 2;</code>
+       * @return Whether the record field is set.
+       */
+      boolean hasRecord();
+      /**
+       * <code>.public.Record record = 2;</code>
+       * @return The record.
+       */
+      com.arize.protocol.Public.Record getRecord();
+      /**
+       * <code>.public.Record record = 2;</code>
+       */
+      com.arize.protocol.Public.RecordOrBuilder getRecordOrBuilder();
+    }
+    /**
+     * Protobuf type {@code public.PreProductionRecord.ValidationRecord}
+     */
+    public  static final class ValidationRecord extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:public.PreProductionRecord.ValidationRecord)
+        ValidationRecordOrBuilder {
+    private static final long serialVersionUID = 0L;
+      // Use ValidationRecord.newBuilder() to construct.
+      private ValidationRecord(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private ValidationRecord() {
+        batchId_ = "";
+      }
+
+      @java.lang.Override
+      @SuppressWarnings({"unused"})
+      protected java.lang.Object newInstance(
+          UnusedPrivateParameter unused) {
+        return new ValidationRecord();
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return this.unknownFields;
+      }
+      private ValidationRecord(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                batchId_ = s;
+                break;
+              }
+              case 18: {
+                com.arize.protocol.Public.Record.Builder subBuilder = null;
+                if (record_ != null) {
+                  subBuilder = record_.toBuilder();
+                }
+                record_ = input.readMessage(com.arize.protocol.Public.Record.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(record_);
+                  record_ = subBuilder.buildPartial();
+                }
+
+                break;
+              }
+              default: {
+                if (!parseUnknownField(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.arize.protocol.Public.internal_static_public_PreProductionRecord_ValidationRecord_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.arize.protocol.Public.internal_static_public_PreProductionRecord_ValidationRecord_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.arize.protocol.Public.PreProductionRecord.ValidationRecord.class, com.arize.protocol.Public.PreProductionRecord.ValidationRecord.Builder.class);
+      }
+
+      public static final int BATCH_ID_FIELD_NUMBER = 1;
+      private volatile java.lang.Object batchId_;
+      /**
+       * <pre>
+       * Unique identifier for a cohort of validation records
+       * </pre>
+       *
+       * <code>string batch_id = 1;</code>
+       * @return The batchId.
+       */
+      public java.lang.String getBatchId() {
+        java.lang.Object ref = batchId_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          batchId_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       * Unique identifier for a cohort of validation records
+       * </pre>
+       *
+       * <code>string batch_id = 1;</code>
+       * @return The bytes for batchId.
+       */
+      public com.google.protobuf.ByteString
+          getBatchIdBytes() {
+        java.lang.Object ref = batchId_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          batchId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int RECORD_FIELD_NUMBER = 2;
+      private com.arize.protocol.Public.Record record_;
+      /**
+       * <code>.public.Record record = 2;</code>
+       * @return Whether the record field is set.
+       */
+      public boolean hasRecord() {
+        return record_ != null;
+      }
+      /**
+       * <code>.public.Record record = 2;</code>
+       * @return The record.
+       */
+      public com.arize.protocol.Public.Record getRecord() {
+        return record_ == null ? com.arize.protocol.Public.Record.getDefaultInstance() : record_;
+      }
+      /**
+       * <code>.public.Record record = 2;</code>
+       */
+      public com.arize.protocol.Public.RecordOrBuilder getRecordOrBuilder() {
+        return getRecord();
+      }
+
+      private byte memoizedIsInitialized = -1;
+      @java.lang.Override
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      @java.lang.Override
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (!getBatchIdBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, batchId_);
+        }
+        if (record_ != null) {
+          output.writeMessage(2, getRecord());
+        }
+        unknownFields.writeTo(output);
+      }
+
+      @java.lang.Override
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (!getBatchIdBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, batchId_);
+        }
+        if (record_ != null) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(2, getRecord());
+        }
+        size += unknownFields.getSerializedSize();
+        memoizedSize = size;
+        return size;
+      }
+
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.arize.protocol.Public.PreProductionRecord.ValidationRecord)) {
+          return super.equals(obj);
+        }
+        com.arize.protocol.Public.PreProductionRecord.ValidationRecord other = (com.arize.protocol.Public.PreProductionRecord.ValidationRecord) obj;
+
+        if (!getBatchId()
+            .equals(other.getBatchId())) return false;
+        if (hasRecord() != other.hasRecord()) return false;
+        if (hasRecord()) {
+          if (!getRecord()
+              .equals(other.getRecord())) return false;
+        }
+        if (!unknownFields.equals(other.unknownFields)) return false;
+        return true;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptor().hashCode();
+        hash = (37 * hash) + BATCH_ID_FIELD_NUMBER;
+        hash = (53 * hash) + getBatchId().hashCode();
+        if (hasRecord()) {
+          hash = (37 * hash) + RECORD_FIELD_NUMBER;
+          hash = (53 * hash) + getRecord().hashCode();
+        }
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      @java.lang.Override
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.arize.protocol.Public.PreProductionRecord.ValidationRecord prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      @java.lang.Override
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code public.PreProductionRecord.ValidationRecord}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:public.PreProductionRecord.ValidationRecord)
+          com.arize.protocol.Public.PreProductionRecord.ValidationRecordOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.arize.protocol.Public.internal_static_public_PreProductionRecord_ValidationRecord_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.arize.protocol.Public.internal_static_public_PreProductionRecord_ValidationRecord_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.arize.protocol.Public.PreProductionRecord.ValidationRecord.class, com.arize.protocol.Public.PreProductionRecord.ValidationRecord.Builder.class);
+        }
+
+        // Construct using com.arize.protocol.Public.PreProductionRecord.ValidationRecord.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        @java.lang.Override
+        public Builder clear() {
+          super.clear();
+          batchId_ = "";
+
+          if (recordBuilder_ == null) {
+            record_ = null;
+          } else {
+            record_ = null;
+            recordBuilder_ = null;
+          }
+          return this;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.arize.protocol.Public.internal_static_public_PreProductionRecord_ValidationRecord_descriptor;
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.PreProductionRecord.ValidationRecord getDefaultInstanceForType() {
+          return com.arize.protocol.Public.PreProductionRecord.ValidationRecord.getDefaultInstance();
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.PreProductionRecord.ValidationRecord build() {
+          com.arize.protocol.Public.PreProductionRecord.ValidationRecord result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.PreProductionRecord.ValidationRecord buildPartial() {
+          com.arize.protocol.Public.PreProductionRecord.ValidationRecord result = new com.arize.protocol.Public.PreProductionRecord.ValidationRecord(this);
+          result.batchId_ = batchId_;
+          if (recordBuilder_ == null) {
+            result.record_ = record_;
+          } else {
+            result.record_ = recordBuilder_.build();
+          }
+          onBuilt();
+          return result;
+        }
+
+        @java.lang.Override
+        public Builder clone() {
+          return super.clone();
+        }
+        @java.lang.Override
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return super.setField(field, value);
+        }
+        @java.lang.Override
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return super.clearField(field);
+        }
+        @java.lang.Override
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return super.clearOneof(oneof);
+        }
+        @java.lang.Override
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, java.lang.Object value) {
+          return super.setRepeatedField(field, index, value);
+        }
+        @java.lang.Override
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return super.addRepeatedField(field, value);
+        }
+        @java.lang.Override
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.arize.protocol.Public.PreProductionRecord.ValidationRecord) {
+            return mergeFrom((com.arize.protocol.Public.PreProductionRecord.ValidationRecord)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.arize.protocol.Public.PreProductionRecord.ValidationRecord other) {
+          if (other == com.arize.protocol.Public.PreProductionRecord.ValidationRecord.getDefaultInstance()) return this;
+          if (!other.getBatchId().isEmpty()) {
+            batchId_ = other.batchId_;
+            onChanged();
+          }
+          if (other.hasRecord()) {
+            mergeRecord(other.getRecord());
+          }
+          this.mergeUnknownFields(other.unknownFields);
+          onChanged();
+          return this;
+        }
+
+        @java.lang.Override
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.arize.protocol.Public.PreProductionRecord.ValidationRecord parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.arize.protocol.Public.PreProductionRecord.ValidationRecord) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+
+        private java.lang.Object batchId_ = "";
+        /**
+         * <pre>
+         * Unique identifier for a cohort of validation records
+         * </pre>
+         *
+         * <code>string batch_id = 1;</code>
+         * @return The batchId.
+         */
+        public java.lang.String getBatchId() {
+          java.lang.Object ref = batchId_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            batchId_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Unique identifier for a cohort of validation records
+         * </pre>
+         *
+         * <code>string batch_id = 1;</code>
+         * @return The bytes for batchId.
+         */
+        public com.google.protobuf.ByteString
+            getBatchIdBytes() {
+          java.lang.Object ref = batchId_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            batchId_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Unique identifier for a cohort of validation records
+         * </pre>
+         *
+         * <code>string batch_id = 1;</code>
+         * @param value The batchId to set.
+         * @return This builder for chaining.
+         */
+        public Builder setBatchId(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          batchId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Unique identifier for a cohort of validation records
+         * </pre>
+         *
+         * <code>string batch_id = 1;</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearBatchId() {
+          
+          batchId_ = getDefaultInstance().getBatchId();
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Unique identifier for a cohort of validation records
+         * </pre>
+         *
+         * <code>string batch_id = 1;</code>
+         * @param value The bytes for batchId to set.
+         * @return This builder for chaining.
+         */
+        public Builder setBatchIdBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          batchId_ = value;
+          onChanged();
+          return this;
+        }
+
+        private com.arize.protocol.Public.Record record_;
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Record, com.arize.protocol.Public.Record.Builder, com.arize.protocol.Public.RecordOrBuilder> recordBuilder_;
+        /**
+         * <code>.public.Record record = 2;</code>
+         * @return Whether the record field is set.
+         */
+        public boolean hasRecord() {
+          return recordBuilder_ != null || record_ != null;
+        }
+        /**
+         * <code>.public.Record record = 2;</code>
+         * @return The record.
+         */
+        public com.arize.protocol.Public.Record getRecord() {
+          if (recordBuilder_ == null) {
+            return record_ == null ? com.arize.protocol.Public.Record.getDefaultInstance() : record_;
+          } else {
+            return recordBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>.public.Record record = 2;</code>
+         */
+        public Builder setRecord(com.arize.protocol.Public.Record value) {
+          if (recordBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            record_ = value;
+            onChanged();
+          } else {
+            recordBuilder_.setMessage(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Record record = 2;</code>
+         */
+        public Builder setRecord(
+            com.arize.protocol.Public.Record.Builder builderForValue) {
+          if (recordBuilder_ == null) {
+            record_ = builderForValue.build();
+            onChanged();
+          } else {
+            recordBuilder_.setMessage(builderForValue.build());
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Record record = 2;</code>
+         */
+        public Builder mergeRecord(com.arize.protocol.Public.Record value) {
+          if (recordBuilder_ == null) {
+            if (record_ != null) {
+              record_ =
+                com.arize.protocol.Public.Record.newBuilder(record_).mergeFrom(value).buildPartial();
+            } else {
+              record_ = value;
+            }
+            onChanged();
+          } else {
+            recordBuilder_.mergeFrom(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Record record = 2;</code>
+         */
+        public Builder clearRecord() {
+          if (recordBuilder_ == null) {
+            record_ = null;
+            onChanged();
+          } else {
+            record_ = null;
+            recordBuilder_ = null;
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Record record = 2;</code>
+         */
+        public com.arize.protocol.Public.Record.Builder getRecordBuilder() {
+          
+          onChanged();
+          return getRecordFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>.public.Record record = 2;</code>
+         */
+        public com.arize.protocol.Public.RecordOrBuilder getRecordOrBuilder() {
+          if (recordBuilder_ != null) {
+            return recordBuilder_.getMessageOrBuilder();
+          } else {
+            return record_ == null ?
+                com.arize.protocol.Public.Record.getDefaultInstance() : record_;
+          }
+        }
+        /**
+         * <code>.public.Record record = 2;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Record, com.arize.protocol.Public.Record.Builder, com.arize.protocol.Public.RecordOrBuilder> 
+            getRecordFieldBuilder() {
+          if (recordBuilder_ == null) {
+            recordBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.arize.protocol.Public.Record, com.arize.protocol.Public.Record.Builder, com.arize.protocol.Public.RecordOrBuilder>(
+                    getRecord(),
+                    getParentForChildren(),
+                    isClean());
+            record_ = null;
+          }
+          return recordBuilder_;
+        }
+        @java.lang.Override
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.setUnknownFields(unknownFields);
+        }
+
+        @java.lang.Override
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.mergeUnknownFields(unknownFields);
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:public.PreProductionRecord.ValidationRecord)
+      }
+
+      // @@protoc_insertion_point(class_scope:public.PreProductionRecord.ValidationRecord)
+      private static final com.arize.protocol.Public.PreProductionRecord.ValidationRecord DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.arize.protocol.Public.PreProductionRecord.ValidationRecord();
+      }
+
+      public static com.arize.protocol.Public.PreProductionRecord.ValidationRecord getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<ValidationRecord>
+          PARSER = new com.google.protobuf.AbstractParser<ValidationRecord>() {
+        @java.lang.Override
+        public ValidationRecord parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new ValidationRecord(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<ValidationRecord> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<ValidationRecord> getParserForType() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.PreProductionRecord.ValidationRecord getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
+    }
+
+    public interface TrainingRecordOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:public.PreProductionRecord.TrainingRecord)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>.public.Record record = 1;</code>
+       * @return Whether the record field is set.
+       */
+      boolean hasRecord();
+      /**
+       * <code>.public.Record record = 1;</code>
+       * @return The record.
+       */
+      com.arize.protocol.Public.Record getRecord();
+      /**
+       * <code>.public.Record record = 1;</code>
+       */
+      com.arize.protocol.Public.RecordOrBuilder getRecordOrBuilder();
+    }
+    /**
+     * <pre>
+     * Thin wrapper around a Record to be explicit on Pre-Production Records
+     * </pre>
+     *
+     * Protobuf type {@code public.PreProductionRecord.TrainingRecord}
+     */
+    public  static final class TrainingRecord extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:public.PreProductionRecord.TrainingRecord)
+        TrainingRecordOrBuilder {
+    private static final long serialVersionUID = 0L;
+      // Use TrainingRecord.newBuilder() to construct.
+      private TrainingRecord(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private TrainingRecord() {
+      }
+
+      @java.lang.Override
+      @SuppressWarnings({"unused"})
+      protected java.lang.Object newInstance(
+          UnusedPrivateParameter unused) {
+        return new TrainingRecord();
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return this.unknownFields;
+      }
+      private TrainingRecord(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                com.arize.protocol.Public.Record.Builder subBuilder = null;
+                if (record_ != null) {
+                  subBuilder = record_.toBuilder();
+                }
+                record_ = input.readMessage(com.arize.protocol.Public.Record.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(record_);
+                  record_ = subBuilder.buildPartial();
+                }
+
+                break;
+              }
+              default: {
+                if (!parseUnknownField(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.arize.protocol.Public.internal_static_public_PreProductionRecord_TrainingRecord_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.arize.protocol.Public.internal_static_public_PreProductionRecord_TrainingRecord_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.arize.protocol.Public.PreProductionRecord.TrainingRecord.class, com.arize.protocol.Public.PreProductionRecord.TrainingRecord.Builder.class);
+      }
+
+      public static final int RECORD_FIELD_NUMBER = 1;
+      private com.arize.protocol.Public.Record record_;
+      /**
+       * <code>.public.Record record = 1;</code>
+       * @return Whether the record field is set.
+       */
+      public boolean hasRecord() {
+        return record_ != null;
+      }
+      /**
+       * <code>.public.Record record = 1;</code>
+       * @return The record.
+       */
+      public com.arize.protocol.Public.Record getRecord() {
+        return record_ == null ? com.arize.protocol.Public.Record.getDefaultInstance() : record_;
+      }
+      /**
+       * <code>.public.Record record = 1;</code>
+       */
+      public com.arize.protocol.Public.RecordOrBuilder getRecordOrBuilder() {
+        return getRecord();
+      }
+
+      private byte memoizedIsInitialized = -1;
+      @java.lang.Override
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      @java.lang.Override
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (record_ != null) {
+          output.writeMessage(1, getRecord());
+        }
+        unknownFields.writeTo(output);
+      }
+
+      @java.lang.Override
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (record_ != null) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(1, getRecord());
+        }
+        size += unknownFields.getSerializedSize();
+        memoizedSize = size;
+        return size;
+      }
+
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.arize.protocol.Public.PreProductionRecord.TrainingRecord)) {
+          return super.equals(obj);
+        }
+        com.arize.protocol.Public.PreProductionRecord.TrainingRecord other = (com.arize.protocol.Public.PreProductionRecord.TrainingRecord) obj;
+
+        if (hasRecord() != other.hasRecord()) return false;
+        if (hasRecord()) {
+          if (!getRecord()
+              .equals(other.getRecord())) return false;
+        }
+        if (!unknownFields.equals(other.unknownFields)) return false;
+        return true;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptor().hashCode();
+        if (hasRecord()) {
+          hash = (37 * hash) + RECORD_FIELD_NUMBER;
+          hash = (53 * hash) + getRecord().hashCode();
+        }
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      @java.lang.Override
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.arize.protocol.Public.PreProductionRecord.TrainingRecord prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      @java.lang.Override
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * <pre>
+       * Thin wrapper around a Record to be explicit on Pre-Production Records
+       * </pre>
+       *
+       * Protobuf type {@code public.PreProductionRecord.TrainingRecord}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:public.PreProductionRecord.TrainingRecord)
+          com.arize.protocol.Public.PreProductionRecord.TrainingRecordOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.arize.protocol.Public.internal_static_public_PreProductionRecord_TrainingRecord_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.arize.protocol.Public.internal_static_public_PreProductionRecord_TrainingRecord_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.arize.protocol.Public.PreProductionRecord.TrainingRecord.class, com.arize.protocol.Public.PreProductionRecord.TrainingRecord.Builder.class);
+        }
+
+        // Construct using com.arize.protocol.Public.PreProductionRecord.TrainingRecord.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        @java.lang.Override
+        public Builder clear() {
+          super.clear();
+          if (recordBuilder_ == null) {
+            record_ = null;
+          } else {
+            record_ = null;
+            recordBuilder_ = null;
+          }
+          return this;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.arize.protocol.Public.internal_static_public_PreProductionRecord_TrainingRecord_descriptor;
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.PreProductionRecord.TrainingRecord getDefaultInstanceForType() {
+          return com.arize.protocol.Public.PreProductionRecord.TrainingRecord.getDefaultInstance();
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.PreProductionRecord.TrainingRecord build() {
+          com.arize.protocol.Public.PreProductionRecord.TrainingRecord result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.PreProductionRecord.TrainingRecord buildPartial() {
+          com.arize.protocol.Public.PreProductionRecord.TrainingRecord result = new com.arize.protocol.Public.PreProductionRecord.TrainingRecord(this);
+          if (recordBuilder_ == null) {
+            result.record_ = record_;
+          } else {
+            result.record_ = recordBuilder_.build();
+          }
+          onBuilt();
+          return result;
+        }
+
+        @java.lang.Override
+        public Builder clone() {
+          return super.clone();
+        }
+        @java.lang.Override
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return super.setField(field, value);
+        }
+        @java.lang.Override
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return super.clearField(field);
+        }
+        @java.lang.Override
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return super.clearOneof(oneof);
+        }
+        @java.lang.Override
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, java.lang.Object value) {
+          return super.setRepeatedField(field, index, value);
+        }
+        @java.lang.Override
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return super.addRepeatedField(field, value);
+        }
+        @java.lang.Override
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.arize.protocol.Public.PreProductionRecord.TrainingRecord) {
+            return mergeFrom((com.arize.protocol.Public.PreProductionRecord.TrainingRecord)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.arize.protocol.Public.PreProductionRecord.TrainingRecord other) {
+          if (other == com.arize.protocol.Public.PreProductionRecord.TrainingRecord.getDefaultInstance()) return this;
+          if (other.hasRecord()) {
+            mergeRecord(other.getRecord());
+          }
+          this.mergeUnknownFields(other.unknownFields);
+          onChanged();
+          return this;
+        }
+
+        @java.lang.Override
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.arize.protocol.Public.PreProductionRecord.TrainingRecord parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.arize.protocol.Public.PreProductionRecord.TrainingRecord) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+
+        private com.arize.protocol.Public.Record record_;
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Record, com.arize.protocol.Public.Record.Builder, com.arize.protocol.Public.RecordOrBuilder> recordBuilder_;
+        /**
+         * <code>.public.Record record = 1;</code>
+         * @return Whether the record field is set.
+         */
+        public boolean hasRecord() {
+          return recordBuilder_ != null || record_ != null;
+        }
+        /**
+         * <code>.public.Record record = 1;</code>
+         * @return The record.
+         */
+        public com.arize.protocol.Public.Record getRecord() {
+          if (recordBuilder_ == null) {
+            return record_ == null ? com.arize.protocol.Public.Record.getDefaultInstance() : record_;
+          } else {
+            return recordBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>.public.Record record = 1;</code>
+         */
+        public Builder setRecord(com.arize.protocol.Public.Record value) {
+          if (recordBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            record_ = value;
+            onChanged();
+          } else {
+            recordBuilder_.setMessage(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Record record = 1;</code>
+         */
+        public Builder setRecord(
+            com.arize.protocol.Public.Record.Builder builderForValue) {
+          if (recordBuilder_ == null) {
+            record_ = builderForValue.build();
+            onChanged();
+          } else {
+            recordBuilder_.setMessage(builderForValue.build());
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Record record = 1;</code>
+         */
+        public Builder mergeRecord(com.arize.protocol.Public.Record value) {
+          if (recordBuilder_ == null) {
+            if (record_ != null) {
+              record_ =
+                com.arize.protocol.Public.Record.newBuilder(record_).mergeFrom(value).buildPartial();
+            } else {
+              record_ = value;
+            }
+            onChanged();
+          } else {
+            recordBuilder_.mergeFrom(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Record record = 1;</code>
+         */
+        public Builder clearRecord() {
+          if (recordBuilder_ == null) {
+            record_ = null;
+            onChanged();
+          } else {
+            record_ = null;
+            recordBuilder_ = null;
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Record record = 1;</code>
+         */
+        public com.arize.protocol.Public.Record.Builder getRecordBuilder() {
+          
+          onChanged();
+          return getRecordFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>.public.Record record = 1;</code>
+         */
+        public com.arize.protocol.Public.RecordOrBuilder getRecordOrBuilder() {
+          if (recordBuilder_ != null) {
+            return recordBuilder_.getMessageOrBuilder();
+          } else {
+            return record_ == null ?
+                com.arize.protocol.Public.Record.getDefaultInstance() : record_;
+          }
+        }
+        /**
+         * <code>.public.Record record = 1;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Record, com.arize.protocol.Public.Record.Builder, com.arize.protocol.Public.RecordOrBuilder> 
+            getRecordFieldBuilder() {
+          if (recordBuilder_ == null) {
+            recordBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.arize.protocol.Public.Record, com.arize.protocol.Public.Record.Builder, com.arize.protocol.Public.RecordOrBuilder>(
+                    getRecord(),
+                    getParentForChildren(),
+                    isClean());
+            record_ = null;
+          }
+          return recordBuilder_;
+        }
+        @java.lang.Override
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.setUnknownFields(unknownFields);
+        }
+
+        @java.lang.Override
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.mergeUnknownFields(unknownFields);
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:public.PreProductionRecord.TrainingRecord)
+      }
+
+      // @@protoc_insertion_point(class_scope:public.PreProductionRecord.TrainingRecord)
+      private static final com.arize.protocol.Public.PreProductionRecord.TrainingRecord DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.arize.protocol.Public.PreProductionRecord.TrainingRecord();
+      }
+
+      public static com.arize.protocol.Public.PreProductionRecord.TrainingRecord getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<TrainingRecord>
+          PARSER = new com.google.protobuf.AbstractParser<TrainingRecord>() {
+        @java.lang.Override
+        public TrainingRecord parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new TrainingRecord(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<TrainingRecord> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<TrainingRecord> getParserForType() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.PreProductionRecord.TrainingRecord getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
+    }
+
+    private int recordTypeCase_ = 0;
+    private java.lang.Object recordType_;
+    public enum RecordTypeCase
+        implements com.google.protobuf.Internal.EnumLite,
+            com.google.protobuf.AbstractMessage.InternalOneOfEnum {
+      TRAINING_RECORD(1),
+      VALIDATION_RECORD(2),
+      RECORDTYPE_NOT_SET(0);
+      private final int value;
+      private RecordTypeCase(int value) {
+        this.value = value;
+      }
+      /**
+       * @param value The number of the enum to look for.
+       * @return The enum associated with the given number.
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static RecordTypeCase valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static RecordTypeCase forNumber(int value) {
+        switch (value) {
+          case 1: return TRAINING_RECORD;
+          case 2: return VALIDATION_RECORD;
+          case 0: return RECORDTYPE_NOT_SET;
+          default: return null;
+        }
+      }
+      public int getNumber() {
+        return this.value;
+      }
+    };
+
+    public RecordTypeCase
+    getRecordTypeCase() {
+      return RecordTypeCase.forNumber(
+          recordTypeCase_);
+    }
+
+    public static final int TRAINING_RECORD_FIELD_NUMBER = 1;
+    /**
+     * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+     * @return Whether the trainingRecord field is set.
+     */
+    public boolean hasTrainingRecord() {
+      return recordTypeCase_ == 1;
+    }
+    /**
+     * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+     * @return The trainingRecord.
+     */
+    public com.arize.protocol.Public.PreProductionRecord.TrainingRecord getTrainingRecord() {
+      if (recordTypeCase_ == 1) {
+         return (com.arize.protocol.Public.PreProductionRecord.TrainingRecord) recordType_;
+      }
+      return com.arize.protocol.Public.PreProductionRecord.TrainingRecord.getDefaultInstance();
+    }
+    /**
+     * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+     */
+    public com.arize.protocol.Public.PreProductionRecord.TrainingRecordOrBuilder getTrainingRecordOrBuilder() {
+      if (recordTypeCase_ == 1) {
+         return (com.arize.protocol.Public.PreProductionRecord.TrainingRecord) recordType_;
+      }
+      return com.arize.protocol.Public.PreProductionRecord.TrainingRecord.getDefaultInstance();
+    }
+
+    public static final int VALIDATION_RECORD_FIELD_NUMBER = 2;
+    /**
+     * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+     * @return Whether the validationRecord field is set.
+     */
+    public boolean hasValidationRecord() {
+      return recordTypeCase_ == 2;
+    }
+    /**
+     * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+     * @return The validationRecord.
+     */
+    public com.arize.protocol.Public.PreProductionRecord.ValidationRecord getValidationRecord() {
+      if (recordTypeCase_ == 2) {
+         return (com.arize.protocol.Public.PreProductionRecord.ValidationRecord) recordType_;
+      }
+      return com.arize.protocol.Public.PreProductionRecord.ValidationRecord.getDefaultInstance();
+    }
+    /**
+     * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+     */
+    public com.arize.protocol.Public.PreProductionRecord.ValidationRecordOrBuilder getValidationRecordOrBuilder() {
+      if (recordTypeCase_ == 2) {
+         return (com.arize.protocol.Public.PreProductionRecord.ValidationRecord) recordType_;
+      }
+      return com.arize.protocol.Public.PreProductionRecord.ValidationRecord.getDefaultInstance();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (recordTypeCase_ == 1) {
+        output.writeMessage(1, (com.arize.protocol.Public.PreProductionRecord.TrainingRecord) recordType_);
+      }
+      if (recordTypeCase_ == 2) {
+        output.writeMessage(2, (com.arize.protocol.Public.PreProductionRecord.ValidationRecord) recordType_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (recordTypeCase_ == 1) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, (com.arize.protocol.Public.PreProductionRecord.TrainingRecord) recordType_);
+      }
+      if (recordTypeCase_ == 2) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, (com.arize.protocol.Public.PreProductionRecord.ValidationRecord) recordType_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.arize.protocol.Public.PreProductionRecord)) {
+        return super.equals(obj);
+      }
+      com.arize.protocol.Public.PreProductionRecord other = (com.arize.protocol.Public.PreProductionRecord) obj;
+
+      if (!getRecordTypeCase().equals(other.getRecordTypeCase())) return false;
+      switch (recordTypeCase_) {
+        case 1:
+          if (!getTrainingRecord()
+              .equals(other.getTrainingRecord())) return false;
+          break;
+        case 2:
+          if (!getValidationRecord()
+              .equals(other.getValidationRecord())) return false;
+          break;
+        case 0:
+        default:
+      }
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      switch (recordTypeCase_) {
+        case 1:
+          hash = (37 * hash) + TRAINING_RECORD_FIELD_NUMBER;
+          hash = (53 * hash) + getTrainingRecord().hashCode();
+          break;
+        case 2:
+          hash = (37 * hash) + VALIDATION_RECORD_FIELD_NUMBER;
+          hash = (53 * hash) + getValidationRecord().hashCode();
+          break;
+        case 0:
+        default:
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.arize.protocol.Public.PreProductionRecord parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.PreProductionRecord parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.PreProductionRecord parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.PreProductionRecord parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.PreProductionRecord parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.PreProductionRecord parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.PreProductionRecord parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.PreProductionRecord parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.PreProductionRecord parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.PreProductionRecord parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.PreProductionRecord parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.PreProductionRecord parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.arize.protocol.Public.PreProductionRecord prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code public.PreProductionRecord}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:public.PreProductionRecord)
+        com.arize.protocol.Public.PreProductionRecordOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.arize.protocol.Public.internal_static_public_PreProductionRecord_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.arize.protocol.Public.internal_static_public_PreProductionRecord_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.arize.protocol.Public.PreProductionRecord.class, com.arize.protocol.Public.PreProductionRecord.Builder.class);
+      }
+
+      // Construct using com.arize.protocol.Public.PreProductionRecord.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        recordTypeCase_ = 0;
+        recordType_ = null;
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.arize.protocol.Public.internal_static_public_PreProductionRecord_descriptor;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.PreProductionRecord getDefaultInstanceForType() {
+        return com.arize.protocol.Public.PreProductionRecord.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.PreProductionRecord build() {
+        com.arize.protocol.Public.PreProductionRecord result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.PreProductionRecord buildPartial() {
+        com.arize.protocol.Public.PreProductionRecord result = new com.arize.protocol.Public.PreProductionRecord(this);
+        if (recordTypeCase_ == 1) {
+          if (trainingRecordBuilder_ == null) {
+            result.recordType_ = recordType_;
+          } else {
+            result.recordType_ = trainingRecordBuilder_.build();
+          }
+        }
+        if (recordTypeCase_ == 2) {
+          if (validationRecordBuilder_ == null) {
+            result.recordType_ = recordType_;
+          } else {
+            result.recordType_ = validationRecordBuilder_.build();
+          }
+        }
+        result.recordTypeCase_ = recordTypeCase_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.arize.protocol.Public.PreProductionRecord) {
+          return mergeFrom((com.arize.protocol.Public.PreProductionRecord)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.arize.protocol.Public.PreProductionRecord other) {
+        if (other == com.arize.protocol.Public.PreProductionRecord.getDefaultInstance()) return this;
+        switch (other.getRecordTypeCase()) {
+          case TRAINING_RECORD: {
+            mergeTrainingRecord(other.getTrainingRecord());
+            break;
+          }
+          case VALIDATION_RECORD: {
+            mergeValidationRecord(other.getValidationRecord());
+            break;
+          }
+          case RECORDTYPE_NOT_SET: {
+            break;
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.arize.protocol.Public.PreProductionRecord parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.arize.protocol.Public.PreProductionRecord) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int recordTypeCase_ = 0;
+      private java.lang.Object recordType_;
+      public RecordTypeCase
+          getRecordTypeCase() {
+        return RecordTypeCase.forNumber(
+            recordTypeCase_);
+      }
+
+      public Builder clearRecordType() {
+        recordTypeCase_ = 0;
+        recordType_ = null;
+        onChanged();
+        return this;
+      }
+
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.PreProductionRecord.TrainingRecord, com.arize.protocol.Public.PreProductionRecord.TrainingRecord.Builder, com.arize.protocol.Public.PreProductionRecord.TrainingRecordOrBuilder> trainingRecordBuilder_;
+      /**
+       * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+       * @return Whether the trainingRecord field is set.
+       */
+      public boolean hasTrainingRecord() {
+        return recordTypeCase_ == 1;
+      }
+      /**
+       * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+       * @return The trainingRecord.
+       */
+      public com.arize.protocol.Public.PreProductionRecord.TrainingRecord getTrainingRecord() {
+        if (trainingRecordBuilder_ == null) {
+          if (recordTypeCase_ == 1) {
+            return (com.arize.protocol.Public.PreProductionRecord.TrainingRecord) recordType_;
+          }
+          return com.arize.protocol.Public.PreProductionRecord.TrainingRecord.getDefaultInstance();
+        } else {
+          if (recordTypeCase_ == 1) {
+            return trainingRecordBuilder_.getMessage();
+          }
+          return com.arize.protocol.Public.PreProductionRecord.TrainingRecord.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+       */
+      public Builder setTrainingRecord(com.arize.protocol.Public.PreProductionRecord.TrainingRecord value) {
+        if (trainingRecordBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          recordType_ = value;
+          onChanged();
+        } else {
+          trainingRecordBuilder_.setMessage(value);
+        }
+        recordTypeCase_ = 1;
+        return this;
+      }
+      /**
+       * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+       */
+      public Builder setTrainingRecord(
+          com.arize.protocol.Public.PreProductionRecord.TrainingRecord.Builder builderForValue) {
+        if (trainingRecordBuilder_ == null) {
+          recordType_ = builderForValue.build();
+          onChanged();
+        } else {
+          trainingRecordBuilder_.setMessage(builderForValue.build());
+        }
+        recordTypeCase_ = 1;
+        return this;
+      }
+      /**
+       * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+       */
+      public Builder mergeTrainingRecord(com.arize.protocol.Public.PreProductionRecord.TrainingRecord value) {
+        if (trainingRecordBuilder_ == null) {
+          if (recordTypeCase_ == 1 &&
+              recordType_ != com.arize.protocol.Public.PreProductionRecord.TrainingRecord.getDefaultInstance()) {
+            recordType_ = com.arize.protocol.Public.PreProductionRecord.TrainingRecord.newBuilder((com.arize.protocol.Public.PreProductionRecord.TrainingRecord) recordType_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            recordType_ = value;
+          }
+          onChanged();
+        } else {
+          if (recordTypeCase_ == 1) {
+            trainingRecordBuilder_.mergeFrom(value);
+          }
+          trainingRecordBuilder_.setMessage(value);
+        }
+        recordTypeCase_ = 1;
+        return this;
+      }
+      /**
+       * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+       */
+      public Builder clearTrainingRecord() {
+        if (trainingRecordBuilder_ == null) {
+          if (recordTypeCase_ == 1) {
+            recordTypeCase_ = 0;
+            recordType_ = null;
+            onChanged();
+          }
+        } else {
+          if (recordTypeCase_ == 1) {
+            recordTypeCase_ = 0;
+            recordType_ = null;
+          }
+          trainingRecordBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+       */
+      public com.arize.protocol.Public.PreProductionRecord.TrainingRecord.Builder getTrainingRecordBuilder() {
+        return getTrainingRecordFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+       */
+      public com.arize.protocol.Public.PreProductionRecord.TrainingRecordOrBuilder getTrainingRecordOrBuilder() {
+        if ((recordTypeCase_ == 1) && (trainingRecordBuilder_ != null)) {
+          return trainingRecordBuilder_.getMessageOrBuilder();
+        } else {
+          if (recordTypeCase_ == 1) {
+            return (com.arize.protocol.Public.PreProductionRecord.TrainingRecord) recordType_;
+          }
+          return com.arize.protocol.Public.PreProductionRecord.TrainingRecord.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.public.PreProductionRecord.TrainingRecord training_record = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.PreProductionRecord.TrainingRecord, com.arize.protocol.Public.PreProductionRecord.TrainingRecord.Builder, com.arize.protocol.Public.PreProductionRecord.TrainingRecordOrBuilder> 
+          getTrainingRecordFieldBuilder() {
+        if (trainingRecordBuilder_ == null) {
+          if (!(recordTypeCase_ == 1)) {
+            recordType_ = com.arize.protocol.Public.PreProductionRecord.TrainingRecord.getDefaultInstance();
+          }
+          trainingRecordBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.arize.protocol.Public.PreProductionRecord.TrainingRecord, com.arize.protocol.Public.PreProductionRecord.TrainingRecord.Builder, com.arize.protocol.Public.PreProductionRecord.TrainingRecordOrBuilder>(
+                  (com.arize.protocol.Public.PreProductionRecord.TrainingRecord) recordType_,
+                  getParentForChildren(),
+                  isClean());
+          recordType_ = null;
+        }
+        recordTypeCase_ = 1;
+        onChanged();;
+        return trainingRecordBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.PreProductionRecord.ValidationRecord, com.arize.protocol.Public.PreProductionRecord.ValidationRecord.Builder, com.arize.protocol.Public.PreProductionRecord.ValidationRecordOrBuilder> validationRecordBuilder_;
+      /**
+       * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+       * @return Whether the validationRecord field is set.
+       */
+      public boolean hasValidationRecord() {
+        return recordTypeCase_ == 2;
+      }
+      /**
+       * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+       * @return The validationRecord.
+       */
+      public com.arize.protocol.Public.PreProductionRecord.ValidationRecord getValidationRecord() {
+        if (validationRecordBuilder_ == null) {
+          if (recordTypeCase_ == 2) {
+            return (com.arize.protocol.Public.PreProductionRecord.ValidationRecord) recordType_;
+          }
+          return com.arize.protocol.Public.PreProductionRecord.ValidationRecord.getDefaultInstance();
+        } else {
+          if (recordTypeCase_ == 2) {
+            return validationRecordBuilder_.getMessage();
+          }
+          return com.arize.protocol.Public.PreProductionRecord.ValidationRecord.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+       */
+      public Builder setValidationRecord(com.arize.protocol.Public.PreProductionRecord.ValidationRecord value) {
+        if (validationRecordBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          recordType_ = value;
+          onChanged();
+        } else {
+          validationRecordBuilder_.setMessage(value);
+        }
+        recordTypeCase_ = 2;
+        return this;
+      }
+      /**
+       * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+       */
+      public Builder setValidationRecord(
+          com.arize.protocol.Public.PreProductionRecord.ValidationRecord.Builder builderForValue) {
+        if (validationRecordBuilder_ == null) {
+          recordType_ = builderForValue.build();
+          onChanged();
+        } else {
+          validationRecordBuilder_.setMessage(builderForValue.build());
+        }
+        recordTypeCase_ = 2;
+        return this;
+      }
+      /**
+       * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+       */
+      public Builder mergeValidationRecord(com.arize.protocol.Public.PreProductionRecord.ValidationRecord value) {
+        if (validationRecordBuilder_ == null) {
+          if (recordTypeCase_ == 2 &&
+              recordType_ != com.arize.protocol.Public.PreProductionRecord.ValidationRecord.getDefaultInstance()) {
+            recordType_ = com.arize.protocol.Public.PreProductionRecord.ValidationRecord.newBuilder((com.arize.protocol.Public.PreProductionRecord.ValidationRecord) recordType_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            recordType_ = value;
+          }
+          onChanged();
+        } else {
+          if (recordTypeCase_ == 2) {
+            validationRecordBuilder_.mergeFrom(value);
+          }
+          validationRecordBuilder_.setMessage(value);
+        }
+        recordTypeCase_ = 2;
+        return this;
+      }
+      /**
+       * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+       */
+      public Builder clearValidationRecord() {
+        if (validationRecordBuilder_ == null) {
+          if (recordTypeCase_ == 2) {
+            recordTypeCase_ = 0;
+            recordType_ = null;
+            onChanged();
+          }
+        } else {
+          if (recordTypeCase_ == 2) {
+            recordTypeCase_ = 0;
+            recordType_ = null;
+          }
+          validationRecordBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+       */
+      public com.arize.protocol.Public.PreProductionRecord.ValidationRecord.Builder getValidationRecordBuilder() {
+        return getValidationRecordFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+       */
+      public com.arize.protocol.Public.PreProductionRecord.ValidationRecordOrBuilder getValidationRecordOrBuilder() {
+        if ((recordTypeCase_ == 2) && (validationRecordBuilder_ != null)) {
+          return validationRecordBuilder_.getMessageOrBuilder();
+        } else {
+          if (recordTypeCase_ == 2) {
+            return (com.arize.protocol.Public.PreProductionRecord.ValidationRecord) recordType_;
+          }
+          return com.arize.protocol.Public.PreProductionRecord.ValidationRecord.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.public.PreProductionRecord.ValidationRecord validation_record = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.PreProductionRecord.ValidationRecord, com.arize.protocol.Public.PreProductionRecord.ValidationRecord.Builder, com.arize.protocol.Public.PreProductionRecord.ValidationRecordOrBuilder> 
+          getValidationRecordFieldBuilder() {
+        if (validationRecordBuilder_ == null) {
+          if (!(recordTypeCase_ == 2)) {
+            recordType_ = com.arize.protocol.Public.PreProductionRecord.ValidationRecord.getDefaultInstance();
+          }
+          validationRecordBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.arize.protocol.Public.PreProductionRecord.ValidationRecord, com.arize.protocol.Public.PreProductionRecord.ValidationRecord.Builder, com.arize.protocol.Public.PreProductionRecord.ValidationRecordOrBuilder>(
+                  (com.arize.protocol.Public.PreProductionRecord.ValidationRecord) recordType_,
+                  getParentForChildren(),
+                  isClean());
+          recordType_ = null;
+        }
+        recordTypeCase_ = 2;
+        onChanged();;
+        return validationRecordBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:public.PreProductionRecord)
+    }
+
+    // @@protoc_insertion_point(class_scope:public.PreProductionRecord)
+    private static final com.arize.protocol.Public.PreProductionRecord DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.arize.protocol.Public.PreProductionRecord();
+    }
+
+    public static com.arize.protocol.Public.PreProductionRecord getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<PreProductionRecord>
+        PARSER = new com.google.protobuf.AbstractParser<PreProductionRecord>() {
+      @java.lang.Override
+      public PreProductionRecord parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PreProductionRecord(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<PreProductionRecord> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PreProductionRecord> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.arize.protocol.Public.PreProductionRecord getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ScoreCategoricalOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:public.ScoreCategorical)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string categorical = 1;</code>
+     * @return The categorical.
+     */
+    java.lang.String getCategorical();
+    /**
+     * <code>string categorical = 1;</code>
+     * @return The bytes for categorical.
+     */
+    com.google.protobuf.ByteString
+        getCategoricalBytes();
+
+    /**
+     * <code>double score = 2;</code>
+     * @return The score.
+     */
+    double getScore();
+  }
+  /**
+   * <pre>
+   * ScoreCategorical Model is a type of model where there are two prediction values - the numeric prediction score and the categorical label the score maps to.
+   * </pre>
+   *
+   * Protobuf type {@code public.ScoreCategorical}
+   */
+  public  static final class ScoreCategorical extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:public.ScoreCategorical)
+      ScoreCategoricalOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ScoreCategorical.newBuilder() to construct.
+    private ScoreCategorical(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ScoreCategorical() {
+      categorical_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ScoreCategorical();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ScoreCategorical(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              categorical_ = s;
+              break;
+            }
+            case 17: {
+
+              score_ = input.readDouble();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.arize.protocol.Public.internal_static_public_ScoreCategorical_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.arize.protocol.Public.internal_static_public_ScoreCategorical_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.arize.protocol.Public.ScoreCategorical.class, com.arize.protocol.Public.ScoreCategorical.Builder.class);
+    }
+
+    public static final int CATEGORICAL_FIELD_NUMBER = 1;
+    private volatile java.lang.Object categorical_;
+    /**
+     * <code>string categorical = 1;</code>
+     * @return The categorical.
+     */
+    public java.lang.String getCategorical() {
+      java.lang.Object ref = categorical_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        categorical_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string categorical = 1;</code>
+     * @return The bytes for categorical.
+     */
+    public com.google.protobuf.ByteString
+        getCategoricalBytes() {
+      java.lang.Object ref = categorical_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        categorical_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SCORE_FIELD_NUMBER = 2;
+    private double score_;
+    /**
+     * <code>double score = 2;</code>
+     * @return The score.
+     */
+    public double getScore() {
+      return score_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getCategoricalBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, categorical_);
+      }
+      if (score_ != 0D) {
+        output.writeDouble(2, score_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getCategoricalBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, categorical_);
+      }
+      if (score_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, score_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.arize.protocol.Public.ScoreCategorical)) {
+        return super.equals(obj);
+      }
+      com.arize.protocol.Public.ScoreCategorical other = (com.arize.protocol.Public.ScoreCategorical) obj;
+
+      if (!getCategorical()
+          .equals(other.getCategorical())) return false;
+      if (java.lang.Double.doubleToLongBits(getScore())
+          != java.lang.Double.doubleToLongBits(
+              other.getScore())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CATEGORICAL_FIELD_NUMBER;
+      hash = (53 * hash) + getCategorical().hashCode();
+      hash = (37 * hash) + SCORE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getScore()));
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.arize.protocol.Public.ScoreCategorical parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.ScoreCategorical parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.ScoreCategorical parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.ScoreCategorical parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.ScoreCategorical parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.ScoreCategorical parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.ScoreCategorical parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.ScoreCategorical parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.ScoreCategorical parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.ScoreCategorical parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.ScoreCategorical parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.ScoreCategorical parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.arize.protocol.Public.ScoreCategorical prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * ScoreCategorical Model is a type of model where there are two prediction values - the numeric prediction score and the categorical label the score maps to.
+     * </pre>
+     *
+     * Protobuf type {@code public.ScoreCategorical}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:public.ScoreCategorical)
+        com.arize.protocol.Public.ScoreCategoricalOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.arize.protocol.Public.internal_static_public_ScoreCategorical_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.arize.protocol.Public.internal_static_public_ScoreCategorical_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.arize.protocol.Public.ScoreCategorical.class, com.arize.protocol.Public.ScoreCategorical.Builder.class);
+      }
+
+      // Construct using com.arize.protocol.Public.ScoreCategorical.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        categorical_ = "";
+
+        score_ = 0D;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.arize.protocol.Public.internal_static_public_ScoreCategorical_descriptor;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.ScoreCategorical getDefaultInstanceForType() {
+        return com.arize.protocol.Public.ScoreCategorical.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.ScoreCategorical build() {
+        com.arize.protocol.Public.ScoreCategorical result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.ScoreCategorical buildPartial() {
+        com.arize.protocol.Public.ScoreCategorical result = new com.arize.protocol.Public.ScoreCategorical(this);
+        result.categorical_ = categorical_;
+        result.score_ = score_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.arize.protocol.Public.ScoreCategorical) {
+          return mergeFrom((com.arize.protocol.Public.ScoreCategorical)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.arize.protocol.Public.ScoreCategorical other) {
+        if (other == com.arize.protocol.Public.ScoreCategorical.getDefaultInstance()) return this;
+        if (!other.getCategorical().isEmpty()) {
+          categorical_ = other.categorical_;
+          onChanged();
+        }
+        if (other.getScore() != 0D) {
+          setScore(other.getScore());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.arize.protocol.Public.ScoreCategorical parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.arize.protocol.Public.ScoreCategorical) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object categorical_ = "";
+      /**
+       * <code>string categorical = 1;</code>
+       * @return The categorical.
+       */
+      public java.lang.String getCategorical() {
+        java.lang.Object ref = categorical_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          categorical_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string categorical = 1;</code>
+       * @return The bytes for categorical.
+       */
+      public com.google.protobuf.ByteString
+          getCategoricalBytes() {
+        java.lang.Object ref = categorical_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          categorical_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string categorical = 1;</code>
+       * @param value The categorical to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCategorical(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        categorical_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string categorical = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCategorical() {
+        
+        categorical_ = getDefaultInstance().getCategorical();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string categorical = 1;</code>
+       * @param value The bytes for categorical to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCategoricalBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        categorical_ = value;
+        onChanged();
+        return this;
+      }
+
+      private double score_ ;
+      /**
+       * <code>double score = 2;</code>
+       * @return The score.
+       */
+      public double getScore() {
+        return score_;
+      }
+      /**
+       * <code>double score = 2;</code>
+       * @param value The score to set.
+       * @return This builder for chaining.
+       */
+      public Builder setScore(double value) {
+        
+        score_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double score = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearScore() {
+        
+        score_ = 0D;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:public.ScoreCategorical)
+    }
+
+    // @@protoc_insertion_point(class_scope:public.ScoreCategorical)
+    private static final com.arize.protocol.Public.ScoreCategorical DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.arize.protocol.Public.ScoreCategorical();
+    }
+
+    public static com.arize.protocol.Public.ScoreCategorical getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ScoreCategorical>
+        PARSER = new com.google.protobuf.AbstractParser<ScoreCategorical>() {
+      @java.lang.Override
+      public ScoreCategorical parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ScoreCategorical(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ScoreCategorical> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ScoreCategorical> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.arize.protocol.Public.ScoreCategorical getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface LabelOrBuilder extends
       // @@protoc_insertion_point(interface_extends:public.Label)
       com.google.protobuf.MessageOrBuilder {
@@ -3208,6 +6340,21 @@ public final class Public {
      * @return The numeric.
      */
     double getNumeric();
+
+    /**
+     * <code>.public.ScoreCategorical score_categorical = 4;</code>
+     * @return Whether the scoreCategorical field is set.
+     */
+    boolean hasScoreCategorical();
+    /**
+     * <code>.public.ScoreCategorical score_categorical = 4;</code>
+     * @return The scoreCategorical.
+     */
+    com.arize.protocol.Public.ScoreCategorical getScoreCategorical();
+    /**
+     * <code>.public.ScoreCategorical score_categorical = 4;</code>
+     */
+    com.arize.protocol.Public.ScoreCategoricalOrBuilder getScoreCategoricalOrBuilder();
 
     public com.arize.protocol.Public.Label.DataCase getDataCase();
   }
@@ -3276,6 +6423,20 @@ public final class Public {
               data_ = input.readDouble();
               break;
             }
+            case 34: {
+              com.arize.protocol.Public.ScoreCategorical.Builder subBuilder = null;
+              if (dataCase_ == 4) {
+                subBuilder = ((com.arize.protocol.Public.ScoreCategorical) data_).toBuilder();
+              }
+              data_ =
+                  input.readMessage(com.arize.protocol.Public.ScoreCategorical.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.arize.protocol.Public.ScoreCategorical) data_);
+                data_ = subBuilder.buildPartial();
+              }
+              dataCase_ = 4;
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -3316,6 +6477,7 @@ public final class Public {
       BINARY(1),
       CATEGORICAL(2),
       NUMERIC(3),
+      SCORE_CATEGORICAL(4),
       DATA_NOT_SET(0);
       private final int value;
       private DataCase(int value) {
@@ -3336,6 +6498,7 @@ public final class Public {
           case 1: return BINARY;
           case 2: return CATEGORICAL;
           case 3: return NUMERIC;
+          case 4: return SCORE_CATEGORICAL;
           case 0: return DATA_NOT_SET;
           default: return null;
         }
@@ -3420,6 +6583,34 @@ public final class Public {
       return 0D;
     }
 
+    public static final int SCORE_CATEGORICAL_FIELD_NUMBER = 4;
+    /**
+     * <code>.public.ScoreCategorical score_categorical = 4;</code>
+     * @return Whether the scoreCategorical field is set.
+     */
+    public boolean hasScoreCategorical() {
+      return dataCase_ == 4;
+    }
+    /**
+     * <code>.public.ScoreCategorical score_categorical = 4;</code>
+     * @return The scoreCategorical.
+     */
+    public com.arize.protocol.Public.ScoreCategorical getScoreCategorical() {
+      if (dataCase_ == 4) {
+         return (com.arize.protocol.Public.ScoreCategorical) data_;
+      }
+      return com.arize.protocol.Public.ScoreCategorical.getDefaultInstance();
+    }
+    /**
+     * <code>.public.ScoreCategorical score_categorical = 4;</code>
+     */
+    public com.arize.protocol.Public.ScoreCategoricalOrBuilder getScoreCategoricalOrBuilder() {
+      if (dataCase_ == 4) {
+         return (com.arize.protocol.Public.ScoreCategorical) data_;
+      }
+      return com.arize.protocol.Public.ScoreCategorical.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -3445,6 +6636,9 @@ public final class Public {
         output.writeDouble(
             3, (double)((java.lang.Double) data_));
       }
+      if (dataCase_ == 4) {
+        output.writeMessage(4, (com.arize.protocol.Public.ScoreCategorical) data_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -3466,6 +6660,10 @@ public final class Public {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(
               3, (double)((java.lang.Double) data_));
+      }
+      if (dataCase_ == 4) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, (com.arize.protocol.Public.ScoreCategorical) data_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3497,6 +6695,10 @@ public final class Public {
               != java.lang.Double.doubleToLongBits(
                   other.getNumeric())) return false;
           break;
+        case 4:
+          if (!getScoreCategorical()
+              .equals(other.getScoreCategorical())) return false;
+          break;
         case 0:
         default:
       }
@@ -3525,6 +6727,10 @@ public final class Public {
           hash = (37 * hash) + NUMERIC_FIELD_NUMBER;
           hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
               java.lang.Double.doubleToLongBits(getNumeric()));
+          break;
+        case 4:
+          hash = (37 * hash) + SCORE_CATEGORICAL_FIELD_NUMBER;
+          hash = (53 * hash) + getScoreCategorical().hashCode();
           break;
         case 0:
         default:
@@ -3703,6 +6909,13 @@ public final class Public {
         if (dataCase_ == 3) {
           result.data_ = data_;
         }
+        if (dataCase_ == 4) {
+          if (scoreCategoricalBuilder_ == null) {
+            result.data_ = data_;
+          } else {
+            result.data_ = scoreCategoricalBuilder_.build();
+          }
+        }
         result.dataCase_ = dataCase_;
         onBuilt();
         return result;
@@ -3765,6 +6978,10 @@ public final class Public {
           }
           case NUMERIC: {
             setNumeric(other.getNumeric());
+            break;
+          }
+          case SCORE_CATEGORICAL: {
+            mergeScoreCategorical(other.getScoreCategorical());
             break;
           }
           case DATA_NOT_SET: {
@@ -3968,6 +7185,144 @@ public final class Public {
           onChanged();
         }
         return this;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.ScoreCategorical, com.arize.protocol.Public.ScoreCategorical.Builder, com.arize.protocol.Public.ScoreCategoricalOrBuilder> scoreCategoricalBuilder_;
+      /**
+       * <code>.public.ScoreCategorical score_categorical = 4;</code>
+       * @return Whether the scoreCategorical field is set.
+       */
+      public boolean hasScoreCategorical() {
+        return dataCase_ == 4;
+      }
+      /**
+       * <code>.public.ScoreCategorical score_categorical = 4;</code>
+       * @return The scoreCategorical.
+       */
+      public com.arize.protocol.Public.ScoreCategorical getScoreCategorical() {
+        if (scoreCategoricalBuilder_ == null) {
+          if (dataCase_ == 4) {
+            return (com.arize.protocol.Public.ScoreCategorical) data_;
+          }
+          return com.arize.protocol.Public.ScoreCategorical.getDefaultInstance();
+        } else {
+          if (dataCase_ == 4) {
+            return scoreCategoricalBuilder_.getMessage();
+          }
+          return com.arize.protocol.Public.ScoreCategorical.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.public.ScoreCategorical score_categorical = 4;</code>
+       */
+      public Builder setScoreCategorical(com.arize.protocol.Public.ScoreCategorical value) {
+        if (scoreCategoricalBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          data_ = value;
+          onChanged();
+        } else {
+          scoreCategoricalBuilder_.setMessage(value);
+        }
+        dataCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.public.ScoreCategorical score_categorical = 4;</code>
+       */
+      public Builder setScoreCategorical(
+          com.arize.protocol.Public.ScoreCategorical.Builder builderForValue) {
+        if (scoreCategoricalBuilder_ == null) {
+          data_ = builderForValue.build();
+          onChanged();
+        } else {
+          scoreCategoricalBuilder_.setMessage(builderForValue.build());
+        }
+        dataCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.public.ScoreCategorical score_categorical = 4;</code>
+       */
+      public Builder mergeScoreCategorical(com.arize.protocol.Public.ScoreCategorical value) {
+        if (scoreCategoricalBuilder_ == null) {
+          if (dataCase_ == 4 &&
+              data_ != com.arize.protocol.Public.ScoreCategorical.getDefaultInstance()) {
+            data_ = com.arize.protocol.Public.ScoreCategorical.newBuilder((com.arize.protocol.Public.ScoreCategorical) data_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            data_ = value;
+          }
+          onChanged();
+        } else {
+          if (dataCase_ == 4) {
+            scoreCategoricalBuilder_.mergeFrom(value);
+          }
+          scoreCategoricalBuilder_.setMessage(value);
+        }
+        dataCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.public.ScoreCategorical score_categorical = 4;</code>
+       */
+      public Builder clearScoreCategorical() {
+        if (scoreCategoricalBuilder_ == null) {
+          if (dataCase_ == 4) {
+            dataCase_ = 0;
+            data_ = null;
+            onChanged();
+          }
+        } else {
+          if (dataCase_ == 4) {
+            dataCase_ = 0;
+            data_ = null;
+          }
+          scoreCategoricalBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.public.ScoreCategorical score_categorical = 4;</code>
+       */
+      public com.arize.protocol.Public.ScoreCategorical.Builder getScoreCategoricalBuilder() {
+        return getScoreCategoricalFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.public.ScoreCategorical score_categorical = 4;</code>
+       */
+      public com.arize.protocol.Public.ScoreCategoricalOrBuilder getScoreCategoricalOrBuilder() {
+        if ((dataCase_ == 4) && (scoreCategoricalBuilder_ != null)) {
+          return scoreCategoricalBuilder_.getMessageOrBuilder();
+        } else {
+          if (dataCase_ == 4) {
+            return (com.arize.protocol.Public.ScoreCategorical) data_;
+          }
+          return com.arize.protocol.Public.ScoreCategorical.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.public.ScoreCategorical score_categorical = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.ScoreCategorical, com.arize.protocol.Public.ScoreCategorical.Builder, com.arize.protocol.Public.ScoreCategoricalOrBuilder> 
+          getScoreCategoricalFieldBuilder() {
+        if (scoreCategoricalBuilder_ == null) {
+          if (!(dataCase_ == 4)) {
+            data_ = com.arize.protocol.Public.ScoreCategorical.getDefaultInstance();
+          }
+          scoreCategoricalBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.arize.protocol.Public.ScoreCategorical, com.arize.protocol.Public.ScoreCategorical.Builder, com.arize.protocol.Public.ScoreCategoricalOrBuilder>(
+                  (com.arize.protocol.Public.ScoreCategorical) data_,
+                  getParentForChildren(),
+                  isClean());
+          data_ = null;
+        }
+        dataCase_ = 4;
+        onChanged();;
+        return scoreCategoricalBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -8034,6 +11389,2120 @@ public final class Public {
 
   }
 
+  public interface FeatureImportancesOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:public.FeatureImportances)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * timestamp of the feature importance values request.  If not set this will default to the time
+     * of receipt
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+     * @return Whether the timestamp field is set.
+     */
+    boolean hasTimestamp();
+    /**
+     * <pre>
+     * timestamp of the feature importance values request.  If not set this will default to the time
+     * of receipt
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+     * @return The timestamp.
+     */
+    com.google.protobuf.Timestamp getTimestamp();
+    /**
+     * <pre>
+     * timestamp of the feature importance values request.  If not set this will default to the time
+     * of receipt
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+     */
+    com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder();
+
+    /**
+     * <pre>
+     * model_version is a user-defined field that ensures that the feature importances are generated using the same model version as the prediction
+     * for a given model_id
+     * </pre>
+     *
+     * <code>string model_version = 2;</code>
+     * @return The modelVersion.
+     */
+    java.lang.String getModelVersion();
+    /**
+     * <pre>
+     * model_version is a user-defined field that ensures that the feature importances are generated using the same model version as the prediction
+     * for a given model_id
+     * </pre>
+     *
+     * <code>string model_version = 2;</code>
+     * @return The bytes for modelVersion.
+     */
+    com.google.protobuf.ByteString
+        getModelVersionBytes();
+
+    /**
+     * <pre>
+     * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+     * and feature importance values for a given model_id and model_version
+     * </pre>
+     *
+     * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+     */
+    int getFeatureImportancesCount();
+    /**
+     * <pre>
+     * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+     * and feature importance values for a given model_id and model_version
+     * </pre>
+     *
+     * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+     */
+    boolean containsFeatureImportances(
+        java.lang.String key);
+    /**
+     * Use {@link #getFeatureImportancesMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, java.lang.Double>
+    getFeatureImportances();
+    /**
+     * <pre>
+     * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+     * and feature importance values for a given model_id and model_version
+     * </pre>
+     *
+     * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+     */
+    java.util.Map<java.lang.String, java.lang.Double>
+    getFeatureImportancesMap();
+    /**
+     * <pre>
+     * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+     * and feature importance values for a given model_id and model_version
+     * </pre>
+     *
+     * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+     */
+
+    double getFeatureImportancesOrDefault(
+        java.lang.String key,
+        double defaultValue);
+    /**
+     * <pre>
+     * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+     * and feature importance values for a given model_id and model_version
+     * </pre>
+     *
+     * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+     */
+
+    double getFeatureImportancesOrThrow(
+        java.lang.String key);
+  }
+  /**
+   * <pre>
+   * FeatureImportances contains feature importance values for a prediction
+   * </pre>
+   *
+   * Protobuf type {@code public.FeatureImportances}
+   */
+  public  static final class FeatureImportances extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:public.FeatureImportances)
+      FeatureImportancesOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use FeatureImportances.newBuilder() to construct.
+    private FeatureImportances(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private FeatureImportances() {
+      modelVersion_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new FeatureImportances();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private FeatureImportances(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.google.protobuf.Timestamp.Builder subBuilder = null;
+              if (timestamp_ != null) {
+                subBuilder = timestamp_.toBuilder();
+              }
+              timestamp_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(timestamp_);
+                timestamp_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              modelVersion_ = s;
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                featureImportances_ = com.google.protobuf.MapField.newMapField(
+                    FeatureImportancesDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000001;
+              }
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.Double>
+              featureImportances__ = input.readMessage(
+                  FeatureImportancesDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              featureImportances_.getMutableMap().put(
+                  featureImportances__.getKey(), featureImportances__.getValue());
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.arize.protocol.Public.internal_static_public_FeatureImportances_descriptor;
+    }
+
+    @SuppressWarnings({"rawtypes"})
+    @java.lang.Override
+    protected com.google.protobuf.MapField internalGetMapField(
+        int number) {
+      switch (number) {
+        case 3:
+          return internalGetFeatureImportances();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.arize.protocol.Public.internal_static_public_FeatureImportances_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.arize.protocol.Public.FeatureImportances.class, com.arize.protocol.Public.FeatureImportances.Builder.class);
+    }
+
+    public static final int TIMESTAMP_FIELD_NUMBER = 1;
+    private com.google.protobuf.Timestamp timestamp_;
+    /**
+     * <pre>
+     * timestamp of the feature importance values request.  If not set this will default to the time
+     * of receipt
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+     * @return Whether the timestamp field is set.
+     */
+    public boolean hasTimestamp() {
+      return timestamp_ != null;
+    }
+    /**
+     * <pre>
+     * timestamp of the feature importance values request.  If not set this will default to the time
+     * of receipt
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+     * @return The timestamp.
+     */
+    public com.google.protobuf.Timestamp getTimestamp() {
+      return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+    }
+    /**
+     * <pre>
+     * timestamp of the feature importance values request.  If not set this will default to the time
+     * of receipt
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+      return getTimestamp();
+    }
+
+    public static final int MODEL_VERSION_FIELD_NUMBER = 2;
+    private volatile java.lang.Object modelVersion_;
+    /**
+     * <pre>
+     * model_version is a user-defined field that ensures that the feature importances are generated using the same model version as the prediction
+     * for a given model_id
+     * </pre>
+     *
+     * <code>string model_version = 2;</code>
+     * @return The modelVersion.
+     */
+    public java.lang.String getModelVersion() {
+      java.lang.Object ref = modelVersion_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        modelVersion_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * model_version is a user-defined field that ensures that the feature importances are generated using the same model version as the prediction
+     * for a given model_id
+     * </pre>
+     *
+     * <code>string model_version = 2;</code>
+     * @return The bytes for modelVersion.
+     */
+    public com.google.protobuf.ByteString
+        getModelVersionBytes() {
+      java.lang.Object ref = modelVersion_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        modelVersion_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FEATURE_IMPORTANCES_FIELD_NUMBER = 3;
+    private static final class FeatureImportancesDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, java.lang.Double> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, java.lang.Double>newDefaultInstance(
+                  com.arize.protocol.Public.internal_static_public_FeatureImportances_FeatureImportancesEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.DOUBLE,
+                  0D);
+    }
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.Double> featureImportances_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.Double>
+    internalGetFeatureImportances() {
+      if (featureImportances_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            FeatureImportancesDefaultEntryHolder.defaultEntry);
+      }
+      return featureImportances_;
+    }
+
+    public int getFeatureImportancesCount() {
+      return internalGetFeatureImportances().getMap().size();
+    }
+    /**
+     * <pre>
+     * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+     * and feature importance values for a given model_id and model_version
+     * </pre>
+     *
+     * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+     */
+
+    public boolean containsFeatureImportances(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetFeatureImportances().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getFeatureImportancesMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.Double> getFeatureImportances() {
+      return getFeatureImportancesMap();
+    }
+    /**
+     * <pre>
+     * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+     * and feature importance values for a given model_id and model_version
+     * </pre>
+     *
+     * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+     */
+
+    public java.util.Map<java.lang.String, java.lang.Double> getFeatureImportancesMap() {
+      return internalGetFeatureImportances().getMap();
+    }
+    /**
+     * <pre>
+     * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+     * and feature importance values for a given model_id and model_version
+     * </pre>
+     *
+     * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+     */
+
+    public double getFeatureImportancesOrDefault(
+        java.lang.String key,
+        double defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Double> map =
+          internalGetFeatureImportances().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <pre>
+     * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+     * and feature importance values for a given model_id and model_version
+     * </pre>
+     *
+     * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+     */
+
+    public double getFeatureImportancesOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Double> map =
+          internalGetFeatureImportances().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (timestamp_ != null) {
+        output.writeMessage(1, getTimestamp());
+      }
+      if (!getModelVersionBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, modelVersion_);
+      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetFeatureImportances(),
+          FeatureImportancesDefaultEntryHolder.defaultEntry,
+          3);
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (timestamp_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getTimestamp());
+      }
+      if (!getModelVersionBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, modelVersion_);
+      }
+      for (java.util.Map.Entry<java.lang.String, java.lang.Double> entry
+           : internalGetFeatureImportances().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, java.lang.Double>
+        featureImportances__ = FeatureImportancesDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(3, featureImportances__);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.arize.protocol.Public.FeatureImportances)) {
+        return super.equals(obj);
+      }
+      com.arize.protocol.Public.FeatureImportances other = (com.arize.protocol.Public.FeatureImportances) obj;
+
+      if (hasTimestamp() != other.hasTimestamp()) return false;
+      if (hasTimestamp()) {
+        if (!getTimestamp()
+            .equals(other.getTimestamp())) return false;
+      }
+      if (!getModelVersion()
+          .equals(other.getModelVersion())) return false;
+      if (!internalGetFeatureImportances().equals(
+          other.internalGetFeatureImportances())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasTimestamp()) {
+        hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+        hash = (53 * hash) + getTimestamp().hashCode();
+      }
+      hash = (37 * hash) + MODEL_VERSION_FIELD_NUMBER;
+      hash = (53 * hash) + getModelVersion().hashCode();
+      if (!internalGetFeatureImportances().getMap().isEmpty()) {
+        hash = (37 * hash) + FEATURE_IMPORTANCES_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetFeatureImportances().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.arize.protocol.Public.FeatureImportances parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.FeatureImportances parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.FeatureImportances parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.FeatureImportances parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.FeatureImportances parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.FeatureImportances parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.FeatureImportances parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.FeatureImportances parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.FeatureImportances parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.FeatureImportances parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.FeatureImportances parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.FeatureImportances parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.arize.protocol.Public.FeatureImportances prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * FeatureImportances contains feature importance values for a prediction
+     * </pre>
+     *
+     * Protobuf type {@code public.FeatureImportances}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:public.FeatureImportances)
+        com.arize.protocol.Public.FeatureImportancesOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.arize.protocol.Public.internal_static_public_FeatureImportances_descriptor;
+      }
+
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMapField(
+          int number) {
+        switch (number) {
+          case 3:
+            return internalGetFeatureImportances();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMutableMapField(
+          int number) {
+        switch (number) {
+          case 3:
+            return internalGetMutableFeatureImportances();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.arize.protocol.Public.internal_static_public_FeatureImportances_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.arize.protocol.Public.FeatureImportances.class, com.arize.protocol.Public.FeatureImportances.Builder.class);
+      }
+
+      // Construct using com.arize.protocol.Public.FeatureImportances.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (timestampBuilder_ == null) {
+          timestamp_ = null;
+        } else {
+          timestamp_ = null;
+          timestampBuilder_ = null;
+        }
+        modelVersion_ = "";
+
+        internalGetMutableFeatureImportances().clear();
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.arize.protocol.Public.internal_static_public_FeatureImportances_descriptor;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.FeatureImportances getDefaultInstanceForType() {
+        return com.arize.protocol.Public.FeatureImportances.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.FeatureImportances build() {
+        com.arize.protocol.Public.FeatureImportances result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.FeatureImportances buildPartial() {
+        com.arize.protocol.Public.FeatureImportances result = new com.arize.protocol.Public.FeatureImportances(this);
+        int from_bitField0_ = bitField0_;
+        if (timestampBuilder_ == null) {
+          result.timestamp_ = timestamp_;
+        } else {
+          result.timestamp_ = timestampBuilder_.build();
+        }
+        result.modelVersion_ = modelVersion_;
+        result.featureImportances_ = internalGetFeatureImportances();
+        result.featureImportances_.makeImmutable();
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.arize.protocol.Public.FeatureImportances) {
+          return mergeFrom((com.arize.protocol.Public.FeatureImportances)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.arize.protocol.Public.FeatureImportances other) {
+        if (other == com.arize.protocol.Public.FeatureImportances.getDefaultInstance()) return this;
+        if (other.hasTimestamp()) {
+          mergeTimestamp(other.getTimestamp());
+        }
+        if (!other.getModelVersion().isEmpty()) {
+          modelVersion_ = other.modelVersion_;
+          onChanged();
+        }
+        internalGetMutableFeatureImportances().mergeFrom(
+            other.internalGetFeatureImportances());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.arize.protocol.Public.FeatureImportances parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.arize.protocol.Public.FeatureImportances) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.Timestamp timestamp_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timestampBuilder_;
+      /**
+       * <pre>
+       * timestamp of the feature importance values request.  If not set this will default to the time
+       * of receipt
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+       * @return Whether the timestamp field is set.
+       */
+      public boolean hasTimestamp() {
+        return timestampBuilder_ != null || timestamp_ != null;
+      }
+      /**
+       * <pre>
+       * timestamp of the feature importance values request.  If not set this will default to the time
+       * of receipt
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+       * @return The timestamp.
+       */
+      public com.google.protobuf.Timestamp getTimestamp() {
+        if (timestampBuilder_ == null) {
+          return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+        } else {
+          return timestampBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * timestamp of the feature importance values request.  If not set this will default to the time
+       * of receipt
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+       */
+      public Builder setTimestamp(com.google.protobuf.Timestamp value) {
+        if (timestampBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          timestamp_ = value;
+          onChanged();
+        } else {
+          timestampBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * timestamp of the feature importance values request.  If not set this will default to the time
+       * of receipt
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+       */
+      public Builder setTimestamp(
+          com.google.protobuf.Timestamp.Builder builderForValue) {
+        if (timestampBuilder_ == null) {
+          timestamp_ = builderForValue.build();
+          onChanged();
+        } else {
+          timestampBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * timestamp of the feature importance values request.  If not set this will default to the time
+       * of receipt
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+       */
+      public Builder mergeTimestamp(com.google.protobuf.Timestamp value) {
+        if (timestampBuilder_ == null) {
+          if (timestamp_ != null) {
+            timestamp_ =
+              com.google.protobuf.Timestamp.newBuilder(timestamp_).mergeFrom(value).buildPartial();
+          } else {
+            timestamp_ = value;
+          }
+          onChanged();
+        } else {
+          timestampBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * timestamp of the feature importance values request.  If not set this will default to the time
+       * of receipt
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+       */
+      public Builder clearTimestamp() {
+        if (timestampBuilder_ == null) {
+          timestamp_ = null;
+          onChanged();
+        } else {
+          timestamp_ = null;
+          timestampBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * timestamp of the feature importance values request.  If not set this will default to the time
+       * of receipt
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+       */
+      public com.google.protobuf.Timestamp.Builder getTimestampBuilder() {
+        
+        onChanged();
+        return getTimestampFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * timestamp of the feature importance values request.  If not set this will default to the time
+       * of receipt
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+       */
+      public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+        if (timestampBuilder_ != null) {
+          return timestampBuilder_.getMessageOrBuilder();
+        } else {
+          return timestamp_ == null ?
+              com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+        }
+      }
+      /**
+       * <pre>
+       * timestamp of the feature importance values request.  If not set this will default to the time
+       * of receipt
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp timestamp = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+          getTimestampFieldBuilder() {
+        if (timestampBuilder_ == null) {
+          timestampBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                  getTimestamp(),
+                  getParentForChildren(),
+                  isClean());
+          timestamp_ = null;
+        }
+        return timestampBuilder_;
+      }
+
+      private java.lang.Object modelVersion_ = "";
+      /**
+       * <pre>
+       * model_version is a user-defined field that ensures that the feature importances are generated using the same model version as the prediction
+       * for a given model_id
+       * </pre>
+       *
+       * <code>string model_version = 2;</code>
+       * @return The modelVersion.
+       */
+      public java.lang.String getModelVersion() {
+        java.lang.Object ref = modelVersion_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          modelVersion_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * model_version is a user-defined field that ensures that the feature importances are generated using the same model version as the prediction
+       * for a given model_id
+       * </pre>
+       *
+       * <code>string model_version = 2;</code>
+       * @return The bytes for modelVersion.
+       */
+      public com.google.protobuf.ByteString
+          getModelVersionBytes() {
+        java.lang.Object ref = modelVersion_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          modelVersion_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * model_version is a user-defined field that ensures that the feature importances are generated using the same model version as the prediction
+       * for a given model_id
+       * </pre>
+       *
+       * <code>string model_version = 2;</code>
+       * @param value The modelVersion to set.
+       * @return This builder for chaining.
+       */
+      public Builder setModelVersion(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        modelVersion_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * model_version is a user-defined field that ensures that the feature importances are generated using the same model version as the prediction
+       * for a given model_id
+       * </pre>
+       *
+       * <code>string model_version = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearModelVersion() {
+        
+        modelVersion_ = getDefaultInstance().getModelVersion();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * model_version is a user-defined field that ensures that the feature importances are generated using the same model version as the prediction
+       * for a given model_id
+       * </pre>
+       *
+       * <code>string model_version = 2;</code>
+       * @param value The bytes for modelVersion to set.
+       * @return This builder for chaining.
+       */
+      public Builder setModelVersionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        modelVersion_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.String, java.lang.Double> featureImportances_;
+      private com.google.protobuf.MapField<java.lang.String, java.lang.Double>
+      internalGetFeatureImportances() {
+        if (featureImportances_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              FeatureImportancesDefaultEntryHolder.defaultEntry);
+        }
+        return featureImportances_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, java.lang.Double>
+      internalGetMutableFeatureImportances() {
+        onChanged();;
+        if (featureImportances_ == null) {
+          featureImportances_ = com.google.protobuf.MapField.newMapField(
+              FeatureImportancesDefaultEntryHolder.defaultEntry);
+        }
+        if (!featureImportances_.isMutable()) {
+          featureImportances_ = featureImportances_.copy();
+        }
+        return featureImportances_;
+      }
+
+      public int getFeatureImportancesCount() {
+        return internalGetFeatureImportances().getMap().size();
+      }
+      /**
+       * <pre>
+       * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+       * and feature importance values for a given model_id and model_version
+       * </pre>
+       *
+       * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+       */
+
+      public boolean containsFeatureImportances(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        return internalGetFeatureImportances().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getFeatureImportancesMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.Double> getFeatureImportances() {
+        return getFeatureImportancesMap();
+      }
+      /**
+       * <pre>
+       * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+       * and feature importance values for a given model_id and model_version
+       * </pre>
+       *
+       * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+       */
+
+      public java.util.Map<java.lang.String, java.lang.Double> getFeatureImportancesMap() {
+        return internalGetFeatureImportances().getMap();
+      }
+      /**
+       * <pre>
+       * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+       * and feature importance values for a given model_id and model_version
+       * </pre>
+       *
+       * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+       */
+
+      public double getFeatureImportancesOrDefault(
+          java.lang.String key,
+          double defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Double> map =
+            internalGetFeatureImportances().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <pre>
+       * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+       * and feature importance values for a given model_id and model_version
+       * </pre>
+       *
+       * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+       */
+
+      public double getFeatureImportancesOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Double> map =
+            internalGetFeatureImportances().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearFeatureImportances() {
+        internalGetMutableFeatureImportances().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <pre>
+       * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+       * and feature importance values for a given model_id and model_version
+       * </pre>
+       *
+       * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+       */
+
+      public Builder removeFeatureImportances(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableFeatureImportances().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.Double>
+      getMutableFeatureImportances() {
+        return internalGetMutableFeatureImportances().getMutableMap();
+      }
+      /**
+       * <pre>
+       * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+       * and feature importance values for a given model_id and model_version
+       * </pre>
+       *
+       * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+       */
+      public Builder putFeatureImportances(
+          java.lang.String key,
+          double value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        
+        internalGetMutableFeatureImportances().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <pre>
+       * importances is a map of human readable model input field containing values that will be used to group together a subset of predictions
+       * and feature importance values for a given model_id and model_version
+       * </pre>
+       *
+       * <code>map&lt;string, double&gt; feature_importances = 3;</code>
+       */
+
+      public Builder putAllFeatureImportances(
+          java.util.Map<java.lang.String, java.lang.Double> values) {
+        internalGetMutableFeatureImportances().getMutableMap()
+            .putAll(values);
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:public.FeatureImportances)
+    }
+
+    // @@protoc_insertion_point(class_scope:public.FeatureImportances)
+    private static final com.arize.protocol.Public.FeatureImportances DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.arize.protocol.Public.FeatureImportances();
+    }
+
+    public static com.arize.protocol.Public.FeatureImportances getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<FeatureImportances>
+        PARSER = new com.google.protobuf.AbstractParser<FeatureImportances>() {
+      @java.lang.Override
+      public FeatureImportances parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FeatureImportances(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<FeatureImportances> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FeatureImportances> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.arize.protocol.Public.FeatureImportances getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface PredictionAndActualOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:public.PredictionAndActual)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.public.Prediction prediction = 1;</code>
+     * @return Whether the prediction field is set.
+     */
+    boolean hasPrediction();
+    /**
+     * <code>.public.Prediction prediction = 1;</code>
+     * @return The prediction.
+     */
+    com.arize.protocol.Public.Prediction getPrediction();
+    /**
+     * <code>.public.Prediction prediction = 1;</code>
+     */
+    com.arize.protocol.Public.PredictionOrBuilder getPredictionOrBuilder();
+
+    /**
+     * <code>.public.Actual actual = 2;</code>
+     * @return Whether the actual field is set.
+     */
+    boolean hasActual();
+    /**
+     * <code>.public.Actual actual = 2;</code>
+     * @return The actual.
+     */
+    com.arize.protocol.Public.Actual getActual();
+    /**
+     * <code>.public.Actual actual = 2;</code>
+     */
+    com.arize.protocol.Public.ActualOrBuilder getActualOrBuilder();
+  }
+  /**
+   * <pre>
+   * A pre-joined prediction and actual object (akin to a conclusion) received from
+   * costumers associated to a given "batch" of inferences that can be recalled by a
+   * human readable name
+   * </pre>
+   *
+   * Protobuf type {@code public.PredictionAndActual}
+   */
+  public  static final class PredictionAndActual extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:public.PredictionAndActual)
+      PredictionAndActualOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use PredictionAndActual.newBuilder() to construct.
+    private PredictionAndActual(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private PredictionAndActual() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new PredictionAndActual();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PredictionAndActual(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.arize.protocol.Public.Prediction.Builder subBuilder = null;
+              if (prediction_ != null) {
+                subBuilder = prediction_.toBuilder();
+              }
+              prediction_ = input.readMessage(com.arize.protocol.Public.Prediction.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(prediction_);
+                prediction_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              com.arize.protocol.Public.Actual.Builder subBuilder = null;
+              if (actual_ != null) {
+                subBuilder = actual_.toBuilder();
+              }
+              actual_ = input.readMessage(com.arize.protocol.Public.Actual.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(actual_);
+                actual_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.arize.protocol.Public.internal_static_public_PredictionAndActual_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.arize.protocol.Public.internal_static_public_PredictionAndActual_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.arize.protocol.Public.PredictionAndActual.class, com.arize.protocol.Public.PredictionAndActual.Builder.class);
+    }
+
+    public static final int PREDICTION_FIELD_NUMBER = 1;
+    private com.arize.protocol.Public.Prediction prediction_;
+    /**
+     * <code>.public.Prediction prediction = 1;</code>
+     * @return Whether the prediction field is set.
+     */
+    public boolean hasPrediction() {
+      return prediction_ != null;
+    }
+    /**
+     * <code>.public.Prediction prediction = 1;</code>
+     * @return The prediction.
+     */
+    public com.arize.protocol.Public.Prediction getPrediction() {
+      return prediction_ == null ? com.arize.protocol.Public.Prediction.getDefaultInstance() : prediction_;
+    }
+    /**
+     * <code>.public.Prediction prediction = 1;</code>
+     */
+    public com.arize.protocol.Public.PredictionOrBuilder getPredictionOrBuilder() {
+      return getPrediction();
+    }
+
+    public static final int ACTUAL_FIELD_NUMBER = 2;
+    private com.arize.protocol.Public.Actual actual_;
+    /**
+     * <code>.public.Actual actual = 2;</code>
+     * @return Whether the actual field is set.
+     */
+    public boolean hasActual() {
+      return actual_ != null;
+    }
+    /**
+     * <code>.public.Actual actual = 2;</code>
+     * @return The actual.
+     */
+    public com.arize.protocol.Public.Actual getActual() {
+      return actual_ == null ? com.arize.protocol.Public.Actual.getDefaultInstance() : actual_;
+    }
+    /**
+     * <code>.public.Actual actual = 2;</code>
+     */
+    public com.arize.protocol.Public.ActualOrBuilder getActualOrBuilder() {
+      return getActual();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (prediction_ != null) {
+        output.writeMessage(1, getPrediction());
+      }
+      if (actual_ != null) {
+        output.writeMessage(2, getActual());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (prediction_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getPrediction());
+      }
+      if (actual_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getActual());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.arize.protocol.Public.PredictionAndActual)) {
+        return super.equals(obj);
+      }
+      com.arize.protocol.Public.PredictionAndActual other = (com.arize.protocol.Public.PredictionAndActual) obj;
+
+      if (hasPrediction() != other.hasPrediction()) return false;
+      if (hasPrediction()) {
+        if (!getPrediction()
+            .equals(other.getPrediction())) return false;
+      }
+      if (hasActual() != other.hasActual()) return false;
+      if (hasActual()) {
+        if (!getActual()
+            .equals(other.getActual())) return false;
+      }
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasPrediction()) {
+        hash = (37 * hash) + PREDICTION_FIELD_NUMBER;
+        hash = (53 * hash) + getPrediction().hashCode();
+      }
+      if (hasActual()) {
+        hash = (37 * hash) + ACTUAL_FIELD_NUMBER;
+        hash = (53 * hash) + getActual().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.arize.protocol.Public.PredictionAndActual parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.PredictionAndActual parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.PredictionAndActual parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.PredictionAndActual parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.PredictionAndActual parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.PredictionAndActual parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.PredictionAndActual parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.PredictionAndActual parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.PredictionAndActual parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.PredictionAndActual parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.PredictionAndActual parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.PredictionAndActual parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.arize.protocol.Public.PredictionAndActual prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * A pre-joined prediction and actual object (akin to a conclusion) received from
+     * costumers associated to a given "batch" of inferences that can be recalled by a
+     * human readable name
+     * </pre>
+     *
+     * Protobuf type {@code public.PredictionAndActual}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:public.PredictionAndActual)
+        com.arize.protocol.Public.PredictionAndActualOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.arize.protocol.Public.internal_static_public_PredictionAndActual_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.arize.protocol.Public.internal_static_public_PredictionAndActual_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.arize.protocol.Public.PredictionAndActual.class, com.arize.protocol.Public.PredictionAndActual.Builder.class);
+      }
+
+      // Construct using com.arize.protocol.Public.PredictionAndActual.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (predictionBuilder_ == null) {
+          prediction_ = null;
+        } else {
+          prediction_ = null;
+          predictionBuilder_ = null;
+        }
+        if (actualBuilder_ == null) {
+          actual_ = null;
+        } else {
+          actual_ = null;
+          actualBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.arize.protocol.Public.internal_static_public_PredictionAndActual_descriptor;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.PredictionAndActual getDefaultInstanceForType() {
+        return com.arize.protocol.Public.PredictionAndActual.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.PredictionAndActual build() {
+        com.arize.protocol.Public.PredictionAndActual result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.PredictionAndActual buildPartial() {
+        com.arize.protocol.Public.PredictionAndActual result = new com.arize.protocol.Public.PredictionAndActual(this);
+        if (predictionBuilder_ == null) {
+          result.prediction_ = prediction_;
+        } else {
+          result.prediction_ = predictionBuilder_.build();
+        }
+        if (actualBuilder_ == null) {
+          result.actual_ = actual_;
+        } else {
+          result.actual_ = actualBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.arize.protocol.Public.PredictionAndActual) {
+          return mergeFrom((com.arize.protocol.Public.PredictionAndActual)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.arize.protocol.Public.PredictionAndActual other) {
+        if (other == com.arize.protocol.Public.PredictionAndActual.getDefaultInstance()) return this;
+        if (other.hasPrediction()) {
+          mergePrediction(other.getPrediction());
+        }
+        if (other.hasActual()) {
+          mergeActual(other.getActual());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.arize.protocol.Public.PredictionAndActual parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.arize.protocol.Public.PredictionAndActual) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private com.arize.protocol.Public.Prediction prediction_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.Prediction, com.arize.protocol.Public.Prediction.Builder, com.arize.protocol.Public.PredictionOrBuilder> predictionBuilder_;
+      /**
+       * <code>.public.Prediction prediction = 1;</code>
+       * @return Whether the prediction field is set.
+       */
+      public boolean hasPrediction() {
+        return predictionBuilder_ != null || prediction_ != null;
+      }
+      /**
+       * <code>.public.Prediction prediction = 1;</code>
+       * @return The prediction.
+       */
+      public com.arize.protocol.Public.Prediction getPrediction() {
+        if (predictionBuilder_ == null) {
+          return prediction_ == null ? com.arize.protocol.Public.Prediction.getDefaultInstance() : prediction_;
+        } else {
+          return predictionBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.public.Prediction prediction = 1;</code>
+       */
+      public Builder setPrediction(com.arize.protocol.Public.Prediction value) {
+        if (predictionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          prediction_ = value;
+          onChanged();
+        } else {
+          predictionBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Prediction prediction = 1;</code>
+       */
+      public Builder setPrediction(
+          com.arize.protocol.Public.Prediction.Builder builderForValue) {
+        if (predictionBuilder_ == null) {
+          prediction_ = builderForValue.build();
+          onChanged();
+        } else {
+          predictionBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Prediction prediction = 1;</code>
+       */
+      public Builder mergePrediction(com.arize.protocol.Public.Prediction value) {
+        if (predictionBuilder_ == null) {
+          if (prediction_ != null) {
+            prediction_ =
+              com.arize.protocol.Public.Prediction.newBuilder(prediction_).mergeFrom(value).buildPartial();
+          } else {
+            prediction_ = value;
+          }
+          onChanged();
+        } else {
+          predictionBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Prediction prediction = 1;</code>
+       */
+      public Builder clearPrediction() {
+        if (predictionBuilder_ == null) {
+          prediction_ = null;
+          onChanged();
+        } else {
+          prediction_ = null;
+          predictionBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Prediction prediction = 1;</code>
+       */
+      public com.arize.protocol.Public.Prediction.Builder getPredictionBuilder() {
+        
+        onChanged();
+        return getPredictionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.public.Prediction prediction = 1;</code>
+       */
+      public com.arize.protocol.Public.PredictionOrBuilder getPredictionOrBuilder() {
+        if (predictionBuilder_ != null) {
+          return predictionBuilder_.getMessageOrBuilder();
+        } else {
+          return prediction_ == null ?
+              com.arize.protocol.Public.Prediction.getDefaultInstance() : prediction_;
+        }
+      }
+      /**
+       * <code>.public.Prediction prediction = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.Prediction, com.arize.protocol.Public.Prediction.Builder, com.arize.protocol.Public.PredictionOrBuilder> 
+          getPredictionFieldBuilder() {
+        if (predictionBuilder_ == null) {
+          predictionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.arize.protocol.Public.Prediction, com.arize.protocol.Public.Prediction.Builder, com.arize.protocol.Public.PredictionOrBuilder>(
+                  getPrediction(),
+                  getParentForChildren(),
+                  isClean());
+          prediction_ = null;
+        }
+        return predictionBuilder_;
+      }
+
+      private com.arize.protocol.Public.Actual actual_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.Actual, com.arize.protocol.Public.Actual.Builder, com.arize.protocol.Public.ActualOrBuilder> actualBuilder_;
+      /**
+       * <code>.public.Actual actual = 2;</code>
+       * @return Whether the actual field is set.
+       */
+      public boolean hasActual() {
+        return actualBuilder_ != null || actual_ != null;
+      }
+      /**
+       * <code>.public.Actual actual = 2;</code>
+       * @return The actual.
+       */
+      public com.arize.protocol.Public.Actual getActual() {
+        if (actualBuilder_ == null) {
+          return actual_ == null ? com.arize.protocol.Public.Actual.getDefaultInstance() : actual_;
+        } else {
+          return actualBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.public.Actual actual = 2;</code>
+       */
+      public Builder setActual(com.arize.protocol.Public.Actual value) {
+        if (actualBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          actual_ = value;
+          onChanged();
+        } else {
+          actualBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Actual actual = 2;</code>
+       */
+      public Builder setActual(
+          com.arize.protocol.Public.Actual.Builder builderForValue) {
+        if (actualBuilder_ == null) {
+          actual_ = builderForValue.build();
+          onChanged();
+        } else {
+          actualBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Actual actual = 2;</code>
+       */
+      public Builder mergeActual(com.arize.protocol.Public.Actual value) {
+        if (actualBuilder_ == null) {
+          if (actual_ != null) {
+            actual_ =
+              com.arize.protocol.Public.Actual.newBuilder(actual_).mergeFrom(value).buildPartial();
+          } else {
+            actual_ = value;
+          }
+          onChanged();
+        } else {
+          actualBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Actual actual = 2;</code>
+       */
+      public Builder clearActual() {
+        if (actualBuilder_ == null) {
+          actual_ = null;
+          onChanged();
+        } else {
+          actual_ = null;
+          actualBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Actual actual = 2;</code>
+       */
+      public com.arize.protocol.Public.Actual.Builder getActualBuilder() {
+        
+        onChanged();
+        return getActualFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.public.Actual actual = 2;</code>
+       */
+      public com.arize.protocol.Public.ActualOrBuilder getActualOrBuilder() {
+        if (actualBuilder_ != null) {
+          return actualBuilder_.getMessageOrBuilder();
+        } else {
+          return actual_ == null ?
+              com.arize.protocol.Public.Actual.getDefaultInstance() : actual_;
+        }
+      }
+      /**
+       * <code>.public.Actual actual = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.Actual, com.arize.protocol.Public.Actual.Builder, com.arize.protocol.Public.ActualOrBuilder> 
+          getActualFieldBuilder() {
+        if (actualBuilder_ == null) {
+          actualBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.arize.protocol.Public.Actual, com.arize.protocol.Public.Actual.Builder, com.arize.protocol.Public.ActualOrBuilder>(
+                  getActual(),
+                  getParentForChildren(),
+                  isClean());
+          actual_ = null;
+        }
+        return actualBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:public.PredictionAndActual)
+    }
+
+    // @@protoc_insertion_point(class_scope:public.PredictionAndActual)
+    private static final com.arize.protocol.Public.PredictionAndActual DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.arize.protocol.Public.PredictionAndActual();
+    }
+
+    public static com.arize.protocol.Public.PredictionAndActual getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<PredictionAndActual>
+        PARSER = new com.google.protobuf.AbstractParser<PredictionAndActual>() {
+      @java.lang.Override
+      public PredictionAndActual parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PredictionAndActual(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<PredictionAndActual> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PredictionAndActual> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.arize.protocol.Public.PredictionAndActual getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_public_BulkRecord_descriptor;
   private static final 
@@ -8044,6 +13513,26 @@ public final class Public {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_public_Record_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_PreProductionRecord_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_PreProductionRecord_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_PreProductionRecord_ValidationRecord_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_PreProductionRecord_ValidationRecord_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_PreProductionRecord_TrainingRecord_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_PreProductionRecord_TrainingRecord_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_ScoreCategorical_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_ScoreCategorical_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_public_Label_descriptor;
   private static final 
@@ -8074,6 +13563,21 @@ public final class Public {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_public_Actual_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_FeatureImportances_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_FeatureImportances_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_FeatureImportances_FeatureImportancesEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_FeatureImportances_FeatureImportancesEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_PredictionAndActual_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_PredictionAndActual_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -8085,31 +13589,53 @@ public final class Public {
     java.lang.String[] descriptorData = {
       "\n)pkg/receiver/protocol/public/public.pr" +
       "oto\022\006public\032\037google/protobuf/timestamp.p" +
-      "roto\"\237\001\n\nBulkRecord\022\030\n\020organization_key\030" +
+      "roto\"\201\001\n\nBulkRecord\022\030\n\020organization_key\030" +
       "\001 \001(\t\022\020\n\010model_id\030\002 \001(\t\022\025\n\rmodel_version" +
-      "\030\003 \001(\t\022-\n\ttimestamp\030\004 \001(\0132\032.google.proto" +
-      "buf.Timestamp\022\037\n\007records\030\005 \003(\0132\016.public." +
-      "Record\"\257\001\n\006Record\022\030\n\020organization_key\030\001 " +
-      "\001(\t\022\020\n\010model_id\030\002 \001(\t\022\025\n\rprediction_id\030\003" +
-      " \001(\t\022(\n\nprediction\030\004 \001(\0132\022.public.Predic" +
-      "tionH\000\022 \n\006actual\030\005 \001(\0132\016.public.ActualH\000" +
-      "B\026\n\024prediction_or_actual\"K\n\005Label\022\020\n\006bin" +
-      "ary\030\001 \001(\010H\000\022\025\n\013categorical\030\002 \001(\tH\000\022\021\n\007nu" +
-      "meric\030\003 \001(\001H\000B\006\n\004data\"\344\001\n\nPrediction\022-\n\t" +
-      "timestamp\030\001 \001(\0132\032.google.protobuf.Timest" +
-      "amp\022\025\n\rmodel_version\030\002 \001(\t\022\034\n\005label\030\003 \001(" +
-      "\0132\r.public.Label\0222\n\010features\030\004 \003(\0132 .pub" +
-      "lic.Prediction.FeaturesEntry\032>\n\rFeatures" +
-      "Entry\022\013\n\003key\030\001 \001(\t\022\034\n\005value\030\002 \001(\0132\r.publ" +
-      "ic.Value:\0028\001\"m\n\005Value\022\020\n\006string\030\001 \001(\tH\000\022" +
-      "\r\n\003int\030\002 \001(\003H\000\022\020\n\006double\030\003 \001(\001H\000\022)\n\013mult" +
-      "i_value\030\004 \001(\0132\022.public.MultiValueH\000B\006\n\004d" +
-      "ata\"\034\n\nMultiValue\022\016\n\006values\030\001 \003(\t\"U\n\006Act" +
-      "ual\022-\n\ttimestamp\030\001 \001(\0132\032.google.protobuf" +
-      ".Timestamp\022\034\n\005label\030\002 \001(\0132\r.public.Label" +
-      "BO\n\022com.arize.protocolZ9github.com/Arize" +
-      "-ai/arize/go/pkg/receiver/protocol/publi" +
-      "cb\006proto3"
+      "\030\003 \001(\t\022\037\n\007records\030\005 \003(\0132\016.public.RecordJ" +
+      "\004\010\004\020\005R\ttimestamp\"\240\002\n\006Record\022\030\n\020organizat" +
+      "ion_key\030\001 \001(\t\022\020\n\010model_id\030\002 \001(\t\022\025\n\rpredi" +
+      "ction_id\030\003 \001(\t\022&\n\nprediction\030\010 \001(\0132\022.pub" +
+      "lic.Prediction\022\036\n\006actual\030\t \001(\0132\016.public." +
+      "Actual\0227\n\023feature_importances\030\n \001(\0132\032.pu" +
+      "blic.FeatureImportances\022:\n\025prediction_an" +
+      "d_actual\030\013 \001(\0132\033.public.PredictionAndAct" +
+      "ualJ\004\010\004\020\005J\004\010\005\020\006J\004\010\006\020\007J\004\010\007\020\010\"\256\002\n\023PreProdu" +
+      "ctionRecord\022E\n\017training_record\030\001 \001(\0132*.p" +
+      "ublic.PreProductionRecord.TrainingRecord" +
+      "H\000\022I\n\021validation_record\030\002 \001(\0132,.public.P" +
+      "reProductionRecord.ValidationRecordH\000\032D\n" +
+      "\020ValidationRecord\022\020\n\010batch_id\030\001 \001(\t\022\036\n\006r" +
+      "ecord\030\002 \001(\0132\016.public.Record\0320\n\016TrainingR" +
+      "ecord\022\036\n\006record\030\001 \001(\0132\016.public.RecordB\r\n" +
+      "\013record_type\"6\n\020ScoreCategorical\022\023\n\013cate" +
+      "gorical\030\001 \001(\t\022\r\n\005score\030\002 \001(\001\"\202\001\n\005Label\022\020" +
+      "\n\006binary\030\001 \001(\010H\000\022\025\n\013categorical\030\002 \001(\tH\000\022" +
+      "\021\n\007numeric\030\003 \001(\001H\000\0225\n\021score_categorical\030" +
+      "\004 \001(\0132\030.public.ScoreCategoricalH\000B\006\n\004dat" +
+      "a\"\344\001\n\nPrediction\022-\n\ttimestamp\030\001 \001(\0132\032.go" +
+      "ogle.protobuf.Timestamp\022\025\n\rmodel_version" +
+      "\030\002 \001(\t\022\034\n\005label\030\003 \001(\0132\r.public.Label\0222\n\010" +
+      "features\030\004 \003(\0132 .public.Prediction.Featu" +
+      "resEntry\032>\n\rFeaturesEntry\022\013\n\003key\030\001 \001(\t\022\034" +
+      "\n\005value\030\002 \001(\0132\r.public.Value:\0028\001\"m\n\005Valu" +
+      "e\022\020\n\006string\030\001 \001(\tH\000\022\r\n\003int\030\002 \001(\003H\000\022\020\n\006do" +
+      "uble\030\003 \001(\001H\000\022)\n\013multi_value\030\004 \001(\0132\022.publ" +
+      "ic.MultiValueH\000B\006\n\004data\"\034\n\nMultiValue\022\016\n" +
+      "\006values\030\001 \003(\t\"U\n\006Actual\022-\n\ttimestamp\030\001 \001" +
+      "(\0132\032.google.protobuf.Timestamp\022\034\n\005label\030" +
+      "\002 \001(\0132\r.public.Label\"\346\001\n\022FeatureImportan" +
+      "ces\022-\n\ttimestamp\030\001 \001(\0132\032.google.protobuf" +
+      ".Timestamp\022\025\n\rmodel_version\030\002 \001(\t\022O\n\023fea" +
+      "ture_importances\030\003 \003(\01322.public.FeatureI" +
+      "mportances.FeatureImportancesEntry\0329\n\027Fe" +
+      "atureImportancesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005va" +
+      "lue\030\002 \001(\001:\0028\001\"]\n\023PredictionAndActual\022&\n\n" +
+      "prediction\030\001 \001(\0132\022.public.Prediction\022\036\n\006" +
+      "actual\030\002 \001(\0132\016.public.Actual*8\n\013Environm" +
+      "ent\022\013\n\007UNKNOWN\020\000\022\014\n\010TRAINING\020\001\022\016\n\nVALIDA" +
+      "TION\020\002BO\n\022com.arize.protocolZ9github.com" +
+      "/Arize-ai/arize/go/pkg/receiver/protocol" +
+      "/publicb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -8121,21 +13647,45 @@ public final class Public {
     internal_static_public_BulkRecord_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_BulkRecord_descriptor,
-        new java.lang.String[] { "OrganizationKey", "ModelId", "ModelVersion", "Timestamp", "Records", });
+        new java.lang.String[] { "OrganizationKey", "ModelId", "ModelVersion", "Records", });
     internal_static_public_Record_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_public_Record_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Record_descriptor,
-        new java.lang.String[] { "OrganizationKey", "ModelId", "PredictionId", "Prediction", "Actual", "PredictionOrActual", });
-    internal_static_public_Label_descriptor =
+        new java.lang.String[] { "OrganizationKey", "ModelId", "PredictionId", "Prediction", "Actual", "FeatureImportances", "PredictionAndActual", });
+    internal_static_public_PreProductionRecord_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_public_PreProductionRecord_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_PreProductionRecord_descriptor,
+        new java.lang.String[] { "TrainingRecord", "ValidationRecord", "RecordType", });
+    internal_static_public_PreProductionRecord_ValidationRecord_descriptor =
+      internal_static_public_PreProductionRecord_descriptor.getNestedTypes().get(0);
+    internal_static_public_PreProductionRecord_ValidationRecord_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_PreProductionRecord_ValidationRecord_descriptor,
+        new java.lang.String[] { "BatchId", "Record", });
+    internal_static_public_PreProductionRecord_TrainingRecord_descriptor =
+      internal_static_public_PreProductionRecord_descriptor.getNestedTypes().get(1);
+    internal_static_public_PreProductionRecord_TrainingRecord_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_PreProductionRecord_TrainingRecord_descriptor,
+        new java.lang.String[] { "Record", });
+    internal_static_public_ScoreCategorical_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_public_ScoreCategorical_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_ScoreCategorical_descriptor,
+        new java.lang.String[] { "Categorical", "Score", });
+    internal_static_public_Label_descriptor =
+      getDescriptor().getMessageTypes().get(4);
     internal_static_public_Label_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Label_descriptor,
-        new java.lang.String[] { "Binary", "Categorical", "Numeric", "Data", });
+        new java.lang.String[] { "Binary", "Categorical", "Numeric", "ScoreCategorical", "Data", });
     internal_static_public_Prediction_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_public_Prediction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Prediction_descriptor,
@@ -8147,23 +13697,41 @@ public final class Public {
         internal_static_public_Prediction_FeaturesEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_public_Value_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_public_Value_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Value_descriptor,
         new java.lang.String[] { "String", "Int", "Double", "MultiValue", "Data", });
     internal_static_public_MultiValue_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_public_MultiValue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_MultiValue_descriptor,
         new java.lang.String[] { "Values", });
     internal_static_public_Actual_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_public_Actual_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Actual_descriptor,
         new java.lang.String[] { "Timestamp", "Label", });
+    internal_static_public_FeatureImportances_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_public_FeatureImportances_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_FeatureImportances_descriptor,
+        new java.lang.String[] { "Timestamp", "ModelVersion", "FeatureImportances", });
+    internal_static_public_FeatureImportances_FeatureImportancesEntry_descriptor =
+      internal_static_public_FeatureImportances_descriptor.getNestedTypes().get(0);
+    internal_static_public_FeatureImportances_FeatureImportancesEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_FeatureImportances_FeatureImportancesEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_public_PredictionAndActual_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_public_PredictionAndActual_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_PredictionAndActual_descriptor,
+        new java.lang.String[] { "Prediction", "Actual", });
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 
