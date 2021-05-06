@@ -1,5 +1,6 @@
 package com.arize;
 
+import com.arize.ArizeClient.ScoredCategorical;
 import com.arize.protocol.Public;
 import com.arize.protocol.Public.Record;
 import com.arize.protocol.Public.Record.Builder;
@@ -156,6 +157,36 @@ public class ArizeClientTest {
         Assert.assertEquals("modelId", rec.getModelId());
         Assert.assertEquals("predictionId", rec.getPredictionId());
         Assert.assertEquals(20.21, rec.getActual().getLabel().getNumeric(), 0.0);
+    }
+
+    @Test
+    public void testLogScoredModel() throws IOException, ExecutionException, InterruptedException {
+        Map<String, Object> features = new HashMap<>();
+        features.putAll(intFeatures);
+        features.putAll(doubleFeatures);
+        features.putAll(stringFeatures);
+        ScoredCategorical label = new ScoredCategorical("category", 20.20);
+        Response response = client.log("modelId", "modelVersion", "predictionId", features, label, null, null, 0);
+        try {
+            response.resolve(10, TimeUnit.SECONDS);
+        } catch (TimeoutException e) {
+            Assert.fail("timeout waiting for server");
+        }
+        Assert.assertEquals("apiKey", headers.get(0).get("Authorization").get(0));
+        Public.Record rec = posts.get(0);
+        Assert.assertEquals("orgKey", rec.getOrganizationKey());
+        Assert.assertEquals("modelId", rec.getModelId());
+        Assert.assertEquals("predictionId", rec.getPredictionId());
+        Assert.assertEquals("modelVersion", rec.getPrediction().getModelVersion());
+        Assert.assertEquals(20.20, rec.getPrediction().getLabel().getScoreCategorical().getScore(), 0.0);
+        Assert.assertEquals("category", rec.getPrediction().getLabel().getScoreCategorical().getCategorical());
+        Assert.assertEquals(12345, rec.getPrediction().getFeaturesOrDefault("int", Public.Value.getDefaultInstance()).getInt());
+        Assert.assertEquals("string", rec.getPrediction().getFeaturesOrDefault("string", Public.Value.getDefaultInstance()).getString());
+        Assert.assertEquals(20.20, rec.getPrediction().getFeaturesOrDefault("double", Public.Value.getDefaultInstance()).getDouble(), 0.0);
+
+        Assert.assertEquals("orgKey", rec.getOrganizationKey());
+        Assert.assertEquals("modelId", rec.getModelId());
+        Assert.assertEquals("predictionId", rec.getPredictionId());
     }
 
     @Test

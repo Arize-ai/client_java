@@ -41,10 +41,10 @@ public class RecordUtil {
                 || rawLabel instanceof Float || rawLabel instanceof Double) {
             return label.setNumeric(Double.parseDouble(String.valueOf(rawLabel))).build();
         } else if (rawLabel instanceof ArizeClient.ScoredCategorical) {
-            ScoreCategorical sc = (ScoreCategorical) rawLabel;
+            ArizeClient.ScoredCategorical sc = (ArizeClient.ScoredCategorical) rawLabel;
             ScoreCategorical.Builder builder = ScoreCategorical.newBuilder();
             builder.setScore(sc.getScore());
-            builder.setCategorical(sc.getCategorical());
+            builder.setCategorical(sc.getCategory());
             return label.setScoreCategorical(builder).build();
         }
         throw new IllegalArgumentException(
