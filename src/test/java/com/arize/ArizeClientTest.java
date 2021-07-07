@@ -211,15 +211,18 @@ public class ArizeClientTest {
         features.put("B", "");
         features.put("C", null);
 
-        Exception error = null;
-        Response prediction = null;
+        Response prediction = client.log("modelId", "modelVersion", "predictionId", features, 20.20, null, null, 0);;
         try {
-            prediction = client.log("modelId", "modelVersion", "predictionId", features, 20.20, null, null, 0);
-        } catch (IllegalArgumentException e) {
-            error = e;
+            prediction.resolve(10, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            Assert.fail("Unexpected exception: " + e.getMessage());
         }
-        Assert.assertNull(prediction);
-        Assert.assertNotNull(error);
+        Record rec = posts.get(0);
+        Assert.assertEquals("modelVersion", rec.getPrediction().getModelVersion());
+        Assert.assertFalse(rec.getPrediction().getFeaturesMap().isEmpty());
+        Assert.assertTrue(rec.getPrediction().getFeaturesMap().containsKey("A"));
+        Assert.assertTrue(rec.getPrediction().getFeaturesMap().containsKey("B"));
+        Assert.assertFalse(rec.getPrediction().getFeaturesMap().containsKey("C"));
     }
 
     @Test

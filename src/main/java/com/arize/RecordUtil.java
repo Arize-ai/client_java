@@ -27,7 +27,11 @@ public class RecordUtil {
     protected static <T> Map<String, Value> convertFeatures(final Map<String, T> features)
             throws IllegalArgumentException {
         Map<String, Value> converted = new HashMap<>();
-        features.forEach((k, v) -> converted.put(k, convertValue(k, v)));
+        features.forEach((k, v) -> {
+            if (v != null) {
+                converted.put(k, convertValue(k, v));
+            }
+        });
         return converted;
     }
 
@@ -74,8 +78,6 @@ public class RecordUtil {
                 }
             }
             return val.setMultiValue(values).build();
-        } else if (rawValue == null) {
-            throw new IllegalArgumentException("Feature " + name + " has a null value");
         }
         throw new IllegalArgumentException(
                 "Illegal feature type: " + rawValue.getClass().getSimpleName() + " for feature: " + name);
