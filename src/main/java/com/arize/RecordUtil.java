@@ -47,8 +47,13 @@ public class RecordUtil {
         } else if (rawLabel instanceof ArizeClient.ScoredCategorical) {
             ArizeClient.ScoredCategorical sc = (ArizeClient.ScoredCategorical) rawLabel;
             ScoreCategorical.Builder builder = ScoreCategorical.newBuilder();
-            builder.setScore(sc.getScore());
-            builder.setCategorical(sc.getCategory());
+            ScoreCategorical.ScoreCategory.Builder scb = ScoreCategorical.ScoreCategory.newBuilder();
+            scb.setScore(sc.getScore());
+            scb.setCategory(sc.getCategory());
+            if (sc.getNumericSequence() != null && sc.getNumericSequence().size() > 0) {
+                scb.addAllNumericSequence(sc.getNumericSequence());
+            }
+            builder.setScoreCategory(scb);
             return label.setScoreCategorical(builder).build();
         }
         throw new IllegalArgumentException(

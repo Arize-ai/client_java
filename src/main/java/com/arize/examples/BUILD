@@ -47,3 +47,11 @@ java_binary(
         "//java/api-client:java_api_lib",
     ],
 )
+
+java_binary(
+    name = "SendBulkNumericSequence",
+    srcs = ["SendBulkNumericSequence.java"],
+    deps = [
+        "//java/api-client:java_api_lib",
+    ],
+)

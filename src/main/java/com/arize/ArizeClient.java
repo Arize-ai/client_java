@@ -466,9 +466,17 @@ public class ArizeClient implements ArizeAPI {
     public static class ScoredCategorical {
         private String category;
         private double score;
+        List<Double> numSeq;
+        
         public ScoredCategorical(String category, double score) {
             this.category = category;
             this.score = score;
+        }
+
+        public ScoredCategorical(String category, double score, List<Double> numSeq) {
+            this.category = category;
+            this.score = score;
+            this.numSeq = numSeq;
         }
 
         public String getCategory() {
@@ -477,6 +485,10 @@ public class ArizeClient implements ArizeAPI {
 
         public double getScore() {
             return score;
+        }
+        
+        public List<Double> getNumericSequence() {
+            return numSeq;
         }
     }
 }

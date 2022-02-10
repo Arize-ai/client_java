@@ -23,19 +23,19 @@ public final class Public {
      * Uniquely identifies the user account in our system
      * </pre>
      *
-     * <code>string organization_key = 1;</code>
+     * <code>string organization_key = 1 [deprecated = true];</code>
      * @return The organizationKey.
      */
-    java.lang.String getOrganizationKey();
+    @java.lang.Deprecated java.lang.String getOrganizationKey();
     /**
      * <pre>
      * Uniquely identifies the user account in our system
      * </pre>
      *
-     * <code>string organization_key = 1;</code>
+     * <code>string organization_key = 1 [deprecated = true];</code>
      * @return The bytes for organizationKey.
      */
-    com.google.protobuf.ByteString
+    @java.lang.Deprecated com.google.protobuf.ByteString
         getOrganizationKeyBytes();
 
     /**
@@ -257,10 +257,10 @@ public final class Public {
      * Uniquely identifies the user account in our system
      * </pre>
      *
-     * <code>string organization_key = 1;</code>
+     * <code>string organization_key = 1 [deprecated = true];</code>
      * @return The organizationKey.
      */
-    public java.lang.String getOrganizationKey() {
+    @java.lang.Deprecated public java.lang.String getOrganizationKey() {
       java.lang.Object ref = organizationKey_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
@@ -277,10 +277,10 @@ public final class Public {
      * Uniquely identifies the user account in our system
      * </pre>
      *
-     * <code>string organization_key = 1;</code>
+     * <code>string organization_key = 1 [deprecated = true];</code>
      * @return The bytes for organizationKey.
      */
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getOrganizationKeyBytes() {
       java.lang.Object ref = organizationKey_;
       if (ref instanceof java.lang.String) {
@@ -886,10 +886,10 @@ public final class Public {
        * Uniquely identifies the user account in our system
        * </pre>
        *
-       * <code>string organization_key = 1;</code>
+       * <code>string organization_key = 1 [deprecated = true];</code>
        * @return The organizationKey.
        */
-      public java.lang.String getOrganizationKey() {
+      @java.lang.Deprecated public java.lang.String getOrganizationKey() {
         java.lang.Object ref = organizationKey_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
@@ -906,10 +906,10 @@ public final class Public {
        * Uniquely identifies the user account in our system
        * </pre>
        *
-       * <code>string organization_key = 1;</code>
+       * <code>string organization_key = 1 [deprecated = true];</code>
        * @return The bytes for organizationKey.
        */
-      public com.google.protobuf.ByteString
+      @java.lang.Deprecated public com.google.protobuf.ByteString
           getOrganizationKeyBytes() {
         java.lang.Object ref = organizationKey_;
         if (ref instanceof String) {
@@ -927,11 +927,11 @@ public final class Public {
        * Uniquely identifies the user account in our system
        * </pre>
        *
-       * <code>string organization_key = 1;</code>
+       * <code>string organization_key = 1 [deprecated = true];</code>
        * @param value The organizationKey to set.
        * @return This builder for chaining.
        */
-      public Builder setOrganizationKey(
+      @java.lang.Deprecated public Builder setOrganizationKey(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
@@ -946,10 +946,10 @@ public final class Public {
        * Uniquely identifies the user account in our system
        * </pre>
        *
-       * <code>string organization_key = 1;</code>
+       * <code>string organization_key = 1 [deprecated = true];</code>
        * @return This builder for chaining.
        */
-      public Builder clearOrganizationKey() {
+      @java.lang.Deprecated public Builder clearOrganizationKey() {
         
         organizationKey_ = getDefaultInstance().getOrganizationKey();
         onChanged();
@@ -960,11 +960,11 @@ public final class Public {
        * Uniquely identifies the user account in our system
        * </pre>
        *
-       * <code>string organization_key = 1;</code>
+       * <code>string organization_key = 1 [deprecated = true];</code>
        * @param value The bytes for organizationKey to set.
        * @return This builder for chaining.
        */
-      public Builder setOrganizationKeyBytes(
+      @java.lang.Deprecated public Builder setOrganizationKeyBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
@@ -1575,19 +1575,19 @@ public final class Public {
      * Uniquely identifies the user account in our system
      * </pre>
      *
-     * <code>string organization_key = 1;</code>
+     * <code>string organization_key = 1 [deprecated = true];</code>
      * @return The organizationKey.
      */
-    java.lang.String getOrganizationKey();
+    @java.lang.Deprecated java.lang.String getOrganizationKey();
     /**
      * <pre>
      * Uniquely identifies the user account in our system
      * </pre>
      *
-     * <code>string organization_key = 1;</code>
+     * <code>string organization_key = 1 [deprecated = true];</code>
      * @return The bytes for organizationKey.
      */
-    com.google.protobuf.ByteString
+    @java.lang.Deprecated com.google.protobuf.ByteString
         getOrganizationKeyBytes();
 
     /**
@@ -1885,10 +1885,10 @@ public final class Public {
      * Uniquely identifies the user account in our system
      * </pre>
      *
-     * <code>string organization_key = 1;</code>
+     * <code>string organization_key = 1 [deprecated = true];</code>
      * @return The organizationKey.
      */
-    public java.lang.String getOrganizationKey() {
+    @java.lang.Deprecated public java.lang.String getOrganizationKey() {
       java.lang.Object ref = organizationKey_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
@@ -1905,10 +1905,10 @@ public final class Public {
      * Uniquely identifies the user account in our system
      * </pre>
      *
-     * <code>string organization_key = 1;</code>
+     * <code>string organization_key = 1 [deprecated = true];</code>
      * @return The bytes for organizationKey.
      */
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getOrganizationKeyBytes() {
       java.lang.Object ref = organizationKey_;
       if (ref instanceof java.lang.String) {
@@ -2636,10 +2636,10 @@ public final class Public {
        * Uniquely identifies the user account in our system
        * </pre>
        *
-       * <code>string organization_key = 1;</code>
+       * <code>string organization_key = 1 [deprecated = true];</code>
        * @return The organizationKey.
        */
-      public java.lang.String getOrganizationKey() {
+      @java.lang.Deprecated public java.lang.String getOrganizationKey() {
         java.lang.Object ref = organizationKey_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
@@ -2656,10 +2656,10 @@ public final class Public {
        * Uniquely identifies the user account in our system
        * </pre>
        *
-       * <code>string organization_key = 1;</code>
+       * <code>string organization_key = 1 [deprecated = true];</code>
        * @return The bytes for organizationKey.
        */
-      public com.google.protobuf.ByteString
+      @java.lang.Deprecated public com.google.protobuf.ByteString
           getOrganizationKeyBytes() {
         java.lang.Object ref = organizationKey_;
         if (ref instanceof String) {
@@ -2677,11 +2677,11 @@ public final class Public {
        * Uniquely identifies the user account in our system
        * </pre>
        *
-       * <code>string organization_key = 1;</code>
+       * <code>string organization_key = 1 [deprecated = true];</code>
        * @param value The organizationKey to set.
        * @return This builder for chaining.
        */
-      public Builder setOrganizationKey(
+      @java.lang.Deprecated public Builder setOrganizationKey(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
@@ -2696,10 +2696,10 @@ public final class Public {
        * Uniquely identifies the user account in our system
        * </pre>
        *
-       * <code>string organization_key = 1;</code>
+       * <code>string organization_key = 1 [deprecated = true];</code>
        * @return This builder for chaining.
        */
-      public Builder clearOrganizationKey() {
+      @java.lang.Deprecated public Builder clearOrganizationKey() {
         
         organizationKey_ = getDefaultInstance().getOrganizationKey();
         onChanged();
@@ -2710,11 +2710,11 @@ public final class Public {
        * Uniquely identifies the user account in our system
        * </pre>
        *
-       * <code>string organization_key = 1;</code>
+       * <code>string organization_key = 1 [deprecated = true];</code>
        * @param value The bytes for organizationKey to set.
        * @return This builder for chaining.
        */
-      public Builder setOrganizationKeyBytes(
+      @java.lang.Deprecated public Builder setOrganizationKeyBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
@@ -6682,6 +6682,23 @@ public final class Public {
        * @return The score.
        */
       double getScore();
+
+      /**
+       * <code>repeated double numeric_sequence = 3;</code>
+       * @return A list containing the numericSequence.
+       */
+      java.util.List<java.lang.Double> getNumericSequenceList();
+      /**
+       * <code>repeated double numeric_sequence = 3;</code>
+       * @return The count of numericSequence.
+       */
+      int getNumericSequenceCount();
+      /**
+       * <code>repeated double numeric_sequence = 3;</code>
+       * @param index The index of the element to return.
+       * @return The numericSequence at the given index.
+       */
+      double getNumericSequence(int index);
     }
     /**
      * Protobuf type {@code public.ScoreCategorical.ScoreCategory}
@@ -6697,6 +6714,7 @@ public final class Public {
       }
       private ScoreCategory() {
         category_ = "";
+        numericSequence_ = emptyDoubleList();
       }
 
       @java.lang.Override
@@ -6719,6 +6737,7 @@ public final class Public {
         if (extensionRegistry == null) {
           throw new java.lang.NullPointerException();
         }
+        int mutable_bitField0_ = 0;
         com.google.protobuf.UnknownFieldSet.Builder unknownFields =
             com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
@@ -6740,6 +6759,27 @@ public final class Public {
                 score_ = input.readDouble();
                 break;
               }
+              case 25: {
+                if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                  numericSequence_ = newDoubleList();
+                  mutable_bitField0_ |= 0x00000001;
+                }
+                numericSequence_.addDouble(input.readDouble());
+                break;
+              }
+              case 26: {
+                int length = input.readRawVarint32();
+                int limit = input.pushLimit(length);
+                if (!((mutable_bitField0_ & 0x00000001) != 0) && input.getBytesUntilLimit() > 0) {
+                  numericSequence_ = newDoubleList();
+                  mutable_bitField0_ |= 0x00000001;
+                }
+                while (input.getBytesUntilLimit() > 0) {
+                  numericSequence_.addDouble(input.readDouble());
+                }
+                input.popLimit(limit);
+                break;
+              }
               default: {
                 if (!parseUnknownField(
                     input, unknownFields, extensionRegistry, tag)) {
@@ -6755,6 +6795,9 @@ public final class Public {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
+          if (((mutable_bitField0_ & 0x00000001) != 0)) {
+            numericSequence_.makeImmutable(); // C
+          }
           this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
@@ -6818,6 +6861,33 @@ public final class Public {
         return score_;
       }
 
+      public static final int NUMERIC_SEQUENCE_FIELD_NUMBER = 3;
+      private com.google.protobuf.Internal.DoubleList numericSequence_;
+      /**
+       * <code>repeated double numeric_sequence = 3;</code>
+       * @return A list containing the numericSequence.
+       */
+      public java.util.List<java.lang.Double>
+          getNumericSequenceList() {
+        return numericSequence_;
+      }
+      /**
+       * <code>repeated double numeric_sequence = 3;</code>
+       * @return The count of numericSequence.
+       */
+      public int getNumericSequenceCount() {
+        return numericSequence_.size();
+      }
+      /**
+       * <code>repeated double numeric_sequence = 3;</code>
+       * @param index The index of the element to return.
+       * @return The numericSequence at the given index.
+       */
+      public double getNumericSequence(int index) {
+        return numericSequence_.getDouble(index);
+      }
+      private int numericSequenceMemoizedSerializedSize = -1;
+
       private byte memoizedIsInitialized = -1;
       @java.lang.Override
       public final boolean isInitialized() {
@@ -6832,11 +6902,19 @@ public final class Public {
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
+        getSerializedSize();
         if (!getCategoryBytes().isEmpty()) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 1, category_);
         }
         if (score_ != 0D) {
           output.writeDouble(2, score_);
+        }
+        if (getNumericSequenceList().size() > 0) {
+          output.writeUInt32NoTag(26);
+          output.writeUInt32NoTag(numericSequenceMemoizedSerializedSize);
+        }
+        for (int i = 0; i < numericSequence_.size(); i++) {
+          output.writeDoubleNoTag(numericSequence_.getDouble(i));
         }
         unknownFields.writeTo(output);
       }
@@ -6853,6 +6931,17 @@ public final class Public {
         if (score_ != 0D) {
           size += com.google.protobuf.CodedOutputStream
             .computeDoubleSize(2, score_);
+        }
+        {
+          int dataSize = 0;
+          dataSize = 8 * getNumericSequenceList().size();
+          size += dataSize;
+          if (!getNumericSequenceList().isEmpty()) {
+            size += 1;
+            size += com.google.protobuf.CodedOutputStream
+                .computeInt32SizeNoTag(dataSize);
+          }
+          numericSequenceMemoizedSerializedSize = dataSize;
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -6874,6 +6963,8 @@ public final class Public {
         if (java.lang.Double.doubleToLongBits(getScore())
             != java.lang.Double.doubleToLongBits(
                 other.getScore())) return false;
+        if (!getNumericSequenceList()
+            .equals(other.getNumericSequenceList())) return false;
         if (!unknownFields.equals(other.unknownFields)) return false;
         return true;
       }
@@ -6890,6 +6981,10 @@ public final class Public {
         hash = (37 * hash) + SCORE_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             java.lang.Double.doubleToLongBits(getScore()));
+        if (getNumericSequenceCount() > 0) {
+          hash = (37 * hash) + NUMERIC_SEQUENCE_FIELD_NUMBER;
+          hash = (53 * hash) + getNumericSequenceList().hashCode();
+        }
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -7027,6 +7122,8 @@ public final class Public {
 
           score_ = 0D;
 
+          numericSequence_ = emptyDoubleList();
+          bitField0_ = (bitField0_ & ~0x00000001);
           return this;
         }
 
@@ -7053,8 +7150,14 @@ public final class Public {
         @java.lang.Override
         public com.arize.protocol.Public.ScoreCategorical.ScoreCategory buildPartial() {
           com.arize.protocol.Public.ScoreCategorical.ScoreCategory result = new com.arize.protocol.Public.ScoreCategorical.ScoreCategory(this);
+          int from_bitField0_ = bitField0_;
           result.category_ = category_;
           result.score_ = score_;
+          if (((bitField0_ & 0x00000001) != 0)) {
+            numericSequence_.makeImmutable();
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.numericSequence_ = numericSequence_;
           onBuilt();
           return result;
         }
@@ -7110,6 +7213,16 @@ public final class Public {
           if (other.getScore() != 0D) {
             setScore(other.getScore());
           }
+          if (!other.numericSequence_.isEmpty()) {
+            if (numericSequence_.isEmpty()) {
+              numericSequence_ = other.numericSequence_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureNumericSequenceIsMutable();
+              numericSequence_.addAll(other.numericSequence_);
+            }
+            onChanged();
+          }
           this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
@@ -7138,6 +7251,7 @@ public final class Public {
           }
           return this;
         }
+        private int bitField0_;
 
         private java.lang.Object category_ = "";
         /**
@@ -7241,6 +7355,85 @@ public final class Public {
         public Builder clearScore() {
           
           score_ = 0D;
+          onChanged();
+          return this;
+        }
+
+        private com.google.protobuf.Internal.DoubleList numericSequence_ = emptyDoubleList();
+        private void ensureNumericSequenceIsMutable() {
+          if (!((bitField0_ & 0x00000001) != 0)) {
+            numericSequence_ = mutableCopy(numericSequence_);
+            bitField0_ |= 0x00000001;
+           }
+        }
+        /**
+         * <code>repeated double numeric_sequence = 3;</code>
+         * @return A list containing the numericSequence.
+         */
+        public java.util.List<java.lang.Double>
+            getNumericSequenceList() {
+          return ((bitField0_ & 0x00000001) != 0) ?
+                   java.util.Collections.unmodifiableList(numericSequence_) : numericSequence_;
+        }
+        /**
+         * <code>repeated double numeric_sequence = 3;</code>
+         * @return The count of numericSequence.
+         */
+        public int getNumericSequenceCount() {
+          return numericSequence_.size();
+        }
+        /**
+         * <code>repeated double numeric_sequence = 3;</code>
+         * @param index The index of the element to return.
+         * @return The numericSequence at the given index.
+         */
+        public double getNumericSequence(int index) {
+          return numericSequence_.getDouble(index);
+        }
+        /**
+         * <code>repeated double numeric_sequence = 3;</code>
+         * @param index The index to set the value at.
+         * @param value The numericSequence to set.
+         * @return This builder for chaining.
+         */
+        public Builder setNumericSequence(
+            int index, double value) {
+          ensureNumericSequenceIsMutable();
+          numericSequence_.setDouble(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated double numeric_sequence = 3;</code>
+         * @param value The numericSequence to add.
+         * @return This builder for chaining.
+         */
+        public Builder addNumericSequence(double value) {
+          ensureNumericSequenceIsMutable();
+          numericSequence_.addDouble(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated double numeric_sequence = 3;</code>
+         * @param values The numericSequence to add.
+         * @return This builder for chaining.
+         */
+        public Builder addAllNumericSequence(
+            java.lang.Iterable<? extends java.lang.Double> values) {
+          ensureNumericSequenceIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, numericSequence_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated double numeric_sequence = 3;</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearNumericSequence() {
+          numericSequence_ = emptyDoubleList();
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
           return this;
         }
@@ -11233,6 +11426,21 @@ public final class Public {
      */
     com.arize.protocol.Public.MultiValueOrBuilder getMultiValueOrBuilder();
 
+    /**
+     * <code>.public.Embedding embedding = 5;</code>
+     * @return Whether the embedding field is set.
+     */
+    boolean hasEmbedding();
+    /**
+     * <code>.public.Embedding embedding = 5;</code>
+     * @return The embedding.
+     */
+    com.arize.protocol.Public.Embedding getEmbedding();
+    /**
+     * <code>.public.Embedding embedding = 5;</code>
+     */
+    com.arize.protocol.Public.EmbeddingOrBuilder getEmbeddingOrBuilder();
+
     public com.arize.protocol.Public.Value.DataCase getDataCase();
   }
   /**
@@ -11314,6 +11522,20 @@ public final class Public {
               dataCase_ = 4;
               break;
             }
+            case 42: {
+              com.arize.protocol.Public.Embedding.Builder subBuilder = null;
+              if (dataCase_ == 5) {
+                subBuilder = ((com.arize.protocol.Public.Embedding) data_).toBuilder();
+              }
+              data_ =
+                  input.readMessage(com.arize.protocol.Public.Embedding.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.arize.protocol.Public.Embedding) data_);
+                data_ = subBuilder.buildPartial();
+              }
+              dataCase_ = 5;
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -11355,6 +11577,7 @@ public final class Public {
       INT(2),
       DOUBLE(3),
       MULTI_VALUE(4),
+      EMBEDDING(5),
       DATA_NOT_SET(0);
       private final int value;
       private DataCase(int value) {
@@ -11376,6 +11599,7 @@ public final class Public {
           case 2: return INT;
           case 3: return DOUBLE;
           case 4: return MULTI_VALUE;
+          case 5: return EMBEDDING;
           case 0: return DATA_NOT_SET;
           default: return null;
         }
@@ -11488,6 +11712,34 @@ public final class Public {
       return com.arize.protocol.Public.MultiValue.getDefaultInstance();
     }
 
+    public static final int EMBEDDING_FIELD_NUMBER = 5;
+    /**
+     * <code>.public.Embedding embedding = 5;</code>
+     * @return Whether the embedding field is set.
+     */
+    public boolean hasEmbedding() {
+      return dataCase_ == 5;
+    }
+    /**
+     * <code>.public.Embedding embedding = 5;</code>
+     * @return The embedding.
+     */
+    public com.arize.protocol.Public.Embedding getEmbedding() {
+      if (dataCase_ == 5) {
+         return (com.arize.protocol.Public.Embedding) data_;
+      }
+      return com.arize.protocol.Public.Embedding.getDefaultInstance();
+    }
+    /**
+     * <code>.public.Embedding embedding = 5;</code>
+     */
+    public com.arize.protocol.Public.EmbeddingOrBuilder getEmbeddingOrBuilder() {
+      if (dataCase_ == 5) {
+         return (com.arize.protocol.Public.Embedding) data_;
+      }
+      return com.arize.protocol.Public.Embedding.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -11516,6 +11768,9 @@ public final class Public {
       if (dataCase_ == 4) {
         output.writeMessage(4, (com.arize.protocol.Public.MultiValue) data_);
       }
+      if (dataCase_ == 5) {
+        output.writeMessage(5, (com.arize.protocol.Public.Embedding) data_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -11541,6 +11796,10 @@ public final class Public {
       if (dataCase_ == 4) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, (com.arize.protocol.Public.MultiValue) data_);
+      }
+      if (dataCase_ == 5) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, (com.arize.protocol.Public.Embedding) data_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -11576,6 +11835,10 @@ public final class Public {
           if (!getMultiValue()
               .equals(other.getMultiValue())) return false;
           break;
+        case 5:
+          if (!getEmbedding()
+              .equals(other.getEmbedding())) return false;
+          break;
         case 0:
         default:
       }
@@ -11608,6 +11871,10 @@ public final class Public {
         case 4:
           hash = (37 * hash) + MULTI_VALUE_FIELD_NUMBER;
           hash = (53 * hash) + getMultiValue().hashCode();
+          break;
+        case 5:
+          hash = (37 * hash) + EMBEDDING_FIELD_NUMBER;
+          hash = (53 * hash) + getEmbedding().hashCode();
           break;
         case 0:
         default:
@@ -11793,6 +12060,13 @@ public final class Public {
             result.data_ = multiValueBuilder_.build();
           }
         }
+        if (dataCase_ == 5) {
+          if (embeddingBuilder_ == null) {
+            result.data_ = data_;
+          } else {
+            result.data_ = embeddingBuilder_.build();
+          }
+        }
         result.dataCase_ = dataCase_;
         onBuilt();
         return result;
@@ -11859,6 +12133,10 @@ public final class Public {
           }
           case MULTI_VALUE: {
             mergeMultiValue(other.getMultiValue());
+            break;
+          }
+          case EMBEDDING: {
+            mergeEmbedding(other.getEmbedding());
             break;
           }
           case DATA_NOT_SET: {
@@ -12200,6 +12478,144 @@ public final class Public {
         dataCase_ = 4;
         onChanged();;
         return multiValueBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.Embedding, com.arize.protocol.Public.Embedding.Builder, com.arize.protocol.Public.EmbeddingOrBuilder> embeddingBuilder_;
+      /**
+       * <code>.public.Embedding embedding = 5;</code>
+       * @return Whether the embedding field is set.
+       */
+      public boolean hasEmbedding() {
+        return dataCase_ == 5;
+      }
+      /**
+       * <code>.public.Embedding embedding = 5;</code>
+       * @return The embedding.
+       */
+      public com.arize.protocol.Public.Embedding getEmbedding() {
+        if (embeddingBuilder_ == null) {
+          if (dataCase_ == 5) {
+            return (com.arize.protocol.Public.Embedding) data_;
+          }
+          return com.arize.protocol.Public.Embedding.getDefaultInstance();
+        } else {
+          if (dataCase_ == 5) {
+            return embeddingBuilder_.getMessage();
+          }
+          return com.arize.protocol.Public.Embedding.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.public.Embedding embedding = 5;</code>
+       */
+      public Builder setEmbedding(com.arize.protocol.Public.Embedding value) {
+        if (embeddingBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          data_ = value;
+          onChanged();
+        } else {
+          embeddingBuilder_.setMessage(value);
+        }
+        dataCase_ = 5;
+        return this;
+      }
+      /**
+       * <code>.public.Embedding embedding = 5;</code>
+       */
+      public Builder setEmbedding(
+          com.arize.protocol.Public.Embedding.Builder builderForValue) {
+        if (embeddingBuilder_ == null) {
+          data_ = builderForValue.build();
+          onChanged();
+        } else {
+          embeddingBuilder_.setMessage(builderForValue.build());
+        }
+        dataCase_ = 5;
+        return this;
+      }
+      /**
+       * <code>.public.Embedding embedding = 5;</code>
+       */
+      public Builder mergeEmbedding(com.arize.protocol.Public.Embedding value) {
+        if (embeddingBuilder_ == null) {
+          if (dataCase_ == 5 &&
+              data_ != com.arize.protocol.Public.Embedding.getDefaultInstance()) {
+            data_ = com.arize.protocol.Public.Embedding.newBuilder((com.arize.protocol.Public.Embedding) data_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            data_ = value;
+          }
+          onChanged();
+        } else {
+          if (dataCase_ == 5) {
+            embeddingBuilder_.mergeFrom(value);
+          }
+          embeddingBuilder_.setMessage(value);
+        }
+        dataCase_ = 5;
+        return this;
+      }
+      /**
+       * <code>.public.Embedding embedding = 5;</code>
+       */
+      public Builder clearEmbedding() {
+        if (embeddingBuilder_ == null) {
+          if (dataCase_ == 5) {
+            dataCase_ = 0;
+            data_ = null;
+            onChanged();
+          }
+        } else {
+          if (dataCase_ == 5) {
+            dataCase_ = 0;
+            data_ = null;
+          }
+          embeddingBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.public.Embedding embedding = 5;</code>
+       */
+      public com.arize.protocol.Public.Embedding.Builder getEmbeddingBuilder() {
+        return getEmbeddingFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.public.Embedding embedding = 5;</code>
+       */
+      public com.arize.protocol.Public.EmbeddingOrBuilder getEmbeddingOrBuilder() {
+        if ((dataCase_ == 5) && (embeddingBuilder_ != null)) {
+          return embeddingBuilder_.getMessageOrBuilder();
+        } else {
+          if (dataCase_ == 5) {
+            return (com.arize.protocol.Public.Embedding) data_;
+          }
+          return com.arize.protocol.Public.Embedding.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.public.Embedding embedding = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.Embedding, com.arize.protocol.Public.Embedding.Builder, com.arize.protocol.Public.EmbeddingOrBuilder> 
+          getEmbeddingFieldBuilder() {
+        if (embeddingBuilder_ == null) {
+          if (!(dataCase_ == 5)) {
+            data_ = com.arize.protocol.Public.Embedding.getDefaultInstance();
+          }
+          embeddingBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.arize.protocol.Public.Embedding, com.arize.protocol.Public.Embedding.Builder, com.arize.protocol.Public.EmbeddingOrBuilder>(
+                  (com.arize.protocol.Public.Embedding) data_,
+                  getParentForChildren(),
+                  isClean());
+          data_ = null;
+        }
+        dataCase_ = 5;
+        onChanged();;
+        return embeddingBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -12887,6 +13303,1189 @@ public final class Public {
 
     @java.lang.Override
     public com.arize.protocol.Public.MultiValue getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface EmbeddingOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:public.Embedding)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * an array representing the values of the embedding's dimensions
+     * </pre>
+     *
+     * <code>repeated double dimensions = 1;</code>
+     * @return A list containing the dimensions.
+     */
+    java.util.List<java.lang.Double> getDimensionsList();
+    /**
+     * <pre>
+     * an array representing the values of the embedding's dimensions
+     * </pre>
+     *
+     * <code>repeated double dimensions = 1;</code>
+     * @return The count of dimensions.
+     */
+    int getDimensionsCount();
+    /**
+     * <pre>
+     * an array representing the values of the embedding's dimensions
+     * </pre>
+     *
+     * <code>repeated double dimensions = 1;</code>
+     * @param index The index of the element to return.
+     * @return The dimensions at the given index.
+     */
+    double getDimensions(int index);
+
+    /**
+     * <pre>
+     * optional raw text (e.g. for NLP)
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue data = 2;</code>
+     * @return Whether the data field is set.
+     */
+    boolean hasData();
+    /**
+     * <pre>
+     * optional raw text (e.g. for NLP)
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue data = 2;</code>
+     * @return The data.
+     */
+    com.google.protobuf.StringValue getData();
+    /**
+     * <pre>
+     * optional raw text (e.g. for NLP)
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue data = 2;</code>
+     */
+    com.google.protobuf.StringValueOrBuilder getDataOrBuilder();
+
+    /**
+     * <pre>
+     * optional link/url to an associated image or text file
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+     * @return Whether the linkToData field is set.
+     */
+    boolean hasLinkToData();
+    /**
+     * <pre>
+     * optional link/url to an associated image or text file
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+     * @return The linkToData.
+     */
+    com.google.protobuf.StringValue getLinkToData();
+    /**
+     * <pre>
+     * optional link/url to an associated image or text file
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+     */
+    com.google.protobuf.StringValueOrBuilder getLinkToDataOrBuilder();
+  }
+  /**
+   * Protobuf type {@code public.Embedding}
+   */
+  public  static final class Embedding extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:public.Embedding)
+      EmbeddingOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use Embedding.newBuilder() to construct.
+    private Embedding(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Embedding() {
+      dimensions_ = emptyDoubleList();
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Embedding();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Embedding(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 9: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                dimensions_ = newDoubleList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              dimensions_.addDouble(input.readDouble());
+              break;
+            }
+            case 10: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000001) != 0) && input.getBytesUntilLimit() > 0) {
+                dimensions_ = newDoubleList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                dimensions_.addDouble(input.readDouble());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 18: {
+              com.google.protobuf.StringValue.Builder subBuilder = null;
+              if (data_ != null) {
+                subBuilder = data_.toBuilder();
+              }
+              data_ = input.readMessage(com.google.protobuf.StringValue.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(data_);
+                data_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 26: {
+              com.google.protobuf.StringValue.Builder subBuilder = null;
+              if (linkToData_ != null) {
+                subBuilder = linkToData_.toBuilder();
+              }
+              linkToData_ = input.readMessage(com.google.protobuf.StringValue.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(linkToData_);
+                linkToData_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          dimensions_.makeImmutable(); // C
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.arize.protocol.Public.internal_static_public_Embedding_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.arize.protocol.Public.internal_static_public_Embedding_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.arize.protocol.Public.Embedding.class, com.arize.protocol.Public.Embedding.Builder.class);
+    }
+
+    public static final int DIMENSIONS_FIELD_NUMBER = 1;
+    private com.google.protobuf.Internal.DoubleList dimensions_;
+    /**
+     * <pre>
+     * an array representing the values of the embedding's dimensions
+     * </pre>
+     *
+     * <code>repeated double dimensions = 1;</code>
+     * @return A list containing the dimensions.
+     */
+    public java.util.List<java.lang.Double>
+        getDimensionsList() {
+      return dimensions_;
+    }
+    /**
+     * <pre>
+     * an array representing the values of the embedding's dimensions
+     * </pre>
+     *
+     * <code>repeated double dimensions = 1;</code>
+     * @return The count of dimensions.
+     */
+    public int getDimensionsCount() {
+      return dimensions_.size();
+    }
+    /**
+     * <pre>
+     * an array representing the values of the embedding's dimensions
+     * </pre>
+     *
+     * <code>repeated double dimensions = 1;</code>
+     * @param index The index of the element to return.
+     * @return The dimensions at the given index.
+     */
+    public double getDimensions(int index) {
+      return dimensions_.getDouble(index);
+    }
+    private int dimensionsMemoizedSerializedSize = -1;
+
+    public static final int DATA_FIELD_NUMBER = 2;
+    private com.google.protobuf.StringValue data_;
+    /**
+     * <pre>
+     * optional raw text (e.g. for NLP)
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue data = 2;</code>
+     * @return Whether the data field is set.
+     */
+    public boolean hasData() {
+      return data_ != null;
+    }
+    /**
+     * <pre>
+     * optional raw text (e.g. for NLP)
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue data = 2;</code>
+     * @return The data.
+     */
+    public com.google.protobuf.StringValue getData() {
+      return data_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : data_;
+    }
+    /**
+     * <pre>
+     * optional raw text (e.g. for NLP)
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue data = 2;</code>
+     */
+    public com.google.protobuf.StringValueOrBuilder getDataOrBuilder() {
+      return getData();
+    }
+
+    public static final int LINK_TO_DATA_FIELD_NUMBER = 3;
+    private com.google.protobuf.StringValue linkToData_;
+    /**
+     * <pre>
+     * optional link/url to an associated image or text file
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+     * @return Whether the linkToData field is set.
+     */
+    public boolean hasLinkToData() {
+      return linkToData_ != null;
+    }
+    /**
+     * <pre>
+     * optional link/url to an associated image or text file
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+     * @return The linkToData.
+     */
+    public com.google.protobuf.StringValue getLinkToData() {
+      return linkToData_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : linkToData_;
+    }
+    /**
+     * <pre>
+     * optional link/url to an associated image or text file
+     * </pre>
+     *
+     * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+     */
+    public com.google.protobuf.StringValueOrBuilder getLinkToDataOrBuilder() {
+      return getLinkToData();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (getDimensionsList().size() > 0) {
+        output.writeUInt32NoTag(10);
+        output.writeUInt32NoTag(dimensionsMemoizedSerializedSize);
+      }
+      for (int i = 0; i < dimensions_.size(); i++) {
+        output.writeDoubleNoTag(dimensions_.getDouble(i));
+      }
+      if (data_ != null) {
+        output.writeMessage(2, getData());
+      }
+      if (linkToData_ != null) {
+        output.writeMessage(3, getLinkToData());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        dataSize = 8 * getDimensionsList().size();
+        size += dataSize;
+        if (!getDimensionsList().isEmpty()) {
+          size += 1;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        dimensionsMemoizedSerializedSize = dataSize;
+      }
+      if (data_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getData());
+      }
+      if (linkToData_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getLinkToData());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.arize.protocol.Public.Embedding)) {
+        return super.equals(obj);
+      }
+      com.arize.protocol.Public.Embedding other = (com.arize.protocol.Public.Embedding) obj;
+
+      if (!getDimensionsList()
+          .equals(other.getDimensionsList())) return false;
+      if (hasData() != other.hasData()) return false;
+      if (hasData()) {
+        if (!getData()
+            .equals(other.getData())) return false;
+      }
+      if (hasLinkToData() != other.hasLinkToData()) return false;
+      if (hasLinkToData()) {
+        if (!getLinkToData()
+            .equals(other.getLinkToData())) return false;
+      }
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getDimensionsCount() > 0) {
+        hash = (37 * hash) + DIMENSIONS_FIELD_NUMBER;
+        hash = (53 * hash) + getDimensionsList().hashCode();
+      }
+      if (hasData()) {
+        hash = (37 * hash) + DATA_FIELD_NUMBER;
+        hash = (53 * hash) + getData().hashCode();
+      }
+      if (hasLinkToData()) {
+        hash = (37 * hash) + LINK_TO_DATA_FIELD_NUMBER;
+        hash = (53 * hash) + getLinkToData().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.arize.protocol.Public.Embedding parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.Embedding parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.Embedding parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.Embedding parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.Embedding parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.Embedding parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.Embedding parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.Embedding parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.Embedding parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.Embedding parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.Embedding parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.Embedding parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.arize.protocol.Public.Embedding prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code public.Embedding}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:public.Embedding)
+        com.arize.protocol.Public.EmbeddingOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.arize.protocol.Public.internal_static_public_Embedding_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.arize.protocol.Public.internal_static_public_Embedding_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.arize.protocol.Public.Embedding.class, com.arize.protocol.Public.Embedding.Builder.class);
+      }
+
+      // Construct using com.arize.protocol.Public.Embedding.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        dimensions_ = emptyDoubleList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (dataBuilder_ == null) {
+          data_ = null;
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
+        if (linkToDataBuilder_ == null) {
+          linkToData_ = null;
+        } else {
+          linkToData_ = null;
+          linkToDataBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.arize.protocol.Public.internal_static_public_Embedding_descriptor;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.Embedding getDefaultInstanceForType() {
+        return com.arize.protocol.Public.Embedding.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.Embedding build() {
+        com.arize.protocol.Public.Embedding result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.Embedding buildPartial() {
+        com.arize.protocol.Public.Embedding result = new com.arize.protocol.Public.Embedding(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          dimensions_.makeImmutable();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.dimensions_ = dimensions_;
+        if (dataBuilder_ == null) {
+          result.data_ = data_;
+        } else {
+          result.data_ = dataBuilder_.build();
+        }
+        if (linkToDataBuilder_ == null) {
+          result.linkToData_ = linkToData_;
+        } else {
+          result.linkToData_ = linkToDataBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.arize.protocol.Public.Embedding) {
+          return mergeFrom((com.arize.protocol.Public.Embedding)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.arize.protocol.Public.Embedding other) {
+        if (other == com.arize.protocol.Public.Embedding.getDefaultInstance()) return this;
+        if (!other.dimensions_.isEmpty()) {
+          if (dimensions_.isEmpty()) {
+            dimensions_ = other.dimensions_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureDimensionsIsMutable();
+            dimensions_.addAll(other.dimensions_);
+          }
+          onChanged();
+        }
+        if (other.hasData()) {
+          mergeData(other.getData());
+        }
+        if (other.hasLinkToData()) {
+          mergeLinkToData(other.getLinkToData());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.arize.protocol.Public.Embedding parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.arize.protocol.Public.Embedding) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.Internal.DoubleList dimensions_ = emptyDoubleList();
+      private void ensureDimensionsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          dimensions_ = mutableCopy(dimensions_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <pre>
+       * an array representing the values of the embedding's dimensions
+       * </pre>
+       *
+       * <code>repeated double dimensions = 1;</code>
+       * @return A list containing the dimensions.
+       */
+      public java.util.List<java.lang.Double>
+          getDimensionsList() {
+        return ((bitField0_ & 0x00000001) != 0) ?
+                 java.util.Collections.unmodifiableList(dimensions_) : dimensions_;
+      }
+      /**
+       * <pre>
+       * an array representing the values of the embedding's dimensions
+       * </pre>
+       *
+       * <code>repeated double dimensions = 1;</code>
+       * @return The count of dimensions.
+       */
+      public int getDimensionsCount() {
+        return dimensions_.size();
+      }
+      /**
+       * <pre>
+       * an array representing the values of the embedding's dimensions
+       * </pre>
+       *
+       * <code>repeated double dimensions = 1;</code>
+       * @param index The index of the element to return.
+       * @return The dimensions at the given index.
+       */
+      public double getDimensions(int index) {
+        return dimensions_.getDouble(index);
+      }
+      /**
+       * <pre>
+       * an array representing the values of the embedding's dimensions
+       * </pre>
+       *
+       * <code>repeated double dimensions = 1;</code>
+       * @param index The index to set the value at.
+       * @param value The dimensions to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDimensions(
+          int index, double value) {
+        ensureDimensionsIsMutable();
+        dimensions_.setDouble(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * an array representing the values of the embedding's dimensions
+       * </pre>
+       *
+       * <code>repeated double dimensions = 1;</code>
+       * @param value The dimensions to add.
+       * @return This builder for chaining.
+       */
+      public Builder addDimensions(double value) {
+        ensureDimensionsIsMutable();
+        dimensions_.addDouble(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * an array representing the values of the embedding's dimensions
+       * </pre>
+       *
+       * <code>repeated double dimensions = 1;</code>
+       * @param values The dimensions to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllDimensions(
+          java.lang.Iterable<? extends java.lang.Double> values) {
+        ensureDimensionsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, dimensions_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * an array representing the values of the embedding's dimensions
+       * </pre>
+       *
+       * <code>repeated double dimensions = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDimensions() {
+        dimensions_ = emptyDoubleList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.StringValue data_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> dataBuilder_;
+      /**
+       * <pre>
+       * optional raw text (e.g. for NLP)
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue data = 2;</code>
+       * @return Whether the data field is set.
+       */
+      public boolean hasData() {
+        return dataBuilder_ != null || data_ != null;
+      }
+      /**
+       * <pre>
+       * optional raw text (e.g. for NLP)
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue data = 2;</code>
+       * @return The data.
+       */
+      public com.google.protobuf.StringValue getData() {
+        if (dataBuilder_ == null) {
+          return data_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : data_;
+        } else {
+          return dataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * optional raw text (e.g. for NLP)
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue data = 2;</code>
+       */
+      public Builder setData(com.google.protobuf.StringValue value) {
+        if (dataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          data_ = value;
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * optional raw text (e.g. for NLP)
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue data = 2;</code>
+       */
+      public Builder setData(
+          com.google.protobuf.StringValue.Builder builderForValue) {
+        if (dataBuilder_ == null) {
+          data_ = builderForValue.build();
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * optional raw text (e.g. for NLP)
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue data = 2;</code>
+       */
+      public Builder mergeData(com.google.protobuf.StringValue value) {
+        if (dataBuilder_ == null) {
+          if (data_ != null) {
+            data_ =
+              com.google.protobuf.StringValue.newBuilder(data_).mergeFrom(value).buildPartial();
+          } else {
+            data_ = value;
+          }
+          onChanged();
+        } else {
+          dataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * optional raw text (e.g. for NLP)
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue data = 2;</code>
+       */
+      public Builder clearData() {
+        if (dataBuilder_ == null) {
+          data_ = null;
+          onChanged();
+        } else {
+          data_ = null;
+          dataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * optional raw text (e.g. for NLP)
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue data = 2;</code>
+       */
+      public com.google.protobuf.StringValue.Builder getDataBuilder() {
+        
+        onChanged();
+        return getDataFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * optional raw text (e.g. for NLP)
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue data = 2;</code>
+       */
+      public com.google.protobuf.StringValueOrBuilder getDataOrBuilder() {
+        if (dataBuilder_ != null) {
+          return dataBuilder_.getMessageOrBuilder();
+        } else {
+          return data_ == null ?
+              com.google.protobuf.StringValue.getDefaultInstance() : data_;
+        }
+      }
+      /**
+       * <pre>
+       * optional raw text (e.g. for NLP)
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue data = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> 
+          getDataFieldBuilder() {
+        if (dataBuilder_ == null) {
+          dataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder>(
+                  getData(),
+                  getParentForChildren(),
+                  isClean());
+          data_ = null;
+        }
+        return dataBuilder_;
+      }
+
+      private com.google.protobuf.StringValue linkToData_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> linkToDataBuilder_;
+      /**
+       * <pre>
+       * optional link/url to an associated image or text file
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+       * @return Whether the linkToData field is set.
+       */
+      public boolean hasLinkToData() {
+        return linkToDataBuilder_ != null || linkToData_ != null;
+      }
+      /**
+       * <pre>
+       * optional link/url to an associated image or text file
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+       * @return The linkToData.
+       */
+      public com.google.protobuf.StringValue getLinkToData() {
+        if (linkToDataBuilder_ == null) {
+          return linkToData_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : linkToData_;
+        } else {
+          return linkToDataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * optional link/url to an associated image or text file
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+       */
+      public Builder setLinkToData(com.google.protobuf.StringValue value) {
+        if (linkToDataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          linkToData_ = value;
+          onChanged();
+        } else {
+          linkToDataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * optional link/url to an associated image or text file
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+       */
+      public Builder setLinkToData(
+          com.google.protobuf.StringValue.Builder builderForValue) {
+        if (linkToDataBuilder_ == null) {
+          linkToData_ = builderForValue.build();
+          onChanged();
+        } else {
+          linkToDataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * optional link/url to an associated image or text file
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+       */
+      public Builder mergeLinkToData(com.google.protobuf.StringValue value) {
+        if (linkToDataBuilder_ == null) {
+          if (linkToData_ != null) {
+            linkToData_ =
+              com.google.protobuf.StringValue.newBuilder(linkToData_).mergeFrom(value).buildPartial();
+          } else {
+            linkToData_ = value;
+          }
+          onChanged();
+        } else {
+          linkToDataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * optional link/url to an associated image or text file
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+       */
+      public Builder clearLinkToData() {
+        if (linkToDataBuilder_ == null) {
+          linkToData_ = null;
+          onChanged();
+        } else {
+          linkToData_ = null;
+          linkToDataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * optional link/url to an associated image or text file
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+       */
+      public com.google.protobuf.StringValue.Builder getLinkToDataBuilder() {
+        
+        onChanged();
+        return getLinkToDataFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * optional link/url to an associated image or text file
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+       */
+      public com.google.protobuf.StringValueOrBuilder getLinkToDataOrBuilder() {
+        if (linkToDataBuilder_ != null) {
+          return linkToDataBuilder_.getMessageOrBuilder();
+        } else {
+          return linkToData_ == null ?
+              com.google.protobuf.StringValue.getDefaultInstance() : linkToData_;
+        }
+      }
+      /**
+       * <pre>
+       * optional link/url to an associated image or text file
+       * </pre>
+       *
+       * <code>.google.protobuf.StringValue link_to_data = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> 
+          getLinkToDataFieldBuilder() {
+        if (linkToDataBuilder_ == null) {
+          linkToDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder>(
+                  getLinkToData(),
+                  getParentForChildren(),
+                  isClean());
+          linkToData_ = null;
+        }
+        return linkToDataBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:public.Embedding)
+    }
+
+    // @@protoc_insertion_point(class_scope:public.Embedding)
+    private static final com.arize.protocol.Public.Embedding DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.arize.protocol.Public.Embedding();
+    }
+
+    public static com.arize.protocol.Public.Embedding getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Embedding>
+        PARSER = new com.google.protobuf.AbstractParser<Embedding>() {
+      @java.lang.Override
+      public Embedding parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Embedding(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Embedding> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Embedding> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.arize.protocol.Public.Embedding getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -19066,6 +20665,53 @@ public final class Public {
 
       java.lang.String getShapValuesColumnNamesOrThrow(
           java.lang.String key);
+
+      /**
+       * <code>repeated string tag_column_names = 9;</code>
+       * @return A list containing the tagColumnNames.
+       */
+      java.util.List<java.lang.String>
+          getTagColumnNamesList();
+      /**
+       * <code>repeated string tag_column_names = 9;</code>
+       * @return The count of tagColumnNames.
+       */
+      int getTagColumnNamesCount();
+      /**
+       * <code>repeated string tag_column_names = 9;</code>
+       * @param index The index of the element to return.
+       * @return The tagColumnNames at the given index.
+       */
+      java.lang.String getTagColumnNames(int index);
+      /**
+       * <code>repeated string tag_column_names = 9;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the tagColumnNames at the given index.
+       */
+      com.google.protobuf.ByteString
+          getTagColumnNamesBytes(int index);
+
+      /**
+       * <pre>
+       * numeric_sequence lets user attach a sequence of numeric values to each record in additional to the scalar score.
+       * the actual_numeric_sequence is primarily used for NDCG calculations
+       * </pre>
+       *
+       * <code>string actual_numeric_sequence_column_name = 10;</code>
+       * @return The actualNumericSequenceColumnName.
+       */
+      java.lang.String getActualNumericSequenceColumnName();
+      /**
+       * <pre>
+       * numeric_sequence lets user attach a sequence of numeric values to each record in additional to the scalar score.
+       * the actual_numeric_sequence is primarily used for NDCG calculations
+       * </pre>
+       *
+       * <code>string actual_numeric_sequence_column_name = 10;</code>
+       * @return The bytes for actualNumericSequenceColumnName.
+       */
+      com.google.protobuf.ByteString
+          getActualNumericSequenceColumnNameBytes();
     }
     /**
      * <pre>
@@ -19093,6 +20739,8 @@ public final class Public {
         predictionScoreColumnName_ = "";
         actualLabelColumnName_ = "";
         actualScoreColumnName_ = "";
+        tagColumnNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        actualNumericSequenceColumnName_ = "";
       }
 
       @java.lang.Override
@@ -19184,6 +20832,21 @@ public final class Public {
                     shapValuesColumnNames__.getKey(), shapValuesColumnNames__.getValue());
                 break;
               }
+              case 74: {
+                java.lang.String s = input.readStringRequireUtf8();
+                if (!((mutable_bitField0_ & 0x00000004) != 0)) {
+                  tagColumnNames_ = new com.google.protobuf.LazyStringArrayList();
+                  mutable_bitField0_ |= 0x00000004;
+                }
+                tagColumnNames_.add(s);
+                break;
+              }
+              case 82: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                actualNumericSequenceColumnName_ = s;
+                break;
+              }
               default: {
                 if (!parseUnknownField(
                     input, unknownFields, extensionRegistry, tag)) {
@@ -19201,6 +20864,9 @@ public final class Public {
         } finally {
           if (((mutable_bitField0_ & 0x00000001) != 0)) {
             featureColumnNames_ = featureColumnNames_.getUnmodifiableView();
+          }
+          if (((mutable_bitField0_ & 0x00000004) != 0)) {
+            tagColumnNames_ = tagColumnNames_.getUnmodifiableView();
           }
           this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
@@ -19574,6 +21240,87 @@ public final class Public {
         return map.get(key);
       }
 
+      public static final int TAG_COLUMN_NAMES_FIELD_NUMBER = 9;
+      private com.google.protobuf.LazyStringList tagColumnNames_;
+      /**
+       * <code>repeated string tag_column_names = 9;</code>
+       * @return A list containing the tagColumnNames.
+       */
+      public com.google.protobuf.ProtocolStringList
+          getTagColumnNamesList() {
+        return tagColumnNames_;
+      }
+      /**
+       * <code>repeated string tag_column_names = 9;</code>
+       * @return The count of tagColumnNames.
+       */
+      public int getTagColumnNamesCount() {
+        return tagColumnNames_.size();
+      }
+      /**
+       * <code>repeated string tag_column_names = 9;</code>
+       * @param index The index of the element to return.
+       * @return The tagColumnNames at the given index.
+       */
+      public java.lang.String getTagColumnNames(int index) {
+        return tagColumnNames_.get(index);
+      }
+      /**
+       * <code>repeated string tag_column_names = 9;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the tagColumnNames at the given index.
+       */
+      public com.google.protobuf.ByteString
+          getTagColumnNamesBytes(int index) {
+        return tagColumnNames_.getByteString(index);
+      }
+
+      public static final int ACTUAL_NUMERIC_SEQUENCE_COLUMN_NAME_FIELD_NUMBER = 10;
+      private volatile java.lang.Object actualNumericSequenceColumnName_;
+      /**
+       * <pre>
+       * numeric_sequence lets user attach a sequence of numeric values to each record in additional to the scalar score.
+       * the actual_numeric_sequence is primarily used for NDCG calculations
+       * </pre>
+       *
+       * <code>string actual_numeric_sequence_column_name = 10;</code>
+       * @return The actualNumericSequenceColumnName.
+       */
+      public java.lang.String getActualNumericSequenceColumnName() {
+        java.lang.Object ref = actualNumericSequenceColumnName_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          actualNumericSequenceColumnName_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       * numeric_sequence lets user attach a sequence of numeric values to each record in additional to the scalar score.
+       * the actual_numeric_sequence is primarily used for NDCG calculations
+       * </pre>
+       *
+       * <code>string actual_numeric_sequence_column_name = 10;</code>
+       * @return The bytes for actualNumericSequenceColumnName.
+       */
+      public com.google.protobuf.ByteString
+          getActualNumericSequenceColumnNameBytes() {
+        java.lang.Object ref = actualNumericSequenceColumnName_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          actualNumericSequenceColumnName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
       private byte memoizedIsInitialized = -1;
       @java.lang.Override
       public final boolean isInitialized() {
@@ -19615,6 +21362,12 @@ public final class Public {
             internalGetShapValuesColumnNames(),
             ShapValuesColumnNamesDefaultEntryHolder.defaultEntry,
             8);
+        for (int i = 0; i < tagColumnNames_.size(); i++) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 9, tagColumnNames_.getRaw(i));
+        }
+        if (!getActualNumericSequenceColumnNameBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 10, actualNumericSequenceColumnName_);
+        }
         unknownFields.writeTo(output);
       }
 
@@ -19660,6 +21413,17 @@ public final class Public {
           size += com.google.protobuf.CodedOutputStream
               .computeMessageSize(8, shapValuesColumnNames__);
         }
+        {
+          int dataSize = 0;
+          for (int i = 0; i < tagColumnNames_.size(); i++) {
+            dataSize += computeStringSizeNoTag(tagColumnNames_.getRaw(i));
+          }
+          size += dataSize;
+          size += 1 * getTagColumnNamesList().size();
+        }
+        if (!getActualNumericSequenceColumnNameBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, actualNumericSequenceColumnName_);
+        }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
@@ -19691,6 +21455,10 @@ public final class Public {
             .equals(other.getActualScoreColumnName())) return false;
         if (!internalGetShapValuesColumnNames().equals(
             other.internalGetShapValuesColumnNames())) return false;
+        if (!getTagColumnNamesList()
+            .equals(other.getTagColumnNamesList())) return false;
+        if (!getActualNumericSequenceColumnName()
+            .equals(other.getActualNumericSequenceColumnName())) return false;
         if (!unknownFields.equals(other.unknownFields)) return false;
         return true;
       }
@@ -19722,6 +21490,12 @@ public final class Public {
           hash = (37 * hash) + SHAP_VALUES_COLUMN_NAMES_FIELD_NUMBER;
           hash = (53 * hash) + internalGetShapValuesColumnNames().hashCode();
         }
+        if (getTagColumnNamesCount() > 0) {
+          hash = (37 * hash) + TAG_COLUMN_NAMES_FIELD_NUMBER;
+          hash = (53 * hash) + getTagColumnNamesList().hashCode();
+        }
+        hash = (37 * hash) + ACTUAL_NUMERIC_SEQUENCE_COLUMN_NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getActualNumericSequenceColumnName().hashCode();
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -19898,6 +21672,10 @@ public final class Public {
           actualScoreColumnName_ = "";
 
           internalGetMutableShapValuesColumnNames().clear();
+          tagColumnNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          actualNumericSequenceColumnName_ = "";
+
           return this;
         }
 
@@ -19938,6 +21716,12 @@ public final class Public {
           result.actualScoreColumnName_ = actualScoreColumnName_;
           result.shapValuesColumnNames_ = internalGetShapValuesColumnNames();
           result.shapValuesColumnNames_.makeImmutable();
+          if (((bitField0_ & 0x00000004) != 0)) {
+            tagColumnNames_ = tagColumnNames_.getUnmodifiableView();
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.tagColumnNames_ = tagColumnNames_;
+          result.actualNumericSequenceColumnName_ = actualNumericSequenceColumnName_;
           onBuilt();
           return result;
         }
@@ -20022,6 +21806,20 @@ public final class Public {
           }
           internalGetMutableShapValuesColumnNames().mergeFrom(
               other.internalGetShapValuesColumnNames());
+          if (!other.tagColumnNames_.isEmpty()) {
+            if (tagColumnNames_.isEmpty()) {
+              tagColumnNames_ = other.tagColumnNames_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureTagColumnNamesIsMutable();
+              tagColumnNames_.addAll(other.tagColumnNames_);
+            }
+            onChanged();
+          }
+          if (!other.getActualNumericSequenceColumnName().isEmpty()) {
+            actualNumericSequenceColumnName_ = other.actualNumericSequenceColumnName_;
+            onChanged();
+          }
           this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
@@ -20768,6 +22566,217 @@ public final class Public {
               .putAll(values);
           return this;
         }
+
+        private com.google.protobuf.LazyStringList tagColumnNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        private void ensureTagColumnNamesIsMutable() {
+          if (!((bitField0_ & 0x00000004) != 0)) {
+            tagColumnNames_ = new com.google.protobuf.LazyStringArrayList(tagColumnNames_);
+            bitField0_ |= 0x00000004;
+           }
+        }
+        /**
+         * <code>repeated string tag_column_names = 9;</code>
+         * @return A list containing the tagColumnNames.
+         */
+        public com.google.protobuf.ProtocolStringList
+            getTagColumnNamesList() {
+          return tagColumnNames_.getUnmodifiableView();
+        }
+        /**
+         * <code>repeated string tag_column_names = 9;</code>
+         * @return The count of tagColumnNames.
+         */
+        public int getTagColumnNamesCount() {
+          return tagColumnNames_.size();
+        }
+        /**
+         * <code>repeated string tag_column_names = 9;</code>
+         * @param index The index of the element to return.
+         * @return The tagColumnNames at the given index.
+         */
+        public java.lang.String getTagColumnNames(int index) {
+          return tagColumnNames_.get(index);
+        }
+        /**
+         * <code>repeated string tag_column_names = 9;</code>
+         * @param index The index of the value to return.
+         * @return The bytes of the tagColumnNames at the given index.
+         */
+        public com.google.protobuf.ByteString
+            getTagColumnNamesBytes(int index) {
+          return tagColumnNames_.getByteString(index);
+        }
+        /**
+         * <code>repeated string tag_column_names = 9;</code>
+         * @param index The index to set the value at.
+         * @param value The tagColumnNames to set.
+         * @return This builder for chaining.
+         */
+        public Builder setTagColumnNames(
+            int index, java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTagColumnNamesIsMutable();
+          tagColumnNames_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string tag_column_names = 9;</code>
+         * @param value The tagColumnNames to add.
+         * @return This builder for chaining.
+         */
+        public Builder addTagColumnNames(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTagColumnNamesIsMutable();
+          tagColumnNames_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string tag_column_names = 9;</code>
+         * @param values The tagColumnNames to add.
+         * @return This builder for chaining.
+         */
+        public Builder addAllTagColumnNames(
+            java.lang.Iterable<java.lang.String> values) {
+          ensureTagColumnNamesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, tagColumnNames_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string tag_column_names = 9;</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearTagColumnNames() {
+          tagColumnNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string tag_column_names = 9;</code>
+         * @param value The bytes of the tagColumnNames to add.
+         * @return This builder for chaining.
+         */
+        public Builder addTagColumnNamesBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          ensureTagColumnNamesIsMutable();
+          tagColumnNames_.add(value);
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object actualNumericSequenceColumnName_ = "";
+        /**
+         * <pre>
+         * numeric_sequence lets user attach a sequence of numeric values to each record in additional to the scalar score.
+         * the actual_numeric_sequence is primarily used for NDCG calculations
+         * </pre>
+         *
+         * <code>string actual_numeric_sequence_column_name = 10;</code>
+         * @return The actualNumericSequenceColumnName.
+         */
+        public java.lang.String getActualNumericSequenceColumnName() {
+          java.lang.Object ref = actualNumericSequenceColumnName_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            actualNumericSequenceColumnName_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <pre>
+         * numeric_sequence lets user attach a sequence of numeric values to each record in additional to the scalar score.
+         * the actual_numeric_sequence is primarily used for NDCG calculations
+         * </pre>
+         *
+         * <code>string actual_numeric_sequence_column_name = 10;</code>
+         * @return The bytes for actualNumericSequenceColumnName.
+         */
+        public com.google.protobuf.ByteString
+            getActualNumericSequenceColumnNameBytes() {
+          java.lang.Object ref = actualNumericSequenceColumnName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            actualNumericSequenceColumnName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         * numeric_sequence lets user attach a sequence of numeric values to each record in additional to the scalar score.
+         * the actual_numeric_sequence is primarily used for NDCG calculations
+         * </pre>
+         *
+         * <code>string actual_numeric_sequence_column_name = 10;</code>
+         * @param value The actualNumericSequenceColumnName to set.
+         * @return This builder for chaining.
+         */
+        public Builder setActualNumericSequenceColumnName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          actualNumericSequenceColumnName_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * numeric_sequence lets user attach a sequence of numeric values to each record in additional to the scalar score.
+         * the actual_numeric_sequence is primarily used for NDCG calculations
+         * </pre>
+         *
+         * <code>string actual_numeric_sequence_column_name = 10;</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearActualNumericSequenceColumnName() {
+          
+          actualNumericSequenceColumnName_ = getDefaultInstance().getActualNumericSequenceColumnName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * numeric_sequence lets user attach a sequence of numeric values to each record in additional to the scalar score.
+         * the actual_numeric_sequence is primarily used for NDCG calculations
+         * </pre>
+         *
+         * <code>string actual_numeric_sequence_column_name = 10;</code>
+         * @param value The bytes for actualNumericSequenceColumnName to set.
+         * @return This builder for chaining.
+         */
+        public Builder setActualNumericSequenceColumnNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          actualNumericSequenceColumnName_ = value;
+          onChanged();
+          return this;
+        }
         @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -20956,11 +22965,71 @@ public final class Public {
        * <code>.public.Schema.GenericSchema.GroupFieldDescriptor shap_values = 8;</code>
        */
       com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptorOrBuilder getShapValuesOrBuilder();
+
+      /**
+       * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+       * @return Whether the tags field is set.
+       */
+      boolean hasTags();
+      /**
+       * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+       * @return The tags.
+       */
+      com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor getTags();
+      /**
+       * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+       */
+      com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptorOrBuilder getTagsOrBuilder();
+
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+       * @return Whether the modelEnvironment field is set.
+       */
+      boolean hasModelEnvironment();
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+       * @return The modelEnvironment.
+       */
+      com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getModelEnvironment();
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+       */
+      com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getModelEnvironmentOrBuilder();
+
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+       * @return Whether the modelVersion field is set.
+       */
+      boolean hasModelVersion();
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+       * @return The modelVersion.
+       */
+      com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getModelVersion();
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+       */
+      com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getModelVersionOrBuilder();
+
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+       * @return Whether the batchId field is set.
+       */
+      boolean hasBatchId();
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+       * @return The batchId.
+       */
+      com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getBatchId();
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+       */
+      com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getBatchIdOrBuilder();
     }
     /**
      * <pre>
-     * GeneriSchema allows users to specify field descriptors within a generic and potentially nested data object (e.g. JSON object) 
-     * to flexibly define a custom schema for their model data. 
+     * GenericSchema allows users to specify field descriptors within a generic and potentially nested data object (e.g. JSON object)
+     * to flexibly define a custom schema for their model data.
      * </pre>
      *
      * Protobuf type {@code public.Schema.GenericSchema}
@@ -21107,6 +23176,58 @@ public final class Public {
                 if (subBuilder != null) {
                   subBuilder.mergeFrom(shapValues_);
                   shapValues_ = subBuilder.buildPartial();
+                }
+
+                break;
+              }
+              case 74: {
+                com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor.Builder subBuilder = null;
+                if (tags_ != null) {
+                  subBuilder = tags_.toBuilder();
+                }
+                tags_ = input.readMessage(com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(tags_);
+                  tags_ = subBuilder.buildPartial();
+                }
+
+                break;
+              }
+              case 82: {
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder subBuilder = null;
+                if (modelEnvironment_ != null) {
+                  subBuilder = modelEnvironment_.toBuilder();
+                }
+                modelEnvironment_ = input.readMessage(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(modelEnvironment_);
+                  modelEnvironment_ = subBuilder.buildPartial();
+                }
+
+                break;
+              }
+              case 90: {
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder subBuilder = null;
+                if (modelVersion_ != null) {
+                  subBuilder = modelVersion_.toBuilder();
+                }
+                modelVersion_ = input.readMessage(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(modelVersion_);
+                  modelVersion_ = subBuilder.buildPartial();
+                }
+
+                break;
+              }
+              case 98: {
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder subBuilder = null;
+                if (batchId_ != null) {
+                  subBuilder = batchId_.toBuilder();
+                }
+                batchId_ = input.readMessage(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(batchId_);
+                  batchId_ = subBuilder.buildPartial();
                 }
 
                 break;
@@ -21820,7 +23941,7 @@ public final class Public {
 
         /**
          * <pre>
-         * represents a capture group string used to extract a feature name from a data field name
+         * represents a capture group string used to extract a dimension name from a data field name
          * e.g. feature[0-9]* would extract "feature123" from "product1_feature123" or "feature123" from "feature123_randomhashsuffix"
          * </pre>
          *
@@ -21830,7 +23951,7 @@ public final class Public {
         java.lang.String getCaptureGroup();
         /**
          * <pre>
-         * represents a capture group string used to extract a feature name from a data field name
+         * represents a capture group string used to extract a dimension name from a data field name
          * e.g. feature[0-9]* would extract "feature123" from "product1_feature123" or "feature123" from "feature123_randomhashsuffix"
          * </pre>
          *
@@ -21981,7 +24102,7 @@ public final class Public {
         private volatile java.lang.Object captureGroup_;
         /**
          * <pre>
-         * represents a capture group string used to extract a feature name from a data field name
+         * represents a capture group string used to extract a dimension name from a data field name
          * e.g. feature[0-9]* would extract "feature123" from "product1_feature123" or "feature123" from "feature123_randomhashsuffix"
          * </pre>
          *
@@ -22002,7 +24123,7 @@ public final class Public {
         }
         /**
          * <pre>
-         * represents a capture group string used to extract a feature name from a data field name
+         * represents a capture group string used to extract a dimension name from a data field name
          * e.g. feature[0-9]* would extract "feature123" from "product1_feature123" or "feature123" from "feature123_randomhashsuffix"
          * </pre>
          *
@@ -22478,7 +24599,7 @@ public final class Public {
           private java.lang.Object captureGroup_ = "";
           /**
            * <pre>
-           * represents a capture group string used to extract a feature name from a data field name
+           * represents a capture group string used to extract a dimension name from a data field name
            * e.g. feature[0-9]* would extract "feature123" from "product1_feature123" or "feature123" from "feature123_randomhashsuffix"
            * </pre>
            *
@@ -22499,7 +24620,7 @@ public final class Public {
           }
           /**
            * <pre>
-           * represents a capture group string used to extract a feature name from a data field name
+           * represents a capture group string used to extract a dimension name from a data field name
            * e.g. feature[0-9]* would extract "feature123" from "product1_feature123" or "feature123" from "feature123_randomhashsuffix"
            * </pre>
            *
@@ -22521,7 +24642,7 @@ public final class Public {
           }
           /**
            * <pre>
-           * represents a capture group string used to extract a feature name from a data field name
+           * represents a capture group string used to extract a dimension name from a data field name
            * e.g. feature[0-9]* would extract "feature123" from "product1_feature123" or "feature123" from "feature123_randomhashsuffix"
            * </pre>
            *
@@ -22541,7 +24662,7 @@ public final class Public {
           }
           /**
            * <pre>
-           * represents a capture group string used to extract a feature name from a data field name
+           * represents a capture group string used to extract a dimension name from a data field name
            * e.g. feature[0-9]* would extract "feature123" from "product1_feature123" or "feature123" from "feature123_randomhashsuffix"
            * </pre>
            *
@@ -22556,7 +24677,7 @@ public final class Public {
           }
           /**
            * <pre>
-           * represents a capture group string used to extract a feature name from a data field name
+           * represents a capture group string used to extract a dimension name from a data field name
            * e.g. feature[0-9]* would extract "feature123" from "product1_feature123" or "feature123" from "feature123_randomhashsuffix"
            * </pre>
            *
@@ -22824,6 +24945,98 @@ public final class Public {
         return getShapValues();
       }
 
+      public static final int TAGS_FIELD_NUMBER = 9;
+      private com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor tags_;
+      /**
+       * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+       * @return Whether the tags field is set.
+       */
+      public boolean hasTags() {
+        return tags_ != null;
+      }
+      /**
+       * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+       * @return The tags.
+       */
+      public com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor getTags() {
+        return tags_ == null ? com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor.getDefaultInstance() : tags_;
+      }
+      /**
+       * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+       */
+      public com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptorOrBuilder getTagsOrBuilder() {
+        return getTags();
+      }
+
+      public static final int MODEL_ENVIRONMENT_FIELD_NUMBER = 10;
+      private com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor modelEnvironment_;
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+       * @return Whether the modelEnvironment field is set.
+       */
+      public boolean hasModelEnvironment() {
+        return modelEnvironment_ != null;
+      }
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+       * @return The modelEnvironment.
+       */
+      public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getModelEnvironment() {
+        return modelEnvironment_ == null ? com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : modelEnvironment_;
+      }
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+       */
+      public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getModelEnvironmentOrBuilder() {
+        return getModelEnvironment();
+      }
+
+      public static final int MODEL_VERSION_FIELD_NUMBER = 11;
+      private com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor modelVersion_;
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+       * @return Whether the modelVersion field is set.
+       */
+      public boolean hasModelVersion() {
+        return modelVersion_ != null;
+      }
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+       * @return The modelVersion.
+       */
+      public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getModelVersion() {
+        return modelVersion_ == null ? com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : modelVersion_;
+      }
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+       */
+      public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getModelVersionOrBuilder() {
+        return getModelVersion();
+      }
+
+      public static final int BATCH_ID_FIELD_NUMBER = 12;
+      private com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor batchId_;
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+       * @return Whether the batchId field is set.
+       */
+      public boolean hasBatchId() {
+        return batchId_ != null;
+      }
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+       * @return The batchId.
+       */
+      public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getBatchId() {
+        return batchId_ == null ? com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : batchId_;
+      }
+      /**
+       * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+       */
+      public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getBatchIdOrBuilder() {
+        return getBatchId();
+      }
+
       private byte memoizedIsInitialized = -1;
       @java.lang.Override
       public final boolean isInitialized() {
@@ -22861,6 +25074,18 @@ public final class Public {
         }
         if (shapValues_ != null) {
           output.writeMessage(8, getShapValues());
+        }
+        if (tags_ != null) {
+          output.writeMessage(9, getTags());
+        }
+        if (modelEnvironment_ != null) {
+          output.writeMessage(10, getModelEnvironment());
+        }
+        if (modelVersion_ != null) {
+          output.writeMessage(11, getModelVersion());
+        }
+        if (batchId_ != null) {
+          output.writeMessage(12, getBatchId());
         }
         unknownFields.writeTo(output);
       }
@@ -22902,6 +25127,22 @@ public final class Public {
         if (shapValues_ != null) {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(8, getShapValues());
+        }
+        if (tags_ != null) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(9, getTags());
+        }
+        if (modelEnvironment_ != null) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(10, getModelEnvironment());
+        }
+        if (modelVersion_ != null) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(11, getModelVersion());
+        }
+        if (batchId_ != null) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(12, getBatchId());
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -22958,6 +25199,26 @@ public final class Public {
           if (!getShapValues()
               .equals(other.getShapValues())) return false;
         }
+        if (hasTags() != other.hasTags()) return false;
+        if (hasTags()) {
+          if (!getTags()
+              .equals(other.getTags())) return false;
+        }
+        if (hasModelEnvironment() != other.hasModelEnvironment()) return false;
+        if (hasModelEnvironment()) {
+          if (!getModelEnvironment()
+              .equals(other.getModelEnvironment())) return false;
+        }
+        if (hasModelVersion() != other.hasModelVersion()) return false;
+        if (hasModelVersion()) {
+          if (!getModelVersion()
+              .equals(other.getModelVersion())) return false;
+        }
+        if (hasBatchId() != other.hasBatchId()) return false;
+        if (hasBatchId()) {
+          if (!getBatchId()
+              .equals(other.getBatchId())) return false;
+        }
         if (!unknownFields.equals(other.unknownFields)) return false;
         return true;
       }
@@ -23000,6 +25261,22 @@ public final class Public {
         if (hasShapValues()) {
           hash = (37 * hash) + SHAP_VALUES_FIELD_NUMBER;
           hash = (53 * hash) + getShapValues().hashCode();
+        }
+        if (hasTags()) {
+          hash = (37 * hash) + TAGS_FIELD_NUMBER;
+          hash = (53 * hash) + getTags().hashCode();
+        }
+        if (hasModelEnvironment()) {
+          hash = (37 * hash) + MODEL_ENVIRONMENT_FIELD_NUMBER;
+          hash = (53 * hash) + getModelEnvironment().hashCode();
+        }
+        if (hasModelVersion()) {
+          hash = (37 * hash) + MODEL_VERSION_FIELD_NUMBER;
+          hash = (53 * hash) + getModelVersion().hashCode();
+        }
+        if (hasBatchId()) {
+          hash = (37 * hash) + BATCH_ID_FIELD_NUMBER;
+          hash = (53 * hash) + getBatchId().hashCode();
         }
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
@@ -23098,8 +25375,8 @@ public final class Public {
       }
       /**
        * <pre>
-       * GeneriSchema allows users to specify field descriptors within a generic and potentially nested data object (e.g. JSON object) 
-       * to flexibly define a custom schema for their model data. 
+       * GenericSchema allows users to specify field descriptors within a generic and potentially nested data object (e.g. JSON object)
+       * to flexibly define a custom schema for their model data.
        * </pre>
        *
        * Protobuf type {@code public.Schema.GenericSchema}
@@ -23187,6 +25464,30 @@ public final class Public {
             shapValues_ = null;
             shapValuesBuilder_ = null;
           }
+          if (tagsBuilder_ == null) {
+            tags_ = null;
+          } else {
+            tags_ = null;
+            tagsBuilder_ = null;
+          }
+          if (modelEnvironmentBuilder_ == null) {
+            modelEnvironment_ = null;
+          } else {
+            modelEnvironment_ = null;
+            modelEnvironmentBuilder_ = null;
+          }
+          if (modelVersionBuilder_ == null) {
+            modelVersion_ = null;
+          } else {
+            modelVersion_ = null;
+            modelVersionBuilder_ = null;
+          }
+          if (batchIdBuilder_ == null) {
+            batchId_ = null;
+          } else {
+            batchId_ = null;
+            batchIdBuilder_ = null;
+          }
           return this;
         }
 
@@ -23252,6 +25553,26 @@ public final class Public {
             result.shapValues_ = shapValues_;
           } else {
             result.shapValues_ = shapValuesBuilder_.build();
+          }
+          if (tagsBuilder_ == null) {
+            result.tags_ = tags_;
+          } else {
+            result.tags_ = tagsBuilder_.build();
+          }
+          if (modelEnvironmentBuilder_ == null) {
+            result.modelEnvironment_ = modelEnvironment_;
+          } else {
+            result.modelEnvironment_ = modelEnvironmentBuilder_.build();
+          }
+          if (modelVersionBuilder_ == null) {
+            result.modelVersion_ = modelVersion_;
+          } else {
+            result.modelVersion_ = modelVersionBuilder_.build();
+          }
+          if (batchIdBuilder_ == null) {
+            result.batchId_ = batchId_;
+          } else {
+            result.batchId_ = batchIdBuilder_.build();
           }
           onBuilt();
           return result;
@@ -23324,6 +25645,18 @@ public final class Public {
           }
           if (other.hasShapValues()) {
             mergeShapValues(other.getShapValues());
+          }
+          if (other.hasTags()) {
+            mergeTags(other.getTags());
+          }
+          if (other.hasModelEnvironment()) {
+            mergeModelEnvironment(other.getModelEnvironment());
+          }
+          if (other.hasModelVersion()) {
+            mergeModelVersion(other.getModelVersion());
+          }
+          if (other.hasBatchId()) {
+            mergeBatchId(other.getBatchId());
           }
           this.mergeUnknownFields(other.unknownFields);
           onChanged();
@@ -24340,6 +26673,482 @@ public final class Public {
             shapValues_ = null;
           }
           return shapValuesBuilder_;
+        }
+
+        private com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor tags_;
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptorOrBuilder> tagsBuilder_;
+        /**
+         * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+         * @return Whether the tags field is set.
+         */
+        public boolean hasTags() {
+          return tagsBuilder_ != null || tags_ != null;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+         * @return The tags.
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor getTags() {
+          if (tagsBuilder_ == null) {
+            return tags_ == null ? com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor.getDefaultInstance() : tags_;
+          } else {
+            return tagsBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+         */
+        public Builder setTags(com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor value) {
+          if (tagsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            tags_ = value;
+            onChanged();
+          } else {
+            tagsBuilder_.setMessage(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+         */
+        public Builder setTags(
+            com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor.Builder builderForValue) {
+          if (tagsBuilder_ == null) {
+            tags_ = builderForValue.build();
+            onChanged();
+          } else {
+            tagsBuilder_.setMessage(builderForValue.build());
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+         */
+        public Builder mergeTags(com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor value) {
+          if (tagsBuilder_ == null) {
+            if (tags_ != null) {
+              tags_ =
+                com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor.newBuilder(tags_).mergeFrom(value).buildPartial();
+            } else {
+              tags_ = value;
+            }
+            onChanged();
+          } else {
+            tagsBuilder_.mergeFrom(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+         */
+        public Builder clearTags() {
+          if (tagsBuilder_ == null) {
+            tags_ = null;
+            onChanged();
+          } else {
+            tags_ = null;
+            tagsBuilder_ = null;
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor.Builder getTagsBuilder() {
+          
+          onChanged();
+          return getTagsFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptorOrBuilder getTagsOrBuilder() {
+          if (tagsBuilder_ != null) {
+            return tagsBuilder_.getMessageOrBuilder();
+          } else {
+            return tags_ == null ?
+                com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor.getDefaultInstance() : tags_;
+          }
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.GroupFieldDescriptor tags = 9;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptorOrBuilder> 
+            getTagsFieldBuilder() {
+          if (tagsBuilder_ == null) {
+            tagsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.GroupFieldDescriptorOrBuilder>(
+                    getTags(),
+                    getParentForChildren(),
+                    isClean());
+            tags_ = null;
+          }
+          return tagsBuilder_;
+        }
+
+        private com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor modelEnvironment_;
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder> modelEnvironmentBuilder_;
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+         * @return Whether the modelEnvironment field is set.
+         */
+        public boolean hasModelEnvironment() {
+          return modelEnvironmentBuilder_ != null || modelEnvironment_ != null;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+         * @return The modelEnvironment.
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getModelEnvironment() {
+          if (modelEnvironmentBuilder_ == null) {
+            return modelEnvironment_ == null ? com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : modelEnvironment_;
+          } else {
+            return modelEnvironmentBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+         */
+        public Builder setModelEnvironment(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor value) {
+          if (modelEnvironmentBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            modelEnvironment_ = value;
+            onChanged();
+          } else {
+            modelEnvironmentBuilder_.setMessage(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+         */
+        public Builder setModelEnvironment(
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder builderForValue) {
+          if (modelEnvironmentBuilder_ == null) {
+            modelEnvironment_ = builderForValue.build();
+            onChanged();
+          } else {
+            modelEnvironmentBuilder_.setMessage(builderForValue.build());
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+         */
+        public Builder mergeModelEnvironment(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor value) {
+          if (modelEnvironmentBuilder_ == null) {
+            if (modelEnvironment_ != null) {
+              modelEnvironment_ =
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.newBuilder(modelEnvironment_).mergeFrom(value).buildPartial();
+            } else {
+              modelEnvironment_ = value;
+            }
+            onChanged();
+          } else {
+            modelEnvironmentBuilder_.mergeFrom(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+         */
+        public Builder clearModelEnvironment() {
+          if (modelEnvironmentBuilder_ == null) {
+            modelEnvironment_ = null;
+            onChanged();
+          } else {
+            modelEnvironment_ = null;
+            modelEnvironmentBuilder_ = null;
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder getModelEnvironmentBuilder() {
+          
+          onChanged();
+          return getModelEnvironmentFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getModelEnvironmentOrBuilder() {
+          if (modelEnvironmentBuilder_ != null) {
+            return modelEnvironmentBuilder_.getMessageOrBuilder();
+          } else {
+            return modelEnvironment_ == null ?
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : modelEnvironment_;
+          }
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_environment = 10;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder> 
+            getModelEnvironmentFieldBuilder() {
+          if (modelEnvironmentBuilder_ == null) {
+            modelEnvironmentBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder>(
+                    getModelEnvironment(),
+                    getParentForChildren(),
+                    isClean());
+            modelEnvironment_ = null;
+          }
+          return modelEnvironmentBuilder_;
+        }
+
+        private com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor modelVersion_;
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder> modelVersionBuilder_;
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+         * @return Whether the modelVersion field is set.
+         */
+        public boolean hasModelVersion() {
+          return modelVersionBuilder_ != null || modelVersion_ != null;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+         * @return The modelVersion.
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getModelVersion() {
+          if (modelVersionBuilder_ == null) {
+            return modelVersion_ == null ? com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : modelVersion_;
+          } else {
+            return modelVersionBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+         */
+        public Builder setModelVersion(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor value) {
+          if (modelVersionBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            modelVersion_ = value;
+            onChanged();
+          } else {
+            modelVersionBuilder_.setMessage(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+         */
+        public Builder setModelVersion(
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder builderForValue) {
+          if (modelVersionBuilder_ == null) {
+            modelVersion_ = builderForValue.build();
+            onChanged();
+          } else {
+            modelVersionBuilder_.setMessage(builderForValue.build());
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+         */
+        public Builder mergeModelVersion(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor value) {
+          if (modelVersionBuilder_ == null) {
+            if (modelVersion_ != null) {
+              modelVersion_ =
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.newBuilder(modelVersion_).mergeFrom(value).buildPartial();
+            } else {
+              modelVersion_ = value;
+            }
+            onChanged();
+          } else {
+            modelVersionBuilder_.mergeFrom(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+         */
+        public Builder clearModelVersion() {
+          if (modelVersionBuilder_ == null) {
+            modelVersion_ = null;
+            onChanged();
+          } else {
+            modelVersion_ = null;
+            modelVersionBuilder_ = null;
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder getModelVersionBuilder() {
+          
+          onChanged();
+          return getModelVersionFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getModelVersionOrBuilder() {
+          if (modelVersionBuilder_ != null) {
+            return modelVersionBuilder_.getMessageOrBuilder();
+          } else {
+            return modelVersion_ == null ?
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : modelVersion_;
+          }
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor model_version = 11;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder> 
+            getModelVersionFieldBuilder() {
+          if (modelVersionBuilder_ == null) {
+            modelVersionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder>(
+                    getModelVersion(),
+                    getParentForChildren(),
+                    isClean());
+            modelVersion_ = null;
+          }
+          return modelVersionBuilder_;
+        }
+
+        private com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor batchId_;
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder> batchIdBuilder_;
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+         * @return Whether the batchId field is set.
+         */
+        public boolean hasBatchId() {
+          return batchIdBuilder_ != null || batchId_ != null;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+         * @return The batchId.
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getBatchId() {
+          if (batchIdBuilder_ == null) {
+            return batchId_ == null ? com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : batchId_;
+          } else {
+            return batchIdBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+         */
+        public Builder setBatchId(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor value) {
+          if (batchIdBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            batchId_ = value;
+            onChanged();
+          } else {
+            batchIdBuilder_.setMessage(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+         */
+        public Builder setBatchId(
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder builderForValue) {
+          if (batchIdBuilder_ == null) {
+            batchId_ = builderForValue.build();
+            onChanged();
+          } else {
+            batchIdBuilder_.setMessage(builderForValue.build());
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+         */
+        public Builder mergeBatchId(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor value) {
+          if (batchIdBuilder_ == null) {
+            if (batchId_ != null) {
+              batchId_ =
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.newBuilder(batchId_).mergeFrom(value).buildPartial();
+            } else {
+              batchId_ = value;
+            }
+            onChanged();
+          } else {
+            batchIdBuilder_.mergeFrom(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+         */
+        public Builder clearBatchId() {
+          if (batchIdBuilder_ == null) {
+            batchId_ = null;
+            onChanged();
+          } else {
+            batchId_ = null;
+            batchIdBuilder_ = null;
+          }
+
+          return this;
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder getBatchIdBuilder() {
+          
+          onChanged();
+          return getBatchIdFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getBatchIdOrBuilder() {
+          if (batchIdBuilder_ != null) {
+            return batchIdBuilder_.getMessageOrBuilder();
+          } else {
+            return batchId_ == null ?
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : batchId_;
+          }
+        }
+        /**
+         * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder> 
+            getBatchIdFieldBuilder() {
+          if (batchIdBuilder_ == null) {
+            batchIdBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder>(
+                    getBatchId(),
+                    getParentForChildren(),
+                    isClean());
+            batchId_ = null;
+          }
+          return batchIdBuilder_;
         }
         @java.lang.Override
         public final Builder setUnknownFields(
@@ -25823,6 +28632,11 @@ public final class Public {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_public_MultiValue_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_Embedding_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_Embedding_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_public_Actual_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -25903,11 +28717,12 @@ public final class Public {
     java.lang.String[] descriptorData = {
       "\n%receiver/protocol/public/public.proto\022" +
       "\006public\032\037google/protobuf/timestamp.proto" +
-      "\"\224\001\n\nBulkRecord\022\030\n\020organization_key\030\001 \001(" +
-      "\t\022\020\n\010model_id\030\002 \001(\t\022\025\n\rmodel_version\030\003 \001" +
-      "(\t\022\037\n\007records\030\005 \003(\0132\016.public.Record\022\021\n\ts" +
-      "pace_key\030\006 \001(\tJ\004\010\004\020\005R\ttimestamp\"\263\002\n\006Reco" +
-      "rd\022\030\n\020organization_key\030\001 \001(\t\022\020\n\010model_id" +
+      "\032\036google/protobuf/wrappers.proto\"\230\001\n\nBul" +
+      "kRecord\022\034\n\020organization_key\030\001 \001(\tB\002\030\001\022\020\n" +
+      "\010model_id\030\002 \001(\t\022\025\n\rmodel_version\030\003 \001(\t\022\037" +
+      "\n\007records\030\005 \003(\0132\016.public.Record\022\021\n\tspace" +
+      "_key\030\006 \001(\tJ\004\010\004\020\005R\ttimestamp\"\267\002\n\006Record\022\034" +
+      "\n\020organization_key\030\001 \001(\tB\002\030\001\022\020\n\010model_id" +
       "\030\002 \001(\t\022\025\n\rprediction_id\030\003 \001(\t\022&\n\npredict" +
       "ion\030\010 \001(\0132\022.public.Prediction\022\036\n\006actual\030" +
       "\t \001(\0132\016.public.Actual\0227\n\023feature_importa" +
@@ -25922,94 +28737,109 @@ public final class Public {
       "ationRecord\022\020\n\010batch_id\030\001 \001(\t\022\036\n\006record\030" +
       "\002 \001(\0132\016.public.Record\0320\n\016TrainingRecord\022" +
       "\036\n\006record\030\001 \001(\0132\016.public.RecordB\r\n\013recor" +
-      "d_type\"\217\002\n\020ScoreCategorical\022\027\n\013categoric" +
+      "d_type\"\251\002\n\020ScoreCategorical\022\027\n\013categoric" +
       "al\030\001 \001(\tB\002\030\001\022\021\n\005score\030\002 \001(\001B\002\030\001\0225\n\010categ" +
       "ory\030\003 \001(\0132!.public.ScoreCategorical.Cate" +
       "goryH\000\022@\n\016score_category\030\004 \001(\0132&.public." +
       "ScoreCategorical.ScoreCategoryH\000\032\034\n\010Cate" +
-      "gory\022\020\n\010category\030\001 \001(\t\0320\n\rScoreCategory\022" +
-      "\020\n\010category\030\001 \001(\t\022\r\n\005score\030\002 \001(\001B\006\n\004type" +
-      "\"\202\001\n\005Label\022\020\n\006binary\030\001 \001(\010H\000\022\025\n\013categori" +
-      "cal\030\002 \001(\tH\000\022\021\n\007numeric\030\003 \001(\001H\000\0225\n\021score_" +
-      "categorical\030\004 \001(\0132\030.public.ScoreCategori" +
-      "calH\000B\006\n\004data\"\314\002\n\nPrediction\022-\n\ttimestam" +
-      "p\030\001 \001(\0132\032.google.protobuf.Timestamp\022\025\n\rm" +
-      "odel_version\030\002 \001(\t\022\034\n\005label\030\003 \001(\0132\r.publ" +
-      "ic.Label\0222\n\010features\030\004 \003(\0132 .public.Pred" +
-      "iction.FeaturesEntry\022*\n\004tags\030\005 \003(\0132\034.pub" +
-      "lic.Prediction.TagsEntry\032>\n\rFeaturesEntr" +
-      "y\022\013\n\003key\030\001 \001(\t\022\034\n\005value\030\002 \001(\0132\r.public.V" +
-      "alue:\0028\001\032:\n\tTagsEntry\022\013\n\003key\030\001 \001(\t\022\034\n\005va" +
-      "lue\030\002 \001(\0132\r.public.Value:\0028\001\"m\n\005Value\022\020\n" +
-      "\006string\030\001 \001(\tH\000\022\r\n\003int\030\002 \001(\003H\000\022\020\n\006double" +
-      "\030\003 \001(\001H\000\022)\n\013multi_value\030\004 \001(\0132\022.public.M" +
-      "ultiValueH\000B\006\n\004data\"\034\n\nMultiValue\022\016\n\006val" +
-      "ues\030\001 \003(\t\"U\n\006Actual\022-\n\ttimestamp\030\001 \001(\0132\032" +
-      ".google.protobuf.Timestamp\022\034\n\005label\030\002 \001(" +
-      "\0132\r.public.Label\"\346\001\n\022FeatureImportances\022" +
-      "-\n\ttimestamp\030\001 \001(\0132\032.google.protobuf.Tim" +
-      "estamp\022\025\n\rmodel_version\030\002 \001(\t\022O\n\023feature" +
-      "_importances\030\003 \003(\01322.public.FeatureImpor" +
-      "tances.FeatureImportancesEntry\0329\n\027Featur" +
-      "eImportancesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030" +
-      "\002 \001(\001:\0028\001\"]\n\023PredictionAndActual\022&\n\npred" +
-      "iction\030\001 \001(\0132\022.public.Prediction\022\036\n\006actu" +
-      "al\030\002 \001(\0132\016.public.Actual\"\213\001\n\nFileHeader\022" +
-      "3\n\013environment\030\001 \001(\0162\036.public.FileHeader" +
-      ".Environment\"H\n\013Environment\022\013\n\007UNKNOWN\020\000" +
-      "\022\014\n\010TRAINING\020\001\022\016\n\nVALIDATION\020\002\022\016\n\nPRODUC" +
-      "TION\020\003\"\363\r\n\006Schema\022+\n\tconstants\030\001 \001(\0132\030.p" +
-      "ublic.Schema.Constants\022<\n\021arize_conclusi" +
-      "ons\030\002 \001(\0132\037.public.Schema.ArizeConclusio" +
-      "nsH\000\022>\n\022arize_explanations\030\003 \001(\0132 .publi" +
-      "c.Schema.ArizeExplanationsH\000\0222\n\014arrow_sc" +
-      "hema\030\004 \001(\0132\032.public.Schema.ArrowSchemaH\000" +
-      "\0226\n\016generic_schema\030\005 \001(\0132\034.public.Schema" +
-      ".GenericSchemaH\000\032\245\001\n\tConstants\022\020\n\010model_" +
-      "id\030\001 \001(\t\022\025\n\rmodel_version\030\002 \001(\t\022\020\n\010batch" +
-      "_id\030\003 \001(\t\022/\n\013environment\030\004 \001(\0162\032.public." +
-      "Schema.Environment\022,\n\nmodel_type\030\005 \001(\0162\030" +
-      ".public.Schema.ModelType\032\022\n\020ArizeConclus" +
-      "ions\032\023\n\021ArizeExplanations\032\224\003\n\013ArrowSchem" +
-      "a\022!\n\031prediction_id_column_name\030\001 \001(\t\022\034\n\024" +
-      "feature_column_names\030\002 \003(\t\022\035\n\025timestamp_" +
-      "column_name\030\003 \001(\t\022$\n\034prediction_label_co" +
-      "lumn_name\030\004 \001(\t\022$\n\034prediction_score_colu" +
-      "mn_name\030\005 \001(\t\022 \n\030actual_label_column_nam" +
-      "e\030\006 \001(\t\022 \n\030actual_score_column_name\030\007 \001(" +
-      "\t\022W\n\030shap_values_column_names\030\010 \003(\01325.pu" +
-      "blic.Schema.ArrowSchema.ShapValuesColumn" +
-      "NamesEntry\032<\n\032ShapValuesColumnNamesEntry" +
-      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032\244\005\n\rGen" +
-      "ericSchema\022C\n\rprediction_id\030\001 \001(\0132,.publ" +
+      "gory\022\020\n\010category\030\001 \001(\t\032J\n\rScoreCategory\022" +
+      "\020\n\010category\030\001 \001(\t\022\r\n\005score\030\002 \001(\001\022\030\n\020nume" +
+      "ric_sequence\030\003 \003(\001B\006\n\004type\"\202\001\n\005Label\022\020\n\006" +
+      "binary\030\001 \001(\010H\000\022\025\n\013categorical\030\002 \001(\tH\000\022\021\n" +
+      "\007numeric\030\003 \001(\001H\000\0225\n\021score_categorical\030\004 " +
+      "\001(\0132\030.public.ScoreCategoricalH\000B\006\n\004data\"" +
+      "\314\002\n\nPrediction\022-\n\ttimestamp\030\001 \001(\0132\032.goog" +
+      "le.protobuf.Timestamp\022\025\n\rmodel_version\030\002" +
+      " \001(\t\022\034\n\005label\030\003 \001(\0132\r.public.Label\0222\n\010fe" +
+      "atures\030\004 \003(\0132 .public.Prediction.Feature" +
+      "sEntry\022*\n\004tags\030\005 \003(\0132\034.public.Prediction" +
+      ".TagsEntry\032>\n\rFeaturesEntry\022\013\n\003key\030\001 \001(\t" +
+      "\022\034\n\005value\030\002 \001(\0132\r.public.Value:\0028\001\032:\n\tTa" +
+      "gsEntry\022\013\n\003key\030\001 \001(\t\022\034\n\005value\030\002 \001(\0132\r.pu" +
+      "blic.Value:\0028\001\"\225\001\n\005Value\022\020\n\006string\030\001 \001(\t" +
+      "H\000\022\r\n\003int\030\002 \001(\003H\000\022\020\n\006double\030\003 \001(\001H\000\022)\n\013m" +
+      "ulti_value\030\004 \001(\0132\022.public.MultiValueH\000\022&" +
+      "\n\tembedding\030\005 \001(\0132\021.public.EmbeddingH\000B\006" +
+      "\n\004data\"\034\n\nMultiValue\022\016\n\006values\030\001 \003(\t\"\177\n\t" +
+      "Embedding\022\022\n\ndimensions\030\001 \003(\001\022*\n\004data\030\002 " +
+      "\001(\0132\034.google.protobuf.StringValue\0222\n\014lin" +
+      "k_to_data\030\003 \001(\0132\034.google.protobuf.String" +
+      "Value\"U\n\006Actual\022-\n\ttimestamp\030\001 \001(\0132\032.goo" +
+      "gle.protobuf.Timestamp\022\034\n\005label\030\002 \001(\0132\r." +
+      "public.Label\"\346\001\n\022FeatureImportances\022-\n\tt" +
+      "imestamp\030\001 \001(\0132\032.google.protobuf.Timesta" +
+      "mp\022\025\n\rmodel_version\030\002 \001(\t\022O\n\023feature_imp" +
+      "ortances\030\003 \003(\01322.public.FeatureImportanc" +
+      "es.FeatureImportancesEntry\0329\n\027FeatureImp" +
+      "ortancesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(" +
+      "\001:\0028\001\"]\n\023PredictionAndActual\022&\n\npredicti" +
+      "on\030\001 \001(\0132\022.public.Prediction\022\036\n\006actual\030\002" +
+      " \001(\0132\016.public.Actual\"\213\001\n\nFileHeader\0223\n\013e" +
+      "nvironment\030\001 \001(\0162\036.public.FileHeader.Env" +
+      "ironment\"H\n\013Environment\022\013\n\007UNKNOWN\020\000\022\014\n\010" +
+      "TRAINING\020\001\022\016\n\nVALIDATION\020\002\022\016\n\nPRODUCTION" +
+      "\020\003\"\311\020\n\006Schema\022+\n\tconstants\030\001 \001(\0132\030.publi" +
+      "c.Schema.Constants\022<\n\021arize_conclusions\030" +
+      "\002 \001(\0132\037.public.Schema.ArizeConclusionsH\000" +
+      "\022>\n\022arize_explanations\030\003 \001(\0132 .public.Sc" +
+      "hema.ArizeExplanationsH\000\0222\n\014arrow_schema" +
+      "\030\004 \001(\0132\032.public.Schema.ArrowSchemaH\000\0226\n\016" +
+      "generic_schema\030\005 \001(\0132\034.public.Schema.Gen" +
+      "ericSchemaH\000\032\245\001\n\tConstants\022\020\n\010model_id\030\001" +
+      " \001(\t\022\025\n\rmodel_version\030\002 \001(\t\022\020\n\010batch_id\030" +
+      "\003 \001(\t\022/\n\013environment\030\004 \001(\0162\032.public.Sche" +
+      "ma.Environment\022,\n\nmodel_type\030\005 \001(\0162\030.pub" +
+      "lic.Schema.ModelType\032\022\n\020ArizeConclusions" +
+      "\032\023\n\021ArizeExplanations\032\333\003\n\013ArrowSchema\022!\n" +
+      "\031prediction_id_column_name\030\001 \001(\t\022\034\n\024feat" +
+      "ure_column_names\030\002 \003(\t\022\035\n\025timestamp_colu" +
+      "mn_name\030\003 \001(\t\022$\n\034prediction_label_column" +
+      "_name\030\004 \001(\t\022$\n\034prediction_score_column_n" +
+      "ame\030\005 \001(\t\022 \n\030actual_label_column_name\030\006 " +
+      "\001(\t\022 \n\030actual_score_column_name\030\007 \001(\t\022W\n" +
+      "\030shap_values_column_names\030\010 \003(\01325.public" +
+      ".Schema.ArrowSchema.ShapValuesColumnName" +
+      "sEntry\022\030\n\020tag_column_names\030\t \003(\t\022+\n#actu" +
+      "al_numeric_sequence_column_name\030\n \001(\t\032<\n" +
+      "\032ShapValuesColumnNamesEntry\022\013\n\003key\030\001 \001(\t" +
+      "\022\r\n\005value\030\002 \001(\t:\0028\001\032\263\007\n\rGenericSchema\022C\n" +
+      "\rprediction_id\030\001 \001(\0132,.public.Schema.Gen" +
+      "ericSchema.FieldDescriptor\022C\n\010features\030\002" +
+      " \001(\01321.public.Schema.GenericSchema.Group" +
+      "FieldDescriptor\022?\n\ttimestamp\030\003 \001(\0132,.pub" +
+      "lic.Schema.GenericSchema.FieldDescriptor" +
+      "\022F\n\020prediction_label\030\004 \001(\0132,.public.Sche" +
+      "ma.GenericSchema.FieldDescriptor\022F\n\020pred" +
+      "iction_score\030\005 \001(\0132,.public.Schema.Gener" +
+      "icSchema.FieldDescriptor\022B\n\014actual_label" +
+      "\030\006 \001(\0132,.public.Schema.GenericSchema.Fie" +
+      "ldDescriptor\022B\n\014actual_score\030\007 \001(\0132,.pub" +
+      "lic.Schema.GenericSchema.FieldDescriptor" +
+      "\022F\n\013shap_values\030\010 \001(\01321.public.Schema.Ge" +
+      "nericSchema.GroupFieldDescriptor\022?\n\004tags" +
+      "\030\t \001(\01321.public.Schema.GenericSchema.Gro" +
+      "upFieldDescriptor\022G\n\021model_environment\030\n" +
+      " \001(\0132,.public.Schema.GenericSchema.Field" +
+      "Descriptor\022C\n\rmodel_version\030\013 \001(\0132,.publ" +
       "ic.Schema.GenericSchema.FieldDescriptor\022" +
-      "C\n\010features\030\002 \001(\01321.public.Schema.Generi" +
-      "cSchema.GroupFieldDescriptor\022?\n\ttimestam" +
-      "p\030\003 \001(\0132,.public.Schema.GenericSchema.Fi" +
-      "eldDescriptor\022F\n\020prediction_label\030\004 \001(\0132" +
-      ",.public.Schema.GenericSchema.FieldDescr" +
-      "iptor\022F\n\020prediction_score\030\005 \001(\0132,.public" +
-      ".Schema.GenericSchema.FieldDescriptor\022B\n" +
-      "\014actual_label\030\006 \001(\0132,.public.Schema.Gene" +
-      "ricSchema.FieldDescriptor\022B\n\014actual_scor" +
-      "e\030\007 \001(\0132,.public.Schema.GenericSchema.Fi" +
-      "eldDescriptor\022F\n\013shap_values\030\010 \001(\01321.pub" +
-      "lic.Schema.GenericSchema.GroupFieldDescr" +
-      "iptor\032%\n\017FieldDescriptor\022\022\n\nproperties\030\001" +
-      " \003(\t\032A\n\024GroupFieldDescriptor\022\022\n\nproperti" +
-      "es\030\001 \003(\t\022\025\n\rcapture_group\030\002 \001(\t\"T\n\013Envir" +
-      "onment\022\027\n\023UNKNOWN_ENVIRONMENT\020\000\022\014\n\010TRAIN" +
-      "ING\020\001\022\016\n\nVALIDATION\020\002\022\016\n\nPRODUCTION\020\003\"c\n" +
-      "\tModelType\022\025\n\021UNKNOWN_MODELTYPE\020\000\022\n\n\006BIN" +
-      "ARY\020\001\022\013\n\007NUMERIC\020\002\022\017\n\013CATEGORICAL\020\003\022\025\n\021S" +
-      "CORE_CATEGORICAL\020\004B\010\n\006schemaBO\n\022com.ariz" +
-      "e.protocolZ9github.com/Arize-ai/arize/go" +
-      "/pkg/receiver/protocol/publicb\006proto3"
+      ">\n\010batch_id\030\014 \001(\0132,.public.Schema.Generi" +
+      "cSchema.FieldDescriptor\032%\n\017FieldDescript" +
+      "or\022\022\n\nproperties\030\001 \003(\t\032A\n\024GroupFieldDesc" +
+      "riptor\022\022\n\nproperties\030\001 \003(\t\022\025\n\rcapture_gr" +
+      "oup\030\002 \001(\t\"T\n\013Environment\022\027\n\023UNKNOWN_ENVI" +
+      "RONMENT\020\000\022\014\n\010TRAINING\020\001\022\016\n\nVALIDATION\020\002\022" +
+      "\016\n\nPRODUCTION\020\003\"c\n\tModelType\022\025\n\021UNKNOWN_" +
+      "MODELTYPE\020\000\022\n\n\006BINARY\020\001\022\013\n\007NUMERIC\020\002\022\017\n\013" +
+      "CATEGORICAL\020\003\022\025\n\021SCORE_CATEGORICAL\020\004B\010\n\006" +
+      "schemaBO\n\022com.arize.protocolZ9github.com" +
+      "/Arize-ai/arize/go/pkg/receiver/protocol" +
+      "/publicb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.TimestampProto.getDescriptor(),
+          com.google.protobuf.WrappersProto.getDescriptor(),
         });
     internal_static_public_BulkRecord_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -26058,7 +28888,7 @@ public final class Public {
     internal_static_public_ScoreCategorical_ScoreCategory_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_ScoreCategorical_ScoreCategory_descriptor,
-        new java.lang.String[] { "Category", "Score", });
+        new java.lang.String[] { "Category", "Score", "NumericSequence", });
     internal_static_public_Label_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_public_Label_fieldAccessorTable = new
@@ -26088,21 +28918,27 @@ public final class Public {
     internal_static_public_Value_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Value_descriptor,
-        new java.lang.String[] { "String", "Int", "Double", "MultiValue", "Data", });
+        new java.lang.String[] { "String", "Int", "Double", "MultiValue", "Embedding", "Data", });
     internal_static_public_MultiValue_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_public_MultiValue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_MultiValue_descriptor,
         new java.lang.String[] { "Values", });
-    internal_static_public_Actual_descriptor =
+    internal_static_public_Embedding_descriptor =
       getDescriptor().getMessageTypes().get(8);
+    internal_static_public_Embedding_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_Embedding_descriptor,
+        new java.lang.String[] { "Dimensions", "Data", "LinkToData", });
+    internal_static_public_Actual_descriptor =
+      getDescriptor().getMessageTypes().get(9);
     internal_static_public_Actual_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Actual_descriptor,
         new java.lang.String[] { "Timestamp", "Label", });
     internal_static_public_FeatureImportances_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_public_FeatureImportances_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_FeatureImportances_descriptor,
@@ -26114,19 +28950,19 @@ public final class Public {
         internal_static_public_FeatureImportances_FeatureImportancesEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_public_PredictionAndActual_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_public_PredictionAndActual_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_PredictionAndActual_descriptor,
         new java.lang.String[] { "Prediction", "Actual", });
     internal_static_public_FileHeader_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_public_FileHeader_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_FileHeader_descriptor,
         new java.lang.String[] { "Environment", });
     internal_static_public_Schema_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_public_Schema_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Schema_descriptor,
@@ -26154,7 +28990,7 @@ public final class Public {
     internal_static_public_Schema_ArrowSchema_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Schema_ArrowSchema_descriptor,
-        new java.lang.String[] { "PredictionIdColumnName", "FeatureColumnNames", "TimestampColumnName", "PredictionLabelColumnName", "PredictionScoreColumnName", "ActualLabelColumnName", "ActualScoreColumnName", "ShapValuesColumnNames", });
+        new java.lang.String[] { "PredictionIdColumnName", "FeatureColumnNames", "TimestampColumnName", "PredictionLabelColumnName", "PredictionScoreColumnName", "ActualLabelColumnName", "ActualScoreColumnName", "ShapValuesColumnNames", "TagColumnNames", "ActualNumericSequenceColumnName", });
     internal_static_public_Schema_ArrowSchema_ShapValuesColumnNamesEntry_descriptor =
       internal_static_public_Schema_ArrowSchema_descriptor.getNestedTypes().get(0);
     internal_static_public_Schema_ArrowSchema_ShapValuesColumnNamesEntry_fieldAccessorTable = new
@@ -26166,7 +29002,7 @@ public final class Public {
     internal_static_public_Schema_GenericSchema_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Schema_GenericSchema_descriptor,
-        new java.lang.String[] { "PredictionId", "Features", "Timestamp", "PredictionLabel", "PredictionScore", "ActualLabel", "ActualScore", "ShapValues", });
+        new java.lang.String[] { "PredictionId", "Features", "Timestamp", "PredictionLabel", "PredictionScore", "ActualLabel", "ActualScore", "ShapValues", "Tags", "ModelEnvironment", "ModelVersion", "BatchId", });
     internal_static_public_Schema_GenericSchema_FieldDescriptor_descriptor =
       internal_static_public_Schema_GenericSchema_descriptor.getNestedTypes().get(0);
     internal_static_public_Schema_GenericSchema_FieldDescriptor_fieldAccessorTable = new
@@ -26180,6 +29016,7 @@ public final class Public {
         internal_static_public_Schema_GenericSchema_GroupFieldDescriptor_descriptor,
         new java.lang.String[] { "Properties", "CaptureGroup", });
     com.google.protobuf.TimestampProto.getDescriptor();
+    com.google.protobuf.WrappersProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
