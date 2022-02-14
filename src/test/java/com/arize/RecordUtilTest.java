@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.arize.protocol.Public.ScoreCategorical;
 import com.arize.protocol.Public.Label;
 import com.arize.protocol.Public.MultiValue;
 import com.arize.protocol.Public.Value;
@@ -16,7 +17,7 @@ import org.junit.Test;
 
 public class RecordUtilTest {
 
-    protected Label binaryLabel, categoricalLabel, numericLabel;
+    protected Label binaryLabel, categoricalLabel, numericLabel, scoreCategoricalLabel;
     protected Map<String, Value> stringMap, intMap, doubleMap, longMap, multiMap, floatMap;
 
     @Before
@@ -24,6 +25,13 @@ public class RecordUtilTest {
         binaryLabel = Label.newBuilder().setBinary(true).build();
         categoricalLabel = Label.newBuilder().setCategorical("value").build();
         numericLabel = Label.newBuilder().setNumeric(20.20).build();
+
+        ScoreCategorical.ScoreCategory.Builder scb = ScoreCategorical.ScoreCategory.newBuilder();
+        scb.setCategory("apple");
+        scb.setScore(3.14);
+        scb.addAllNumericSequence(Arrays.asList(0.12, 0.23, 0.34));
+        scoreCategoricalLabel = Label.newBuilder()
+            .setScoreCategorical(ScoreCategorical.newBuilder().setScoreCategory(scb)).build();
 
         stringMap = new HashMap<>();
         intMap = new HashMap<>();
@@ -47,6 +55,8 @@ public class RecordUtilTest {
         assertEquals(binaryLabel, RecordUtil.convertLabel(true));
         assertEquals(categoricalLabel, RecordUtil.convertLabel("value"));
         assertEquals(numericLabel, RecordUtil.convertLabel(20.20));
+        assertEquals(scoreCategoricalLabel, RecordUtil
+            .convertLabel(new ArizeClient.ScoredCategorical("apple", 3.14, Arrays.asList(0.12, 0.23, 0.34))));
     }
 
     @Test

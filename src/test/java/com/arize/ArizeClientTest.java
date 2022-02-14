@@ -178,8 +178,8 @@ public class ArizeClientTest {
         Assert.assertEquals("modelId", rec.getModelId());
         Assert.assertEquals("predictionId", rec.getPredictionId());
         Assert.assertEquals("modelVersion", rec.getPrediction().getModelVersion());
-        Assert.assertEquals(20.20, rec.getPrediction().getLabel().getScoreCategorical().getScore(), 0.0);
-        Assert.assertEquals("category", rec.getPrediction().getLabel().getScoreCategorical().getCategorical());
+        Assert.assertEquals(20.20, rec.getPrediction().getLabel().getScoreCategorical().getScoreCategory().getScore(), 0.0);
+        Assert.assertEquals("category", rec.getPrediction().getLabel().getScoreCategorical().getScoreCategory().getCategory());
         Assert.assertEquals(12345, rec.getPrediction().getFeaturesOrDefault("int", Public.Value.getDefaultInstance()).getInt());
         Assert.assertEquals("string", rec.getPrediction().getFeaturesOrDefault("string", Public.Value.getDefaultInstance()).getString());
         Assert.assertEquals(20.20, rec.getPrediction().getFeaturesOrDefault("double", Public.Value.getDefaultInstance()).getDouble(), 0.0);
