@@ -8,8 +8,6 @@ import com.google.protobuf.Timestamp;
 import com.google.protobuf.util.JsonFormat;
 import com.google.protobuf.util.Timestamps;
 import com.sun.net.httpserver.Headers;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import org.junit.After;
 import org.junit.Assert;
@@ -18,7 +16,6 @@ import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
@@ -45,8 +42,8 @@ public class ArizeClientTest {
     protected Map<String, String> stringFeatures;
     protected Map<String, Double> doubleFeatures;
 
-    protected String predictionPayload = "{\"organization_key\": \"orgKey\", \"model_id\": \"modelId\", \"prediction_id\": \"predictionId\", \"prediction\": {\"model_version\": \"modelVersion\", \"label\": {\"numeric\": 20.2}, \"features\": {\"int\": {\"int\": \"12345\"}, \"string\": {\"string\": \"string\"}, \"double\": {\"double\": 20.2}}}}";
-    protected String actualPayload = "{\"organization_key\": \"orgKey\", \"model_id\": \"modelId\", \"prediction_id\": \"predictionId\", \"actual\": {\"label\": {\"numeric\": 20.2}}}";
+    protected String predictionPayload = "{\"space_key\": \"spaceKey\", \"model_id\": \"modelId\", \"prediction_id\": \"predictionId\", \"prediction\": {\"model_version\": \"modelVersion\", \"label\": {\"numeric\": 20.2}, \"features\": {\"int\": {\"int\": \"12345\"}, \"string\": {\"string\": \"string\"}, \"double\": {\"double\": 20.2}}}}";
+    protected String actualPayload = "{\"space_key\": \"spaceKey\", \"model_id\": \"modelId\", \"prediction_id\": \"predictionId\", \"actual\": {\"label\": {\"numeric\": 20.2}}}";
 
     private List<String> expectedIds;
     private List<Integer> expectedLabels;
@@ -62,7 +59,7 @@ public class ArizeClientTest {
         server = testServer(posts, bulkPosts, preProductionRecords, headers);
         server.start();
         String uri = "http://localhost:" + server.getAddress().getPort() + "/v1";
-        client = new ArizeClient("apiKey", "orgKey", uri);
+        client = new ArizeClient("apiKey", "spaceKey", uri);
         intFeatures = new HashMap<>();
         longFeatures = new HashMap<>();
         stringFeatures = new HashMap<>();
@@ -94,41 +91,6 @@ public class ArizeClientTest {
         server.stop(0);
     }
 
-    @Test
-    public void testLogPrediction() throws IOException, ExecutionException, InterruptedException {
-        Response response = client.logPrediction("modelId", "modelVersion", "predictionId", 20.20, intFeatures, doubleFeatures, stringFeatures);
-        try {
-            response.resolve(10, TimeUnit.SECONDS);
-        } catch (TimeoutException e) {
-            Assert.fail("timeout waiting for server");
-        }
-        Assert.assertEquals("apiKey", headers.get(0).get("Authorization").get(0));
-        Public.Record rec = posts.get(0);
-        Assert.assertEquals("orgKey", rec.getOrganizationKey());
-        Assert.assertEquals("modelId", rec.getModelId());
-        Assert.assertEquals("predictionId", rec.getPredictionId());
-        Assert.assertEquals("modelVersion", rec.getPrediction().getModelVersion());
-        Assert.assertEquals(20.20, rec.getPrediction().getLabel().getNumeric(), 0.0);
-        Assert.assertEquals(12345, rec.getPrediction().getFeaturesOrDefault("int", Public.Value.getDefaultInstance()).getInt());
-        Assert.assertEquals("string", rec.getPrediction().getFeaturesOrDefault("string", Public.Value.getDefaultInstance()).getString());
-        Assert.assertEquals(20.20, rec.getPrediction().getFeaturesOrDefault("double", Public.Value.getDefaultInstance()).getDouble(), 0.0);
-    }
-
-    @Test
-    public void testLogActual() throws IOException, ExecutionException, InterruptedException {
-        Response response = client.logActual("modelId", "predictionId", 20.20);
-        try {
-            response.resolve(10, TimeUnit.SECONDS);
-        } catch (TimeoutException e) {
-            Assert.fail("timeout waiting for server");
-        }
-        Assert.assertEquals("apiKey", headers.get(0).get("Authorization").get(0));
-        Public.Record rec = posts.get(0);
-        Assert.assertEquals("orgKey", rec.getOrganizationKey());
-        Assert.assertEquals("modelId", rec.getModelId());
-        Assert.assertEquals("predictionId", rec.getPredictionId());
-        Assert.assertEquals(20.20, rec.getActual().getLabel().getNumeric(), 0.0);
-    }
 
     @Test
     public void testLog() throws IOException, ExecutionException, InterruptedException {
@@ -144,7 +106,7 @@ public class ArizeClientTest {
         }
         Assert.assertEquals("apiKey", headers.get(0).get("Authorization").get(0));
         Public.Record rec = posts.get(0);
-        Assert.assertEquals("orgKey", rec.getOrganizationKey());
+        Assert.assertEquals("spaceKey", rec.getSpaceKey());
         Assert.assertEquals("modelId", rec.getModelId());
         Assert.assertEquals("predictionId", rec.getPredictionId());
         Assert.assertEquals("modelVersion", rec.getPrediction().getModelVersion());
@@ -153,7 +115,7 @@ public class ArizeClientTest {
         Assert.assertEquals("string", rec.getPrediction().getFeaturesOrDefault("string", Public.Value.getDefaultInstance()).getString());
         Assert.assertEquals(20.20, rec.getPrediction().getFeaturesOrDefault("double", Public.Value.getDefaultInstance()).getDouble(), 0.0);
 
-        Assert.assertEquals("orgKey", rec.getOrganizationKey());
+        Assert.assertEquals("spaceKey", rec.getSpaceKey());
         Assert.assertEquals("modelId", rec.getModelId());
         Assert.assertEquals("predictionId", rec.getPredictionId());
         Assert.assertEquals(20.21, rec.getActual().getLabel().getNumeric(), 0.0);
@@ -174,7 +136,7 @@ public class ArizeClientTest {
         }
         Assert.assertEquals("apiKey", headers.get(0).get("Authorization").get(0));
         Public.Record rec = posts.get(0);
-        Assert.assertEquals("orgKey", rec.getOrganizationKey());
+        Assert.assertEquals("spaceKey", rec.getSpaceKey());
         Assert.assertEquals("modelId", rec.getModelId());
         Assert.assertEquals("predictionId", rec.getPredictionId());
         Assert.assertEquals("modelVersion", rec.getPrediction().getModelVersion());
@@ -184,7 +146,7 @@ public class ArizeClientTest {
         Assert.assertEquals("string", rec.getPrediction().getFeaturesOrDefault("string", Public.Value.getDefaultInstance()).getString());
         Assert.assertEquals(20.20, rec.getPrediction().getFeaturesOrDefault("double", Public.Value.getDefaultInstance()).getDouble(), 0.0);
 
-        Assert.assertEquals("orgKey", rec.getOrganizationKey());
+        Assert.assertEquals("spaceKey", rec.getSpaceKey());
         Assert.assertEquals("modelId", rec.getModelId());
         Assert.assertEquals("predictionId", rec.getPredictionId());
     }
@@ -211,7 +173,7 @@ public class ArizeClientTest {
         features.put("B", "");
         features.put("C", null);
 
-        Response prediction = client.log("modelId", "modelVersion", "predictionId", features, 20.20, null, null, 0);;
+        Response prediction = client.log("modelId", "modelVersion", "predictionId", features, 20.20, null, null, 0);
         try {
             prediction.resolve(10, TimeUnit.SECONDS);
         } catch (Exception e) {
@@ -254,7 +216,7 @@ public class ArizeClientTest {
         }
         Public.BulkRecord bulkRec = bulkPosts.get(0);
         Assert.assertEquals("modelId", bulkRec.getModelId());
-        Assert.assertEquals("orgKey", bulkRec.getOrganizationKey());
+        Assert.assertEquals("spaceKey", bulkRec.getSpaceKey());
         Assert.assertEquals(3, bulkRec.getRecordsCount());
         List<Record> records = bulkRec.getRecordsList();
         for (Record record : records) {
@@ -269,17 +231,17 @@ public class ArizeClientTest {
     @Test
     public void testBuildBulkPrediction() throws ExecutionException, InterruptedException, IOException {
         List<Map<String, ?>> features = new ArrayList<>();
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             putAll(intFeatures);
             putAll(doubleFeatures);
             putAll(stringFeatures);
         }});
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             putAll(intFeatures);
             putAll(doubleFeatures);
             putAll(stringFeatures);
         }});
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             putAll(intFeatures);
             putAll(doubleFeatures);
             putAll(stringFeatures);
@@ -294,7 +256,7 @@ public class ArizeClientTest {
 
         Public.BulkRecord bulk = bulkPosts.get(0);
         Assert.assertEquals("modelId", bulk.getModelId());
-        Assert.assertEquals("orgKey", bulk.getOrganizationKey());
+        Assert.assertEquals("spaceKey", bulk.getSpaceKey());
         Assert.assertEquals("modelVersion", bulk.getModelVersion());
         Assert.assertEquals(3, bulk.getRecordsCount());
 
@@ -313,30 +275,30 @@ public class ArizeClientTest {
     @Test
     public void testFullLog() throws IOException, ExecutionException, InterruptedException {
         List<Map<String, ?>> features = new ArrayList<>();
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             put("days", 5.0);
             put("is_organic", 0l);
         }});
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             put("days", 4.5);
             put("is_organic", 1l);
         }});
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             put("days", 2.0);
             put("is_organic", 0l);
         }});
         List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
         List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
         List<Map<String, Double>> shapValues = new ArrayList<>();
-        shapValues.add(new HashMap<String, Double>(){{
+        shapValues.add(new HashMap<String, Double>() {{
             put("days", 2.0);
             put("is_organic", -1.2);
         }});
-        shapValues.add(new HashMap<String, Double>(){{
+        shapValues.add(new HashMap<String, Double>() {{
             put("days", 2.2);
             put("is_organic", -1.2);
         }});
-        shapValues.add(new HashMap<String, Double>(){{
+        shapValues.add(new HashMap<String, Double>() {{
             put("days", 2.5);
             put("is_organic", -1.2);
         }});
@@ -350,7 +312,7 @@ public class ArizeClientTest {
 
         Public.BulkRecord bulk = bulkPosts.get(0);
         Assert.assertEquals("modelId", bulk.getModelId());
-        Assert.assertEquals("orgKey", bulk.getOrganizationKey());
+        Assert.assertEquals("spaceKey", bulk.getSpaceKey());
         Assert.assertEquals("modelVersion", bulk.getModelVersion());
         Assert.assertEquals(3, bulk.getRecordsCount());
 
@@ -382,15 +344,15 @@ public class ArizeClientTest {
     @Test
     public void testLogTraining() throws IOException, ExecutionException, InterruptedException {
         List<Map<String, ?>> features = new ArrayList<>();
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             put("days", 5.0);
             put("is_organic", 0l);
         }});
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             put("days", 4.5);
             put("is_organic", 1l);
         }});
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             put("days", 2.0);
             put("is_organic", 0l);
         }});
@@ -406,7 +368,7 @@ public class ArizeClientTest {
 
         Headers headers = this.headers.get(0);
         Assert.assertEquals("apiKey", headers.get("Authorization").get(0));
-        Assert.assertEquals("orgKey", headers.get("Grpc-Metadata-organization").get(0));
+        Assert.assertEquals("spaceKey", headers.get("Grpc-Metadata-space").get(0));
 
         for (int i = 0; i < preProductionRecords.size(); i++) {
             Public.PreProductionRecord preprodRec = preProductionRecords.get(i);
@@ -434,15 +396,15 @@ public class ArizeClientTest {
     @Test
     public void testLogValidation() throws IOException, ExecutionException, InterruptedException {
         List<Map<String, ?>> features = new ArrayList<>();
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             put("days", 5.0);
             put("is_organic", 0l);
         }});
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             put("days", 4.5);
             put("is_organic", 1l);
         }});
-        features.add(new HashMap<String, Object>(){{
+        features.add(new HashMap<String, Object>() {{
             put("days", 2.0);
             put("is_organic", 0l);
         }});
@@ -458,7 +420,7 @@ public class ArizeClientTest {
 
         Headers headers = this.headers.get(0);
         Assert.assertEquals("apiKey", headers.get("Authorization").get(0));
-        Assert.assertEquals("orgKey", headers.get("Grpc-Metadata-organization").get(0));
+        Assert.assertEquals("spaceKey", headers.get("Grpc-Metadata-space").get(0));
 
         for (int i = 0; i < preProductionRecords.size(); i++) {
             Public.PreProductionRecord preprodRec = preProductionRecords.get(i);

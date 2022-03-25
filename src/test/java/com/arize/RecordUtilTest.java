@@ -1,19 +1,18 @@
 package com.arize;
 
-import static org.junit.Assert.assertEquals;
+import com.arize.protocol.Public.Label;
+import com.arize.protocol.Public.MultiValue;
+import com.arize.protocol.Public.ScoreCategorical;
+import com.arize.protocol.Public.Value;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.arize.protocol.Public.ScoreCategorical;
-import com.arize.protocol.Public.Label;
-import com.arize.protocol.Public.MultiValue;
-import com.arize.protocol.Public.Value;
-
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class RecordUtilTest {
 
@@ -31,7 +30,7 @@ public class RecordUtilTest {
         scb.setScore(3.14);
         scb.addAllNumericSequence(Arrays.asList(0.12, 0.23, 0.34));
         scoreCategoricalLabel = Label.newBuilder()
-            .setScoreCategorical(ScoreCategorical.newBuilder().setScoreCategory(scb)).build();
+                .setScoreCategorical(ScoreCategorical.newBuilder().setScoreCategory(scb)).build();
 
         stringMap = new HashMap<>();
         intMap = new HashMap<>();
@@ -46,7 +45,7 @@ public class RecordUtilTest {
         longMap.put("key", Value.newBuilder().setInt(2020l).build());
         List<String> asList = Arrays.asList("first", "second");
         multiMap.put("key", Value.newBuilder().setMultiValue(MultiValue.newBuilder()
-            .addAllValues(asList).build()).build());
+                .addAllValues(asList).build()).build());
         floatMap.put("key", Value.newBuilder().setDouble(20.2f).build());
     }
 
@@ -56,7 +55,7 @@ public class RecordUtilTest {
         assertEquals(categoricalLabel, RecordUtil.convertLabel("value"));
         assertEquals(numericLabel, RecordUtil.convertLabel(20.20));
         assertEquals(scoreCategoricalLabel, RecordUtil
-            .convertLabel(new ArizeClient.ScoredCategorical("apple", 3.14, Arrays.asList(0.12, 0.23, 0.34))));
+                .convertLabel(new ArizeClient.ScoredCategorical("apple", 3.14, Arrays.asList(0.12, 0.23, 0.34))));
     }
 
     @Test
