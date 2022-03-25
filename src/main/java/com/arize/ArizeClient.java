@@ -12,9 +12,7 @@ import org.apache.http.impl.nio.client.HttpAsyncClients;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -38,14 +36,14 @@ public class ArizeClient implements ArizeAPI {
     private final URI trainingValidationHost;
 
     /**
-     * The Arize api key for the corresponding organization.
+     * The Arize api key for the corresponding space.
      */
     private final String apiKey;
 
     /**
-     * The Arize organization key
+     * The Arize space key
      */
-    private final String organizationKey;
+    private final String spaceKey;
 
     /**
      * The HTTP client.
@@ -59,16 +57,16 @@ public class ArizeClient implements ArizeAPI {
      * @param uri    uri for Arize endpoint
      * @throws URISyntaxException if uri string violates RFC 2396
      */
-    public ArizeClient(final CloseableHttpAsyncClient client, final String apiKey, final String organizationKey, final String uri) throws URISyntaxException {
+    public ArizeClient(final CloseableHttpAsyncClient client, final String apiKey, final String spaceKey, final String uri) throws URISyntaxException {
         this.client = client;
         if (apiKey == null || apiKey.isEmpty()) {
             throw new IllegalArgumentException("apiKey cannot be null or empty");
         }
-        if (organizationKey == null || organizationKey.isEmpty()) {
-            throw new IllegalArgumentException("organizationKey cannot be null or empty");
+        if (spaceKey == null || spaceKey.isEmpty()) {
+            throw new IllegalArgumentException("spaceKey cannot be null or empty");
         }
         this.apiKey = apiKey;
-        this.organizationKey = organizationKey;
+        this.spaceKey = spaceKey;
         this.host = new URI(uri + "/log");
         this.bulkHost = new URI(uri + "/bulk");
         this.trainingValidationHost = new URI(uri + "/preprod");
@@ -78,25 +76,36 @@ public class ArizeClient implements ArizeAPI {
     /**
      * Construct a new API wrapper.
      *
-     * @param apiKey          your Arize API Key
-     * @param organizationKey your Arize organization key
+     * @param apiKey   your Arize API Key
+     * @param spaceKey your Arize space key
      * @throws URISyntaxException if uri string violates RFC 2396
      */
-    public ArizeClient(final String apiKey, final String organizationKey) throws URISyntaxException {
-        this(HttpAsyncClients.createDefault(), apiKey, organizationKey, DEFAULT_URI);
+    public ArizeClient(final String apiKey, final String spaceKey) throws URISyntaxException {
+        this(HttpAsyncClients.createDefault(), apiKey, spaceKey, DEFAULT_URI);
     }
 
     /**
      * Construct a new API wrapper while overwriting the Arize endpoint, typically
      * for custom integrations and e2e testing.
      *
-     * @param apiKey          your Arize API Key
-     * @param organizationKey your Arize organization key
-     * @param uri             uri for Arize endpoint
+     * @param apiKey   your Arize API Key
+     * @param spaceKey your Arize space key
+     * @param uri      uri for Arize endpoint
      * @throws URISyntaxException if uri string violates RFC 2396
      */
-    public ArizeClient(final String apiKey, final String organizationKey, final String uri) throws URISyntaxException {
-        this(HttpAsyncClients.createDefault(), apiKey, organizationKey, uri);
+    public ArizeClient(final String apiKey, final String spaceKey, final String uri) throws URISyntaxException {
+        this(HttpAsyncClients.createDefault(), apiKey, spaceKey, uri);
+    }
+
+    protected static HttpPost buildRequest(final String body, final URI host, String apiKey, String spaceKey) {
+        final HttpPost request = new HttpPost();
+        request.setEntity(new StringEntity(body, StandardCharsets.UTF_8));
+        request.setURI(host);
+        request.addHeader("Authorization", apiKey);
+        request.addHeader("Grpc-Metadata-space", spaceKey);
+        request.addHeader("Grpc-Metadata-sdk", "jvm");
+        request.addHeader("Grpc-Metadata-sdk-version", SDK_VERSION);
+        return request;
     }
 
     /**
@@ -109,18 +118,17 @@ public class ArizeClient implements ArizeAPI {
     }
 
     /**
-     * Get the organization key in the Arize platform
+     * Get the space key in the Arize platform
      *
-     * @return the Arize supplied organization key
+     * @return the Arize supplied space key
      */
-    public String getOrganizationKey() {
-        return organizationKey;
+    public String getSpaceKey() {
+        return spaceKey;
     }
-
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * log constructs a record and executes the API call asynchronously returning a future.
      */
     @Override
@@ -134,7 +142,7 @@ public class ArizeClient implements ArizeAPI {
         Record.Builder builder = Record.newBuilder();
         builder.setModelId(modelId);
         builder.setPredictionId(predictionId);
-        builder.setOrganizationKey(this.organizationKey);
+        builder.setSpaceKey(this.spaceKey);
 
         if (predictionLabel != null) {
             Public.Prediction.Builder predictionBuilder = Public.Prediction.newBuilder();
@@ -169,13 +177,13 @@ public class ArizeClient implements ArizeAPI {
             featureImportancesBuilder.putAllFeatureImportances(shapValues);
             builder.setFeatureImportances(featureImportancesBuilder);
         }
-        HttpPost req = buildRequest(RecordUtil.toJSON(builder.build()), this.host, this.apiKey, this.organizationKey);
+        HttpPost req = buildRequest(RecordUtil.toJSON(builder.build()), this.host, this.apiKey, this.spaceKey);
         return new Response(client.execute(req, null));
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * bulkLog constructs a bulk record and executes the API call asynchronously returning a future response.
      */
     @Override
@@ -195,7 +203,7 @@ public class ArizeClient implements ArizeAPI {
         if (features != null && predictionIds.size() != features.size()) {
             throw new IllegalArgumentException("predictionIds.size() must equal features.size()");
         }
-        if (shapValues!= null && predictionIds.size() != shapValues.size()) {
+        if (shapValues != null && predictionIds.size() != shapValues.size()) {
             throw new IllegalArgumentException("predictionIds.size() must equal shapValues.size()");
         }
         if (predictionTimestamps != null && predictionIds.size() != predictionTimestamps.size()) {
@@ -203,7 +211,7 @@ public class ArizeClient implements ArizeAPI {
         }
         BulkRecord.Builder builder = BulkRecord.newBuilder();
         builder.setModelId(modelId);
-        builder.setOrganizationKey(organizationKey);
+        builder.setSpaceKey(spaceKey);
         if (modelVersion != null) {
             builder.setModelVersion(modelVersion);
         }
@@ -247,13 +255,12 @@ public class ArizeClient implements ArizeAPI {
             }
             builder.addRecords(recordBuilder);
         }
-        final HttpPost request = buildRequest(RecordUtil.toJSON(builder.build()), this.bulkHost, this.apiKey, this.organizationKey);
+        final HttpPost request = buildRequest(RecordUtil.toJSON(builder.build()), this.bulkHost, this.apiKey, this.spaceKey);
         return new Response(client.execute(request, null));
     }
 
     /**
      * {@inheritDoc}
-     *
      */
     @Override
     public <T> Response logTrainingRecords(String modelId, String modelVersion, List<Map<String, ?>> features, List<T> predictionLabels, List<T> actualLabels) throws IOException {
@@ -299,13 +306,12 @@ public class ArizeClient implements ArizeAPI {
             sb.append(RecordUtil.toJSON(pprBuilder.build()));
             sb.append('\n');
         }
-        final HttpPost request = buildRequest(sb.toString(), this.trainingValidationHost, this.apiKey, this.organizationKey);
+        final HttpPost request = buildRequest(sb.toString(), this.trainingValidationHost, this.apiKey, this.spaceKey);
         return new Response(client.execute(request, null));
     }
 
     /**
      * {@inheritDoc}
-     *
      */
     @Override
     public <T> Response logValidationRecords(String modelId, String modelVersion, String batchId, List<Map<String, ?>> features, List<T> predictionLabels, List<T> actualLabels) throws IOException {
@@ -355,92 +361,8 @@ public class ArizeClient implements ArizeAPI {
             sb.append(RecordUtil.toJSON(pprBuilder.build()));
             sb.append('\n');
         }
-        final HttpPost request = buildRequest(sb.toString(), this.trainingValidationHost, this.apiKey, this.organizationKey);
+        final HttpPost request = buildRequest(sb.toString(), this.trainingValidationHost, this.apiKey, this.spaceKey);
         return new Response(client.execute(request, null));
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * logPrediction builds a Prediction record and executes the API call
-     * asynchronously returning a future response.
-     */
-    @Deprecated
-    @Override
-    @SuppressWarnings({ "unchecked" })
-    public <T> Response logPrediction(final String modelId, final String modelVersion, final String predictionId,
-            final T predictionLabel, final Map<String, ?>... features) throws IOException, IllegalArgumentException {
-        Map<String, Object> feats = new HashMap<>();
-        for (Map<String, ?> f : features) {
-            feats.putAll(f);
-        }
-        return log(modelId, modelVersion, predictionId, feats, predictionLabel, null, null, 0);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * logPrediction builds a Prediction record with a overwritten timestamp and
-     * executes the API call asynchronously returning a future response.
-     */
-    @Deprecated
-    @Override
-    @SuppressWarnings({ "unchecked" })
-    public <T> Response logPrediction(final String modelId, final String modelVersion, final String predictionId,
-            final T predictionLabel, final long timeOverwrite, final Map<String, ?>... features)
-            throws IOException, IllegalArgumentException {
-        Map<String, Object> feats = new HashMap<>();
-        for (Map<String, ?> f : features) {
-            feats.putAll(f);
-        }
-        return log(modelId, modelVersion, predictionId, feats, predictionLabel, null, null, timeOverwrite);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * logActual builds an Actual record and executes the API call asynchronously
-     * returning a future response.
-     */
-    @Deprecated
-    @Override
-    public <T> Response logActual(final String modelId, final String predictionId, final T actualLabel)
-            throws IOException, IllegalArgumentException {
-        Map<String, Object> feats = new HashMap<>();
-        return log(modelId, "", predictionId, null, null, actualLabel, null, 0);
-
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * logBulkPrediction builds a Bulk Prediction record and executes the API call
-     * asynchronously returning a future response.
-     */
-    @Deprecated
-    @Override
-    @SuppressWarnings({ "unchecked" })
-    public <T> Response logBulkPrediction(final String modelId, final String modelVersion,
-            final List<String> predictionIds, final List<T> predictionLabels, final List<Long> timesOverwriteMillis,
-            final List<Map<String, ?>>... features) throws IOException, IllegalArgumentException {
-        List<Map<String, ?>> featuresColumn = new ArrayList<>();
-        for (List<Map<String, ?>> f : features) {
-            featuresColumn.addAll(f);
-        }
-        return bulkLog(modelId, modelVersion, predictionIds, featuresColumn, predictionLabels, null, null, timesOverwriteMillis);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * logBulkActual builds a Bulk Actual record and executes the API call
-     * asynchronously returning a future response.
-     */
-    @Deprecated
-    @Override
-    public <T> Response logBulkActual(final String modelId, final List<String> predictionIds,
-            final List<T> actualLabels) throws IOException, IllegalArgumentException {
-        return bulkLog(modelId, "", predictionIds, null, null, actualLabels, null, null);
     }
 
     /**
@@ -452,22 +374,11 @@ public class ArizeClient implements ArizeAPI {
         this.client.close();
     }
 
-    protected static HttpPost buildRequest(final String body, final URI host, String apiKey, String organizationKey) {
-        final HttpPost request = new HttpPost();
-        request.setEntity(new StringEntity(body, Charset.forName("UTF-8")));
-        request.setURI(host);
-        request.addHeader("Authorization", apiKey);
-        request.addHeader("Grpc-Metadata-organization", organizationKey);
-        request.addHeader("Grpc-Metadata-sdk", "jvm");
-        request.addHeader("Grpc-Metadata-sdk-version", SDK_VERSION);
-        return request;
-    }
-
     public static class ScoredCategorical {
-        private String category;
-        private double score;
+        private final String category;
+        private final double score;
         List<Double> numSeq;
-        
+
         public ScoredCategorical(String category, double score) {
             this.category = category;
             this.score = score;
@@ -486,7 +397,7 @@ public class ArizeClient implements ArizeAPI {
         public double getScore() {
             return score;
         }
-        
+
         public List<Double> getNumericSequence() {
             return numSeq;
         }

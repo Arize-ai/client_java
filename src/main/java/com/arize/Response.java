@@ -1,5 +1,9 @@
 package com.arize;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.util.EntityUtils;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutionException;
@@ -7,29 +11,21 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.util.EntityUtils;
-
 /**
- * Warpper class holding future response
+ * Wrapper class holding future response
  */
 public class Response {
-
-    public enum ResponseCode {
-        OK, NOT_FOUND, AUTHENTICATION_ERROR, BAD_REQUEST, UNEXPECTED_FAILURE;
-    }
 
     /**
      * Private store for properties
      */
-    private Future<HttpResponse> future;
+    private final Future<HttpResponse> future;
     private HttpResponse response;
 
     /**
      * Wrapper for a Future HttpResponse to abstract away the underlying protocol
-     * 
-     * @param future
+     *
+     * @param future Future-wrapped HttpResponse
      */
     protected Response(final Future<HttpResponse> future) {
         this.future = future;
@@ -38,7 +34,7 @@ public class Response {
     /**
      * Waits if necessary for at most the given time for the computation to
      * complete.
-     * 
+     *
      * @param timeout the maximum time to wait
      * @param unit    the time unit of the timeout argument
      * @throws InterruptedException
@@ -52,7 +48,7 @@ public class Response {
 
     /**
      * Waits if necessary for the computation to complete.
-     * 
+     *
      * @throws InterruptedException
      * @throws ExecutionException
      */
@@ -63,7 +59,7 @@ public class Response {
     /**
      * Waits if necessary for the computation to complete, and then retrieves the
      * response code.
-     * 
+     *
      * @return ResponseCode The response code for the api call
      * @throws InterruptedException
      * @throws ExecutionException
@@ -89,7 +85,7 @@ public class Response {
     /**
      * Waits if necessary for the computation to complete, and then retrieves the
      * response body.
-     * 
+     *
      * @return The body contents of the response object
      * @throws IOException
      * @throws InterruptedException
@@ -105,7 +101,7 @@ public class Response {
 
     /**
      * Attempts to cancel execution of this api call.
-     * 
+     *
      * @return boolean
      */
     public boolean cancel() {
@@ -114,7 +110,7 @@ public class Response {
 
     /**
      * Returns true if this task was cancelled before it completed normally.
-     * 
+     *
      * @return boolean
      */
     public boolean isCancelled() {
@@ -123,11 +119,15 @@ public class Response {
 
     /**
      * Returns true if this task completed.
-     * 
-     * @return
+     *
+     * @return boolean
      */
     public boolean isDone() {
         return this.future.isDone();
+    }
+
+    public enum ResponseCode {
+        OK, NOT_FOUND, AUTHENTICATION_ERROR, BAD_REQUEST, UNEXPECTED_FAILURE
     }
 
 }

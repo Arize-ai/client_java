@@ -60,7 +60,7 @@ public class RecordUtil {
                 "Illegal label " + rawLabel + ", must be oneof: boolean, String, int, long, short, float, double");
     }
 
-    @SuppressWarnings({ "unchecked" })
+    @SuppressWarnings({"unchecked"})
     private static <T> Value convertValue(final String name, final T rawValue) throws IllegalArgumentException {
         Value.Builder val = Value.newBuilder();
         if (rawValue instanceof String) {
