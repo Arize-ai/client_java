@@ -13,9 +13,16 @@
     <groupId>com.arize</groupId>
     <artifactId>arize-api-client</artifactId>
     <name>arize-api-client</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <url>https://github.com/Arize-ai/client_java/</url>
     <description>Java client library for Arize AI API</description>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://github.com/Arize-ai/client_java/blob/main/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

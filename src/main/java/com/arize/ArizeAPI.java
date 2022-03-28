@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface ArizeAPI {
 
-    String SDK_VERSION = "1.0.0";
+    String SDK_VERSION = "1.0.1";
 
     /**
      * log builds and submits a record to the Arize API.
