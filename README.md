@@ -6,6 +6,7 @@
 [![javadoc](https://javadoc.io/badge2/com.arize/arize-api-client/javadoc.svg)](https://javadoc.io/doc/com.arize/arize-api-client)
 [![openjdk](https://img.shields.io/badge/opendjk-%3E=1.8-green)](https://openjdk.java.net)
 [![Slack](https://img.shields.io/badge/slack-@arize-yellow.svg?logo=slack)](https://join.slack.com/t/arize-ai/shared_invite/zt-g9c1j1xs-aQEwOAkU4T2x5K8cqI1Xqg)
+[![license](https://img.shields.io/github/license/arize-ai/client_java)](https://github.com/Arize-ai/client_java/blob/main/LICENSE)
 ----
 ## Overview
 A helper library to interact with Arize AI APIs.
@@ -48,7 +49,7 @@ If you are using the Arize Java client, add a few lines to your code to log pred
 <dependency>
   <groupId>com.arize</groupId>
   <artifactId>arize-api-client</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
@@ -57,7 +58,7 @@ If you are using the Arize Java client, add a few lines to your code to log pred
 maven_jar(
     name = "arize-api-client",
     artifact = "com.arize:arize-api-client:1.0.0",
-    sha1 = "2ad88a929827157c42208081d67890f9660b8138",
+    sha1 = "2a82c3d269b1f7ac3c13c16ffa7228cc3446285f",
 )
 ```
 
