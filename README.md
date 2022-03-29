@@ -57,7 +57,7 @@ If you are using the Arize Java client, add a few lines to your code to log pred
 ```
 maven_jar(
     name = "arize-api-client",
-    artifact = "com.arize:arize-api-client:1.0.0",
+    artifact = "com.arize:arize-api-client:1.0.1",
     sha1 = "2a82c3d269b1f7ac3c13c16ffa7228cc3446285f",
 )
 ```
