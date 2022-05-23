@@ -13343,33 +13343,6 @@ public final class Public {
 
     /**
      * <pre>
-     * optional raw text (e.g. for NLP)
-     * </pre>
-     *
-     * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-     * @return Whether the data field is set.
-     */
-    @java.lang.Deprecated boolean hasData();
-    /**
-     * <pre>
-     * optional raw text (e.g. for NLP)
-     * </pre>
-     *
-     * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-     * @return The data.
-     */
-    @java.lang.Deprecated com.google.protobuf.StringValue getData();
-    /**
-     * <pre>
-     * optional raw text (e.g. for NLP)
-     * </pre>
-     *
-     * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated com.google.protobuf.StringValueOrBuilder getDataOrBuilder();
-
-    /**
-     * <pre>
      * optional link/url to an associated image or text file
      * </pre>
      *
@@ -13490,19 +13463,6 @@ public final class Public {
               input.popLimit(limit);
               break;
             }
-            case 18: {
-              com.google.protobuf.StringValue.Builder subBuilder = null;
-              if (data_ != null) {
-                subBuilder = data_.toBuilder();
-              }
-              data_ = input.readMessage(com.google.protobuf.StringValue.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(data_);
-                data_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
             case 26: {
               com.google.protobuf.StringValue.Builder subBuilder = null;
               if (linkToData_ != null) {
@@ -13569,28 +13529,31 @@ public final class Public {
         com.google.protobuf.MessageOrBuilder {
 
       /**
-       * <code>string string = 1;</code>
-       * @return The string.
-       */
-      java.lang.String getString();
-      /**
-       * <code>string string = 1;</code>
-       * @return The bytes for string.
-       */
-      com.google.protobuf.ByteString
-          getStringBytes();
-
-      /**
+       * <pre>
+       * If a token array of only one token is sent, we will infer that it is a piece of text
+       * and it will show in the UI as text, not token array
+       * </pre>
+       *
        * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
        * @return Whether the tokenArray field is set.
        */
       boolean hasTokenArray();
       /**
+       * <pre>
+       * If a token array of only one token is sent, we will infer that it is a piece of text
+       * and it will show in the UI as text, not token array
+       * </pre>
+       *
        * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
        * @return The tokenArray.
        */
       com.arize.protocol.Public.Embedding.TokenArray getTokenArray();
       /**
+       * <pre>
+       * If a token array of only one token is sent, we will infer that it is a piece of text
+       * and it will show in the UI as text, not token array
+       * </pre>
+       *
        * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
        */
       com.arize.protocol.Public.Embedding.TokenArrayOrBuilder getTokenArrayOrBuilder();
@@ -13642,12 +13605,6 @@ public final class Public {
               case 0:
                 done = true;
                 break;
-              case 10: {
-                java.lang.String s = input.readStringRequireUtf8();
-                typeCase_ = 1;
-                type_ = s;
-                break;
-              }
               case 18: {
                 com.arize.protocol.Public.Embedding.TokenArray.Builder subBuilder = null;
                 if (typeCase_ == 2) {
@@ -13699,7 +13656,6 @@ public final class Public {
       public enum TypeCase
           implements com.google.protobuf.Internal.EnumLite,
               com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-        STRING(1),
         TOKENARRAY(2),
         TYPE_NOT_SET(0);
         private final int value;
@@ -13718,7 +13674,6 @@ public final class Public {
 
         public static TypeCase forNumber(int value) {
           switch (value) {
-            case 1: return STRING;
             case 2: return TOKENARRAY;
             case 0: return TYPE_NOT_SET;
             default: return null;
@@ -13735,53 +13690,13 @@ public final class Public {
             typeCase_);
       }
 
-      public static final int STRING_FIELD_NUMBER = 1;
-      /**
-       * <code>string string = 1;</code>
-       * @return The string.
-       */
-      public java.lang.String getString() {
-        java.lang.Object ref = "";
-        if (typeCase_ == 1) {
-          ref = type_;
-        }
-        if (ref instanceof java.lang.String) {
-          return (java.lang.String) ref;
-        } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (typeCase_ == 1) {
-            type_ = s;
-          }
-          return s;
-        }
-      }
-      /**
-       * <code>string string = 1;</code>
-       * @return The bytes for string.
-       */
-      public com.google.protobuf.ByteString
-          getStringBytes() {
-        java.lang.Object ref = "";
-        if (typeCase_ == 1) {
-          ref = type_;
-        }
-        if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          if (typeCase_ == 1) {
-            type_ = b;
-          }
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-
       public static final int TOKENARRAY_FIELD_NUMBER = 2;
       /**
+       * <pre>
+       * If a token array of only one token is sent, we will infer that it is a piece of text
+       * and it will show in the UI as text, not token array
+       * </pre>
+       *
        * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
        * @return Whether the tokenArray field is set.
        */
@@ -13789,6 +13704,11 @@ public final class Public {
         return typeCase_ == 2;
       }
       /**
+       * <pre>
+       * If a token array of only one token is sent, we will infer that it is a piece of text
+       * and it will show in the UI as text, not token array
+       * </pre>
+       *
        * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
        * @return The tokenArray.
        */
@@ -13799,6 +13719,11 @@ public final class Public {
         return com.arize.protocol.Public.Embedding.TokenArray.getDefaultInstance();
       }
       /**
+       * <pre>
+       * If a token array of only one token is sent, we will infer that it is a piece of text
+       * and it will show in the UI as text, not token array
+       * </pre>
+       *
        * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
        */
       public com.arize.protocol.Public.Embedding.TokenArrayOrBuilder getTokenArrayOrBuilder() {
@@ -13822,9 +13747,6 @@ public final class Public {
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
-        if (typeCase_ == 1) {
-          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, type_);
-        }
         if (typeCase_ == 2) {
           output.writeMessage(2, (com.arize.protocol.Public.Embedding.TokenArray) type_);
         }
@@ -13837,9 +13759,6 @@ public final class Public {
         if (size != -1) return size;
 
         size = 0;
-        if (typeCase_ == 1) {
-          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, type_);
-        }
         if (typeCase_ == 2) {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(2, (com.arize.protocol.Public.Embedding.TokenArray) type_);
@@ -13861,10 +13780,6 @@ public final class Public {
 
         if (!getTypeCase().equals(other.getTypeCase())) return false;
         switch (typeCase_) {
-          case 1:
-            if (!getString()
-                .equals(other.getString())) return false;
-            break;
           case 2:
             if (!getTokenArray()
                 .equals(other.getTokenArray())) return false;
@@ -13884,10 +13799,6 @@ public final class Public {
         int hash = 41;
         hash = (19 * hash) + getDescriptor().hashCode();
         switch (typeCase_) {
-          case 1:
-            hash = (37 * hash) + STRING_FIELD_NUMBER;
-            hash = (53 * hash) + getString().hashCode();
-            break;
           case 2:
             hash = (37 * hash) + TOKENARRAY_FIELD_NUMBER;
             hash = (53 * hash) + getTokenArray().hashCode();
@@ -14056,9 +13967,6 @@ public final class Public {
         @java.lang.Override
         public com.arize.protocol.Public.Embedding.RawData buildPartial() {
           com.arize.protocol.Public.Embedding.RawData result = new com.arize.protocol.Public.Embedding.RawData(this);
-          if (typeCase_ == 1) {
-            result.type_ = type_;
-          }
           if (typeCase_ == 2) {
             if (tokenArrayBuilder_ == null) {
               result.type_ = type_;
@@ -14116,12 +14024,6 @@ public final class Public {
         public Builder mergeFrom(com.arize.protocol.Public.Embedding.RawData other) {
           if (other == com.arize.protocol.Public.Embedding.RawData.getDefaultInstance()) return this;
           switch (other.getTypeCase()) {
-            case STRING: {
-              typeCase_ = 1;
-              type_ = other.type_;
-              onChanged();
-              break;
-            }
             case TOKENARRAY: {
               mergeTokenArray(other.getTokenArray());
               break;
@@ -14174,96 +14076,14 @@ public final class Public {
         }
 
 
-        /**
-         * <code>string string = 1;</code>
-         * @return The string.
-         */
-        public java.lang.String getString() {
-          java.lang.Object ref = "";
-          if (typeCase_ == 1) {
-            ref = type_;
-          }
-          if (!(ref instanceof java.lang.String)) {
-            com.google.protobuf.ByteString bs =
-                (com.google.protobuf.ByteString) ref;
-            java.lang.String s = bs.toStringUtf8();
-            if (typeCase_ == 1) {
-              type_ = s;
-            }
-            return s;
-          } else {
-            return (java.lang.String) ref;
-          }
-        }
-        /**
-         * <code>string string = 1;</code>
-         * @return The bytes for string.
-         */
-        public com.google.protobuf.ByteString
-            getStringBytes() {
-          java.lang.Object ref = "";
-          if (typeCase_ == 1) {
-            ref = type_;
-          }
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            if (typeCase_ == 1) {
-              type_ = b;
-            }
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        /**
-         * <code>string string = 1;</code>
-         * @param value The string to set.
-         * @return This builder for chaining.
-         */
-        public Builder setString(
-            java.lang.String value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  typeCase_ = 1;
-          type_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>string string = 1;</code>
-         * @return This builder for chaining.
-         */
-        public Builder clearString() {
-          if (typeCase_ == 1) {
-            typeCase_ = 0;
-            type_ = null;
-            onChanged();
-          }
-          return this;
-        }
-        /**
-         * <code>string string = 1;</code>
-         * @param value The bytes for string to set.
-         * @return This builder for chaining.
-         */
-        public Builder setStringBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-          typeCase_ = 1;
-          type_ = value;
-          onChanged();
-          return this;
-        }
-
         private com.google.protobuf.SingleFieldBuilderV3<
             com.arize.protocol.Public.Embedding.TokenArray, com.arize.protocol.Public.Embedding.TokenArray.Builder, com.arize.protocol.Public.Embedding.TokenArrayOrBuilder> tokenArrayBuilder_;
         /**
+         * <pre>
+         * If a token array of only one token is sent, we will infer that it is a piece of text
+         * and it will show in the UI as text, not token array
+         * </pre>
+         *
          * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
          * @return Whether the tokenArray field is set.
          */
@@ -14271,6 +14091,11 @@ public final class Public {
           return typeCase_ == 2;
         }
         /**
+         * <pre>
+         * If a token array of only one token is sent, we will infer that it is a piece of text
+         * and it will show in the UI as text, not token array
+         * </pre>
+         *
          * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
          * @return The tokenArray.
          */
@@ -14288,6 +14113,11 @@ public final class Public {
           }
         }
         /**
+         * <pre>
+         * If a token array of only one token is sent, we will infer that it is a piece of text
+         * and it will show in the UI as text, not token array
+         * </pre>
+         *
          * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
          */
         public Builder setTokenArray(com.arize.protocol.Public.Embedding.TokenArray value) {
@@ -14304,6 +14134,11 @@ public final class Public {
           return this;
         }
         /**
+         * <pre>
+         * If a token array of only one token is sent, we will infer that it is a piece of text
+         * and it will show in the UI as text, not token array
+         * </pre>
+         *
          * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
          */
         public Builder setTokenArray(
@@ -14318,6 +14153,11 @@ public final class Public {
           return this;
         }
         /**
+         * <pre>
+         * If a token array of only one token is sent, we will infer that it is a piece of text
+         * and it will show in the UI as text, not token array
+         * </pre>
+         *
          * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
          */
         public Builder mergeTokenArray(com.arize.protocol.Public.Embedding.TokenArray value) {
@@ -14340,6 +14180,11 @@ public final class Public {
           return this;
         }
         /**
+         * <pre>
+         * If a token array of only one token is sent, we will infer that it is a piece of text
+         * and it will show in the UI as text, not token array
+         * </pre>
+         *
          * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
          */
         public Builder clearTokenArray() {
@@ -14359,12 +14204,22 @@ public final class Public {
           return this;
         }
         /**
+         * <pre>
+         * If a token array of only one token is sent, we will infer that it is a piece of text
+         * and it will show in the UI as text, not token array
+         * </pre>
+         *
          * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
          */
         public com.arize.protocol.Public.Embedding.TokenArray.Builder getTokenArrayBuilder() {
           return getTokenArrayFieldBuilder().getBuilder();
         }
         /**
+         * <pre>
+         * If a token array of only one token is sent, we will infer that it is a piece of text
+         * and it will show in the UI as text, not token array
+         * </pre>
+         *
          * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
          */
         public com.arize.protocol.Public.Embedding.TokenArrayOrBuilder getTokenArrayOrBuilder() {
@@ -14378,6 +14233,11 @@ public final class Public {
           }
         }
         /**
+         * <pre>
+         * If a token array of only one token is sent, we will infer that it is a piece of text
+         * and it will show in the UI as text, not token array
+         * </pre>
+         *
          * <code>.public.Embedding.TokenArray tokenArray = 2;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
@@ -15136,41 +14996,6 @@ public final class Public {
     }
     private int vectorMemoizedSerializedSize = -1;
 
-    public static final int DATA_FIELD_NUMBER = 2;
-    private com.google.protobuf.StringValue data_;
-    /**
-     * <pre>
-     * optional raw text (e.g. for NLP)
-     * </pre>
-     *
-     * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-     * @return Whether the data field is set.
-     */
-    @java.lang.Deprecated public boolean hasData() {
-      return data_ != null;
-    }
-    /**
-     * <pre>
-     * optional raw text (e.g. for NLP)
-     * </pre>
-     *
-     * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-     * @return The data.
-     */
-    @java.lang.Deprecated public com.google.protobuf.StringValue getData() {
-      return data_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : data_;
-    }
-    /**
-     * <pre>
-     * optional raw text (e.g. for NLP)
-     * </pre>
-     *
-     * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-     */
-    @java.lang.Deprecated public com.google.protobuf.StringValueOrBuilder getDataOrBuilder() {
-      return getData();
-    }
-
     public static final int LINK_TO_DATA_FIELD_NUMBER = 3;
     private com.google.protobuf.StringValue linkToData_;
     /**
@@ -15263,9 +15088,6 @@ public final class Public {
       for (int i = 0; i < vector_.size(); i++) {
         output.writeDoubleNoTag(vector_.getDouble(i));
       }
-      if (data_ != null) {
-        output.writeMessage(2, getData());
-      }
       if (linkToData_ != null) {
         output.writeMessage(3, getLinkToData());
       }
@@ -15292,10 +15114,6 @@ public final class Public {
         }
         vectorMemoizedSerializedSize = dataSize;
       }
-      if (data_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getData());
-      }
       if (linkToData_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getLinkToData());
@@ -15321,11 +15139,6 @@ public final class Public {
 
       if (!getVectorList()
           .equals(other.getVectorList())) return false;
-      if (hasData() != other.hasData()) return false;
-      if (hasData()) {
-        if (!getData()
-            .equals(other.getData())) return false;
-      }
       if (hasLinkToData() != other.hasLinkToData()) return false;
       if (hasLinkToData()) {
         if (!getLinkToData()
@@ -15350,10 +15163,6 @@ public final class Public {
       if (getVectorCount() > 0) {
         hash = (37 * hash) + VECTOR_FIELD_NUMBER;
         hash = (53 * hash) + getVectorList().hashCode();
-      }
-      if (hasData()) {
-        hash = (37 * hash) + DATA_FIELD_NUMBER;
-        hash = (53 * hash) + getData().hashCode();
       }
       if (hasLinkToData()) {
         hash = (37 * hash) + LINK_TO_DATA_FIELD_NUMBER;
@@ -15498,12 +15307,6 @@ public final class Public {
         super.clear();
         vector_ = emptyDoubleList();
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (dataBuilder_ == null) {
-          data_ = null;
-        } else {
-          data_ = null;
-          dataBuilder_ = null;
-        }
         if (linkToDataBuilder_ == null) {
           linkToData_ = null;
         } else {
@@ -15548,11 +15351,6 @@ public final class Public {
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.vector_ = vector_;
-        if (dataBuilder_ == null) {
-          result.data_ = data_;
-        } else {
-          result.data_ = dataBuilder_.build();
-        }
         if (linkToDataBuilder_ == null) {
           result.linkToData_ = linkToData_;
         } else {
@@ -15620,9 +15418,6 @@ public final class Public {
             vector_.addAll(other.vector_);
           }
           onChanged();
-        }
-        if (other.hasData()) {
-          mergeData(other.getData());
         }
         if (other.hasLinkToData()) {
           mergeLinkToData(other.getLinkToData());
@@ -15765,161 +15560,6 @@ public final class Public {
         bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
-      }
-
-      private com.google.protobuf.StringValue data_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> dataBuilder_;
-      /**
-       * <pre>
-       * optional raw text (e.g. for NLP)
-       * </pre>
-       *
-       * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-       * @return Whether the data field is set.
-       */
-      @java.lang.Deprecated public boolean hasData() {
-        return dataBuilder_ != null || data_ != null;
-      }
-      /**
-       * <pre>
-       * optional raw text (e.g. for NLP)
-       * </pre>
-       *
-       * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-       * @return The data.
-       */
-      @java.lang.Deprecated public com.google.protobuf.StringValue getData() {
-        if (dataBuilder_ == null) {
-          return data_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : data_;
-        } else {
-          return dataBuilder_.getMessage();
-        }
-      }
-      /**
-       * <pre>
-       * optional raw text (e.g. for NLP)
-       * </pre>
-       *
-       * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-       */
-      @java.lang.Deprecated public Builder setData(com.google.protobuf.StringValue value) {
-        if (dataBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          data_ = value;
-          onChanged();
-        } else {
-          dataBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * optional raw text (e.g. for NLP)
-       * </pre>
-       *
-       * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-       */
-      @java.lang.Deprecated public Builder setData(
-          com.google.protobuf.StringValue.Builder builderForValue) {
-        if (dataBuilder_ == null) {
-          data_ = builderForValue.build();
-          onChanged();
-        } else {
-          dataBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * optional raw text (e.g. for NLP)
-       * </pre>
-       *
-       * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-       */
-      @java.lang.Deprecated public Builder mergeData(com.google.protobuf.StringValue value) {
-        if (dataBuilder_ == null) {
-          if (data_ != null) {
-            data_ =
-              com.google.protobuf.StringValue.newBuilder(data_).mergeFrom(value).buildPartial();
-          } else {
-            data_ = value;
-          }
-          onChanged();
-        } else {
-          dataBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * optional raw text (e.g. for NLP)
-       * </pre>
-       *
-       * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-       */
-      @java.lang.Deprecated public Builder clearData() {
-        if (dataBuilder_ == null) {
-          data_ = null;
-          onChanged();
-        } else {
-          data_ = null;
-          dataBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * optional raw text (e.g. for NLP)
-       * </pre>
-       *
-       * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-       */
-      @java.lang.Deprecated public com.google.protobuf.StringValue.Builder getDataBuilder() {
-        
-        onChanged();
-        return getDataFieldBuilder().getBuilder();
-      }
-      /**
-       * <pre>
-       * optional raw text (e.g. for NLP)
-       * </pre>
-       *
-       * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-       */
-      @java.lang.Deprecated public com.google.protobuf.StringValueOrBuilder getDataOrBuilder() {
-        if (dataBuilder_ != null) {
-          return dataBuilder_.getMessageOrBuilder();
-        } else {
-          return data_ == null ?
-              com.google.protobuf.StringValue.getDefaultInstance() : data_;
-        }
-      }
-      /**
-       * <pre>
-       * optional raw text (e.g. for NLP)
-       * </pre>
-       *
-       * <code>.google.protobuf.StringValue data = 2 [deprecated = true];</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> 
-          getDataFieldBuilder() {
-        if (dataBuilder_ == null) {
-          dataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder>(
-                  getData(),
-                  getParentForChildren(),
-                  isClean());
-          data_ = null;
-        }
-        return dataBuilder_;
       }
 
       private com.google.protobuf.StringValue linkToData_;
@@ -16317,6 +15957,75 @@ public final class Public {
      * <code>.public.Label label = 2;</code>
      */
     com.arize.protocol.Public.LabelOrBuilder getLabelOrBuilder();
+
+    /**
+     * <pre>
+     * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+     * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+     * For an Actual with a tag, if its corresponding Prediction also has a tag,
+     * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+     * </pre>
+     *
+     * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+     */
+    int getTagsCount();
+    /**
+     * <pre>
+     * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+     * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+     * For an Actual with a tag, if its corresponding Prediction also has a tag,
+     * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+     * </pre>
+     *
+     * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+     */
+    boolean containsTags(
+        java.lang.String key);
+    /**
+     * Use {@link #getTagsMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, com.arize.protocol.Public.Value>
+    getTags();
+    /**
+     * <pre>
+     * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+     * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+     * For an Actual with a tag, if its corresponding Prediction also has a tag,
+     * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+     * </pre>
+     *
+     * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+     */
+    java.util.Map<java.lang.String, com.arize.protocol.Public.Value>
+    getTagsMap();
+    /**
+     * <pre>
+     * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+     * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+     * For an Actual with a tag, if its corresponding Prediction also has a tag,
+     * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+     * </pre>
+     *
+     * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+     */
+
+    com.arize.protocol.Public.Value getTagsOrDefault(
+        java.lang.String key,
+        com.arize.protocol.Public.Value defaultValue);
+    /**
+     * <pre>
+     * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+     * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+     * For an Actual with a tag, if its corresponding Prediction also has a tag,
+     * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+     * </pre>
+     *
+     * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+     */
+
+    com.arize.protocol.Public.Value getTagsOrThrow(
+        java.lang.String key);
   }
   /**
    * <pre>
@@ -16357,6 +16066,7 @@ public final class Public {
       if (extensionRegistry == null) {
         throw new java.lang.NullPointerException();
       }
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -16393,6 +16103,19 @@ public final class Public {
 
               break;
             }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                tags_ = com.google.protobuf.MapField.newMapField(
+                    TagsDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000001;
+              }
+              com.google.protobuf.MapEntry<java.lang.String, com.arize.protocol.Public.Value>
+              tags__ = input.readMessage(
+                  TagsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              tags_.getMutableMap().put(
+                  tags__.getKey(), tags__.getValue());
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -16417,6 +16140,18 @@ public final class Public {
       return com.arize.protocol.Public.internal_static_public_Actual_descriptor;
     }
 
+    @SuppressWarnings({"rawtypes"})
+    @java.lang.Override
+    protected com.google.protobuf.MapField internalGetMapField(
+        int number) {
+      switch (number) {
+        case 3:
+          return internalGetTags();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -16471,6 +16206,110 @@ public final class Public {
       return getLabel();
     }
 
+    public static final int TAGS_FIELD_NUMBER = 3;
+    private static final class TagsDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, com.arize.protocol.Public.Value> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, com.arize.protocol.Public.Value>newDefaultInstance(
+                  com.arize.protocol.Public.internal_static_public_Actual_TagsEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  com.arize.protocol.Public.Value.getDefaultInstance());
+    }
+    private com.google.protobuf.MapField<
+        java.lang.String, com.arize.protocol.Public.Value> tags_;
+    private com.google.protobuf.MapField<java.lang.String, com.arize.protocol.Public.Value>
+    internalGetTags() {
+      if (tags_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            TagsDefaultEntryHolder.defaultEntry);
+      }
+      return tags_;
+    }
+
+    public int getTagsCount() {
+      return internalGetTags().getMap().size();
+    }
+    /**
+     * <pre>
+     * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+     * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+     * For an Actual with a tag, if its corresponding Prediction also has a tag,
+     * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+     * </pre>
+     *
+     * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+     */
+
+    public boolean containsTags(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetTags().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getTagsMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, com.arize.protocol.Public.Value> getTags() {
+      return getTagsMap();
+    }
+    /**
+     * <pre>
+     * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+     * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+     * For an Actual with a tag, if its corresponding Prediction also has a tag,
+     * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+     * </pre>
+     *
+     * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+     */
+
+    public java.util.Map<java.lang.String, com.arize.protocol.Public.Value> getTagsMap() {
+      return internalGetTags().getMap();
+    }
+    /**
+     * <pre>
+     * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+     * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+     * For an Actual with a tag, if its corresponding Prediction also has a tag,
+     * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+     * </pre>
+     *
+     * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+     */
+
+    public com.arize.protocol.Public.Value getTagsOrDefault(
+        java.lang.String key,
+        com.arize.protocol.Public.Value defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, com.arize.protocol.Public.Value> map =
+          internalGetTags().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <pre>
+     * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+     * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+     * For an Actual with a tag, if its corresponding Prediction also has a tag,
+     * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+     * </pre>
+     *
+     * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+     */
+
+    public com.arize.protocol.Public.Value getTagsOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, com.arize.protocol.Public.Value> map =
+          internalGetTags().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -16491,6 +16330,12 @@ public final class Public {
       if (label_ != null) {
         output.writeMessage(2, getLabel());
       }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetTags(),
+          TagsDefaultEntryHolder.defaultEntry,
+          3);
       unknownFields.writeTo(output);
     }
 
@@ -16507,6 +16352,16 @@ public final class Public {
       if (label_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getLabel());
+      }
+      for (java.util.Map.Entry<java.lang.String, com.arize.protocol.Public.Value> entry
+           : internalGetTags().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, com.arize.protocol.Public.Value>
+        tags__ = TagsDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(3, tags__);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -16533,6 +16388,8 @@ public final class Public {
         if (!getLabel()
             .equals(other.getLabel())) return false;
       }
+      if (!internalGetTags().equals(
+          other.internalGetTags())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -16551,6 +16408,10 @@ public final class Public {
       if (hasLabel()) {
         hash = (37 * hash) + LABEL_FIELD_NUMBER;
         hash = (53 * hash) + getLabel().hashCode();
+      }
+      if (!internalGetTags().getMap().isEmpty()) {
+        hash = (37 * hash) + TAGS_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetTags().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -16663,6 +16524,28 @@ public final class Public {
         return com.arize.protocol.Public.internal_static_public_Actual_descriptor;
       }
 
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMapField(
+          int number) {
+        switch (number) {
+          case 3:
+            return internalGetTags();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMutableMapField(
+          int number) {
+        switch (number) {
+          case 3:
+            return internalGetMutableTags();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
@@ -16701,6 +16584,7 @@ public final class Public {
           label_ = null;
           labelBuilder_ = null;
         }
+        internalGetMutableTags().clear();
         return this;
       }
 
@@ -16727,6 +16611,7 @@ public final class Public {
       @java.lang.Override
       public com.arize.protocol.Public.Actual buildPartial() {
         com.arize.protocol.Public.Actual result = new com.arize.protocol.Public.Actual(this);
+        int from_bitField0_ = bitField0_;
         if (timestampBuilder_ == null) {
           result.timestamp_ = timestamp_;
         } else {
@@ -16737,6 +16622,8 @@ public final class Public {
         } else {
           result.label_ = labelBuilder_.build();
         }
+        result.tags_ = internalGetTags();
+        result.tags_.makeImmutable();
         onBuilt();
         return result;
       }
@@ -16791,6 +16678,8 @@ public final class Public {
         if (other.hasLabel()) {
           mergeLabel(other.getLabel());
         }
+        internalGetMutableTags().mergeFrom(
+            other.internalGetTags());
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -16819,6 +16708,7 @@ public final class Public {
         }
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.Timestamp timestamp_;
       private com.google.protobuf.SingleFieldBuilderV3<
@@ -17056,6 +16946,178 @@ public final class Public {
           label_ = null;
         }
         return labelBuilder_;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.String, com.arize.protocol.Public.Value> tags_;
+      private com.google.protobuf.MapField<java.lang.String, com.arize.protocol.Public.Value>
+      internalGetTags() {
+        if (tags_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              TagsDefaultEntryHolder.defaultEntry);
+        }
+        return tags_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, com.arize.protocol.Public.Value>
+      internalGetMutableTags() {
+        onChanged();;
+        if (tags_ == null) {
+          tags_ = com.google.protobuf.MapField.newMapField(
+              TagsDefaultEntryHolder.defaultEntry);
+        }
+        if (!tags_.isMutable()) {
+          tags_ = tags_.copy();
+        }
+        return tags_;
+      }
+
+      public int getTagsCount() {
+        return internalGetTags().getMap().size();
+      }
+      /**
+       * <pre>
+       * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+       * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+       * For an Actual with a tag, if its corresponding Prediction also has a tag,
+       * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+       * </pre>
+       *
+       * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+       */
+
+      public boolean containsTags(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        return internalGetTags().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getTagsMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, com.arize.protocol.Public.Value> getTags() {
+        return getTagsMap();
+      }
+      /**
+       * <pre>
+       * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+       * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+       * For an Actual with a tag, if its corresponding Prediction also has a tag,
+       * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+       * </pre>
+       *
+       * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+       */
+
+      public java.util.Map<java.lang.String, com.arize.protocol.Public.Value> getTagsMap() {
+        return internalGetTags().getMap();
+      }
+      /**
+       * <pre>
+       * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+       * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+       * For an Actual with a tag, if its corresponding Prediction also has a tag,
+       * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+       * </pre>
+       *
+       * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+       */
+
+      public com.arize.protocol.Public.Value getTagsOrDefault(
+          java.lang.String key,
+          com.arize.protocol.Public.Value defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, com.arize.protocol.Public.Value> map =
+            internalGetTags().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <pre>
+       * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+       * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+       * For an Actual with a tag, if its corresponding Prediction also has a tag,
+       * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+       * </pre>
+       *
+       * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+       */
+
+      public com.arize.protocol.Public.Value getTagsOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, com.arize.protocol.Public.Value> map =
+            internalGetTags().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearTags() {
+        internalGetMutableTags().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <pre>
+       * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+       * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+       * For an Actual with a tag, if its corresponding Prediction also has a tag,
+       * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+       * </pre>
+       *
+       * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+       */
+
+      public Builder removeTags(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableTags().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, com.arize.protocol.Public.Value>
+      getMutableTags() {
+        return internalGetMutableTags().getMutableMap();
+      }
+      /**
+       * <pre>
+       * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+       * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+       * For an Actual with a tag, if its corresponding Prediction also has a tag,
+       * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+       * </pre>
+       *
+       * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+       */
+      public Builder putTags(
+          java.lang.String key,
+          com.arize.protocol.Public.Value value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        if (value == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableTags().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <pre>
+       * tags is a map of human readable model input field that will be used to group together a subset of Actuals
+       * for a given model_id and model_version. Separated from features in the UI and is normally used for model metadata.
+       * For an Actual with a tag, if its corresponding Prediction also has a tag,
+       * we save the Prediction's tag in the Conclusion record and this tag is discarded. Otherwise this tag is saved.
+       * </pre>
+       *
+       * <code>map&lt;string, .public.Value&gt; tags = 3;</code>
+       */
+
+      public Builder putAllTags(
+          java.util.Map<java.lang.String, com.arize.protocol.Public.Value> values) {
+        internalGetMutableTags().getMutableMap()
+            .putAll(values);
+        return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -22505,6 +22567,30 @@ public final class Public {
        */
       com.google.protobuf.ByteString
           getActualNumericSequenceColumnNameBytes();
+
+      /**
+       * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+       */
+      java.util.List<com.arize.protocol.Public.Schema.EmbeddingColumnNames> 
+          getEmbeddingFeatureColumnNamesList();
+      /**
+       * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+       */
+      com.arize.protocol.Public.Schema.EmbeddingColumnNames getEmbeddingFeatureColumnNames(int index);
+      /**
+       * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+       */
+      int getEmbeddingFeatureColumnNamesCount();
+      /**
+       * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+       */
+      java.util.List<? extends com.arize.protocol.Public.Schema.EmbeddingColumnNamesOrBuilder> 
+          getEmbeddingFeatureColumnNamesOrBuilderList();
+      /**
+       * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+       */
+      com.arize.protocol.Public.Schema.EmbeddingColumnNamesOrBuilder getEmbeddingFeatureColumnNamesOrBuilder(
+          int index);
     }
     /**
      * <pre>
@@ -22534,6 +22620,7 @@ public final class Public {
         actualScoreColumnName_ = "";
         tagColumnNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         actualNumericSequenceColumnName_ = "";
+        embeddingFeatureColumnNames_ = java.util.Collections.emptyList();
       }
 
       @java.lang.Override
@@ -22640,6 +22727,15 @@ public final class Public {
                 actualNumericSequenceColumnName_ = s;
                 break;
               }
+              case 90: {
+                if (!((mutable_bitField0_ & 0x00000008) != 0)) {
+                  embeddingFeatureColumnNames_ = new java.util.ArrayList<com.arize.protocol.Public.Schema.EmbeddingColumnNames>();
+                  mutable_bitField0_ |= 0x00000008;
+                }
+                embeddingFeatureColumnNames_.add(
+                    input.readMessage(com.arize.protocol.Public.Schema.EmbeddingColumnNames.parser(), extensionRegistry));
+                break;
+              }
               default: {
                 if (!parseUnknownField(
                     input, unknownFields, extensionRegistry, tag)) {
@@ -22660,6 +22756,9 @@ public final class Public {
           }
           if (((mutable_bitField0_ & 0x00000004) != 0)) {
             tagColumnNames_ = tagColumnNames_.getUnmodifiableView();
+          }
+          if (((mutable_bitField0_ & 0x00000008) != 0)) {
+            embeddingFeatureColumnNames_ = java.util.Collections.unmodifiableList(embeddingFeatureColumnNames_);
           }
           this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
@@ -23114,6 +23213,41 @@ public final class Public {
         }
       }
 
+      public static final int EMBEDDING_FEATURE_COLUMN_NAMES_FIELD_NUMBER = 11;
+      private java.util.List<com.arize.protocol.Public.Schema.EmbeddingColumnNames> embeddingFeatureColumnNames_;
+      /**
+       * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+       */
+      public java.util.List<com.arize.protocol.Public.Schema.EmbeddingColumnNames> getEmbeddingFeatureColumnNamesList() {
+        return embeddingFeatureColumnNames_;
+      }
+      /**
+       * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+       */
+      public java.util.List<? extends com.arize.protocol.Public.Schema.EmbeddingColumnNamesOrBuilder> 
+          getEmbeddingFeatureColumnNamesOrBuilderList() {
+        return embeddingFeatureColumnNames_;
+      }
+      /**
+       * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+       */
+      public int getEmbeddingFeatureColumnNamesCount() {
+        return embeddingFeatureColumnNames_.size();
+      }
+      /**
+       * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+       */
+      public com.arize.protocol.Public.Schema.EmbeddingColumnNames getEmbeddingFeatureColumnNames(int index) {
+        return embeddingFeatureColumnNames_.get(index);
+      }
+      /**
+       * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+       */
+      public com.arize.protocol.Public.Schema.EmbeddingColumnNamesOrBuilder getEmbeddingFeatureColumnNamesOrBuilder(
+          int index) {
+        return embeddingFeatureColumnNames_.get(index);
+      }
+
       private byte memoizedIsInitialized = -1;
       @java.lang.Override
       public final boolean isInitialized() {
@@ -23160,6 +23294,9 @@ public final class Public {
         }
         if (!getActualNumericSequenceColumnNameBytes().isEmpty()) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 10, actualNumericSequenceColumnName_);
+        }
+        for (int i = 0; i < embeddingFeatureColumnNames_.size(); i++) {
+          output.writeMessage(11, embeddingFeatureColumnNames_.get(i));
         }
         unknownFields.writeTo(output);
       }
@@ -23217,6 +23354,10 @@ public final class Public {
         if (!getActualNumericSequenceColumnNameBytes().isEmpty()) {
           size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, actualNumericSequenceColumnName_);
         }
+        for (int i = 0; i < embeddingFeatureColumnNames_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(11, embeddingFeatureColumnNames_.get(i));
+        }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
@@ -23252,6 +23393,8 @@ public final class Public {
             .equals(other.getTagColumnNamesList())) return false;
         if (!getActualNumericSequenceColumnName()
             .equals(other.getActualNumericSequenceColumnName())) return false;
+        if (!getEmbeddingFeatureColumnNamesList()
+            .equals(other.getEmbeddingFeatureColumnNamesList())) return false;
         if (!unknownFields.equals(other.unknownFields)) return false;
         return true;
       }
@@ -23289,6 +23432,10 @@ public final class Public {
         }
         hash = (37 * hash) + ACTUAL_NUMERIC_SEQUENCE_COLUMN_NAME_FIELD_NUMBER;
         hash = (53 * hash) + getActualNumericSequenceColumnName().hashCode();
+        if (getEmbeddingFeatureColumnNamesCount() > 0) {
+          hash = (37 * hash) + EMBEDDING_FEATURE_COLUMN_NAMES_FIELD_NUMBER;
+          hash = (53 * hash) + getEmbeddingFeatureColumnNamesList().hashCode();
+        }
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -23445,6 +23592,7 @@ public final class Public {
         private void maybeForceBuilderInitialization() {
           if (com.google.protobuf.GeneratedMessageV3
                   .alwaysUseFieldBuilders) {
+            getEmbeddingFeatureColumnNamesFieldBuilder();
           }
         }
         @java.lang.Override
@@ -23469,6 +23617,12 @@ public final class Public {
           bitField0_ = (bitField0_ & ~0x00000004);
           actualNumericSequenceColumnName_ = "";
 
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            embeddingFeatureColumnNames_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            embeddingFeatureColumnNamesBuilder_.clear();
+          }
           return this;
         }
 
@@ -23515,6 +23669,15 @@ public final class Public {
           }
           result.tagColumnNames_ = tagColumnNames_;
           result.actualNumericSequenceColumnName_ = actualNumericSequenceColumnName_;
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            if (((bitField0_ & 0x00000008) != 0)) {
+              embeddingFeatureColumnNames_ = java.util.Collections.unmodifiableList(embeddingFeatureColumnNames_);
+              bitField0_ = (bitField0_ & ~0x00000008);
+            }
+            result.embeddingFeatureColumnNames_ = embeddingFeatureColumnNames_;
+          } else {
+            result.embeddingFeatureColumnNames_ = embeddingFeatureColumnNamesBuilder_.build();
+          }
           onBuilt();
           return result;
         }
@@ -23612,6 +23775,32 @@ public final class Public {
           if (!other.getActualNumericSequenceColumnName().isEmpty()) {
             actualNumericSequenceColumnName_ = other.actualNumericSequenceColumnName_;
             onChanged();
+          }
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            if (!other.embeddingFeatureColumnNames_.isEmpty()) {
+              if (embeddingFeatureColumnNames_.isEmpty()) {
+                embeddingFeatureColumnNames_ = other.embeddingFeatureColumnNames_;
+                bitField0_ = (bitField0_ & ~0x00000008);
+              } else {
+                ensureEmbeddingFeatureColumnNamesIsMutable();
+                embeddingFeatureColumnNames_.addAll(other.embeddingFeatureColumnNames_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.embeddingFeatureColumnNames_.isEmpty()) {
+              if (embeddingFeatureColumnNamesBuilder_.isEmpty()) {
+                embeddingFeatureColumnNamesBuilder_.dispose();
+                embeddingFeatureColumnNamesBuilder_ = null;
+                embeddingFeatureColumnNames_ = other.embeddingFeatureColumnNames_;
+                bitField0_ = (bitField0_ & ~0x00000008);
+                embeddingFeatureColumnNamesBuilder_ = 
+                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                     getEmbeddingFeatureColumnNamesFieldBuilder() : null;
+              } else {
+                embeddingFeatureColumnNamesBuilder_.addAllMessages(other.embeddingFeatureColumnNames_);
+              }
+            }
           }
           this.mergeUnknownFields(other.unknownFields);
           onChanged();
@@ -24570,6 +24759,246 @@ public final class Public {
           onChanged();
           return this;
         }
+
+        private java.util.List<com.arize.protocol.Public.Schema.EmbeddingColumnNames> embeddingFeatureColumnNames_ =
+          java.util.Collections.emptyList();
+        private void ensureEmbeddingFeatureColumnNamesIsMutable() {
+          if (!((bitField0_ & 0x00000008) != 0)) {
+            embeddingFeatureColumnNames_ = new java.util.ArrayList<com.arize.protocol.Public.Schema.EmbeddingColumnNames>(embeddingFeatureColumnNames_);
+            bitField0_ |= 0x00000008;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+            com.arize.protocol.Public.Schema.EmbeddingColumnNames, com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder, com.arize.protocol.Public.Schema.EmbeddingColumnNamesOrBuilder> embeddingFeatureColumnNamesBuilder_;
+
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public java.util.List<com.arize.protocol.Public.Schema.EmbeddingColumnNames> getEmbeddingFeatureColumnNamesList() {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(embeddingFeatureColumnNames_);
+          } else {
+            return embeddingFeatureColumnNamesBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public int getEmbeddingFeatureColumnNamesCount() {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            return embeddingFeatureColumnNames_.size();
+          } else {
+            return embeddingFeatureColumnNamesBuilder_.getCount();
+          }
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public com.arize.protocol.Public.Schema.EmbeddingColumnNames getEmbeddingFeatureColumnNames(int index) {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            return embeddingFeatureColumnNames_.get(index);
+          } else {
+            return embeddingFeatureColumnNamesBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public Builder setEmbeddingFeatureColumnNames(
+            int index, com.arize.protocol.Public.Schema.EmbeddingColumnNames value) {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureEmbeddingFeatureColumnNamesIsMutable();
+            embeddingFeatureColumnNames_.set(index, value);
+            onChanged();
+          } else {
+            embeddingFeatureColumnNamesBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public Builder setEmbeddingFeatureColumnNames(
+            int index, com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder builderForValue) {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            ensureEmbeddingFeatureColumnNamesIsMutable();
+            embeddingFeatureColumnNames_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            embeddingFeatureColumnNamesBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public Builder addEmbeddingFeatureColumnNames(com.arize.protocol.Public.Schema.EmbeddingColumnNames value) {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureEmbeddingFeatureColumnNamesIsMutable();
+            embeddingFeatureColumnNames_.add(value);
+            onChanged();
+          } else {
+            embeddingFeatureColumnNamesBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public Builder addEmbeddingFeatureColumnNames(
+            int index, com.arize.protocol.Public.Schema.EmbeddingColumnNames value) {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureEmbeddingFeatureColumnNamesIsMutable();
+            embeddingFeatureColumnNames_.add(index, value);
+            onChanged();
+          } else {
+            embeddingFeatureColumnNamesBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public Builder addEmbeddingFeatureColumnNames(
+            com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder builderForValue) {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            ensureEmbeddingFeatureColumnNamesIsMutable();
+            embeddingFeatureColumnNames_.add(builderForValue.build());
+            onChanged();
+          } else {
+            embeddingFeatureColumnNamesBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public Builder addEmbeddingFeatureColumnNames(
+            int index, com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder builderForValue) {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            ensureEmbeddingFeatureColumnNamesIsMutable();
+            embeddingFeatureColumnNames_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            embeddingFeatureColumnNamesBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public Builder addAllEmbeddingFeatureColumnNames(
+            java.lang.Iterable<? extends com.arize.protocol.Public.Schema.EmbeddingColumnNames> values) {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            ensureEmbeddingFeatureColumnNamesIsMutable();
+            com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, embeddingFeatureColumnNames_);
+            onChanged();
+          } else {
+            embeddingFeatureColumnNamesBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public Builder clearEmbeddingFeatureColumnNames() {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            embeddingFeatureColumnNames_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000008);
+            onChanged();
+          } else {
+            embeddingFeatureColumnNamesBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public Builder removeEmbeddingFeatureColumnNames(int index) {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            ensureEmbeddingFeatureColumnNamesIsMutable();
+            embeddingFeatureColumnNames_.remove(index);
+            onChanged();
+          } else {
+            embeddingFeatureColumnNamesBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder getEmbeddingFeatureColumnNamesBuilder(
+            int index) {
+          return getEmbeddingFeatureColumnNamesFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public com.arize.protocol.Public.Schema.EmbeddingColumnNamesOrBuilder getEmbeddingFeatureColumnNamesOrBuilder(
+            int index) {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            return embeddingFeatureColumnNames_.get(index);  } else {
+            return embeddingFeatureColumnNamesBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public java.util.List<? extends com.arize.protocol.Public.Schema.EmbeddingColumnNamesOrBuilder> 
+             getEmbeddingFeatureColumnNamesOrBuilderList() {
+          if (embeddingFeatureColumnNamesBuilder_ != null) {
+            return embeddingFeatureColumnNamesBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(embeddingFeatureColumnNames_);
+          }
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder addEmbeddingFeatureColumnNamesBuilder() {
+          return getEmbeddingFeatureColumnNamesFieldBuilder().addBuilder(
+              com.arize.protocol.Public.Schema.EmbeddingColumnNames.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder addEmbeddingFeatureColumnNamesBuilder(
+            int index) {
+          return getEmbeddingFeatureColumnNamesFieldBuilder().addBuilder(
+              index, com.arize.protocol.Public.Schema.EmbeddingColumnNames.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .public.Schema.EmbeddingColumnNames embedding_feature_column_names = 11;</code>
+         */
+        public java.util.List<com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder> 
+             getEmbeddingFeatureColumnNamesBuilderList() {
+          return getEmbeddingFeatureColumnNamesFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+            com.arize.protocol.Public.Schema.EmbeddingColumnNames, com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder, com.arize.protocol.Public.Schema.EmbeddingColumnNamesOrBuilder> 
+            getEmbeddingFeatureColumnNamesFieldBuilder() {
+          if (embeddingFeatureColumnNamesBuilder_ == null) {
+            embeddingFeatureColumnNamesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+                com.arize.protocol.Public.Schema.EmbeddingColumnNames, com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder, com.arize.protocol.Public.Schema.EmbeddingColumnNamesOrBuilder>(
+                    embeddingFeatureColumnNames_,
+                    ((bitField0_ & 0x00000008) != 0),
+                    getParentForChildren(),
+                    isClean());
+            embeddingFeatureColumnNames_ = null;
+          }
+          return embeddingFeatureColumnNamesBuilder_;
+        }
         @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -24618,6 +25047,868 @@ public final class Public {
 
       @java.lang.Override
       public com.arize.protocol.Public.Schema.ArrowSchema getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
+    }
+
+    public interface EmbeddingColumnNamesOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:public.Schema.EmbeddingColumnNames)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>string vector_column_name = 1;</code>
+       * @return The vectorColumnName.
+       */
+      java.lang.String getVectorColumnName();
+      /**
+       * <code>string vector_column_name = 1;</code>
+       * @return The bytes for vectorColumnName.
+       */
+      com.google.protobuf.ByteString
+          getVectorColumnNameBytes();
+
+      /**
+       * <code>string data_column_name = 2;</code>
+       * @return The dataColumnName.
+       */
+      java.lang.String getDataColumnName();
+      /**
+       * <code>string data_column_name = 2;</code>
+       * @return The bytes for dataColumnName.
+       */
+      com.google.protobuf.ByteString
+          getDataColumnNameBytes();
+
+      /**
+       * <code>string link_to_data_column_name = 3;</code>
+       * @return The linkToDataColumnName.
+       */
+      java.lang.String getLinkToDataColumnName();
+      /**
+       * <code>string link_to_data_column_name = 3;</code>
+       * @return The bytes for linkToDataColumnName.
+       */
+      com.google.protobuf.ByteString
+          getLinkToDataColumnNameBytes();
+    }
+    /**
+     * Protobuf type {@code public.Schema.EmbeddingColumnNames}
+     */
+    public  static final class EmbeddingColumnNames extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:public.Schema.EmbeddingColumnNames)
+        EmbeddingColumnNamesOrBuilder {
+    private static final long serialVersionUID = 0L;
+      // Use EmbeddingColumnNames.newBuilder() to construct.
+      private EmbeddingColumnNames(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private EmbeddingColumnNames() {
+        vectorColumnName_ = "";
+        dataColumnName_ = "";
+        linkToDataColumnName_ = "";
+      }
+
+      @java.lang.Override
+      @SuppressWarnings({"unused"})
+      protected java.lang.Object newInstance(
+          UnusedPrivateParameter unused) {
+        return new EmbeddingColumnNames();
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return this.unknownFields;
+      }
+      private EmbeddingColumnNames(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                vectorColumnName_ = s;
+                break;
+              }
+              case 18: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                dataColumnName_ = s;
+                break;
+              }
+              case 26: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                linkToDataColumnName_ = s;
+                break;
+              }
+              default: {
+                if (!parseUnknownField(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.arize.protocol.Public.internal_static_public_Schema_EmbeddingColumnNames_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.arize.protocol.Public.internal_static_public_Schema_EmbeddingColumnNames_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.arize.protocol.Public.Schema.EmbeddingColumnNames.class, com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder.class);
+      }
+
+      public static final int VECTOR_COLUMN_NAME_FIELD_NUMBER = 1;
+      private volatile java.lang.Object vectorColumnName_;
+      /**
+       * <code>string vector_column_name = 1;</code>
+       * @return The vectorColumnName.
+       */
+      public java.lang.String getVectorColumnName() {
+        java.lang.Object ref = vectorColumnName_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          vectorColumnName_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>string vector_column_name = 1;</code>
+       * @return The bytes for vectorColumnName.
+       */
+      public com.google.protobuf.ByteString
+          getVectorColumnNameBytes() {
+        java.lang.Object ref = vectorColumnName_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          vectorColumnName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int DATA_COLUMN_NAME_FIELD_NUMBER = 2;
+      private volatile java.lang.Object dataColumnName_;
+      /**
+       * <code>string data_column_name = 2;</code>
+       * @return The dataColumnName.
+       */
+      public java.lang.String getDataColumnName() {
+        java.lang.Object ref = dataColumnName_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          dataColumnName_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>string data_column_name = 2;</code>
+       * @return The bytes for dataColumnName.
+       */
+      public com.google.protobuf.ByteString
+          getDataColumnNameBytes() {
+        java.lang.Object ref = dataColumnName_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dataColumnName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int LINK_TO_DATA_COLUMN_NAME_FIELD_NUMBER = 3;
+      private volatile java.lang.Object linkToDataColumnName_;
+      /**
+       * <code>string link_to_data_column_name = 3;</code>
+       * @return The linkToDataColumnName.
+       */
+      public java.lang.String getLinkToDataColumnName() {
+        java.lang.Object ref = linkToDataColumnName_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          linkToDataColumnName_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>string link_to_data_column_name = 3;</code>
+       * @return The bytes for linkToDataColumnName.
+       */
+      public com.google.protobuf.ByteString
+          getLinkToDataColumnNameBytes() {
+        java.lang.Object ref = linkToDataColumnName_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          linkToDataColumnName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      private byte memoizedIsInitialized = -1;
+      @java.lang.Override
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      @java.lang.Override
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (!getVectorColumnNameBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, vectorColumnName_);
+        }
+        if (!getDataColumnNameBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 2, dataColumnName_);
+        }
+        if (!getLinkToDataColumnNameBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 3, linkToDataColumnName_);
+        }
+        unknownFields.writeTo(output);
+      }
+
+      @java.lang.Override
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (!getVectorColumnNameBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, vectorColumnName_);
+        }
+        if (!getDataColumnNameBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, dataColumnName_);
+        }
+        if (!getLinkToDataColumnNameBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, linkToDataColumnName_);
+        }
+        size += unknownFields.getSerializedSize();
+        memoizedSize = size;
+        return size;
+      }
+
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.arize.protocol.Public.Schema.EmbeddingColumnNames)) {
+          return super.equals(obj);
+        }
+        com.arize.protocol.Public.Schema.EmbeddingColumnNames other = (com.arize.protocol.Public.Schema.EmbeddingColumnNames) obj;
+
+        if (!getVectorColumnName()
+            .equals(other.getVectorColumnName())) return false;
+        if (!getDataColumnName()
+            .equals(other.getDataColumnName())) return false;
+        if (!getLinkToDataColumnName()
+            .equals(other.getLinkToDataColumnName())) return false;
+        if (!unknownFields.equals(other.unknownFields)) return false;
+        return true;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptor().hashCode();
+        hash = (37 * hash) + VECTOR_COLUMN_NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getVectorColumnName().hashCode();
+        hash = (37 * hash) + DATA_COLUMN_NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getDataColumnName().hashCode();
+        hash = (37 * hash) + LINK_TO_DATA_COLUMN_NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getLinkToDataColumnName().hashCode();
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      @java.lang.Override
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.arize.protocol.Public.Schema.EmbeddingColumnNames prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      @java.lang.Override
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code public.Schema.EmbeddingColumnNames}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:public.Schema.EmbeddingColumnNames)
+          com.arize.protocol.Public.Schema.EmbeddingColumnNamesOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.arize.protocol.Public.internal_static_public_Schema_EmbeddingColumnNames_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.arize.protocol.Public.internal_static_public_Schema_EmbeddingColumnNames_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.arize.protocol.Public.Schema.EmbeddingColumnNames.class, com.arize.protocol.Public.Schema.EmbeddingColumnNames.Builder.class);
+        }
+
+        // Construct using com.arize.protocol.Public.Schema.EmbeddingColumnNames.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        @java.lang.Override
+        public Builder clear() {
+          super.clear();
+          vectorColumnName_ = "";
+
+          dataColumnName_ = "";
+
+          linkToDataColumnName_ = "";
+
+          return this;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.arize.protocol.Public.internal_static_public_Schema_EmbeddingColumnNames_descriptor;
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.Schema.EmbeddingColumnNames getDefaultInstanceForType() {
+          return com.arize.protocol.Public.Schema.EmbeddingColumnNames.getDefaultInstance();
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.Schema.EmbeddingColumnNames build() {
+          com.arize.protocol.Public.Schema.EmbeddingColumnNames result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.Schema.EmbeddingColumnNames buildPartial() {
+          com.arize.protocol.Public.Schema.EmbeddingColumnNames result = new com.arize.protocol.Public.Schema.EmbeddingColumnNames(this);
+          result.vectorColumnName_ = vectorColumnName_;
+          result.dataColumnName_ = dataColumnName_;
+          result.linkToDataColumnName_ = linkToDataColumnName_;
+          onBuilt();
+          return result;
+        }
+
+        @java.lang.Override
+        public Builder clone() {
+          return super.clone();
+        }
+        @java.lang.Override
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return super.setField(field, value);
+        }
+        @java.lang.Override
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return super.clearField(field);
+        }
+        @java.lang.Override
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return super.clearOneof(oneof);
+        }
+        @java.lang.Override
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, java.lang.Object value) {
+          return super.setRepeatedField(field, index, value);
+        }
+        @java.lang.Override
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return super.addRepeatedField(field, value);
+        }
+        @java.lang.Override
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.arize.protocol.Public.Schema.EmbeddingColumnNames) {
+            return mergeFrom((com.arize.protocol.Public.Schema.EmbeddingColumnNames)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.arize.protocol.Public.Schema.EmbeddingColumnNames other) {
+          if (other == com.arize.protocol.Public.Schema.EmbeddingColumnNames.getDefaultInstance()) return this;
+          if (!other.getVectorColumnName().isEmpty()) {
+            vectorColumnName_ = other.vectorColumnName_;
+            onChanged();
+          }
+          if (!other.getDataColumnName().isEmpty()) {
+            dataColumnName_ = other.dataColumnName_;
+            onChanged();
+          }
+          if (!other.getLinkToDataColumnName().isEmpty()) {
+            linkToDataColumnName_ = other.linkToDataColumnName_;
+            onChanged();
+          }
+          this.mergeUnknownFields(other.unknownFields);
+          onChanged();
+          return this;
+        }
+
+        @java.lang.Override
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.arize.protocol.Public.Schema.EmbeddingColumnNames parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.arize.protocol.Public.Schema.EmbeddingColumnNames) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+
+        private java.lang.Object vectorColumnName_ = "";
+        /**
+         * <code>string vector_column_name = 1;</code>
+         * @return The vectorColumnName.
+         */
+        public java.lang.String getVectorColumnName() {
+          java.lang.Object ref = vectorColumnName_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            vectorColumnName_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>string vector_column_name = 1;</code>
+         * @return The bytes for vectorColumnName.
+         */
+        public com.google.protobuf.ByteString
+            getVectorColumnNameBytes() {
+          java.lang.Object ref = vectorColumnName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            vectorColumnName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>string vector_column_name = 1;</code>
+         * @param value The vectorColumnName to set.
+         * @return This builder for chaining.
+         */
+        public Builder setVectorColumnName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          vectorColumnName_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>string vector_column_name = 1;</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearVectorColumnName() {
+          
+          vectorColumnName_ = getDefaultInstance().getVectorColumnName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>string vector_column_name = 1;</code>
+         * @param value The bytes for vectorColumnName to set.
+         * @return This builder for chaining.
+         */
+        public Builder setVectorColumnNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          vectorColumnName_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object dataColumnName_ = "";
+        /**
+         * <code>string data_column_name = 2;</code>
+         * @return The dataColumnName.
+         */
+        public java.lang.String getDataColumnName() {
+          java.lang.Object ref = dataColumnName_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            dataColumnName_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>string data_column_name = 2;</code>
+         * @return The bytes for dataColumnName.
+         */
+        public com.google.protobuf.ByteString
+            getDataColumnNameBytes() {
+          java.lang.Object ref = dataColumnName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            dataColumnName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>string data_column_name = 2;</code>
+         * @param value The dataColumnName to set.
+         * @return This builder for chaining.
+         */
+        public Builder setDataColumnName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          dataColumnName_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>string data_column_name = 2;</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearDataColumnName() {
+          
+          dataColumnName_ = getDefaultInstance().getDataColumnName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>string data_column_name = 2;</code>
+         * @param value The bytes for dataColumnName to set.
+         * @return This builder for chaining.
+         */
+        public Builder setDataColumnNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          dataColumnName_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object linkToDataColumnName_ = "";
+        /**
+         * <code>string link_to_data_column_name = 3;</code>
+         * @return The linkToDataColumnName.
+         */
+        public java.lang.String getLinkToDataColumnName() {
+          java.lang.Object ref = linkToDataColumnName_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            linkToDataColumnName_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>string link_to_data_column_name = 3;</code>
+         * @return The bytes for linkToDataColumnName.
+         */
+        public com.google.protobuf.ByteString
+            getLinkToDataColumnNameBytes() {
+          java.lang.Object ref = linkToDataColumnName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            linkToDataColumnName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>string link_to_data_column_name = 3;</code>
+         * @param value The linkToDataColumnName to set.
+         * @return This builder for chaining.
+         */
+        public Builder setLinkToDataColumnName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          linkToDataColumnName_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>string link_to_data_column_name = 3;</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearLinkToDataColumnName() {
+          
+          linkToDataColumnName_ = getDefaultInstance().getLinkToDataColumnName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>string link_to_data_column_name = 3;</code>
+         * @param value The bytes for linkToDataColumnName to set.
+         * @return This builder for chaining.
+         */
+        public Builder setLinkToDataColumnNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          linkToDataColumnName_ = value;
+          onChanged();
+          return this;
+        }
+        @java.lang.Override
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.setUnknownFields(unknownFields);
+        }
+
+        @java.lang.Override
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.mergeUnknownFields(unknownFields);
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:public.Schema.EmbeddingColumnNames)
+      }
+
+      // @@protoc_insertion_point(class_scope:public.Schema.EmbeddingColumnNames)
+      private static final com.arize.protocol.Public.Schema.EmbeddingColumnNames DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.arize.protocol.Public.Schema.EmbeddingColumnNames();
+      }
+
+      public static com.arize.protocol.Public.Schema.EmbeddingColumnNames getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<EmbeddingColumnNames>
+          PARSER = new com.google.protobuf.AbstractParser<EmbeddingColumnNames>() {
+        @java.lang.Override
+        public EmbeddingColumnNames parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new EmbeddingColumnNames(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<EmbeddingColumnNames> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<EmbeddingColumnNames> getParserForType() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.Schema.EmbeddingColumnNames getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
       }
 
@@ -30354,6 +31645,818 @@ public final class Public {
 
   }
 
+  public interface ArrowFileUploadResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:public.ArrowFileUploadResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * error field is set if any error was encountered during the file upload request. If request was successful this field
+     * is an empty string
+     * </pre>
+     *
+     * <code>string error = 1;</code>
+     * @return The error.
+     */
+    java.lang.String getError();
+    /**
+     * <pre>
+     * error field is set if any error was encountered during the file upload request. If request was successful this field
+     * is an empty string
+     * </pre>
+     *
+     * <code>string error = 1;</code>
+     * @return The bytes for error.
+     */
+    com.google.protobuf.ByteString
+        getErrorBytes();
+
+    /**
+     * <pre>
+     * the URI to the real time ingestion page that will show real time ingestion stats on the records sent in via the file upload
+     * this field is empty if an error occurred during the request.
+     * </pre>
+     *
+     * <code>string real_time_ingestion_uri = 2;</code>
+     * @return The realTimeIngestionUri.
+     */
+    java.lang.String getRealTimeIngestionUri();
+    /**
+     * <pre>
+     * the URI to the real time ingestion page that will show real time ingestion stats on the records sent in via the file upload
+     * this field is empty if an error occurred during the request.
+     * </pre>
+     *
+     * <code>string real_time_ingestion_uri = 2;</code>
+     * @return The bytes for realTimeIngestionUri.
+     */
+    com.google.protobuf.ByteString
+        getRealTimeIngestionUriBytes();
+  }
+  /**
+   * <pre>
+   * ArrowFileUploadResponse is the response body for the ArrowFileUpload receiver endpoint.
+   * </pre>
+   *
+   * Protobuf type {@code public.ArrowFileUploadResponse}
+   */
+  public  static final class ArrowFileUploadResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:public.ArrowFileUploadResponse)
+      ArrowFileUploadResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ArrowFileUploadResponse.newBuilder() to construct.
+    private ArrowFileUploadResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ArrowFileUploadResponse() {
+      error_ = "";
+      realTimeIngestionUri_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ArrowFileUploadResponse();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ArrowFileUploadResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              error_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              realTimeIngestionUri_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.arize.protocol.Public.internal_static_public_ArrowFileUploadResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.arize.protocol.Public.internal_static_public_ArrowFileUploadResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.arize.protocol.Public.ArrowFileUploadResponse.class, com.arize.protocol.Public.ArrowFileUploadResponse.Builder.class);
+    }
+
+    public static final int ERROR_FIELD_NUMBER = 1;
+    private volatile java.lang.Object error_;
+    /**
+     * <pre>
+     * error field is set if any error was encountered during the file upload request. If request was successful this field
+     * is an empty string
+     * </pre>
+     *
+     * <code>string error = 1;</code>
+     * @return The error.
+     */
+    public java.lang.String getError() {
+      java.lang.Object ref = error_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        error_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * error field is set if any error was encountered during the file upload request. If request was successful this field
+     * is an empty string
+     * </pre>
+     *
+     * <code>string error = 1;</code>
+     * @return The bytes for error.
+     */
+    public com.google.protobuf.ByteString
+        getErrorBytes() {
+      java.lang.Object ref = error_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        error_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int REAL_TIME_INGESTION_URI_FIELD_NUMBER = 2;
+    private volatile java.lang.Object realTimeIngestionUri_;
+    /**
+     * <pre>
+     * the URI to the real time ingestion page that will show real time ingestion stats on the records sent in via the file upload
+     * this field is empty if an error occurred during the request.
+     * </pre>
+     *
+     * <code>string real_time_ingestion_uri = 2;</code>
+     * @return The realTimeIngestionUri.
+     */
+    public java.lang.String getRealTimeIngestionUri() {
+      java.lang.Object ref = realTimeIngestionUri_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        realTimeIngestionUri_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * the URI to the real time ingestion page that will show real time ingestion stats on the records sent in via the file upload
+     * this field is empty if an error occurred during the request.
+     * </pre>
+     *
+     * <code>string real_time_ingestion_uri = 2;</code>
+     * @return The bytes for realTimeIngestionUri.
+     */
+    public com.google.protobuf.ByteString
+        getRealTimeIngestionUriBytes() {
+      java.lang.Object ref = realTimeIngestionUri_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        realTimeIngestionUri_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getErrorBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, error_);
+      }
+      if (!getRealTimeIngestionUriBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, realTimeIngestionUri_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getErrorBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, error_);
+      }
+      if (!getRealTimeIngestionUriBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, realTimeIngestionUri_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.arize.protocol.Public.ArrowFileUploadResponse)) {
+        return super.equals(obj);
+      }
+      com.arize.protocol.Public.ArrowFileUploadResponse other = (com.arize.protocol.Public.ArrowFileUploadResponse) obj;
+
+      if (!getError()
+          .equals(other.getError())) return false;
+      if (!getRealTimeIngestionUri()
+          .equals(other.getRealTimeIngestionUri())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ERROR_FIELD_NUMBER;
+      hash = (53 * hash) + getError().hashCode();
+      hash = (37 * hash) + REAL_TIME_INGESTION_URI_FIELD_NUMBER;
+      hash = (53 * hash) + getRealTimeIngestionUri().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.arize.protocol.Public.ArrowFileUploadResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.arize.protocol.Public.ArrowFileUploadResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * ArrowFileUploadResponse is the response body for the ArrowFileUpload receiver endpoint.
+     * </pre>
+     *
+     * Protobuf type {@code public.ArrowFileUploadResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:public.ArrowFileUploadResponse)
+        com.arize.protocol.Public.ArrowFileUploadResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.arize.protocol.Public.internal_static_public_ArrowFileUploadResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.arize.protocol.Public.internal_static_public_ArrowFileUploadResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.arize.protocol.Public.ArrowFileUploadResponse.class, com.arize.protocol.Public.ArrowFileUploadResponse.Builder.class);
+      }
+
+      // Construct using com.arize.protocol.Public.ArrowFileUploadResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        error_ = "";
+
+        realTimeIngestionUri_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.arize.protocol.Public.internal_static_public_ArrowFileUploadResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.ArrowFileUploadResponse getDefaultInstanceForType() {
+        return com.arize.protocol.Public.ArrowFileUploadResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.ArrowFileUploadResponse build() {
+        com.arize.protocol.Public.ArrowFileUploadResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.ArrowFileUploadResponse buildPartial() {
+        com.arize.protocol.Public.ArrowFileUploadResponse result = new com.arize.protocol.Public.ArrowFileUploadResponse(this);
+        result.error_ = error_;
+        result.realTimeIngestionUri_ = realTimeIngestionUri_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.arize.protocol.Public.ArrowFileUploadResponse) {
+          return mergeFrom((com.arize.protocol.Public.ArrowFileUploadResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.arize.protocol.Public.ArrowFileUploadResponse other) {
+        if (other == com.arize.protocol.Public.ArrowFileUploadResponse.getDefaultInstance()) return this;
+        if (!other.getError().isEmpty()) {
+          error_ = other.error_;
+          onChanged();
+        }
+        if (!other.getRealTimeIngestionUri().isEmpty()) {
+          realTimeIngestionUri_ = other.realTimeIngestionUri_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.arize.protocol.Public.ArrowFileUploadResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.arize.protocol.Public.ArrowFileUploadResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object error_ = "";
+      /**
+       * <pre>
+       * error field is set if any error was encountered during the file upload request. If request was successful this field
+       * is an empty string
+       * </pre>
+       *
+       * <code>string error = 1;</code>
+       * @return The error.
+       */
+      public java.lang.String getError() {
+        java.lang.Object ref = error_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          error_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * error field is set if any error was encountered during the file upload request. If request was successful this field
+       * is an empty string
+       * </pre>
+       *
+       * <code>string error = 1;</code>
+       * @return The bytes for error.
+       */
+      public com.google.protobuf.ByteString
+          getErrorBytes() {
+        java.lang.Object ref = error_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          error_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * error field is set if any error was encountered during the file upload request. If request was successful this field
+       * is an empty string
+       * </pre>
+       *
+       * <code>string error = 1;</code>
+       * @param value The error to set.
+       * @return This builder for chaining.
+       */
+      public Builder setError(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        error_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * error field is set if any error was encountered during the file upload request. If request was successful this field
+       * is an empty string
+       * </pre>
+       *
+       * <code>string error = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearError() {
+        
+        error_ = getDefaultInstance().getError();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * error field is set if any error was encountered during the file upload request. If request was successful this field
+       * is an empty string
+       * </pre>
+       *
+       * <code>string error = 1;</code>
+       * @param value The bytes for error to set.
+       * @return This builder for chaining.
+       */
+      public Builder setErrorBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        error_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object realTimeIngestionUri_ = "";
+      /**
+       * <pre>
+       * the URI to the real time ingestion page that will show real time ingestion stats on the records sent in via the file upload
+       * this field is empty if an error occurred during the request.
+       * </pre>
+       *
+       * <code>string real_time_ingestion_uri = 2;</code>
+       * @return The realTimeIngestionUri.
+       */
+      public java.lang.String getRealTimeIngestionUri() {
+        java.lang.Object ref = realTimeIngestionUri_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          realTimeIngestionUri_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * the URI to the real time ingestion page that will show real time ingestion stats on the records sent in via the file upload
+       * this field is empty if an error occurred during the request.
+       * </pre>
+       *
+       * <code>string real_time_ingestion_uri = 2;</code>
+       * @return The bytes for realTimeIngestionUri.
+       */
+      public com.google.protobuf.ByteString
+          getRealTimeIngestionUriBytes() {
+        java.lang.Object ref = realTimeIngestionUri_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          realTimeIngestionUri_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * the URI to the real time ingestion page that will show real time ingestion stats on the records sent in via the file upload
+       * this field is empty if an error occurred during the request.
+       * </pre>
+       *
+       * <code>string real_time_ingestion_uri = 2;</code>
+       * @param value The realTimeIngestionUri to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRealTimeIngestionUri(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        realTimeIngestionUri_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * the URI to the real time ingestion page that will show real time ingestion stats on the records sent in via the file upload
+       * this field is empty if an error occurred during the request.
+       * </pre>
+       *
+       * <code>string real_time_ingestion_uri = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRealTimeIngestionUri() {
+        
+        realTimeIngestionUri_ = getDefaultInstance().getRealTimeIngestionUri();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * the URI to the real time ingestion page that will show real time ingestion stats on the records sent in via the file upload
+       * this field is empty if an error occurred during the request.
+       * </pre>
+       *
+       * <code>string real_time_ingestion_uri = 2;</code>
+       * @param value The bytes for realTimeIngestionUri to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRealTimeIngestionUriBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        realTimeIngestionUri_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:public.ArrowFileUploadResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:public.ArrowFileUploadResponse)
+    private static final com.arize.protocol.Public.ArrowFileUploadResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.arize.protocol.Public.ArrowFileUploadResponse();
+    }
+
+    public static com.arize.protocol.Public.ArrowFileUploadResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ArrowFileUploadResponse>
+        PARSER = new com.google.protobuf.AbstractParser<ArrowFileUploadResponse>() {
+      @java.lang.Override
+      public ArrowFileUploadResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ArrowFileUploadResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ArrowFileUploadResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ArrowFileUploadResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.arize.protocol.Public.ArrowFileUploadResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_public_BulkRecord_descriptor;
   private static final 
@@ -30445,6 +32548,11 @@ public final class Public {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_public_Actual_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_Actual_TagsEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_Actual_TagsEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_public_FeatureImportances_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -30495,6 +32603,11 @@ public final class Public {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_public_Schema_ArrowSchema_ShapValuesColumnNamesEntry_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_Schema_EmbeddingColumnNames_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_Schema_EmbeddingColumnNames_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_public_Schema_GenericSchema_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -30509,6 +32622,11 @@ public final class Public {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_public_Schema_GenericSchema_GroupFieldDescriptor_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_ArrowFileUploadResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_ArrowFileUploadResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -30563,84 +32681,92 @@ public final class Public {
       "H\000\022\r\n\003int\030\002 \001(\003H\000\022\020\n\006double\030\003 \001(\001H\000\022)\n\013m" +
       "ulti_value\030\004 \001(\0132\022.public.MultiValueH\000\022&" +
       "\n\tembedding\030\005 \001(\0132\021.public.EmbeddingH\000B\006" +
-      "\n\004data\"\034\n\nMultiValue\022\016\n\006values\030\001 \003(\t\"\243\002\n" +
-      "\tEmbedding\022\016\n\006vector\030\001 \003(\001\022.\n\004data\030\002 \001(\013" +
-      "2\034.google.protobuf.StringValueB\002\030\001\0222\n\014li" +
-      "nk_to_data\030\003 \001(\0132\034.google.protobuf.Strin" +
-      "gValue\022+\n\010raw_data\030\004 \001(\0132\031.public.Embedd" +
-      "ing.RawData\032W\n\007RawData\022\020\n\006string\030\001 \001(\tH\000" +
-      "\0222\n\ntokenArray\030\002 \001(\0132\034.public.Embedding." +
-      "TokenArrayH\000B\006\n\004type\032\034\n\nTokenArray\022\016\n\006to" +
-      "kens\030\001 \003(\t\"U\n\006Actual\022-\n\ttimestamp\030\001 \001(\0132" +
-      "\032.google.protobuf.Timestamp\022\034\n\005label\030\002 \001" +
-      "(\0132\r.public.Label\"\346\001\n\022FeatureImportances" +
-      "\022-\n\ttimestamp\030\001 \001(\0132\032.google.protobuf.Ti" +
-      "mestamp\022\025\n\rmodel_version\030\002 \001(\t\022O\n\023featur" +
-      "e_importances\030\003 \003(\01322.public.FeatureImpo" +
-      "rtances.FeatureImportancesEntry\0329\n\027Featu" +
-      "reImportancesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value" +
-      "\030\002 \001(\001:\0028\001\"]\n\023PredictionAndActual\022&\n\npre" +
-      "diction\030\001 \001(\0132\022.public.Prediction\022\036\n\006act" +
-      "ual\030\002 \001(\0132\016.public.Actual\"\213\001\n\nFileHeader" +
-      "\0223\n\013environment\030\001 \001(\0162\036.public.FileHeade" +
-      "r.Environment\"H\n\013Environment\022\013\n\007UNKNOWN\020" +
-      "\000\022\014\n\010TRAINING\020\001\022\016\n\nVALIDATION\020\002\022\016\n\nPRODU" +
-      "CTION\020\003\"\311\020\n\006Schema\022+\n\tconstants\030\001 \001(\0132\030." +
-      "public.Schema.Constants\022<\n\021arize_conclus" +
-      "ions\030\002 \001(\0132\037.public.Schema.ArizeConclusi" +
-      "onsH\000\022>\n\022arize_explanations\030\003 \001(\0132 .publ" +
-      "ic.Schema.ArizeExplanationsH\000\0222\n\014arrow_s" +
-      "chema\030\004 \001(\0132\032.public.Schema.ArrowSchemaH" +
-      "\000\0226\n\016generic_schema\030\005 \001(\0132\034.public.Schem" +
-      "a.GenericSchemaH\000\032\245\001\n\tConstants\022\020\n\010model" +
-      "_id\030\001 \001(\t\022\025\n\rmodel_version\030\002 \001(\t\022\020\n\010batc" +
-      "h_id\030\003 \001(\t\022/\n\013environment\030\004 \001(\0162\032.public" +
-      ".Schema.Environment\022,\n\nmodel_type\030\005 \001(\0162" +
-      "\030.public.Schema.ModelType\032\022\n\020ArizeConclu" +
-      "sions\032\023\n\021ArizeExplanations\032\333\003\n\013ArrowSche" +
-      "ma\022!\n\031prediction_id_column_name\030\001 \001(\t\022\034\n" +
-      "\024feature_column_names\030\002 \003(\t\022\035\n\025timestamp" +
-      "_column_name\030\003 \001(\t\022$\n\034prediction_label_c" +
-      "olumn_name\030\004 \001(\t\022$\n\034prediction_score_col" +
-      "umn_name\030\005 \001(\t\022 \n\030actual_label_column_na" +
-      "me\030\006 \001(\t\022 \n\030actual_score_column_name\030\007 \001" +
-      "(\t\022W\n\030shap_values_column_names\030\010 \003(\01325.p" +
-      "ublic.Schema.ArrowSchema.ShapValuesColum" +
-      "nNamesEntry\022\030\n\020tag_column_names\030\t \003(\t\022+\n" +
-      "#actual_numeric_sequence_column_name\030\n \001" +
-      "(\t\032<\n\032ShapValuesColumnNamesEntry\022\013\n\003key\030" +
-      "\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032\263\007\n\rGenericSche" +
-      "ma\022C\n\rprediction_id\030\001 \001(\0132,.public.Schem" +
-      "a.GenericSchema.FieldDescriptor\022C\n\010featu" +
-      "res\030\002 \001(\01321.public.Schema.GenericSchema." +
-      "GroupFieldDescriptor\022?\n\ttimestamp\030\003 \001(\0132" +
-      ",.public.Schema.GenericSchema.FieldDescr" +
-      "iptor\022F\n\020prediction_label\030\004 \001(\0132,.public" +
-      ".Schema.GenericSchema.FieldDescriptor\022F\n" +
-      "\020prediction_score\030\005 \001(\0132,.public.Schema." +
-      "GenericSchema.FieldDescriptor\022B\n\014actual_" +
-      "label\030\006 \001(\0132,.public.Schema.GenericSchem" +
-      "a.FieldDescriptor\022B\n\014actual_score\030\007 \001(\0132" +
-      ",.public.Schema.GenericSchema.FieldDescr" +
-      "iptor\022F\n\013shap_values\030\010 \001(\01321.public.Sche" +
-      "ma.GenericSchema.GroupFieldDescriptor\022?\n" +
-      "\004tags\030\t \001(\01321.public.Schema.GenericSchem" +
-      "a.GroupFieldDescriptor\022G\n\021model_environm" +
-      "ent\030\n \001(\0132,.public.Schema.GenericSchema." +
-      "FieldDescriptor\022C\n\rmodel_version\030\013 \001(\0132," +
-      ".public.Schema.GenericSchema.FieldDescri" +
-      "ptor\022>\n\010batch_id\030\014 \001(\0132,.public.Schema.G" +
-      "enericSchema.FieldDescriptor\032%\n\017FieldDes" +
-      "criptor\022\022\n\nproperties\030\001 \003(\t\032A\n\024GroupFiel" +
-      "dDescriptor\022\022\n\nproperties\030\001 \003(\t\022\025\n\rcaptu" +
-      "re_group\030\002 \001(\t\"T\n\013Environment\022\027\n\023UNKNOWN" +
-      "_ENVIRONMENT\020\000\022\014\n\010TRAINING\020\001\022\016\n\nVALIDATI" +
-      "ON\020\002\022\016\n\nPRODUCTION\020\003\"c\n\tModelType\022\025\n\021UNK" +
-      "NOWN_MODELTYPE\020\000\022\n\n\006BINARY\020\001\022\013\n\007NUMERIC\020" +
-      "\002\022\017\n\013CATEGORICAL\020\003\022\025\n\021SCORE_CATEGORICAL\020" +
-      "\004B\010\n\006schemaBO\n\022com.arize.protocolZ9githu" +
-      "b.com/Arize-ai/arize/go/pkg/receiver/pro" +
-      "tocol/publicb\006proto3"
+      "\n\004data\"\034\n\nMultiValue\022\016\n\006values\030\001 \003(\t\"\355\001\n" +
+      "\tEmbedding\022\016\n\006vector\030\001 \003(\001\0222\n\014link_to_da" +
+      "ta\030\003 \001(\0132\034.google.protobuf.StringValue\022+" +
+      "\n\010raw_data\030\004 \001(\0132\031.public.Embedding.RawD" +
+      "ata\032K\n\007RawData\0222\n\ntokenArray\030\002 \001(\0132\034.pub" +
+      "lic.Embedding.TokenArrayH\000B\006\n\004typeJ\004\010\001\020\002" +
+      "\032\034\n\nTokenArray\022\016\n\006tokens\030\001 \003(\tJ\004\010\002\020\003\"\271\001\n" +
+      "\006Actual\022-\n\ttimestamp\030\001 \001(\0132\032.google.prot" +
+      "obuf.Timestamp\022\034\n\005label\030\002 \001(\0132\r.public.L" +
+      "abel\022&\n\004tags\030\003 \003(\0132\030.public.Actual.TagsE" +
+      "ntry\032:\n\tTagsEntry\022\013\n\003key\030\001 \001(\t\022\034\n\005value\030" +
+      "\002 \001(\0132\r.public.Value:\0028\001\"\346\001\n\022FeatureImpo" +
+      "rtances\022-\n\ttimestamp\030\001 \001(\0132\032.google.prot" +
+      "obuf.Timestamp\022\025\n\rmodel_version\030\002 \001(\t\022O\n" +
+      "\023feature_importances\030\003 \003(\01322.public.Feat" +
+      "ureImportances.FeatureImportancesEntry\0329" +
+      "\n\027FeatureImportancesEntry\022\013\n\003key\030\001 \001(\t\022\r" +
+      "\n\005value\030\002 \001(\001:\0028\001\"]\n\023PredictionAndActual" +
+      "\022&\n\nprediction\030\001 \001(\0132\022.public.Prediction" +
+      "\022\036\n\006actual\030\002 \001(\0132\016.public.Actual\"\213\001\n\nFil" +
+      "eHeader\0223\n\013environment\030\001 \001(\0162\036.public.Fi" +
+      "leHeader.Environment\"H\n\013Environment\022\013\n\007U" +
+      "NKNOWN\020\000\022\014\n\010TRAINING\020\001\022\016\n\nVALIDATION\020\002\022\016" +
+      "\n\nPRODUCTION\020\003\"\206\022\n\006Schema\022+\n\tconstants\030\001" +
+      " \001(\0132\030.public.Schema.Constants\022<\n\021arize_" +
+      "conclusions\030\002 \001(\0132\037.public.Schema.ArizeC" +
+      "onclusionsH\000\022>\n\022arize_explanations\030\003 \001(\013" +
+      "2 .public.Schema.ArizeExplanationsH\000\0222\n\014" +
+      "arrow_schema\030\004 \001(\0132\032.public.Schema.Arrow" +
+      "SchemaH\000\0226\n\016generic_schema\030\005 \001(\0132\034.publi" +
+      "c.Schema.GenericSchemaH\000\032\245\001\n\tConstants\022\020" +
+      "\n\010model_id\030\001 \001(\t\022\025\n\rmodel_version\030\002 \001(\t\022" +
+      "\020\n\010batch_id\030\003 \001(\t\022/\n\013environment\030\004 \001(\0162\032" +
+      ".public.Schema.Environment\022,\n\nmodel_type" +
+      "\030\005 \001(\0162\030.public.Schema.ModelType\032\022\n\020Ariz" +
+      "eConclusions\032\023\n\021ArizeExplanations\032\250\004\n\013Ar" +
+      "rowSchema\022!\n\031prediction_id_column_name\030\001" +
+      " \001(\t\022\034\n\024feature_column_names\030\002 \003(\t\022\035\n\025ti" +
+      "mestamp_column_name\030\003 \001(\t\022$\n\034prediction_" +
+      "label_column_name\030\004 \001(\t\022$\n\034prediction_sc" +
+      "ore_column_name\030\005 \001(\t\022 \n\030actual_label_co" +
+      "lumn_name\030\006 \001(\t\022 \n\030actual_score_column_n" +
+      "ame\030\007 \001(\t\022W\n\030shap_values_column_names\030\010 " +
+      "\003(\01325.public.Schema.ArrowSchema.ShapValu" +
+      "esColumnNamesEntry\022\030\n\020tag_column_names\030\t" +
+      " \003(\t\022+\n#actual_numeric_sequence_column_n" +
+      "ame\030\n \001(\t\022K\n\036embedding_feature_column_na" +
+      "mes\030\013 \003(\0132#.public.Schema.EmbeddingColum" +
+      "nNames\032<\n\032ShapValuesColumnNamesEntry\022\013\n\003" +
+      "key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032n\n\024Embeddin" +
+      "gColumnNames\022\032\n\022vector_column_name\030\001 \001(\t" +
+      "\022\030\n\020data_column_name\030\002 \001(\t\022 \n\030link_to_da" +
+      "ta_column_name\030\003 \001(\t\032\263\007\n\rGenericSchema\022C" +
+      "\n\rprediction_id\030\001 \001(\0132,.public.Schema.Ge" +
+      "nericSchema.FieldDescriptor\022C\n\010features\030" +
+      "\002 \001(\01321.public.Schema.GenericSchema.Grou" +
+      "pFieldDescriptor\022?\n\ttimestamp\030\003 \001(\0132,.pu" +
+      "blic.Schema.GenericSchema.FieldDescripto" +
+      "r\022F\n\020prediction_label\030\004 \001(\0132,.public.Sch" +
+      "ema.GenericSchema.FieldDescriptor\022F\n\020pre" +
+      "diction_score\030\005 \001(\0132,.public.Schema.Gene" +
+      "ricSchema.FieldDescriptor\022B\n\014actual_labe" +
+      "l\030\006 \001(\0132,.public.Schema.GenericSchema.Fi" +
+      "eldDescriptor\022B\n\014actual_score\030\007 \001(\0132,.pu" +
+      "blic.Schema.GenericSchema.FieldDescripto" +
+      "r\022F\n\013shap_values\030\010 \001(\01321.public.Schema.G" +
+      "enericSchema.GroupFieldDescriptor\022?\n\004tag" +
+      "s\030\t \001(\01321.public.Schema.GenericSchema.Gr" +
+      "oupFieldDescriptor\022G\n\021model_environment\030" +
+      "\n \001(\0132,.public.Schema.GenericSchema.Fiel" +
+      "dDescriptor\022C\n\rmodel_version\030\013 \001(\0132,.pub" +
+      "lic.Schema.GenericSchema.FieldDescriptor" +
+      "\022>\n\010batch_id\030\014 \001(\0132,.public.Schema.Gener" +
+      "icSchema.FieldDescriptor\032%\n\017FieldDescrip" +
+      "tor\022\022\n\nproperties\030\001 \003(\t\032A\n\024GroupFieldDes" +
+      "criptor\022\022\n\nproperties\030\001 \003(\t\022\025\n\rcapture_g" +
+      "roup\030\002 \001(\t\"T\n\013Environment\022\027\n\023UNKNOWN_ENV" +
+      "IRONMENT\020\000\022\014\n\010TRAINING\020\001\022\016\n\nVALIDATION\020\002" +
+      "\022\016\n\nPRODUCTION\020\003\"c\n\tModelType\022\025\n\021UNKNOWN" +
+      "_MODELTYPE\020\000\022\n\n\006BINARY\020\001\022\013\n\007NUMERIC\020\002\022\017\n" +
+      "\013CATEGORICAL\020\003\022\025\n\021SCORE_CATEGORICAL\020\004B\010\n" +
+      "\006schema\"I\n\027ArrowFileUploadResponse\022\r\n\005er" +
+      "ror\030\001 \001(\t\022\037\n\027real_time_ingestion_uri\030\002 \001" +
+      "(\tBO\n\022com.arize.protocolZ9github.com/Ari" +
+      "ze-ai/arize/go/pkg/receiver/protocol/pub" +
+      "licb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -30737,13 +32863,13 @@ public final class Public {
     internal_static_public_Embedding_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Embedding_descriptor,
-        new java.lang.String[] { "Vector", "Data", "LinkToData", "RawData", });
+        new java.lang.String[] { "Vector", "LinkToData", "RawData", });
     internal_static_public_Embedding_RawData_descriptor =
       internal_static_public_Embedding_descriptor.getNestedTypes().get(0);
     internal_static_public_Embedding_RawData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Embedding_RawData_descriptor,
-        new java.lang.String[] { "String", "TokenArray", "Type", });
+        new java.lang.String[] { "TokenArray", "Type", });
     internal_static_public_Embedding_TokenArray_descriptor =
       internal_static_public_Embedding_descriptor.getNestedTypes().get(1);
     internal_static_public_Embedding_TokenArray_fieldAccessorTable = new
@@ -30755,7 +32881,13 @@ public final class Public {
     internal_static_public_Actual_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Actual_descriptor,
-        new java.lang.String[] { "Timestamp", "Label", });
+        new java.lang.String[] { "Timestamp", "Label", "Tags", });
+    internal_static_public_Actual_TagsEntry_descriptor =
+      internal_static_public_Actual_descriptor.getNestedTypes().get(0);
+    internal_static_public_Actual_TagsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_Actual_TagsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
     internal_static_public_FeatureImportances_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_public_FeatureImportances_fieldAccessorTable = new
@@ -30809,15 +32941,21 @@ public final class Public {
     internal_static_public_Schema_ArrowSchema_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Schema_ArrowSchema_descriptor,
-        new java.lang.String[] { "PredictionIdColumnName", "FeatureColumnNames", "TimestampColumnName", "PredictionLabelColumnName", "PredictionScoreColumnName", "ActualLabelColumnName", "ActualScoreColumnName", "ShapValuesColumnNames", "TagColumnNames", "ActualNumericSequenceColumnName", });
+        new java.lang.String[] { "PredictionIdColumnName", "FeatureColumnNames", "TimestampColumnName", "PredictionLabelColumnName", "PredictionScoreColumnName", "ActualLabelColumnName", "ActualScoreColumnName", "ShapValuesColumnNames", "TagColumnNames", "ActualNumericSequenceColumnName", "EmbeddingFeatureColumnNames", });
     internal_static_public_Schema_ArrowSchema_ShapValuesColumnNamesEntry_descriptor =
       internal_static_public_Schema_ArrowSchema_descriptor.getNestedTypes().get(0);
     internal_static_public_Schema_ArrowSchema_ShapValuesColumnNamesEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Schema_ArrowSchema_ShapValuesColumnNamesEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_public_Schema_GenericSchema_descriptor =
+    internal_static_public_Schema_EmbeddingColumnNames_descriptor =
       internal_static_public_Schema_descriptor.getNestedTypes().get(4);
+    internal_static_public_Schema_EmbeddingColumnNames_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_Schema_EmbeddingColumnNames_descriptor,
+        new java.lang.String[] { "VectorColumnName", "DataColumnName", "LinkToDataColumnName", });
+    internal_static_public_Schema_GenericSchema_descriptor =
+      internal_static_public_Schema_descriptor.getNestedTypes().get(5);
     internal_static_public_Schema_GenericSchema_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Schema_GenericSchema_descriptor,
@@ -30834,6 +32972,12 @@ public final class Public {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Schema_GenericSchema_GroupFieldDescriptor_descriptor,
         new java.lang.String[] { "Properties", "CaptureGroup", });
+    internal_static_public_ArrowFileUploadResponse_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_public_ArrowFileUploadResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_ArrowFileUploadResponse_descriptor,
+        new java.lang.String[] { "Error", "RealTimeIngestionUri", });
     com.google.protobuf.TimestampProto.getDescriptor();
     com.google.protobuf.WrappersProto.getDescriptor();
   }

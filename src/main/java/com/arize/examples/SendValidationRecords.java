@@ -32,7 +32,7 @@ public class SendValidationRecords {
         final List<String> predictionLabels = new ArrayList<String>(Arrays.asList("pear", "banana", "apple"));
         final List<String> actualLabels = new ArrayList<String>(Arrays.asList("pear", "strawberry", "apple"));
 
-        final Response asyncResponse = arize.logValidationRecords("exampleModelId", "v1", "offline", features, predictionLabels, actualLabels);
+        final Response asyncResponse = arize.logValidationRecords("exampleModelId", "v1", "offline", features, null, predictionLabels, actualLabels);
 
         // This is a blocking call similar to future.get()
         asyncResponse.resolve();

@@ -132,13 +132,14 @@ public class ArizeClient implements ArizeAPI {
      * log constructs a record and executes the API call asynchronously returning a future.
      */
     @Override
-    public <T> Response log(String modelId, String modelVersion, String predictionId, Map<String, ?> features, T predictionLabel, T actualLabel, Map<String, Double> shapValues, long predictionTimestamp) throws IOException, IllegalArgumentException {
+    public <T> Response log(String modelId, String modelVersion, String predictionId, Map<String, ?> features, Map<String, ?> tags, T predictionLabel, T actualLabel, Map<String, Double> shapValues, long predictionTimestamp) throws IOException, IllegalArgumentException {
         if (modelId == null || modelId.isEmpty()) {
             throw new IllegalArgumentException("modelId cannot be null or empty");
         }
         if (predictionId == null || predictionId.length() == 0) {
             throw new IllegalArgumentException("predictionId cannot be null or empty");
         }
+        RecordUtil.validatePredictionActualMatches(predictionLabel, actualLabel);
         Record.Builder builder = Record.newBuilder();
         builder.setModelId(modelId);
         builder.setPredictionId(predictionId);
@@ -153,6 +154,9 @@ public class ArizeClient implements ArizeAPI {
             if (features != null) {
                 predictionBuilder.putAllFeatures(RecordUtil.convertFeatures(features));
             }
+            if (tags != null) {
+                predictionBuilder.putAllTags(RecordUtil.convertTags(tags));
+            }
             if (predictionTimestamp != 0) {
                 predictionBuilder.setTimestamp(Timestamps.fromMillis(predictionTimestamp));
             }
@@ -163,6 +167,10 @@ public class ArizeClient implements ArizeAPI {
             actualBuilder.setLabel(RecordUtil.convertLabel(actualLabel));
             if (predictionTimestamp != 0) {
                 actualBuilder.setTimestamp(Timestamps.fromMillis(predictionTimestamp));
+            }
+            // Added to support latent tags on actuals.
+            if (tags != null) {
+                actualBuilder.putAllTags(RecordUtil.convertTags(tags));
             }
             builder.setActual(actualBuilder);
         }
@@ -187,7 +195,7 @@ public class ArizeClient implements ArizeAPI {
      * bulkLog constructs a bulk record and executes the API call asynchronously returning a future response.
      */
     @Override
-    public <T> Response bulkLog(String modelId, String modelVersion, List<String> predictionIds, List<Map<String, ?>> features, List<T> predictionLabels, List<T> actualLabels, List<Map<String, Double>> shapValues, List<Long> predictionTimestamps) throws IOException, IllegalArgumentException {
+    public <T> Response bulkLog(String modelId, String modelVersion, List<String> predictionIds, List<Map<String, ?>> features, List<Map<String, ?>> tags, List<T> predictionLabels, List<T> actualLabels, List<Map<String, Double>> shapValues, List<Long> predictionTimestamps) throws IOException, IllegalArgumentException {
         if (modelId == null || modelId.isEmpty()) {
             throw new IllegalArgumentException("modelId cannot be null or empty");
         }
@@ -203,12 +211,16 @@ public class ArizeClient implements ArizeAPI {
         if (features != null && predictionIds.size() != features.size()) {
             throw new IllegalArgumentException("predictionIds.size() must equal features.size()");
         }
+        if (tags != null && predictionIds.size() != tags.size()) {
+            throw new IllegalArgumentException("predictionIds.size() must equal tags.size()");
+        }
         if (shapValues != null && predictionIds.size() != shapValues.size()) {
             throw new IllegalArgumentException("predictionIds.size() must equal shapValues.size()");
         }
         if (predictionTimestamps != null && predictionIds.size() != predictionTimestamps.size()) {
             throw new IllegalArgumentException("predictionIds.size() must equal predictionTimestamps.size()");
         }
+        RecordUtil.validateBulkPredictionActualMatches(predictionLabels, actualLabels);
         BulkRecord.Builder builder = BulkRecord.newBuilder();
         builder.setModelId(modelId);
         builder.setSpaceKey(spaceKey);
@@ -229,6 +241,9 @@ public class ArizeClient implements ArizeAPI {
                 if (features != null) {
                     predictionBuilder.putAllFeatures(RecordUtil.convertFeatures(features.get(index)));
                 }
+                if (tags != null) {
+                    predictionBuilder.putAllTags(RecordUtil.convertTags(tags.get(index)));
+                }
                 if (predictionTimestamps != null) {
                     predictionBuilder.setTimestamp(Timestamps.fromMillis(predictionTimestamps.get(index)));
                 }
@@ -239,6 +254,10 @@ public class ArizeClient implements ArizeAPI {
                 actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(index)));
                 if (predictionTimestamps != null) {
                     actualBuilder.setTimestamp(Timestamps.fromMillis(predictionTimestamps.get(index)));
+                }
+                // Added to support latent tags on actuals.
+                if (tags != null) {
+                    actualBuilder.putAllTags(RecordUtil.convertTags(tags.get(index)));
                 }
                 recordBuilder.setActual(actualBuilder);
             }
@@ -263,7 +282,7 @@ public class ArizeClient implements ArizeAPI {
      * {@inheritDoc}
      */
     @Override
-    public <T> Response logTrainingRecords(String modelId, String modelVersion, List<Map<String, ?>> features, List<T> predictionLabels, List<T> actualLabels) throws IOException {
+    public <T> Response logTrainingRecords(String modelId, String modelVersion, List<Map<String, ?>> features, List<Map<String, ?>> tags, List<T> predictionLabels, List<T> actualLabels) throws IOException {
         if (modelId == null || modelId.isEmpty()) {
             throw new IllegalArgumentException("modelId cannot be null or empty");
         }
@@ -272,6 +291,9 @@ public class ArizeClient implements ArizeAPI {
         }
         if (features != null && features.size() != predictionLabels.size()) {
             throw new IllegalArgumentException("if specified, features list must be the same length as predictionLabels");
+        }
+        if (tags != null && tags.size() != predictionLabels.size()) {
+            throw new IllegalArgumentException("predictionLabels.size() must equal tags.size()");
         }
         if (actualLabels == null || actualLabels.size() != predictionLabels.size()) {
             throw new IllegalArgumentException("actualLabels cannot be null and must be the same length as predictionLabels");
@@ -284,7 +306,6 @@ public class ArizeClient implements ArizeAPI {
             Record.Builder recordBuilder = Record.newBuilder();
             recordBuilder.setModelId(modelId);
 
-            Public.PredictionAndActual.Builder panda = Public.PredictionAndActual.newBuilder();
             Public.Prediction.Builder predictionBuilder = Public.Prediction.newBuilder();
             predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabels.get(i)));
             if (modelVersion != null) {
@@ -293,13 +314,15 @@ public class ArizeClient implements ArizeAPI {
             if (features != null) {
                 predictionBuilder.putAllFeatures(RecordUtil.convertFeatures(features.get(i)));
             }
-            panda.setPrediction(predictionBuilder);
+            if (tags != null) {
+                predictionBuilder.putAllTags(RecordUtil.convertTags(tags.get(i)));
+            }
+            recordBuilder.setPrediction(predictionBuilder);
 
             Public.Actual.Builder actualBuilder = Public.Actual.newBuilder();
             actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(i)));
-            panda.setActual(actualBuilder);
+            recordBuilder.setActual(actualBuilder);
 
-            recordBuilder.setPredictionAndActual(panda);
             trBuilder.setRecord(recordBuilder);
 
             pprBuilder.setTrainingRecord(trBuilder);
@@ -314,7 +337,7 @@ public class ArizeClient implements ArizeAPI {
      * {@inheritDoc}
      */
     @Override
-    public <T> Response logValidationRecords(String modelId, String modelVersion, String batchId, List<Map<String, ?>> features, List<T> predictionLabels, List<T> actualLabels) throws IOException {
+    public <T> Response logValidationRecords(String modelId, String modelVersion, String batchId, List<Map<String, ?>> features, List<Map<String, ?>> tags, List<T> predictionLabels, List<T> actualLabels) throws IOException {
         if (modelId == null || modelId.isEmpty()) {
             throw new IllegalArgumentException("modelId cannot be null or empty");
         }
@@ -326,6 +349,9 @@ public class ArizeClient implements ArizeAPI {
         }
         if (features != null && features.size() != predictionLabels.size()) {
             throw new IllegalArgumentException("if specified, features list must be the same length as predictionLabels");
+        }
+        if (tags != null && tags.size() != predictionLabels.size()) {
+            throw new IllegalArgumentException("predictionLabels.size() must equal tags.size()");
         }
         if (actualLabels == null || actualLabels.size() != predictionLabels.size()) {
             throw new IllegalArgumentException("actualLabels cannot be null and must be the same length as predictionLabels");
@@ -339,7 +365,6 @@ public class ArizeClient implements ArizeAPI {
             Record.Builder recordBuilder = Record.newBuilder();
             recordBuilder.setModelId(modelId);
 
-            Public.PredictionAndActual.Builder panda = Public.PredictionAndActual.newBuilder();
             Public.Prediction.Builder predictionBuilder = Public.Prediction.newBuilder();
             predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabels.get(i)));
             if (modelVersion != null) {
@@ -348,13 +373,15 @@ public class ArizeClient implements ArizeAPI {
             if (features != null) {
                 predictionBuilder.putAllFeatures(RecordUtil.convertFeatures(features.get(i)));
             }
-            panda.setPrediction(predictionBuilder);
+            if (tags != null) {
+                predictionBuilder.putAllTags(RecordUtil.convertTags(tags.get(i)));
+            }
+            recordBuilder.setPrediction(predictionBuilder);
 
             Public.Actual.Builder actualBuilder = Public.Actual.newBuilder();
             actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(i)));
-            panda.setActual(actualBuilder);
+            recordBuilder.setActual(actualBuilder);
 
-            recordBuilder.setPredictionAndActual(panda);
             vrBuilder.setRecord(recordBuilder);
 
             pprBuilder.setValidationRecord(vrBuilder);

@@ -26,8 +26,18 @@ public class RecordUtil {
 
     protected static <T> Map<String, Value> convertFeatures(final Map<String, T> features)
             throws IllegalArgumentException {
+        return convertDimensions(features);
+    }
+
+    protected static <T> Map<String, Value> convertTags(final Map<String, T> tags)
+            throws IllegalArgumentException {
+        return convertDimensions(tags);
+    }
+
+    private static <T> Map<String, Value> convertDimensions(final Map<String, T> dimensions)
+            throws IllegalArgumentException {
         Map<String, Value> converted = new HashMap<>();
-        features.forEach((k, v) -> {
+        dimensions.forEach((k, v) -> {
             if (v != null) {
                 converted.put(k, convertValue(k, v));
             }
@@ -57,7 +67,25 @@ public class RecordUtil {
             return label.setScoreCategorical(builder).build();
         }
         throw new IllegalArgumentException(
-                "Illegal label " + rawLabel + ", must be oneof: boolean, String, int, long, short, float, double");
+                "Illegal label " + rawLabel + ", must be oneof: boolean, String, int, long, short, float, double, ScoreCategorical");
+    }
+
+    protected static <T> void validatePredictionActualMatches(final T predictionLabel, final T actualLabel) throws IllegalArgumentException {
+        if (predictionLabel != null && actualLabel != null) {
+            if (predictionLabel.getClass() != actualLabel.getClass()) {
+                throw new IllegalArgumentException("predictionLabel and actualLabel must be of the same type. predictionLabel: " + predictionLabel.getClass() +
+                        "actualLabel: " + actualLabel.getClass());
+            }
+        }
+    }
+
+    protected static <T> void validateBulkPredictionActualMatches(final List<T> predictionLabels, final List<T> actualLabels) throws IllegalArgumentException {
+        if (predictionLabels != null && actualLabels != null) {
+            if (predictionLabels.getClass().getComponentType() != actualLabels.getClass().getComponentType()) {
+                throw new IllegalArgumentException("predictionLabel and actualLabel must be of the same type. predictionLabel: " + predictionLabels.getClass().getComponentType() +
+                        " actualLabel: " + actualLabels.getClass().getComponentType());
+            }
+        }
     }
 
     @SuppressWarnings({"unchecked"})

@@ -6,26 +6,30 @@ import java.util.Map;
 
 public interface ArizeAPI {
 
-    String SDK_VERSION = "1.0.1";
+    String SDK_VERSION = "2.0.1";
 
     /**
      * log builds and submits a record to the Arize API.
      *
      * @param modelId             Unique identifier for a given model.
-     * @param modelVersion        Optional identifier used to group together a subset of
+     * @param modelVersion        Model version identifier used to group together a subset of
      *                            predictions and actuals for a given modelId.
-     * @param predictionId        Unique identifier for a given prediction.
+     * @param predictionId        Required unique identifier for a given prediction.
      * @param features            Optional {@link Map} containing model features. Map key must be
      *                            {@link String} and values are one of: string, int,
      *                            long, short, float, double, boolean.
-     * @param predictionLabel     The predicted value for a given set of model inputs.
+     * @param tags                Optional {@link Map} containing record tags (aka metadata) that can be associated
+     *                            with a prediction. This can be used to filter during analysis. Map key must be
+     *                            {@link String} and values are one of: string, int, long, short, float, double, boolean.
+     *                            by non-feature data.
+     * @param predictionLabel     Predicted value for a given set of model inputs.
      *                            Supported boxed types are: boolean, string, int, long,
-     *                            short, float, double.
+     *                            short, float, double. Not required if sending latent actual or feature importance.
      * @param actualLabel         The latent truth value for a given set of model inputs.
      *                            Supported boxed types are: boolean, string, int, long,
      *                            short, float, double. This can either be supplied at the same time as the predictionLabel
      *                            or on its own once it is known, and it will be linked back by the predictionId
-     * @param shapValues          {@link Map} from feature name to shap value.  This can either be supplied at the same time as the
+     * @param shapValues          Optional {@link Map} from feature name to shap value. This can either be supplied at the same time as the
      *                            predictionLabel or on its own, and it will be linked back by the predictionId
      * @param predictionTimestamp The timestamp to which the prediction should be attributed. If not set this defaults
      *                            to the time of receipt
@@ -41,6 +45,7 @@ public interface ArizeAPI {
             final String modelVersion,
             final String predictionId,
             final Map<String, ?> features,
+            final Map<String, ?> tags,
             final T predictionLabel,
             final T actualLabel,
             final Map<String, Double> shapValues,
@@ -65,6 +70,10 @@ public interface ArizeAPI {
      *                             features. Map key must be {@link String} and
      *                             values are one of: string, int, long, short,
      *                             float, double, boolean.
+     * @param tags                 Optional {@link List} of {@link Map} varargs
+     *                             containing record tags/metadata. Map key must be {@link String} and
+     *                             values are one of: string, int, long, short,
+     *                             float, double, boolean.
      * @param predictionLabels     {@link List} of predicted values. Supported boxed
      *                             types are: boolean, string, int, long, short,
      *                             float, double.
@@ -74,7 +83,7 @@ public interface ArizeAPI {
      *                             time as the predictionLabels or on their own
      *                             once they are known, and they will be linked back by the
      *                             corresponding predictionIds
-     * @param shapValues           {@link List} of {@link Map} from feature name to shap value.  Can be provided at the
+     * @param shapValues           Optional {@link List} of {@link Map} from feature name to shap value. Can be provided at the
      *                             same time as the predictionLabels or on their own and they will
      *                             be linked back by the corresponding predictionIds
      * @param predictionTimestamps Optional {@link List} of {@link Long} of unix
@@ -93,6 +102,7 @@ public interface ArizeAPI {
             final String modelVersion,
             final List<String> predictionIds,
             final List<Map<String, ?>> features,
+            final List<Map<String, ?>> tags,
             final List<T> predictionLabels,
             final List<T> actualLabels,
             final List<Map<String, Double>> shapValues,
@@ -108,6 +118,10 @@ public interface ArizeAPI {
      * @param features         Optional {@link List} of {@link Map} varargs
      *                         containing human-readable and debuggable model
      *                         features. Map key must be {@link String} and
+     *                         values are one of: string, int, long, short,
+     *                         float, double, boolean.
+     * @param tags             Optional {@link List} of {@link Map} varargs
+     *                         containing record tags/metadata. Map key must be {@link String} and
      *                         values are one of: string, int, long, short,
      *                         float, double, boolean.
      * @param predictionLabels {@link List} of predicted values. Supported boxed
@@ -131,6 +145,7 @@ public interface ArizeAPI {
             final String modelId,
             final String modelVersion,
             final List<Map<String, ?>> features,
+            final List<Map<String, ?>> tags,
             final List<T> predictionLabels,
             final List<T> actualLabels
     ) throws IOException, IllegalArgumentException;
@@ -145,6 +160,10 @@ public interface ArizeAPI {
      * @param features         Optional {@link List} of {@link Map} varargs
      *                         containing human readable and debuggable model
      *                         features. Map key must be {@link String} and
+     *                         values are one of: string, int, long, short,
+     *                         float, double, boolean.
+     * @param tags             Optional {@link List} of {@link Map} varargs
+     *                         containing record tags/metadata. Map key must be {@link String} and
      *                         values are one of: string, int, long, short,
      *                         float, double, boolean.
      * @param predictionLabels {@link List} of predicted values. Supported boxed
@@ -169,6 +188,7 @@ public interface ArizeAPI {
             final String modelVersion,
             final String batchId,
             final List<Map<String, ?>> features,
+            final List<Map<String, ?>> tags,
             final List<T> predictionLabels,
             final List<T> actualLabels
     ) throws IOException;

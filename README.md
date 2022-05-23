@@ -26,7 +26,7 @@ This guide will help you instrument your code to log observability data for mode
 Start logging your model data with the following steps:
 
 ### 1. Sign up for your account
-Sign up for a free account at https://www.arize.com.
+Sign up for a free account at https://arize.com/join.
 
 <div align="center">
   <img src="https://storage.googleapis.com/arize-assets/Arize%20UI%20platform.jpg" /><br><br>
@@ -49,7 +49,7 @@ If you are using the Arize Java client, add a few lines to your code to log pred
 <dependency>
   <groupId>com.arize</groupId>
   <artifactId>arize-api-client</artifactId>
-  <version>1.0.1</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -57,8 +57,8 @@ If you are using the Arize Java client, add a few lines to your code to log pred
 ```
 maven_jar(
     name = "arize-api-client",
-    artifact = "com.arize:arize-api-client:1.0.1",
-    sha1 = "2a82c3d269b1f7ac3c13c16ffa7228cc3446285f",
+    artifact = "com.arize:arize-api-client:2.0.1",
+    sha1 = "2df6860c04899d9c1f508043388b5351ae2ee61c",
 )
 ```
 
@@ -82,10 +82,16 @@ For a single real-time prediction, you can track all input features used at pred
 
 ```java
 
-Map<String, String> rawFeatures = new HashMap<>();
-rawFeatures.put("key", "value");
+Map<String, String> features = new HashMap<>();
+features.put("feature name", "feature value");
 
-Response asyncResponse = arize.log("exampleModelId", "v1", UUID.randomUUID().toString(), rawFeatures, "pear", null, null, 0);
+Map<String, String> eventMetadata = new HashMap<>();
+eventMetadata.put("business metric", "business metric value");
+
+Map<String, Float> shapValues = new HashMap<>();
+shapValues.put("feature name", 0.856f);
+
+Response asyncResponse = arize.log("exampleModelId", "v1", UUID.randomUUID().toString(), features, eventMetadata, "pear", "apple", shapValues, System.currentTimeMillis());
 
 // This is a blocking call similar to future.get()
 asyncResponse.resolve();
@@ -132,15 +138,21 @@ features.add(new HashMap<String, Object>() {{ put("days", 5); put("is_organic", 
 features.add(new HashMap<String, Object>() {{ put("days", 3); put("is_organic", 0);}});
 features.add(new HashMap<String, Object>() {{ put("days", 7); put("is_organic", 0);}});
 
+final List<Map<String, ?>> tags = new ArrayList<Map<String, ?>>();
+tags.add(new HashMap<String, Object>() {{ put("metadata", 5); put("my business metric", 1);}});
+tags.add(new HashMap<String, Object>() {{ put("metadata", 3); put("my business metric", 0);}});
+tags.add(new HashMap<String, Object>() {{ put("metadata", 7); put("my business metric", 8);}});
+
 final List<Map<String, Double>> shapValues = new ArrayList<>();
 shapValues.add(new HashMap<String, Double>(){{ put("days", 1.0); put("is_organic", -1.5);}});
 shapValues.add(new HashMap<String, Double>(){{ put("days", 1.0); put("is_organic", -1.1);}});
 shapValues.add(new HashMap<String, Double>(){{ put("days", 1.0); put("is_organic", -1.1);}});
 
-final List<String> labels = new ArrayList<String>(Arrays.asList("pear", "banana", "apple"));
+final List<String> predictions = new ArrayList<String>(Arrays.asList("pear", "banana", "apple"));
+final List<String> actuals = new ArrayList<String>(Arrays.asList("pear", "pear", "apple"));
 final List<String> predictionIds = new ArrayList<String>(Arrays.asList(UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString()));
 
-final Response asyncResponse = arize.bulkLog("exampleModelId", "v1", predictionIds, features, labels, null, shapValues,null);
+final Response asyncResponse = arize.bulkLog("exampleModelId", "v1", predictionIds, features, tags, predictions, actuals, shapValues, null);
 
 // This is a blocking call similar to future.get()
 asyncResponse.resolve();
