@@ -29,6 +29,20 @@ public class SendBulkPrediction {
             put("is_organic", 0);
         }});
 
+        final List<Map<String, ?>> tags = new ArrayList<>();
+        tags.add(new HashMap<String, Object>() {{
+            put("region", 5);
+            put("age", 1);
+        }});
+        tags.add(new HashMap<String, Object>() {{
+            put("region", 3);
+            put("age", 0);
+        }});
+        tags.add(new HashMap<String, Object>() {{
+            put("region", 7);
+            put("age", 0);
+        }});
+
         final List<Map<String, Double>> shapValues = new ArrayList<>();
         shapValues.add(new HashMap<String, Double>() {{
             put("days", 1.0);
@@ -46,7 +60,7 @@ public class SendBulkPrediction {
         final List<String> labels = new ArrayList<>(Arrays.asList("pear", "banana", "apple"));
         final List<String> predictionIds = new ArrayList<>(Arrays.asList(UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString()));
 
-        final Response asyncResponse = arize.bulkLog("exampleModelId", "v1", predictionIds, features, labels, null, shapValues, null);
+        final Response asyncResponse = arize.bulkLog("exampleModelId", "v1", predictionIds, features, tags, labels, null, shapValues, null);
 
         // This is a blocking call similar to future.get()
         asyncResponse.resolve();

@@ -6,7 +6,6 @@ import com.arize.Response;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -20,7 +19,7 @@ public class SendBulkActual {
 
         final List<String> labels = new ArrayList<>(Collections.singletonList("Categorical Observed Label"));
         final List<String> predictionIds = new ArrayList<>(Collections.singletonList("id_12345"));
-        final Response asyncResponse = arize.bulkLog("exampleModelId", null, predictionIds, null, null, labels, null, null);
+        final Response asyncResponse = arize.bulkLog("exampleModelId", null, predictionIds, null, null, null, labels, null, null);
 
         // This is a blocking call similar to future.get()
         asyncResponse.resolve();

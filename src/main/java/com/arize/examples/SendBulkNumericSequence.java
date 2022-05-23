@@ -31,7 +31,7 @@ public class SendBulkNumericSequence {
                 new ScoredCategorical("relevant", 8.26),
                 new ScoredCategorical("relevant", 2.49, Arrays.asList(0.45, 0.56)));
 
-        final Response asyncResponse = arize.bulkLog("exampleModelId", "v1", predictionIds, null, predictionLabels, actualLabels, null, null);
+        final Response asyncResponse = arize.bulkLog("exampleModelId", "v1", predictionIds, null, null, predictionLabels, actualLabels, null, null);
 
         // This is a blocking call similar to future.get()
         asyncResponse.resolve();

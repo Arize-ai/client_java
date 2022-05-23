@@ -20,7 +20,7 @@ public class SendActual {
         Map<String, String> rawFeatures = new HashMap<>();
         rawFeatures.put("key", "value");
 
-        Response asyncResponse = arize.log("exampleModelId", null, UUID.randomUUID().toString(), null, null, "pear", null, 0);
+        Response asyncResponse = arize.log("exampleModelId", null, UUID.randomUUID().toString(), null, null, null, "pear", null, 0);
 
         // This is a blocking call similar to future.get()
         asyncResponse.resolve();

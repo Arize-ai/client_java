@@ -18,9 +18,12 @@ public class SendPrediction {
         Map<String, String> rawFeatures = new HashMap<>();
         rawFeatures.put("key", "value");
 
+        Map<String, String> tags = new HashMap<>();
+        tags.put("matadata", "value");
+
         ArizeClient arize = new ArizeClient(System.getenv("ARIZE_API_KEY"), System.getenv("ARIZE_SPACE_KEY"));
 
-        Response asyncResponse = arize.log("exampleModelId", "v1", UUID.randomUUID().toString(), rawFeatures, "pear", null, null, 0);
+        Response asyncResponse = arize.log("exampleModelId", "v1", UUID.randomUUID().toString(), rawFeatures, tags, "pear", null, null, 0);
 
         // This is a blocking call similar to future.get()
         asyncResponse.resolve();

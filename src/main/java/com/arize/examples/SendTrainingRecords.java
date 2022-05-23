@@ -32,7 +32,7 @@ public class SendTrainingRecords {
         final List<String> predictionLabels = new ArrayList<>(Arrays.asList("pear", "banana", "apple"));
         final List<String> actualLabels = new ArrayList<>(Arrays.asList("pear", "strawberry", "apple"));
 
-        final Response asyncResponse = arize.logTrainingRecords("exampleModelId", "v1", features, predictionLabels, actualLabels);
+        final Response asyncResponse = arize.logTrainingRecords("exampleModelId", "v1", features, null, predictionLabels, actualLabels);
 
         // This is a blocking call similar to future.get()
         asyncResponse.resolve();

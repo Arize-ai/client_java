@@ -41,13 +41,13 @@ public class ArizeClientTest {
     protected Map<String, Long> longFeatures;
     protected Map<String, String> stringFeatures;
     protected Map<String, Double> doubleFeatures;
+    protected Map<String, String> stringTags;
 
-    protected String predictionPayload = "{\"space_key\": \"spaceKey\", \"model_id\": \"modelId\", \"prediction_id\": \"predictionId\", \"prediction\": {\"model_version\": \"modelVersion\", \"label\": {\"numeric\": 20.2}, \"features\": {\"int\": {\"int\": \"12345\"}, \"string\": {\"string\": \"string\"}, \"double\": {\"double\": 20.2}}}}";
-    protected String actualPayload = "{\"space_key\": \"spaceKey\", \"model_id\": \"modelId\", \"prediction_id\": \"predictionId\", \"actual\": {\"label\": {\"numeric\": 20.2}}}";
+    protected String predictionPayload = "{\"space_key\": \"spaceKey\", \"model_id\": \"modelId\", \"prediction_id\": \"predictionId\", \"prediction\": {\"model_version\": \"modelVersion\", \"label\": {\"numeric\": 20.2}, \"tags\": {\"string\": {\"string\": \"string\"}}, \"features\": {\"int\": {\"int\": \"12345\"}, \"string\": {\"string\": \"string\"}, \"double\": {\"double\": 20.2}}}}";
+    protected String actualPayload = "{\"space_key\": \"spaceKey\", \"model_id\": \"modelId\", \"prediction_id\": \"predictionId\", \"actual\": {\"label\": {\"numeric\": 20.2}}}, \"tags\": {\"string\": {\"string\": \"string\"}}";
 
     private List<String> expectedIds;
     private List<Integer> expectedLabels;
-    private List<Map<String, ?>> expectedIntFeatures, expectedStringFeatures, expectedDoubleFeatures;
     private Record expectedActual, expectedPrediction;
 
     @Before
@@ -64,9 +64,11 @@ public class ArizeClientTest {
         longFeatures = new HashMap<>();
         stringFeatures = new HashMap<>();
         doubleFeatures = new HashMap<>();
+        stringTags = new HashMap<>();
         intFeatures.put("int", 12345);
         stringFeatures.put("string", "string");
         doubleFeatures.put("double", 20.20);
+        stringTags.put("string", "string");
 
         Builder predictionBuilder = Record.newBuilder();
         Builder actualBuilder = Record.newBuilder();
@@ -81,9 +83,6 @@ public class ArizeClientTest {
 
         expectedIds = new ArrayList<>(Arrays.asList("one", "two", "three"));
         expectedLabels = new ArrayList<>(Arrays.asList(2020, 2121, 2222));
-        expectedIntFeatures = new ArrayList<>(Arrays.asList(intFeatures, intFeatures, intFeatures));
-        expectedStringFeatures = new ArrayList<>(Arrays.asList(stringFeatures, stringFeatures, stringFeatures));
-        expectedDoubleFeatures = new ArrayList<>(Arrays.asList(doubleFeatures, doubleFeatures, doubleFeatures));
     }
 
     @After
@@ -98,7 +97,7 @@ public class ArizeClientTest {
         features.putAll(intFeatures);
         features.putAll(doubleFeatures);
         features.putAll(stringFeatures);
-        Response response = client.log("modelId", "modelVersion", "predictionId", features, 20.20, 20.21, null, 0);
+        Response response = client.log("modelId", "modelVersion", "predictionId", features, stringTags, 20.20, 20.21, null, 0);
         try {
             response.resolve(10, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
@@ -114,6 +113,7 @@ public class ArizeClientTest {
         Assert.assertEquals(12345, rec.getPrediction().getFeaturesOrDefault("int", Public.Value.getDefaultInstance()).getInt());
         Assert.assertEquals("string", rec.getPrediction().getFeaturesOrDefault("string", Public.Value.getDefaultInstance()).getString());
         Assert.assertEquals(20.20, rec.getPrediction().getFeaturesOrDefault("double", Public.Value.getDefaultInstance()).getDouble(), 0.0);
+        Assert.assertEquals("string", rec.getPrediction().getTagsOrDefault("string", Public.Value.getDefaultInstance()).getString());
 
         Assert.assertEquals("spaceKey", rec.getSpaceKey());
         Assert.assertEquals("modelId", rec.getModelId());
@@ -128,7 +128,7 @@ public class ArizeClientTest {
         features.putAll(doubleFeatures);
         features.putAll(stringFeatures);
         ScoredCategorical label = new ScoredCategorical("category", 20.20);
-        Response response = client.log("modelId", "modelVersion", "predictionId", features, label, null, null, 0);
+        Response response = client.log("modelId", "modelVersion", "predictionId", features, stringTags, label, null, null, 0);
         try {
             response.resolve(10, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
@@ -145,6 +145,7 @@ public class ArizeClientTest {
         Assert.assertEquals(12345, rec.getPrediction().getFeaturesOrDefault("int", Public.Value.getDefaultInstance()).getInt());
         Assert.assertEquals("string", rec.getPrediction().getFeaturesOrDefault("string", Public.Value.getDefaultInstance()).getString());
         Assert.assertEquals(20.20, rec.getPrediction().getFeaturesOrDefault("double", Public.Value.getDefaultInstance()).getDouble(), 0.0);
+        Assert.assertEquals("string", rec.getPrediction().getTagsOrDefault("string", Public.Value.getDefaultInstance()).getString());
 
         Assert.assertEquals("spaceKey", rec.getSpaceKey());
         Assert.assertEquals("modelId", rec.getModelId());
@@ -154,7 +155,7 @@ public class ArizeClientTest {
     @Test
     public void testOptionalPredictionFields() throws IOException, ExecutionException, InterruptedException {
         Map<String, Object> features = new HashMap<>();
-        Response response = client.log("modelId", null, "predictionId", null, 20.20, null, null, 0);
+        Response response = client.log("modelId", null, "predictionId", null, null, 20.20, null, null, 0);
         try {
             response.resolve(10, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
@@ -165,6 +166,44 @@ public class ArizeClientTest {
         Assert.assertTrue(rec.getPrediction().getFeaturesMap().isEmpty());
     }
 
+    @Test
+    public void testPredActualMissmatchedTypes() throws IOException, ExecutionException, InterruptedException {
+        List intList = new ArrayList<>();
+        intList.add(0, 1);
+        List scList = new ArrayList<>();
+        scList.add(0, new ScoredCategorical("cat", 1));
+        try {
+            client.log("modelId", null, "predictionId", null, null, 20.20, 1, null, 0);
+        } catch (IllegalArgumentException e) {
+            Assert.assertTrue(e.getMessage().contains("predictionLabel and actualLabel must be of the same type."));
+        }
+        try {
+            client.log("modelId", null, "predictionId", null, null, new ScoredCategorical("1", 1), 1, null, 0);
+        } catch (IllegalArgumentException e) {
+            Assert.assertTrue(e.getMessage().contains("predictionLabel and actualLabel must be of the same type."));
+        }
+        try {
+            client.log("modelId", null, "predictionId", null, null, 20.20, 1, null, 0);
+        } catch (IllegalArgumentException e) {
+            Assert.assertTrue(e.getMessage().contains("predictionLabel and actualLabel must be of the same type."));
+        }
+        try {
+            client.log("modelId", null, "predictionId", null, null, 1L, 1, null, 0);
+        } catch (IllegalArgumentException e) {
+            Assert.assertTrue(e.getMessage().contains("predictionLabel and actualLabel must be of the same type."));
+        }
+        try {
+            client.logTrainingRecords("modelId", "version", null, null, intList, scList);
+        } catch (IllegalArgumentException e) {
+            Assert.assertTrue(e.getMessage().contains("predictionLabel and actualLabel must be of the same type."));
+        }
+        try {
+            client.logValidationRecords("modelId", "version", "batch", null, null, intList, scList);
+        } catch (IllegalArgumentException e) {
+            Assert.assertTrue(e.getMessage().contains("predictionLabel and actualLabel must be of the same type."));
+        }
+    }
+
 
     @Test
     public void testPredictionFeaturesWithNulls() throws IOException {
@@ -173,7 +212,7 @@ public class ArizeClientTest {
         features.put("B", "");
         features.put("C", null);
 
-        Response prediction = client.log("modelId", "modelVersion", "predictionId", features, 20.20, null, null, 0);
+        Response prediction = client.log("modelId", "modelVersion", "predictionId", features, null, 20.20, null, null, 0);
         try {
             prediction.resolve(10, TimeUnit.SECONDS);
         } catch (Exception e) {
@@ -188,12 +227,12 @@ public class ArizeClientTest {
     }
 
     @Test
-    public void testPredictionTimeOverwrite() throws IOException, ExecutionException, InterruptedException {
+    public void testPredictionWithTimestamp() throws IOException, ExecutionException, InterruptedException {
         Map<String, Object> features = new HashMap<>();
         features.putAll(intFeatures);
         features.putAll(doubleFeatures);
         features.putAll(stringFeatures);
-        Response response = client.log("modelId", null, "predictionId", features, 20.20, null, null, 1596560235000L);
+        Response response = client.log("modelId", null, "predictionId", features, null, 20.20, null, null, 1596560235000L);
         Timestamp expectedTime = Timestamps.fromMillis(1596560235000L);
         try {
             response.resolve(10, TimeUnit.SECONDS);
@@ -208,7 +247,7 @@ public class ArizeClientTest {
         List<String> expectedIds = new ArrayList<>(Arrays.asList("one", "two", "three"));
         List<Integer> expectedLabels = new ArrayList<Integer>(Arrays.asList(2020, 2121, 2222));
 
-        Response response = client.bulkLog("modelId", "modelVersion", expectedIds, null, null, expectedLabels, null, null);
+        Response response = client.bulkLog("modelId", "modelVersion", expectedIds, null, null, null, expectedLabels, null, null);
         try {
             response.resolve(10, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
@@ -246,8 +285,18 @@ public class ArizeClientTest {
             putAll(doubleFeatures);
             putAll(stringFeatures);
         }});
+        List<Map<String, ?>> tags = new ArrayList<>();
+        tags.add(new HashMap<String, Object>() {{
+            putAll(stringTags);
+        }});
+        tags.add(new HashMap<String, Object>() {{
+            putAll(stringTags);
+        }});
+        tags.add(new HashMap<String, Object>() {{
+            putAll(stringTags);
+        }});
 
-        Response response = client.bulkLog("modelId", "modelVersion", expectedIds, features, expectedLabels, null, null, null);
+        Response response = client.bulkLog("modelId", "modelVersion", expectedIds, features, tags, expectedLabels, null, null, null);
         try {
             response.resolve(10, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
@@ -269,6 +318,7 @@ public class ArizeClientTest {
             Assert.assertEquals("modelId", record.getModelId());
             Assert.assertFalse(record.getPrediction().hasTimestamp());
             Assert.assertEquals(3, record.getPrediction().getFeaturesCount());
+            Assert.assertEquals(1, record.getPrediction().getTagsCount());
         }
     }
 
@@ -277,15 +327,28 @@ public class ArizeClientTest {
         List<Map<String, ?>> features = new ArrayList<>();
         features.add(new HashMap<String, Object>() {{
             put("days", 5.0);
-            put("is_organic", 0l);
+            put("is_organic", 0L);
         }});
         features.add(new HashMap<String, Object>() {{
             put("days", 4.5);
-            put("is_organic", 1l);
+            put("is_organic", 1L);
         }});
         features.add(new HashMap<String, Object>() {{
             put("days", 2.0);
-            put("is_organic", 0l);
+            put("is_organic", 0L);
+        }});
+        List<Map<String, ?>> tags = new ArrayList<>();
+        tags.add(new HashMap<String, Object>() {{
+            put("tag_1", 5.0);
+            put("tag_2", "tag_2");
+        }});
+        tags.add(new HashMap<String, Object>() {{
+            put("tag_1", 5.0);
+            put("tag_2", "tag_2");
+        }});
+        tags.add(new HashMap<String, Object>() {{
+            put("tag_1", 5.0);
+            put("tag_2", "tag_2");
         }});
         List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
         List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
@@ -303,7 +366,7 @@ public class ArizeClientTest {
             put("is_organic", -1.2);
         }});
 
-        Response response = client.bulkLog("modelId", "modelVersion", expectedIds, features, predictionLabels, actualLabels, shapValues, null);
+        Response response = client.bulkLog("modelId", "modelVersion", expectedIds, features, tags, predictionLabels, actualLabels, shapValues, null);
         try {
             response.resolve(10, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
@@ -328,6 +391,11 @@ public class ArizeClientTest {
             Assert.assertEquals(f.get("days"), rec.getPrediction().getFeaturesOrDefault("days", Public.Value.getDefaultInstance()).getDouble());
             Assert.assertEquals(f.get("is_organic"), rec.getPrediction().getFeaturesOrDefault("is_organic", Public.Value.getDefaultInstance()).getInt());
 
+            //compare input tags to posted Public.Record
+            Map<String, ?> t = tags.get(i);
+            Assert.assertEquals(t.get("tag_1"), rec.getPrediction().getTagsOrDefault("tag_1", Public.Value.getDefaultInstance()).getDouble());
+            Assert.assertEquals(t.get("tag_2"), rec.getPrediction().getTagsOrDefault("tag_2", Public.Value.getDefaultInstance()).getString());
+
             //compare input prediction labels to posted Public.Record
             Assert.assertEquals(predictionLabels.get(i), rec.getPrediction().getLabel().getCategorical());
 
@@ -346,20 +414,33 @@ public class ArizeClientTest {
         List<Map<String, ?>> features = new ArrayList<>();
         features.add(new HashMap<String, Object>() {{
             put("days", 5.0);
-            put("is_organic", 0l);
+            put("is_organic", 0L);
         }});
         features.add(new HashMap<String, Object>() {{
             put("days", 4.5);
-            put("is_organic", 1l);
+            put("is_organic", 1L);
         }});
         features.add(new HashMap<String, Object>() {{
             put("days", 2.0);
-            put("is_organic", 0l);
+            put("is_organic", 0L);
+        }});
+        List<Map<String, ?>> tags = new ArrayList<>();
+        tags.add(new HashMap<String, Object>() {{
+            put("tag_1", 5.0);
+            put("tag_2", "tag_2");
+        }});
+        tags.add(new HashMap<String, Object>() {{
+            put("tag_1", 5.0);
+            put("tag_2", "tag_2");
+        }});
+        tags.add(new HashMap<String, Object>() {{
+            put("tag_1", 5.0);
+            put("tag_2", "tag_2");
         }});
         List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
         List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
 
-        Response response = client.logTrainingRecords("modelId", "modelVersion", features, predictionLabels, actualLabels);
+        Response response = client.logTrainingRecords("modelId", "modelVersion", features, tags, predictionLabels, actualLabels);
         try {
             response.resolve(10, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
@@ -374,7 +455,7 @@ public class ArizeClientTest {
             Public.PreProductionRecord preprodRec = preProductionRecords.get(i);
             Record record = preprodRec.getTrainingRecord().getRecord();
             Assert.assertEquals("modelId", record.getModelId());
-            Assert.assertEquals("modelVersion", record.getPredictionAndActual().getPrediction().getModelVersion());
+            Assert.assertEquals("modelVersion", record.getPrediction().getModelVersion());
 
 
             // For now training records dont include a prediction id
@@ -382,14 +463,19 @@ public class ArizeClientTest {
 
             //compare input features to posted Public.Record
             Map<String, ?> f = features.get(i);
-            Assert.assertEquals(f.get("days"), record.getPredictionAndActual().getPrediction().getFeaturesOrDefault("days", Public.Value.getDefaultInstance()).getDouble());
-            Assert.assertEquals(f.get("is_organic"), record.getPredictionAndActual().getPrediction().getFeaturesOrDefault("is_organic", Public.Value.getDefaultInstance()).getInt());
+            Assert.assertEquals(f.get("days"), record.getPrediction().getFeaturesOrDefault("days", Public.Value.getDefaultInstance()).getDouble());
+            Assert.assertEquals(f.get("is_organic"), record.getPrediction().getFeaturesOrDefault("is_organic", Public.Value.getDefaultInstance()).getInt());
+
+            //compare input tags to posted Public.Record
+            Map<String, ?> t = tags.get(i);
+            Assert.assertEquals(t.get("tag_1"), record.getPrediction().getTagsOrDefault("tag_1", Public.Value.getDefaultInstance()).getDouble());
+            Assert.assertEquals(t.get("tag_2"), record.getPrediction().getTagsOrDefault("tag_2", Public.Value.getDefaultInstance()).getString());
 
             //compare input prediction labels to posted Public.Record
-            Assert.assertEquals(predictionLabels.get(i), record.getPredictionAndActual().getPrediction().getLabel().getCategorical());
+            Assert.assertEquals(predictionLabels.get(i), record.getPrediction().getLabel().getCategorical());
 
             //compare input actual labels to posted Public.Record
-            Assert.assertEquals(actualLabels.get(i), record.getPredictionAndActual().getActual().getLabel().getCategorical());
+            Assert.assertEquals(actualLabels.get(i), record.getActual().getLabel().getCategorical());
         }
     }
 
@@ -398,20 +484,33 @@ public class ArizeClientTest {
         List<Map<String, ?>> features = new ArrayList<>();
         features.add(new HashMap<String, Object>() {{
             put("days", 5.0);
-            put("is_organic", 0l);
+            put("is_organic", 0L);
         }});
         features.add(new HashMap<String, Object>() {{
             put("days", 4.5);
-            put("is_organic", 1l);
+            put("is_organic", 1L);
         }});
         features.add(new HashMap<String, Object>() {{
             put("days", 2.0);
-            put("is_organic", 0l);
+            put("is_organic", 0L);
+        }});
+        List<Map<String, ?>> tags = new ArrayList<>();
+        tags.add(new HashMap<String, Object>() {{
+            put("tag_1", 5.0);
+            put("tag_2", "tag_2");
+        }});
+        tags.add(new HashMap<String, Object>() {{
+            put("tag_1", 5.0);
+            put("tag_2", "tag_2");
+        }});
+        tags.add(new HashMap<String, Object>() {{
+            put("tag_1", 5.0);
+            put("tag_2", "tag_2");
         }});
         List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
         List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
 
-        Response response = client.logValidationRecords("modelId", "modelVersion", "offline-1", features, predictionLabels, actualLabels);
+        Response response = client.logValidationRecords("modelId", "modelVersion", "offline-1", features, tags, predictionLabels, actualLabels);
         try {
             response.resolve(10, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
@@ -427,24 +526,29 @@ public class ArizeClientTest {
             Assert.assertEquals("offline-1", preprodRec.getValidationRecord().getBatchId());
             Record record = preprodRec.getValidationRecord().getRecord();
             Assert.assertEquals("modelId", record.getModelId());
-            Assert.assertEquals("modelVersion", record.getPredictionAndActual().getPrediction().getModelVersion());
-
+            Assert.assertEquals("modelVersion", record.getPrediction().getModelVersion());
 
             // For now training records dont include a prediction id
             Assert.assertEquals("", record.getPredictionId());
 
             //compare input features to posted Public.Record
             Map<String, ?> f = features.get(i);
-            Assert.assertEquals(f.get("days"), record.getPredictionAndActual().getPrediction().getFeaturesOrDefault("days", Public.Value.getDefaultInstance()).getDouble());
-            Assert.assertEquals(f.get("is_organic"), record.getPredictionAndActual().getPrediction().getFeaturesOrDefault("is_organic", Public.Value.getDefaultInstance()).getInt());
+            Assert.assertEquals(f.get("days"), record.getPrediction().getFeaturesOrDefault("days", Public.Value.getDefaultInstance()).getDouble());
+            Assert.assertEquals(f.get("is_organic"), record.getPrediction().getFeaturesOrDefault("is_organic", Public.Value.getDefaultInstance()).getInt());
+
+            //compare input tags to posted Public.Record
+            Map<String, ?> t = tags.get(i);
+            Assert.assertEquals(t.get("tag_1"), record.getPrediction().getTagsOrDefault("tag_1", Public.Value.getDefaultInstance()).getDouble());
+            Assert.assertEquals(t.get("tag_2"), record.getPrediction().getTagsOrDefault("tag_2", Public.Value.getDefaultInstance()).getString());
 
             //compare input prediction labels to posted Public.Record
-            Assert.assertEquals(predictionLabels.get(i), record.getPredictionAndActual().getPrediction().getLabel().getCategorical());
+            Assert.assertEquals(predictionLabels.get(i), record.getPrediction().getLabel().getCategorical());
 
             //compare input actual labels to posted Public.Record
-            Assert.assertEquals(actualLabels.get(i), record.getPredictionAndActual().getActual().getLabel().getCategorical());
+            Assert.assertEquals(actualLabels.get(i), record.getActual().getLabel().getCategorical());
         }
     }
+
 
     private HttpServer testServer(List<Public.Record> postBodies, List<Public.BulkRecord> bulkPostBodies, List<Public.PreProductionRecord> preProductionPostBodies, List<Headers> headers) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(0), 0);
@@ -486,6 +590,4 @@ public class ArizeClientTest {
         });
         return server;
     }
-
-
 }
