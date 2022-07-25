@@ -1715,6 +1715,21 @@ public final class Public {
      */
     com.google.protobuf.ByteString
         getSpaceKeyBytes();
+
+    /**
+     * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+     * @return Whether the environmentParams field is set.
+     */
+    boolean hasEnvironmentParams();
+    /**
+     * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+     * @return The environmentParams.
+     */
+    com.arize.protocol.Public.Record.EnvironmentParams getEnvironmentParams();
+    /**
+     * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+     */
+    com.arize.protocol.Public.Record.EnvironmentParamsOrBuilder getEnvironmentParamsOrBuilder();
   }
   /**
    * <pre>
@@ -1846,6 +1861,19 @@ public final class Public {
               spaceKey_ = s;
               break;
             }
+            case 106: {
+              com.arize.protocol.Public.Record.EnvironmentParams.Builder subBuilder = null;
+              if (environmentParams_ != null) {
+                subBuilder = environmentParams_.toBuilder();
+              }
+              environmentParams_ = input.readMessage(com.arize.protocol.Public.Record.EnvironmentParams.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(environmentParams_);
+                environmentParams_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -1876,6 +1904,2574 @@ public final class Public {
       return com.arize.protocol.Public.internal_static_public_Record_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.arize.protocol.Public.Record.class, com.arize.protocol.Public.Record.Builder.class);
+    }
+
+    public interface EnvironmentParamsOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:public.Record.EnvironmentParams)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+       * @return Whether the training field is set.
+       */
+      boolean hasTraining();
+      /**
+       * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+       * @return The training.
+       */
+      com.arize.protocol.Public.Record.EnvironmentParams.Training getTraining();
+      /**
+       * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+       */
+      com.arize.protocol.Public.Record.EnvironmentParams.TrainingOrBuilder getTrainingOrBuilder();
+
+      /**
+       * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+       * @return Whether the validation field is set.
+       */
+      boolean hasValidation();
+      /**
+       * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+       * @return The validation.
+       */
+      com.arize.protocol.Public.Record.EnvironmentParams.Validation getValidation();
+      /**
+       * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+       */
+      com.arize.protocol.Public.Record.EnvironmentParams.ValidationOrBuilder getValidationOrBuilder();
+
+      /**
+       * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+       * @return Whether the production field is set.
+       */
+      boolean hasProduction();
+      /**
+       * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+       * @return The production.
+       */
+      com.arize.protocol.Public.Record.EnvironmentParams.Production getProduction();
+      /**
+       * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+       */
+      com.arize.protocol.Public.Record.EnvironmentParams.ProductionOrBuilder getProductionOrBuilder();
+
+      public com.arize.protocol.Public.Record.EnvironmentParams.EnvironmentCase getEnvironmentCase();
+    }
+    /**
+     * Protobuf type {@code public.Record.EnvironmentParams}
+     */
+    public  static final class EnvironmentParams extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:public.Record.EnvironmentParams)
+        EnvironmentParamsOrBuilder {
+    private static final long serialVersionUID = 0L;
+      // Use EnvironmentParams.newBuilder() to construct.
+      private EnvironmentParams(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private EnvironmentParams() {
+      }
+
+      @java.lang.Override
+      @SuppressWarnings({"unused"})
+      protected java.lang.Object newInstance(
+          UnusedPrivateParameter unused) {
+        return new EnvironmentParams();
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return this.unknownFields;
+      }
+      private EnvironmentParams(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                com.arize.protocol.Public.Record.EnvironmentParams.Training.Builder subBuilder = null;
+                if (environmentCase_ == 1) {
+                  subBuilder = ((com.arize.protocol.Public.Record.EnvironmentParams.Training) environment_).toBuilder();
+                }
+                environment_ =
+                    input.readMessage(com.arize.protocol.Public.Record.EnvironmentParams.Training.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom((com.arize.protocol.Public.Record.EnvironmentParams.Training) environment_);
+                  environment_ = subBuilder.buildPartial();
+                }
+                environmentCase_ = 1;
+                break;
+              }
+              case 18: {
+                com.arize.protocol.Public.Record.EnvironmentParams.Validation.Builder subBuilder = null;
+                if (environmentCase_ == 2) {
+                  subBuilder = ((com.arize.protocol.Public.Record.EnvironmentParams.Validation) environment_).toBuilder();
+                }
+                environment_ =
+                    input.readMessage(com.arize.protocol.Public.Record.EnvironmentParams.Validation.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom((com.arize.protocol.Public.Record.EnvironmentParams.Validation) environment_);
+                  environment_ = subBuilder.buildPartial();
+                }
+                environmentCase_ = 2;
+                break;
+              }
+              case 26: {
+                com.arize.protocol.Public.Record.EnvironmentParams.Production.Builder subBuilder = null;
+                if (environmentCase_ == 3) {
+                  subBuilder = ((com.arize.protocol.Public.Record.EnvironmentParams.Production) environment_).toBuilder();
+                }
+                environment_ =
+                    input.readMessage(com.arize.protocol.Public.Record.EnvironmentParams.Production.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom((com.arize.protocol.Public.Record.EnvironmentParams.Production) environment_);
+                  environment_ = subBuilder.buildPartial();
+                }
+                environmentCase_ = 3;
+                break;
+              }
+              default: {
+                if (!parseUnknownField(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.arize.protocol.Public.Record.EnvironmentParams.class, com.arize.protocol.Public.Record.EnvironmentParams.Builder.class);
+      }
+
+      public interface TrainingOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:public.Record.EnvironmentParams.Training)
+          com.google.protobuf.MessageOrBuilder {
+      }
+      /**
+       * <pre>
+       * RecordTypeParams allow to set parameters values specifically to each type of record
+       * </pre>
+       *
+       * Protobuf type {@code public.Record.EnvironmentParams.Training}
+       */
+      public  static final class Training extends
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:public.Record.EnvironmentParams.Training)
+          TrainingOrBuilder {
+      private static final long serialVersionUID = 0L;
+        // Use Training.newBuilder() to construct.
+        private Training(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+          super(builder);
+        }
+        private Training() {
+        }
+
+        @java.lang.Override
+        @SuppressWarnings({"unused"})
+        protected java.lang.Object newInstance(
+            UnusedPrivateParameter unused) {
+          return new Training();
+        }
+
+        @java.lang.Override
+        public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+          return this.unknownFields;
+        }
+        private Training(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          this();
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!parseUnknownField(
+                      input, unknownFields, extensionRegistry, tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(this);
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(
+                e).setUnfinishedMessage(this);
+          } finally {
+            this.unknownFields = unknownFields.build();
+            makeExtensionsImmutable();
+          }
+        }
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Training_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Training_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.arize.protocol.Public.Record.EnvironmentParams.Training.class, com.arize.protocol.Public.Record.EnvironmentParams.Training.Builder.class);
+        }
+
+        private byte memoizedIsInitialized = -1;
+        @java.lang.Override
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return true;
+          if (isInitialized == 0) return false;
+
+          memoizedIsInitialized = 1;
+          return true;
+        }
+
+        @java.lang.Override
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          unknownFields.writeTo(output);
+        }
+
+        @java.lang.Override
+        public int getSerializedSize() {
+          int size = memoizedSize;
+          if (size != -1) return size;
+
+          size = 0;
+          size += unknownFields.getSerializedSize();
+          memoizedSize = size;
+          return size;
+        }
+
+        @java.lang.Override
+        public boolean equals(final java.lang.Object obj) {
+          if (obj == this) {
+           return true;
+          }
+          if (!(obj instanceof com.arize.protocol.Public.Record.EnvironmentParams.Training)) {
+            return super.equals(obj);
+          }
+          com.arize.protocol.Public.Record.EnvironmentParams.Training other = (com.arize.protocol.Public.Record.EnvironmentParams.Training) obj;
+
+          if (!unknownFields.equals(other.unknownFields)) return false;
+          return true;
+        }
+
+        @java.lang.Override
+        public int hashCode() {
+          if (memoizedHashCode != 0) {
+            return memoizedHashCode;
+          }
+          int hash = 41;
+          hash = (19 * hash) + getDescriptor().hashCode();
+          hash = (29 * hash) + unknownFields.hashCode();
+          memoizedHashCode = hash;
+          return hash;
+        }
+
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseDelimitedWithIOException(PARSER, input);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        @java.lang.Override
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder() {
+          return DEFAULT_INSTANCE.toBuilder();
+        }
+        public static Builder newBuilder(com.arize.protocol.Public.Record.EnvironmentParams.Training prototype) {
+          return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+        }
+        @java.lang.Override
+        public Builder toBuilder() {
+          return this == DEFAULT_INSTANCE
+              ? new Builder() : new Builder().mergeFrom(this);
+        }
+
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        /**
+         * <pre>
+         * RecordTypeParams allow to set parameters values specifically to each type of record
+         * </pre>
+         *
+         * Protobuf type {@code public.Record.EnvironmentParams.Training}
+         */
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:public.Record.EnvironmentParams.Training)
+            com.arize.protocol.Public.Record.EnvironmentParams.TrainingOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Training_descriptor;
+          }
+
+          @java.lang.Override
+          protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Training_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                    com.arize.protocol.Public.Record.EnvironmentParams.Training.class, com.arize.protocol.Public.Record.EnvironmentParams.Training.Builder.class);
+          }
+
+          // Construct using com.arize.protocol.Public.Record.EnvironmentParams.Training.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+
+          private Builder(
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessageV3
+                    .alwaysUseFieldBuilders) {
+            }
+          }
+          @java.lang.Override
+          public Builder clear() {
+            super.clear();
+            return this;
+          }
+
+          @java.lang.Override
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Training_descriptor;
+          }
+
+          @java.lang.Override
+          public com.arize.protocol.Public.Record.EnvironmentParams.Training getDefaultInstanceForType() {
+            return com.arize.protocol.Public.Record.EnvironmentParams.Training.getDefaultInstance();
+          }
+
+          @java.lang.Override
+          public com.arize.protocol.Public.Record.EnvironmentParams.Training build() {
+            com.arize.protocol.Public.Record.EnvironmentParams.Training result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+
+          @java.lang.Override
+          public com.arize.protocol.Public.Record.EnvironmentParams.Training buildPartial() {
+            com.arize.protocol.Public.Record.EnvironmentParams.Training result = new com.arize.protocol.Public.Record.EnvironmentParams.Training(this);
+            onBuilt();
+            return result;
+          }
+
+          @java.lang.Override
+          public Builder clone() {
+            return super.clone();
+          }
+          @java.lang.Override
+          public Builder setField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              java.lang.Object value) {
+            return super.setField(field, value);
+          }
+          @java.lang.Override
+          public Builder clearField(
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
+            return super.clearField(field);
+          }
+          @java.lang.Override
+          public Builder clearOneof(
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+            return super.clearOneof(oneof);
+          }
+          @java.lang.Override
+          public Builder setRepeatedField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, java.lang.Object value) {
+            return super.setRepeatedField(field, index, value);
+          }
+          @java.lang.Override
+          public Builder addRepeatedField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              java.lang.Object value) {
+            return super.addRepeatedField(field, value);
+          }
+          @java.lang.Override
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.arize.protocol.Public.Record.EnvironmentParams.Training) {
+              return mergeFrom((com.arize.protocol.Public.Record.EnvironmentParams.Training)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+
+          public Builder mergeFrom(com.arize.protocol.Public.Record.EnvironmentParams.Training other) {
+            if (other == com.arize.protocol.Public.Record.EnvironmentParams.Training.getDefaultInstance()) return this;
+            this.mergeUnknownFields(other.unknownFields);
+            onChanged();
+            return this;
+          }
+
+          @java.lang.Override
+          public final boolean isInitialized() {
+            return true;
+          }
+
+          @java.lang.Override
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.arize.protocol.Public.Record.EnvironmentParams.Training parsedMessage = null;
+            try {
+              parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+              parsedMessage = (com.arize.protocol.Public.Record.EnvironmentParams.Training) e.getUnfinishedMessage();
+              throw e.unwrapIOException();
+            } finally {
+              if (parsedMessage != null) {
+                mergeFrom(parsedMessage);
+              }
+            }
+            return this;
+          }
+          @java.lang.Override
+          public final Builder setUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+            return super.setUnknownFields(unknownFields);
+          }
+
+          @java.lang.Override
+          public final Builder mergeUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+            return super.mergeUnknownFields(unknownFields);
+          }
+
+
+          // @@protoc_insertion_point(builder_scope:public.Record.EnvironmentParams.Training)
+        }
+
+        // @@protoc_insertion_point(class_scope:public.Record.EnvironmentParams.Training)
+        private static final com.arize.protocol.Public.Record.EnvironmentParams.Training DEFAULT_INSTANCE;
+        static {
+          DEFAULT_INSTANCE = new com.arize.protocol.Public.Record.EnvironmentParams.Training();
+        }
+
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Training getDefaultInstance() {
+          return DEFAULT_INSTANCE;
+        }
+
+        private static final com.google.protobuf.Parser<Training>
+            PARSER = new com.google.protobuf.AbstractParser<Training>() {
+          @java.lang.Override
+          public Training parsePartialFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            return new Training(input, extensionRegistry);
+          }
+        };
+
+        public static com.google.protobuf.Parser<Training> parser() {
+          return PARSER;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Parser<Training> getParserForType() {
+          return PARSER;
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.Record.EnvironmentParams.Training getDefaultInstanceForType() {
+          return DEFAULT_INSTANCE;
+        }
+
+      }
+
+      public interface ValidationOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:public.Record.EnvironmentParams.Validation)
+          com.google.protobuf.MessageOrBuilder {
+
+        /**
+         * <code>string batch_id = 1;</code>
+         * @return The batchId.
+         */
+        java.lang.String getBatchId();
+        /**
+         * <code>string batch_id = 1;</code>
+         * @return The bytes for batchId.
+         */
+        com.google.protobuf.ByteString
+            getBatchIdBytes();
+      }
+      /**
+       * Protobuf type {@code public.Record.EnvironmentParams.Validation}
+       */
+      public  static final class Validation extends
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:public.Record.EnvironmentParams.Validation)
+          ValidationOrBuilder {
+      private static final long serialVersionUID = 0L;
+        // Use Validation.newBuilder() to construct.
+        private Validation(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+          super(builder);
+        }
+        private Validation() {
+          batchId_ = "";
+        }
+
+        @java.lang.Override
+        @SuppressWarnings({"unused"})
+        protected java.lang.Object newInstance(
+            UnusedPrivateParameter unused) {
+          return new Validation();
+        }
+
+        @java.lang.Override
+        public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+          return this.unknownFields;
+        }
+        private Validation(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          this();
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                case 10: {
+                  java.lang.String s = input.readStringRequireUtf8();
+
+                  batchId_ = s;
+                  break;
+                }
+                default: {
+                  if (!parseUnknownField(
+                      input, unknownFields, extensionRegistry, tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(this);
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(
+                e).setUnfinishedMessage(this);
+          } finally {
+            this.unknownFields = unknownFields.build();
+            makeExtensionsImmutable();
+          }
+        }
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Validation_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Validation_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.arize.protocol.Public.Record.EnvironmentParams.Validation.class, com.arize.protocol.Public.Record.EnvironmentParams.Validation.Builder.class);
+        }
+
+        public static final int BATCH_ID_FIELD_NUMBER = 1;
+        private volatile java.lang.Object batchId_;
+        /**
+         * <code>string batch_id = 1;</code>
+         * @return The batchId.
+         */
+        public java.lang.String getBatchId() {
+          java.lang.Object ref = batchId_;
+          if (ref instanceof java.lang.String) {
+            return (java.lang.String) ref;
+          } else {
+            com.google.protobuf.ByteString bs = 
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            batchId_ = s;
+            return s;
+          }
+        }
+        /**
+         * <code>string batch_id = 1;</code>
+         * @return The bytes for batchId.
+         */
+        public com.google.protobuf.ByteString
+            getBatchIdBytes() {
+          java.lang.Object ref = batchId_;
+          if (ref instanceof java.lang.String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            batchId_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+
+        private byte memoizedIsInitialized = -1;
+        @java.lang.Override
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return true;
+          if (isInitialized == 0) return false;
+
+          memoizedIsInitialized = 1;
+          return true;
+        }
+
+        @java.lang.Override
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          if (!getBatchIdBytes().isEmpty()) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 1, batchId_);
+          }
+          unknownFields.writeTo(output);
+        }
+
+        @java.lang.Override
+        public int getSerializedSize() {
+          int size = memoizedSize;
+          if (size != -1) return size;
+
+          size = 0;
+          if (!getBatchIdBytes().isEmpty()) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, batchId_);
+          }
+          size += unknownFields.getSerializedSize();
+          memoizedSize = size;
+          return size;
+        }
+
+        @java.lang.Override
+        public boolean equals(final java.lang.Object obj) {
+          if (obj == this) {
+           return true;
+          }
+          if (!(obj instanceof com.arize.protocol.Public.Record.EnvironmentParams.Validation)) {
+            return super.equals(obj);
+          }
+          com.arize.protocol.Public.Record.EnvironmentParams.Validation other = (com.arize.protocol.Public.Record.EnvironmentParams.Validation) obj;
+
+          if (!getBatchId()
+              .equals(other.getBatchId())) return false;
+          if (!unknownFields.equals(other.unknownFields)) return false;
+          return true;
+        }
+
+        @java.lang.Override
+        public int hashCode() {
+          if (memoizedHashCode != 0) {
+            return memoizedHashCode;
+          }
+          int hash = 41;
+          hash = (19 * hash) + getDescriptor().hashCode();
+          hash = (37 * hash) + BATCH_ID_FIELD_NUMBER;
+          hash = (53 * hash) + getBatchId().hashCode();
+          hash = (29 * hash) + unknownFields.hashCode();
+          memoizedHashCode = hash;
+          return hash;
+        }
+
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseDelimitedWithIOException(PARSER, input);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        @java.lang.Override
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder() {
+          return DEFAULT_INSTANCE.toBuilder();
+        }
+        public static Builder newBuilder(com.arize.protocol.Public.Record.EnvironmentParams.Validation prototype) {
+          return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+        }
+        @java.lang.Override
+        public Builder toBuilder() {
+          return this == DEFAULT_INSTANCE
+              ? new Builder() : new Builder().mergeFrom(this);
+        }
+
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        /**
+         * Protobuf type {@code public.Record.EnvironmentParams.Validation}
+         */
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:public.Record.EnvironmentParams.Validation)
+            com.arize.protocol.Public.Record.EnvironmentParams.ValidationOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Validation_descriptor;
+          }
+
+          @java.lang.Override
+          protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Validation_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                    com.arize.protocol.Public.Record.EnvironmentParams.Validation.class, com.arize.protocol.Public.Record.EnvironmentParams.Validation.Builder.class);
+          }
+
+          // Construct using com.arize.protocol.Public.Record.EnvironmentParams.Validation.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+
+          private Builder(
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessageV3
+                    .alwaysUseFieldBuilders) {
+            }
+          }
+          @java.lang.Override
+          public Builder clear() {
+            super.clear();
+            batchId_ = "";
+
+            return this;
+          }
+
+          @java.lang.Override
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Validation_descriptor;
+          }
+
+          @java.lang.Override
+          public com.arize.protocol.Public.Record.EnvironmentParams.Validation getDefaultInstanceForType() {
+            return com.arize.protocol.Public.Record.EnvironmentParams.Validation.getDefaultInstance();
+          }
+
+          @java.lang.Override
+          public com.arize.protocol.Public.Record.EnvironmentParams.Validation build() {
+            com.arize.protocol.Public.Record.EnvironmentParams.Validation result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+
+          @java.lang.Override
+          public com.arize.protocol.Public.Record.EnvironmentParams.Validation buildPartial() {
+            com.arize.protocol.Public.Record.EnvironmentParams.Validation result = new com.arize.protocol.Public.Record.EnvironmentParams.Validation(this);
+            result.batchId_ = batchId_;
+            onBuilt();
+            return result;
+          }
+
+          @java.lang.Override
+          public Builder clone() {
+            return super.clone();
+          }
+          @java.lang.Override
+          public Builder setField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              java.lang.Object value) {
+            return super.setField(field, value);
+          }
+          @java.lang.Override
+          public Builder clearField(
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
+            return super.clearField(field);
+          }
+          @java.lang.Override
+          public Builder clearOneof(
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+            return super.clearOneof(oneof);
+          }
+          @java.lang.Override
+          public Builder setRepeatedField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, java.lang.Object value) {
+            return super.setRepeatedField(field, index, value);
+          }
+          @java.lang.Override
+          public Builder addRepeatedField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              java.lang.Object value) {
+            return super.addRepeatedField(field, value);
+          }
+          @java.lang.Override
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.arize.protocol.Public.Record.EnvironmentParams.Validation) {
+              return mergeFrom((com.arize.protocol.Public.Record.EnvironmentParams.Validation)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+
+          public Builder mergeFrom(com.arize.protocol.Public.Record.EnvironmentParams.Validation other) {
+            if (other == com.arize.protocol.Public.Record.EnvironmentParams.Validation.getDefaultInstance()) return this;
+            if (!other.getBatchId().isEmpty()) {
+              batchId_ = other.batchId_;
+              onChanged();
+            }
+            this.mergeUnknownFields(other.unknownFields);
+            onChanged();
+            return this;
+          }
+
+          @java.lang.Override
+          public final boolean isInitialized() {
+            return true;
+          }
+
+          @java.lang.Override
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.arize.protocol.Public.Record.EnvironmentParams.Validation parsedMessage = null;
+            try {
+              parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+              parsedMessage = (com.arize.protocol.Public.Record.EnvironmentParams.Validation) e.getUnfinishedMessage();
+              throw e.unwrapIOException();
+            } finally {
+              if (parsedMessage != null) {
+                mergeFrom(parsedMessage);
+              }
+            }
+            return this;
+          }
+
+          private java.lang.Object batchId_ = "";
+          /**
+           * <code>string batch_id = 1;</code>
+           * @return The batchId.
+           */
+          public java.lang.String getBatchId() {
+            java.lang.Object ref = batchId_;
+            if (!(ref instanceof java.lang.String)) {
+              com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+              java.lang.String s = bs.toStringUtf8();
+              batchId_ = s;
+              return s;
+            } else {
+              return (java.lang.String) ref;
+            }
+          }
+          /**
+           * <code>string batch_id = 1;</code>
+           * @return The bytes for batchId.
+           */
+          public com.google.protobuf.ByteString
+              getBatchIdBytes() {
+            java.lang.Object ref = batchId_;
+            if (ref instanceof String) {
+              com.google.protobuf.ByteString b = 
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                      (java.lang.String) ref);
+              batchId_ = b;
+              return b;
+            } else {
+              return (com.google.protobuf.ByteString) ref;
+            }
+          }
+          /**
+           * <code>string batch_id = 1;</code>
+           * @param value The batchId to set.
+           * @return This builder for chaining.
+           */
+          public Builder setBatchId(
+              java.lang.String value) {
+            if (value == null) {
+    throw new NullPointerException();
+  }
+  
+            batchId_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>string batch_id = 1;</code>
+           * @return This builder for chaining.
+           */
+          public Builder clearBatchId() {
+            
+            batchId_ = getDefaultInstance().getBatchId();
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>string batch_id = 1;</code>
+           * @param value The bytes for batchId to set.
+           * @return This builder for chaining.
+           */
+          public Builder setBatchIdBytes(
+              com.google.protobuf.ByteString value) {
+            if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+            
+            batchId_ = value;
+            onChanged();
+            return this;
+          }
+          @java.lang.Override
+          public final Builder setUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+            return super.setUnknownFields(unknownFields);
+          }
+
+          @java.lang.Override
+          public final Builder mergeUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+            return super.mergeUnknownFields(unknownFields);
+          }
+
+
+          // @@protoc_insertion_point(builder_scope:public.Record.EnvironmentParams.Validation)
+        }
+
+        // @@protoc_insertion_point(class_scope:public.Record.EnvironmentParams.Validation)
+        private static final com.arize.protocol.Public.Record.EnvironmentParams.Validation DEFAULT_INSTANCE;
+        static {
+          DEFAULT_INSTANCE = new com.arize.protocol.Public.Record.EnvironmentParams.Validation();
+        }
+
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Validation getDefaultInstance() {
+          return DEFAULT_INSTANCE;
+        }
+
+        private static final com.google.protobuf.Parser<Validation>
+            PARSER = new com.google.protobuf.AbstractParser<Validation>() {
+          @java.lang.Override
+          public Validation parsePartialFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            return new Validation(input, extensionRegistry);
+          }
+        };
+
+        public static com.google.protobuf.Parser<Validation> parser() {
+          return PARSER;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Parser<Validation> getParserForType() {
+          return PARSER;
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.Record.EnvironmentParams.Validation getDefaultInstanceForType() {
+          return DEFAULT_INSTANCE;
+        }
+
+      }
+
+      public interface ProductionOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:public.Record.EnvironmentParams.Production)
+          com.google.protobuf.MessageOrBuilder {
+      }
+      /**
+       * Protobuf type {@code public.Record.EnvironmentParams.Production}
+       */
+      public  static final class Production extends
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:public.Record.EnvironmentParams.Production)
+          ProductionOrBuilder {
+      private static final long serialVersionUID = 0L;
+        // Use Production.newBuilder() to construct.
+        private Production(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+          super(builder);
+        }
+        private Production() {
+        }
+
+        @java.lang.Override
+        @SuppressWarnings({"unused"})
+        protected java.lang.Object newInstance(
+            UnusedPrivateParameter unused) {
+          return new Production();
+        }
+
+        @java.lang.Override
+        public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+          return this.unknownFields;
+        }
+        private Production(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          this();
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!parseUnknownField(
+                      input, unknownFields, extensionRegistry, tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(this);
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(
+                e).setUnfinishedMessage(this);
+          } finally {
+            this.unknownFields = unknownFields.build();
+            makeExtensionsImmutable();
+          }
+        }
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Production_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Production_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.arize.protocol.Public.Record.EnvironmentParams.Production.class, com.arize.protocol.Public.Record.EnvironmentParams.Production.Builder.class);
+        }
+
+        private byte memoizedIsInitialized = -1;
+        @java.lang.Override
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return true;
+          if (isInitialized == 0) return false;
+
+          memoizedIsInitialized = 1;
+          return true;
+        }
+
+        @java.lang.Override
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          unknownFields.writeTo(output);
+        }
+
+        @java.lang.Override
+        public int getSerializedSize() {
+          int size = memoizedSize;
+          if (size != -1) return size;
+
+          size = 0;
+          size += unknownFields.getSerializedSize();
+          memoizedSize = size;
+          return size;
+        }
+
+        @java.lang.Override
+        public boolean equals(final java.lang.Object obj) {
+          if (obj == this) {
+           return true;
+          }
+          if (!(obj instanceof com.arize.protocol.Public.Record.EnvironmentParams.Production)) {
+            return super.equals(obj);
+          }
+          com.arize.protocol.Public.Record.EnvironmentParams.Production other = (com.arize.protocol.Public.Record.EnvironmentParams.Production) obj;
+
+          if (!unknownFields.equals(other.unknownFields)) return false;
+          return true;
+        }
+
+        @java.lang.Override
+        public int hashCode() {
+          if (memoizedHashCode != 0) {
+            return memoizedHashCode;
+          }
+          int hash = 41;
+          hash = (19 * hash) + getDescriptor().hashCode();
+          hash = (29 * hash) + unknownFields.hashCode();
+          memoizedHashCode = hash;
+          return hash;
+        }
+
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseDelimitedWithIOException(PARSER, input);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input);
+        }
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        @java.lang.Override
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder() {
+          return DEFAULT_INSTANCE.toBuilder();
+        }
+        public static Builder newBuilder(com.arize.protocol.Public.Record.EnvironmentParams.Production prototype) {
+          return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+        }
+        @java.lang.Override
+        public Builder toBuilder() {
+          return this == DEFAULT_INSTANCE
+              ? new Builder() : new Builder().mergeFrom(this);
+        }
+
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        /**
+         * Protobuf type {@code public.Record.EnvironmentParams.Production}
+         */
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:public.Record.EnvironmentParams.Production)
+            com.arize.protocol.Public.Record.EnvironmentParams.ProductionOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Production_descriptor;
+          }
+
+          @java.lang.Override
+          protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Production_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                    com.arize.protocol.Public.Record.EnvironmentParams.Production.class, com.arize.protocol.Public.Record.EnvironmentParams.Production.Builder.class);
+          }
+
+          // Construct using com.arize.protocol.Public.Record.EnvironmentParams.Production.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+
+          private Builder(
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessageV3
+                    .alwaysUseFieldBuilders) {
+            }
+          }
+          @java.lang.Override
+          public Builder clear() {
+            super.clear();
+            return this;
+          }
+
+          @java.lang.Override
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_Production_descriptor;
+          }
+
+          @java.lang.Override
+          public com.arize.protocol.Public.Record.EnvironmentParams.Production getDefaultInstanceForType() {
+            return com.arize.protocol.Public.Record.EnvironmentParams.Production.getDefaultInstance();
+          }
+
+          @java.lang.Override
+          public com.arize.protocol.Public.Record.EnvironmentParams.Production build() {
+            com.arize.protocol.Public.Record.EnvironmentParams.Production result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+
+          @java.lang.Override
+          public com.arize.protocol.Public.Record.EnvironmentParams.Production buildPartial() {
+            com.arize.protocol.Public.Record.EnvironmentParams.Production result = new com.arize.protocol.Public.Record.EnvironmentParams.Production(this);
+            onBuilt();
+            return result;
+          }
+
+          @java.lang.Override
+          public Builder clone() {
+            return super.clone();
+          }
+          @java.lang.Override
+          public Builder setField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              java.lang.Object value) {
+            return super.setField(field, value);
+          }
+          @java.lang.Override
+          public Builder clearField(
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
+            return super.clearField(field);
+          }
+          @java.lang.Override
+          public Builder clearOneof(
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+            return super.clearOneof(oneof);
+          }
+          @java.lang.Override
+          public Builder setRepeatedField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, java.lang.Object value) {
+            return super.setRepeatedField(field, index, value);
+          }
+          @java.lang.Override
+          public Builder addRepeatedField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              java.lang.Object value) {
+            return super.addRepeatedField(field, value);
+          }
+          @java.lang.Override
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.arize.protocol.Public.Record.EnvironmentParams.Production) {
+              return mergeFrom((com.arize.protocol.Public.Record.EnvironmentParams.Production)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+
+          public Builder mergeFrom(com.arize.protocol.Public.Record.EnvironmentParams.Production other) {
+            if (other == com.arize.protocol.Public.Record.EnvironmentParams.Production.getDefaultInstance()) return this;
+            this.mergeUnknownFields(other.unknownFields);
+            onChanged();
+            return this;
+          }
+
+          @java.lang.Override
+          public final boolean isInitialized() {
+            return true;
+          }
+
+          @java.lang.Override
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.arize.protocol.Public.Record.EnvironmentParams.Production parsedMessage = null;
+            try {
+              parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+              parsedMessage = (com.arize.protocol.Public.Record.EnvironmentParams.Production) e.getUnfinishedMessage();
+              throw e.unwrapIOException();
+            } finally {
+              if (parsedMessage != null) {
+                mergeFrom(parsedMessage);
+              }
+            }
+            return this;
+          }
+          @java.lang.Override
+          public final Builder setUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+            return super.setUnknownFields(unknownFields);
+          }
+
+          @java.lang.Override
+          public final Builder mergeUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+            return super.mergeUnknownFields(unknownFields);
+          }
+
+
+          // @@protoc_insertion_point(builder_scope:public.Record.EnvironmentParams.Production)
+        }
+
+        // @@protoc_insertion_point(class_scope:public.Record.EnvironmentParams.Production)
+        private static final com.arize.protocol.Public.Record.EnvironmentParams.Production DEFAULT_INSTANCE;
+        static {
+          DEFAULT_INSTANCE = new com.arize.protocol.Public.Record.EnvironmentParams.Production();
+        }
+
+        public static com.arize.protocol.Public.Record.EnvironmentParams.Production getDefaultInstance() {
+          return DEFAULT_INSTANCE;
+        }
+
+        private static final com.google.protobuf.Parser<Production>
+            PARSER = new com.google.protobuf.AbstractParser<Production>() {
+          @java.lang.Override
+          public Production parsePartialFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            return new Production(input, extensionRegistry);
+          }
+        };
+
+        public static com.google.protobuf.Parser<Production> parser() {
+          return PARSER;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Parser<Production> getParserForType() {
+          return PARSER;
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.Record.EnvironmentParams.Production getDefaultInstanceForType() {
+          return DEFAULT_INSTANCE;
+        }
+
+      }
+
+      private int environmentCase_ = 0;
+      private java.lang.Object environment_;
+      public enum EnvironmentCase
+          implements com.google.protobuf.Internal.EnumLite,
+              com.google.protobuf.AbstractMessage.InternalOneOfEnum {
+        TRAINING(1),
+        VALIDATION(2),
+        PRODUCTION(3),
+        ENVIRONMENT_NOT_SET(0);
+        private final int value;
+        private EnvironmentCase(int value) {
+          this.value = value;
+        }
+        /**
+         * @param value The number of the enum to look for.
+         * @return The enum associated with the given number.
+         * @deprecated Use {@link #forNumber(int)} instead.
+         */
+        @java.lang.Deprecated
+        public static EnvironmentCase valueOf(int value) {
+          return forNumber(value);
+        }
+
+        public static EnvironmentCase forNumber(int value) {
+          switch (value) {
+            case 1: return TRAINING;
+            case 2: return VALIDATION;
+            case 3: return PRODUCTION;
+            case 0: return ENVIRONMENT_NOT_SET;
+            default: return null;
+          }
+        }
+        public int getNumber() {
+          return this.value;
+        }
+      };
+
+      public EnvironmentCase
+      getEnvironmentCase() {
+        return EnvironmentCase.forNumber(
+            environmentCase_);
+      }
+
+      public static final int TRAINING_FIELD_NUMBER = 1;
+      /**
+       * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+       * @return Whether the training field is set.
+       */
+      public boolean hasTraining() {
+        return environmentCase_ == 1;
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+       * @return The training.
+       */
+      public com.arize.protocol.Public.Record.EnvironmentParams.Training getTraining() {
+        if (environmentCase_ == 1) {
+           return (com.arize.protocol.Public.Record.EnvironmentParams.Training) environment_;
+        }
+        return com.arize.protocol.Public.Record.EnvironmentParams.Training.getDefaultInstance();
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+       */
+      public com.arize.protocol.Public.Record.EnvironmentParams.TrainingOrBuilder getTrainingOrBuilder() {
+        if (environmentCase_ == 1) {
+           return (com.arize.protocol.Public.Record.EnvironmentParams.Training) environment_;
+        }
+        return com.arize.protocol.Public.Record.EnvironmentParams.Training.getDefaultInstance();
+      }
+
+      public static final int VALIDATION_FIELD_NUMBER = 2;
+      /**
+       * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+       * @return Whether the validation field is set.
+       */
+      public boolean hasValidation() {
+        return environmentCase_ == 2;
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+       * @return The validation.
+       */
+      public com.arize.protocol.Public.Record.EnvironmentParams.Validation getValidation() {
+        if (environmentCase_ == 2) {
+           return (com.arize.protocol.Public.Record.EnvironmentParams.Validation) environment_;
+        }
+        return com.arize.protocol.Public.Record.EnvironmentParams.Validation.getDefaultInstance();
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+       */
+      public com.arize.protocol.Public.Record.EnvironmentParams.ValidationOrBuilder getValidationOrBuilder() {
+        if (environmentCase_ == 2) {
+           return (com.arize.protocol.Public.Record.EnvironmentParams.Validation) environment_;
+        }
+        return com.arize.protocol.Public.Record.EnvironmentParams.Validation.getDefaultInstance();
+      }
+
+      public static final int PRODUCTION_FIELD_NUMBER = 3;
+      /**
+       * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+       * @return Whether the production field is set.
+       */
+      public boolean hasProduction() {
+        return environmentCase_ == 3;
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+       * @return The production.
+       */
+      public com.arize.protocol.Public.Record.EnvironmentParams.Production getProduction() {
+        if (environmentCase_ == 3) {
+           return (com.arize.protocol.Public.Record.EnvironmentParams.Production) environment_;
+        }
+        return com.arize.protocol.Public.Record.EnvironmentParams.Production.getDefaultInstance();
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+       */
+      public com.arize.protocol.Public.Record.EnvironmentParams.ProductionOrBuilder getProductionOrBuilder() {
+        if (environmentCase_ == 3) {
+           return (com.arize.protocol.Public.Record.EnvironmentParams.Production) environment_;
+        }
+        return com.arize.protocol.Public.Record.EnvironmentParams.Production.getDefaultInstance();
+      }
+
+      private byte memoizedIsInitialized = -1;
+      @java.lang.Override
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      @java.lang.Override
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (environmentCase_ == 1) {
+          output.writeMessage(1, (com.arize.protocol.Public.Record.EnvironmentParams.Training) environment_);
+        }
+        if (environmentCase_ == 2) {
+          output.writeMessage(2, (com.arize.protocol.Public.Record.EnvironmentParams.Validation) environment_);
+        }
+        if (environmentCase_ == 3) {
+          output.writeMessage(3, (com.arize.protocol.Public.Record.EnvironmentParams.Production) environment_);
+        }
+        unknownFields.writeTo(output);
+      }
+
+      @java.lang.Override
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (environmentCase_ == 1) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(1, (com.arize.protocol.Public.Record.EnvironmentParams.Training) environment_);
+        }
+        if (environmentCase_ == 2) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(2, (com.arize.protocol.Public.Record.EnvironmentParams.Validation) environment_);
+        }
+        if (environmentCase_ == 3) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(3, (com.arize.protocol.Public.Record.EnvironmentParams.Production) environment_);
+        }
+        size += unknownFields.getSerializedSize();
+        memoizedSize = size;
+        return size;
+      }
+
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.arize.protocol.Public.Record.EnvironmentParams)) {
+          return super.equals(obj);
+        }
+        com.arize.protocol.Public.Record.EnvironmentParams other = (com.arize.protocol.Public.Record.EnvironmentParams) obj;
+
+        if (!getEnvironmentCase().equals(other.getEnvironmentCase())) return false;
+        switch (environmentCase_) {
+          case 1:
+            if (!getTraining()
+                .equals(other.getTraining())) return false;
+            break;
+          case 2:
+            if (!getValidation()
+                .equals(other.getValidation())) return false;
+            break;
+          case 3:
+            if (!getProduction()
+                .equals(other.getProduction())) return false;
+            break;
+          case 0:
+          default:
+        }
+        if (!unknownFields.equals(other.unknownFields)) return false;
+        return true;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptor().hashCode();
+        switch (environmentCase_) {
+          case 1:
+            hash = (37 * hash) + TRAINING_FIELD_NUMBER;
+            hash = (53 * hash) + getTraining().hashCode();
+            break;
+          case 2:
+            hash = (37 * hash) + VALIDATION_FIELD_NUMBER;
+            hash = (53 * hash) + getValidation().hashCode();
+            break;
+          case 3:
+            hash = (37 * hash) + PRODUCTION_FIELD_NUMBER;
+            hash = (53 * hash) + getProduction().hashCode();
+            break;
+          case 0:
+          default:
+        }
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.arize.protocol.Public.Record.EnvironmentParams parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      @java.lang.Override
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.arize.protocol.Public.Record.EnvironmentParams prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      @java.lang.Override
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code public.Record.EnvironmentParams}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:public.Record.EnvironmentParams)
+          com.arize.protocol.Public.Record.EnvironmentParamsOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.arize.protocol.Public.Record.EnvironmentParams.class, com.arize.protocol.Public.Record.EnvironmentParams.Builder.class);
+        }
+
+        // Construct using com.arize.protocol.Public.Record.EnvironmentParams.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        @java.lang.Override
+        public Builder clear() {
+          super.clear();
+          environmentCase_ = 0;
+          environment_ = null;
+          return this;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.arize.protocol.Public.internal_static_public_Record_EnvironmentParams_descriptor;
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.Record.EnvironmentParams getDefaultInstanceForType() {
+          return com.arize.protocol.Public.Record.EnvironmentParams.getDefaultInstance();
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.Record.EnvironmentParams build() {
+          com.arize.protocol.Public.Record.EnvironmentParams result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        @java.lang.Override
+        public com.arize.protocol.Public.Record.EnvironmentParams buildPartial() {
+          com.arize.protocol.Public.Record.EnvironmentParams result = new com.arize.protocol.Public.Record.EnvironmentParams(this);
+          if (environmentCase_ == 1) {
+            if (trainingBuilder_ == null) {
+              result.environment_ = environment_;
+            } else {
+              result.environment_ = trainingBuilder_.build();
+            }
+          }
+          if (environmentCase_ == 2) {
+            if (validationBuilder_ == null) {
+              result.environment_ = environment_;
+            } else {
+              result.environment_ = validationBuilder_.build();
+            }
+          }
+          if (environmentCase_ == 3) {
+            if (productionBuilder_ == null) {
+              result.environment_ = environment_;
+            } else {
+              result.environment_ = productionBuilder_.build();
+            }
+          }
+          result.environmentCase_ = environmentCase_;
+          onBuilt();
+          return result;
+        }
+
+        @java.lang.Override
+        public Builder clone() {
+          return super.clone();
+        }
+        @java.lang.Override
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return super.setField(field, value);
+        }
+        @java.lang.Override
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return super.clearField(field);
+        }
+        @java.lang.Override
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return super.clearOneof(oneof);
+        }
+        @java.lang.Override
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, java.lang.Object value) {
+          return super.setRepeatedField(field, index, value);
+        }
+        @java.lang.Override
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return super.addRepeatedField(field, value);
+        }
+        @java.lang.Override
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.arize.protocol.Public.Record.EnvironmentParams) {
+            return mergeFrom((com.arize.protocol.Public.Record.EnvironmentParams)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.arize.protocol.Public.Record.EnvironmentParams other) {
+          if (other == com.arize.protocol.Public.Record.EnvironmentParams.getDefaultInstance()) return this;
+          switch (other.getEnvironmentCase()) {
+            case TRAINING: {
+              mergeTraining(other.getTraining());
+              break;
+            }
+            case VALIDATION: {
+              mergeValidation(other.getValidation());
+              break;
+            }
+            case PRODUCTION: {
+              mergeProduction(other.getProduction());
+              break;
+            }
+            case ENVIRONMENT_NOT_SET: {
+              break;
+            }
+          }
+          this.mergeUnknownFields(other.unknownFields);
+          onChanged();
+          return this;
+        }
+
+        @java.lang.Override
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.arize.protocol.Public.Record.EnvironmentParams parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.arize.protocol.Public.Record.EnvironmentParams) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int environmentCase_ = 0;
+        private java.lang.Object environment_;
+        public EnvironmentCase
+            getEnvironmentCase() {
+          return EnvironmentCase.forNumber(
+              environmentCase_);
+        }
+
+        public Builder clearEnvironment() {
+          environmentCase_ = 0;
+          environment_ = null;
+          onChanged();
+          return this;
+        }
+
+
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Record.EnvironmentParams.Training, com.arize.protocol.Public.Record.EnvironmentParams.Training.Builder, com.arize.protocol.Public.Record.EnvironmentParams.TrainingOrBuilder> trainingBuilder_;
+        /**
+         * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+         * @return Whether the training field is set.
+         */
+        public boolean hasTraining() {
+          return environmentCase_ == 1;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+         * @return The training.
+         */
+        public com.arize.protocol.Public.Record.EnvironmentParams.Training getTraining() {
+          if (trainingBuilder_ == null) {
+            if (environmentCase_ == 1) {
+              return (com.arize.protocol.Public.Record.EnvironmentParams.Training) environment_;
+            }
+            return com.arize.protocol.Public.Record.EnvironmentParams.Training.getDefaultInstance();
+          } else {
+            if (environmentCase_ == 1) {
+              return trainingBuilder_.getMessage();
+            }
+            return com.arize.protocol.Public.Record.EnvironmentParams.Training.getDefaultInstance();
+          }
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+         */
+        public Builder setTraining(com.arize.protocol.Public.Record.EnvironmentParams.Training value) {
+          if (trainingBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            environment_ = value;
+            onChanged();
+          } else {
+            trainingBuilder_.setMessage(value);
+          }
+          environmentCase_ = 1;
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+         */
+        public Builder setTraining(
+            com.arize.protocol.Public.Record.EnvironmentParams.Training.Builder builderForValue) {
+          if (trainingBuilder_ == null) {
+            environment_ = builderForValue.build();
+            onChanged();
+          } else {
+            trainingBuilder_.setMessage(builderForValue.build());
+          }
+          environmentCase_ = 1;
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+         */
+        public Builder mergeTraining(com.arize.protocol.Public.Record.EnvironmentParams.Training value) {
+          if (trainingBuilder_ == null) {
+            if (environmentCase_ == 1 &&
+                environment_ != com.arize.protocol.Public.Record.EnvironmentParams.Training.getDefaultInstance()) {
+              environment_ = com.arize.protocol.Public.Record.EnvironmentParams.Training.newBuilder((com.arize.protocol.Public.Record.EnvironmentParams.Training) environment_)
+                  .mergeFrom(value).buildPartial();
+            } else {
+              environment_ = value;
+            }
+            onChanged();
+          } else {
+            if (environmentCase_ == 1) {
+              trainingBuilder_.mergeFrom(value);
+            }
+            trainingBuilder_.setMessage(value);
+          }
+          environmentCase_ = 1;
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+         */
+        public Builder clearTraining() {
+          if (trainingBuilder_ == null) {
+            if (environmentCase_ == 1) {
+              environmentCase_ = 0;
+              environment_ = null;
+              onChanged();
+            }
+          } else {
+            if (environmentCase_ == 1) {
+              environmentCase_ = 0;
+              environment_ = null;
+            }
+            trainingBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+         */
+        public com.arize.protocol.Public.Record.EnvironmentParams.Training.Builder getTrainingBuilder() {
+          return getTrainingFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+         */
+        public com.arize.protocol.Public.Record.EnvironmentParams.TrainingOrBuilder getTrainingOrBuilder() {
+          if ((environmentCase_ == 1) && (trainingBuilder_ != null)) {
+            return trainingBuilder_.getMessageOrBuilder();
+          } else {
+            if (environmentCase_ == 1) {
+              return (com.arize.protocol.Public.Record.EnvironmentParams.Training) environment_;
+            }
+            return com.arize.protocol.Public.Record.EnvironmentParams.Training.getDefaultInstance();
+          }
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Training training = 1;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Record.EnvironmentParams.Training, com.arize.protocol.Public.Record.EnvironmentParams.Training.Builder, com.arize.protocol.Public.Record.EnvironmentParams.TrainingOrBuilder> 
+            getTrainingFieldBuilder() {
+          if (trainingBuilder_ == null) {
+            if (!(environmentCase_ == 1)) {
+              environment_ = com.arize.protocol.Public.Record.EnvironmentParams.Training.getDefaultInstance();
+            }
+            trainingBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.arize.protocol.Public.Record.EnvironmentParams.Training, com.arize.protocol.Public.Record.EnvironmentParams.Training.Builder, com.arize.protocol.Public.Record.EnvironmentParams.TrainingOrBuilder>(
+                    (com.arize.protocol.Public.Record.EnvironmentParams.Training) environment_,
+                    getParentForChildren(),
+                    isClean());
+            environment_ = null;
+          }
+          environmentCase_ = 1;
+          onChanged();;
+          return trainingBuilder_;
+        }
+
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Record.EnvironmentParams.Validation, com.arize.protocol.Public.Record.EnvironmentParams.Validation.Builder, com.arize.protocol.Public.Record.EnvironmentParams.ValidationOrBuilder> validationBuilder_;
+        /**
+         * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+         * @return Whether the validation field is set.
+         */
+        public boolean hasValidation() {
+          return environmentCase_ == 2;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+         * @return The validation.
+         */
+        public com.arize.protocol.Public.Record.EnvironmentParams.Validation getValidation() {
+          if (validationBuilder_ == null) {
+            if (environmentCase_ == 2) {
+              return (com.arize.protocol.Public.Record.EnvironmentParams.Validation) environment_;
+            }
+            return com.arize.protocol.Public.Record.EnvironmentParams.Validation.getDefaultInstance();
+          } else {
+            if (environmentCase_ == 2) {
+              return validationBuilder_.getMessage();
+            }
+            return com.arize.protocol.Public.Record.EnvironmentParams.Validation.getDefaultInstance();
+          }
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+         */
+        public Builder setValidation(com.arize.protocol.Public.Record.EnvironmentParams.Validation value) {
+          if (validationBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            environment_ = value;
+            onChanged();
+          } else {
+            validationBuilder_.setMessage(value);
+          }
+          environmentCase_ = 2;
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+         */
+        public Builder setValidation(
+            com.arize.protocol.Public.Record.EnvironmentParams.Validation.Builder builderForValue) {
+          if (validationBuilder_ == null) {
+            environment_ = builderForValue.build();
+            onChanged();
+          } else {
+            validationBuilder_.setMessage(builderForValue.build());
+          }
+          environmentCase_ = 2;
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+         */
+        public Builder mergeValidation(com.arize.protocol.Public.Record.EnvironmentParams.Validation value) {
+          if (validationBuilder_ == null) {
+            if (environmentCase_ == 2 &&
+                environment_ != com.arize.protocol.Public.Record.EnvironmentParams.Validation.getDefaultInstance()) {
+              environment_ = com.arize.protocol.Public.Record.EnvironmentParams.Validation.newBuilder((com.arize.protocol.Public.Record.EnvironmentParams.Validation) environment_)
+                  .mergeFrom(value).buildPartial();
+            } else {
+              environment_ = value;
+            }
+            onChanged();
+          } else {
+            if (environmentCase_ == 2) {
+              validationBuilder_.mergeFrom(value);
+            }
+            validationBuilder_.setMessage(value);
+          }
+          environmentCase_ = 2;
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+         */
+        public Builder clearValidation() {
+          if (validationBuilder_ == null) {
+            if (environmentCase_ == 2) {
+              environmentCase_ = 0;
+              environment_ = null;
+              onChanged();
+            }
+          } else {
+            if (environmentCase_ == 2) {
+              environmentCase_ = 0;
+              environment_ = null;
+            }
+            validationBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+         */
+        public com.arize.protocol.Public.Record.EnvironmentParams.Validation.Builder getValidationBuilder() {
+          return getValidationFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+         */
+        public com.arize.protocol.Public.Record.EnvironmentParams.ValidationOrBuilder getValidationOrBuilder() {
+          if ((environmentCase_ == 2) && (validationBuilder_ != null)) {
+            return validationBuilder_.getMessageOrBuilder();
+          } else {
+            if (environmentCase_ == 2) {
+              return (com.arize.protocol.Public.Record.EnvironmentParams.Validation) environment_;
+            }
+            return com.arize.protocol.Public.Record.EnvironmentParams.Validation.getDefaultInstance();
+          }
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Validation validation = 2;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Record.EnvironmentParams.Validation, com.arize.protocol.Public.Record.EnvironmentParams.Validation.Builder, com.arize.protocol.Public.Record.EnvironmentParams.ValidationOrBuilder> 
+            getValidationFieldBuilder() {
+          if (validationBuilder_ == null) {
+            if (!(environmentCase_ == 2)) {
+              environment_ = com.arize.protocol.Public.Record.EnvironmentParams.Validation.getDefaultInstance();
+            }
+            validationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.arize.protocol.Public.Record.EnvironmentParams.Validation, com.arize.protocol.Public.Record.EnvironmentParams.Validation.Builder, com.arize.protocol.Public.Record.EnvironmentParams.ValidationOrBuilder>(
+                    (com.arize.protocol.Public.Record.EnvironmentParams.Validation) environment_,
+                    getParentForChildren(),
+                    isClean());
+            environment_ = null;
+          }
+          environmentCase_ = 2;
+          onChanged();;
+          return validationBuilder_;
+        }
+
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Record.EnvironmentParams.Production, com.arize.protocol.Public.Record.EnvironmentParams.Production.Builder, com.arize.protocol.Public.Record.EnvironmentParams.ProductionOrBuilder> productionBuilder_;
+        /**
+         * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+         * @return Whether the production field is set.
+         */
+        public boolean hasProduction() {
+          return environmentCase_ == 3;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+         * @return The production.
+         */
+        public com.arize.protocol.Public.Record.EnvironmentParams.Production getProduction() {
+          if (productionBuilder_ == null) {
+            if (environmentCase_ == 3) {
+              return (com.arize.protocol.Public.Record.EnvironmentParams.Production) environment_;
+            }
+            return com.arize.protocol.Public.Record.EnvironmentParams.Production.getDefaultInstance();
+          } else {
+            if (environmentCase_ == 3) {
+              return productionBuilder_.getMessage();
+            }
+            return com.arize.protocol.Public.Record.EnvironmentParams.Production.getDefaultInstance();
+          }
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+         */
+        public Builder setProduction(com.arize.protocol.Public.Record.EnvironmentParams.Production value) {
+          if (productionBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            environment_ = value;
+            onChanged();
+          } else {
+            productionBuilder_.setMessage(value);
+          }
+          environmentCase_ = 3;
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+         */
+        public Builder setProduction(
+            com.arize.protocol.Public.Record.EnvironmentParams.Production.Builder builderForValue) {
+          if (productionBuilder_ == null) {
+            environment_ = builderForValue.build();
+            onChanged();
+          } else {
+            productionBuilder_.setMessage(builderForValue.build());
+          }
+          environmentCase_ = 3;
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+         */
+        public Builder mergeProduction(com.arize.protocol.Public.Record.EnvironmentParams.Production value) {
+          if (productionBuilder_ == null) {
+            if (environmentCase_ == 3 &&
+                environment_ != com.arize.protocol.Public.Record.EnvironmentParams.Production.getDefaultInstance()) {
+              environment_ = com.arize.protocol.Public.Record.EnvironmentParams.Production.newBuilder((com.arize.protocol.Public.Record.EnvironmentParams.Production) environment_)
+                  .mergeFrom(value).buildPartial();
+            } else {
+              environment_ = value;
+            }
+            onChanged();
+          } else {
+            if (environmentCase_ == 3) {
+              productionBuilder_.mergeFrom(value);
+            }
+            productionBuilder_.setMessage(value);
+          }
+          environmentCase_ = 3;
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+         */
+        public Builder clearProduction() {
+          if (productionBuilder_ == null) {
+            if (environmentCase_ == 3) {
+              environmentCase_ = 0;
+              environment_ = null;
+              onChanged();
+            }
+          } else {
+            if (environmentCase_ == 3) {
+              environmentCase_ = 0;
+              environment_ = null;
+            }
+            productionBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+         */
+        public com.arize.protocol.Public.Record.EnvironmentParams.Production.Builder getProductionBuilder() {
+          return getProductionFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+         */
+        public com.arize.protocol.Public.Record.EnvironmentParams.ProductionOrBuilder getProductionOrBuilder() {
+          if ((environmentCase_ == 3) && (productionBuilder_ != null)) {
+            return productionBuilder_.getMessageOrBuilder();
+          } else {
+            if (environmentCase_ == 3) {
+              return (com.arize.protocol.Public.Record.EnvironmentParams.Production) environment_;
+            }
+            return com.arize.protocol.Public.Record.EnvironmentParams.Production.getDefaultInstance();
+          }
+        }
+        /**
+         * <code>.public.Record.EnvironmentParams.Production production = 3;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Record.EnvironmentParams.Production, com.arize.protocol.Public.Record.EnvironmentParams.Production.Builder, com.arize.protocol.Public.Record.EnvironmentParams.ProductionOrBuilder> 
+            getProductionFieldBuilder() {
+          if (productionBuilder_ == null) {
+            if (!(environmentCase_ == 3)) {
+              environment_ = com.arize.protocol.Public.Record.EnvironmentParams.Production.getDefaultInstance();
+            }
+            productionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.arize.protocol.Public.Record.EnvironmentParams.Production, com.arize.protocol.Public.Record.EnvironmentParams.Production.Builder, com.arize.protocol.Public.Record.EnvironmentParams.ProductionOrBuilder>(
+                    (com.arize.protocol.Public.Record.EnvironmentParams.Production) environment_,
+                    getParentForChildren(),
+                    isClean());
+            environment_ = null;
+          }
+          environmentCase_ = 3;
+          onChanged();;
+          return productionBuilder_;
+        }
+        @java.lang.Override
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.setUnknownFields(unknownFields);
+        }
+
+        @java.lang.Override
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.mergeUnknownFields(unknownFields);
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:public.Record.EnvironmentParams)
+      }
+
+      // @@protoc_insertion_point(class_scope:public.Record.EnvironmentParams)
+      private static final com.arize.protocol.Public.Record.EnvironmentParams DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.arize.protocol.Public.Record.EnvironmentParams();
+      }
+
+      public static com.arize.protocol.Public.Record.EnvironmentParams getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<EnvironmentParams>
+          PARSER = new com.google.protobuf.AbstractParser<EnvironmentParams>() {
+        @java.lang.Override
+        public EnvironmentParams parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new EnvironmentParams(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<EnvironmentParams> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<EnvironmentParams> getParserForType() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.arize.protocol.Public.Record.EnvironmentParams getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
     }
 
     public static final int ORGANIZATION_KEY_FIELD_NUMBER = 1;
@@ -2152,6 +4748,29 @@ public final class Public {
       }
     }
 
+    public static final int ENVIRONMENT_PARAMS_FIELD_NUMBER = 13;
+    private com.arize.protocol.Public.Record.EnvironmentParams environmentParams_;
+    /**
+     * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+     * @return Whether the environmentParams field is set.
+     */
+    public boolean hasEnvironmentParams() {
+      return environmentParams_ != null;
+    }
+    /**
+     * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+     * @return The environmentParams.
+     */
+    public com.arize.protocol.Public.Record.EnvironmentParams getEnvironmentParams() {
+      return environmentParams_ == null ? com.arize.protocol.Public.Record.EnvironmentParams.getDefaultInstance() : environmentParams_;
+    }
+    /**
+     * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+     */
+    public com.arize.protocol.Public.Record.EnvironmentParamsOrBuilder getEnvironmentParamsOrBuilder() {
+      return getEnvironmentParams();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2190,6 +4809,9 @@ public final class Public {
       if (!getSpaceKeyBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 12, spaceKey_);
       }
+      if (environmentParams_ != null) {
+        output.writeMessage(13, getEnvironmentParams());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -2226,6 +4848,10 @@ public final class Public {
       }
       if (!getSpaceKeyBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, spaceKey_);
+      }
+      if (environmentParams_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(13, getEnvironmentParams());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2270,6 +4896,11 @@ public final class Public {
       }
       if (!getSpaceKey()
           .equals(other.getSpaceKey())) return false;
+      if (hasEnvironmentParams() != other.hasEnvironmentParams()) return false;
+      if (hasEnvironmentParams()) {
+        if (!getEnvironmentParams()
+            .equals(other.getEnvironmentParams())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2305,6 +4936,10 @@ public final class Public {
       }
       hash = (37 * hash) + SPACE_KEY_FIELD_NUMBER;
       hash = (53 * hash) + getSpaceKey().hashCode();
+      if (hasEnvironmentParams()) {
+        hash = (37 * hash) + ENVIRONMENT_PARAMS_FIELD_NUMBER;
+        hash = (53 * hash) + getEnvironmentParams().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2475,6 +5110,12 @@ public final class Public {
         }
         spaceKey_ = "";
 
+        if (environmentParamsBuilder_ == null) {
+          environmentParams_ = null;
+        } else {
+          environmentParams_ = null;
+          environmentParamsBuilder_ = null;
+        }
         return this;
       }
 
@@ -2525,6 +5166,11 @@ public final class Public {
           result.predictionAndActual_ = predictionAndActualBuilder_.build();
         }
         result.spaceKey_ = spaceKey_;
+        if (environmentParamsBuilder_ == null) {
+          result.environmentParams_ = environmentParams_;
+        } else {
+          result.environmentParams_ = environmentParamsBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -2600,6 +5246,9 @@ public final class Public {
         if (!other.getSpaceKey().isEmpty()) {
           spaceKey_ = other.spaceKey_;
           onChanged();
+        }
+        if (other.hasEnvironmentParams()) {
+          mergeEnvironmentParams(other.getEnvironmentParams());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3503,6 +6152,125 @@ public final class Public {
         spaceKey_ = value;
         onChanged();
         return this;
+      }
+
+      private com.arize.protocol.Public.Record.EnvironmentParams environmentParams_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.Record.EnvironmentParams, com.arize.protocol.Public.Record.EnvironmentParams.Builder, com.arize.protocol.Public.Record.EnvironmentParamsOrBuilder> environmentParamsBuilder_;
+      /**
+       * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+       * @return Whether the environmentParams field is set.
+       */
+      public boolean hasEnvironmentParams() {
+        return environmentParamsBuilder_ != null || environmentParams_ != null;
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+       * @return The environmentParams.
+       */
+      public com.arize.protocol.Public.Record.EnvironmentParams getEnvironmentParams() {
+        if (environmentParamsBuilder_ == null) {
+          return environmentParams_ == null ? com.arize.protocol.Public.Record.EnvironmentParams.getDefaultInstance() : environmentParams_;
+        } else {
+          return environmentParamsBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+       */
+      public Builder setEnvironmentParams(com.arize.protocol.Public.Record.EnvironmentParams value) {
+        if (environmentParamsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          environmentParams_ = value;
+          onChanged();
+        } else {
+          environmentParamsBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+       */
+      public Builder setEnvironmentParams(
+          com.arize.protocol.Public.Record.EnvironmentParams.Builder builderForValue) {
+        if (environmentParamsBuilder_ == null) {
+          environmentParams_ = builderForValue.build();
+          onChanged();
+        } else {
+          environmentParamsBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+       */
+      public Builder mergeEnvironmentParams(com.arize.protocol.Public.Record.EnvironmentParams value) {
+        if (environmentParamsBuilder_ == null) {
+          if (environmentParams_ != null) {
+            environmentParams_ =
+              com.arize.protocol.Public.Record.EnvironmentParams.newBuilder(environmentParams_).mergeFrom(value).buildPartial();
+          } else {
+            environmentParams_ = value;
+          }
+          onChanged();
+        } else {
+          environmentParamsBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+       */
+      public Builder clearEnvironmentParams() {
+        if (environmentParamsBuilder_ == null) {
+          environmentParams_ = null;
+          onChanged();
+        } else {
+          environmentParams_ = null;
+          environmentParamsBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+       */
+      public com.arize.protocol.Public.Record.EnvironmentParams.Builder getEnvironmentParamsBuilder() {
+        
+        onChanged();
+        return getEnvironmentParamsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+       */
+      public com.arize.protocol.Public.Record.EnvironmentParamsOrBuilder getEnvironmentParamsOrBuilder() {
+        if (environmentParamsBuilder_ != null) {
+          return environmentParamsBuilder_.getMessageOrBuilder();
+        } else {
+          return environmentParams_ == null ?
+              com.arize.protocol.Public.Record.EnvironmentParams.getDefaultInstance() : environmentParams_;
+        }
+      }
+      /**
+       * <code>.public.Record.EnvironmentParams environment_params = 13;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.arize.protocol.Public.Record.EnvironmentParams, com.arize.protocol.Public.Record.EnvironmentParams.Builder, com.arize.protocol.Public.Record.EnvironmentParamsOrBuilder> 
+          getEnvironmentParamsFieldBuilder() {
+        if (environmentParamsBuilder_ == null) {
+          environmentParamsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.arize.protocol.Public.Record.EnvironmentParams, com.arize.protocol.Public.Record.EnvironmentParams.Builder, com.arize.protocol.Public.Record.EnvironmentParamsOrBuilder>(
+                  getEnvironmentParams(),
+                  getParentForChildren(),
+                  isClean());
+          environmentParams_ = null;
+        }
+        return environmentParamsBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -26109,6 +28877,33 @@ public final class Public {
        * <code>.public.Schema.GenericSchema.FieldDescriptor batch_id = 12;</code>
        */
       com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getBatchIdOrBuilder();
+
+      /**
+       * <pre>
+       * List of fields to not ignore/not ingest
+       * </pre>
+       *
+       * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+       * @return Whether the exclude field is set.
+       */
+      boolean hasExclude();
+      /**
+       * <pre>
+       * List of fields to not ignore/not ingest
+       * </pre>
+       *
+       * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+       * @return The exclude.
+       */
+      com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getExclude();
+      /**
+       * <pre>
+       * List of fields to not ignore/not ingest
+       * </pre>
+       *
+       * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+       */
+      com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getExcludeOrBuilder();
     }
     /**
      * <pre>
@@ -26312,6 +29107,19 @@ public final class Public {
                 if (subBuilder != null) {
                   subBuilder.mergeFrom(batchId_);
                   batchId_ = subBuilder.buildPartial();
+                }
+
+                break;
+              }
+              case 106: {
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder subBuilder = null;
+                if (exclude_ != null) {
+                  subBuilder = exclude_.toBuilder();
+                }
+                exclude_ = input.readMessage(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(exclude_);
+                  exclude_ = subBuilder.buildPartial();
                 }
 
                 break;
@@ -28121,6 +30929,41 @@ public final class Public {
         return getBatchId();
       }
 
+      public static final int EXCLUDE_FIELD_NUMBER = 13;
+      private com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor exclude_;
+      /**
+       * <pre>
+       * List of fields to not ignore/not ingest
+       * </pre>
+       *
+       * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+       * @return Whether the exclude field is set.
+       */
+      public boolean hasExclude() {
+        return exclude_ != null;
+      }
+      /**
+       * <pre>
+       * List of fields to not ignore/not ingest
+       * </pre>
+       *
+       * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+       * @return The exclude.
+       */
+      public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getExclude() {
+        return exclude_ == null ? com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : exclude_;
+      }
+      /**
+       * <pre>
+       * List of fields to not ignore/not ingest
+       * </pre>
+       *
+       * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+       */
+      public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getExcludeOrBuilder() {
+        return getExclude();
+      }
+
       private byte memoizedIsInitialized = -1;
       @java.lang.Override
       public final boolean isInitialized() {
@@ -28170,6 +31013,9 @@ public final class Public {
         }
         if (batchId_ != null) {
           output.writeMessage(12, getBatchId());
+        }
+        if (exclude_ != null) {
+          output.writeMessage(13, getExclude());
         }
         unknownFields.writeTo(output);
       }
@@ -28227,6 +31073,10 @@ public final class Public {
         if (batchId_ != null) {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(12, getBatchId());
+        }
+        if (exclude_ != null) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(13, getExclude());
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -28303,6 +31153,11 @@ public final class Public {
           if (!getBatchId()
               .equals(other.getBatchId())) return false;
         }
+        if (hasExclude() != other.hasExclude()) return false;
+        if (hasExclude()) {
+          if (!getExclude()
+              .equals(other.getExclude())) return false;
+        }
         if (!unknownFields.equals(other.unknownFields)) return false;
         return true;
       }
@@ -28361,6 +31216,10 @@ public final class Public {
         if (hasBatchId()) {
           hash = (37 * hash) + BATCH_ID_FIELD_NUMBER;
           hash = (53 * hash) + getBatchId().hashCode();
+        }
+        if (hasExclude()) {
+          hash = (37 * hash) + EXCLUDE_FIELD_NUMBER;
+          hash = (53 * hash) + getExclude().hashCode();
         }
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
@@ -28572,6 +31431,12 @@ public final class Public {
             batchId_ = null;
             batchIdBuilder_ = null;
           }
+          if (excludeBuilder_ == null) {
+            exclude_ = null;
+          } else {
+            exclude_ = null;
+            excludeBuilder_ = null;
+          }
           return this;
         }
 
@@ -28658,6 +31523,11 @@ public final class Public {
           } else {
             result.batchId_ = batchIdBuilder_.build();
           }
+          if (excludeBuilder_ == null) {
+            result.exclude_ = exclude_;
+          } else {
+            result.exclude_ = excludeBuilder_.build();
+          }
           onBuilt();
           return result;
         }
@@ -28741,6 +31611,9 @@ public final class Public {
           }
           if (other.hasBatchId()) {
             mergeBatchId(other.getBatchId());
+          }
+          if (other.hasExclude()) {
+            mergeExclude(other.getExclude());
           }
           this.mergeUnknownFields(other.unknownFields);
           onChanged();
@@ -30233,6 +33106,161 @@ public final class Public {
             batchId_ = null;
           }
           return batchIdBuilder_;
+        }
+
+        private com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor exclude_;
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder> excludeBuilder_;
+        /**
+         * <pre>
+         * List of fields to not ignore/not ingest
+         * </pre>
+         *
+         * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+         * @return Whether the exclude field is set.
+         */
+        public boolean hasExclude() {
+          return excludeBuilder_ != null || exclude_ != null;
+        }
+        /**
+         * <pre>
+         * List of fields to not ignore/not ingest
+         * </pre>
+         *
+         * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+         * @return The exclude.
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor getExclude() {
+          if (excludeBuilder_ == null) {
+            return exclude_ == null ? com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : exclude_;
+          } else {
+            return excludeBuilder_.getMessage();
+          }
+        }
+        /**
+         * <pre>
+         * List of fields to not ignore/not ingest
+         * </pre>
+         *
+         * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+         */
+        public Builder setExclude(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor value) {
+          if (excludeBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            exclude_ = value;
+            onChanged();
+          } else {
+            excludeBuilder_.setMessage(value);
+          }
+
+          return this;
+        }
+        /**
+         * <pre>
+         * List of fields to not ignore/not ingest
+         * </pre>
+         *
+         * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+         */
+        public Builder setExclude(
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder builderForValue) {
+          if (excludeBuilder_ == null) {
+            exclude_ = builderForValue.build();
+            onChanged();
+          } else {
+            excludeBuilder_.setMessage(builderForValue.build());
+          }
+
+          return this;
+        }
+        /**
+         * <pre>
+         * List of fields to not ignore/not ingest
+         * </pre>
+         *
+         * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+         */
+        public Builder mergeExclude(com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor value) {
+          if (excludeBuilder_ == null) {
+            if (exclude_ != null) {
+              exclude_ =
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.newBuilder(exclude_).mergeFrom(value).buildPartial();
+            } else {
+              exclude_ = value;
+            }
+            onChanged();
+          } else {
+            excludeBuilder_.mergeFrom(value);
+          }
+
+          return this;
+        }
+        /**
+         * <pre>
+         * List of fields to not ignore/not ingest
+         * </pre>
+         *
+         * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+         */
+        public Builder clearExclude() {
+          if (excludeBuilder_ == null) {
+            exclude_ = null;
+            onChanged();
+          } else {
+            exclude_ = null;
+            excludeBuilder_ = null;
+          }
+
+          return this;
+        }
+        /**
+         * <pre>
+         * List of fields to not ignore/not ingest
+         * </pre>
+         *
+         * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder getExcludeBuilder() {
+          
+          onChanged();
+          return getExcludeFieldBuilder().getBuilder();
+        }
+        /**
+         * <pre>
+         * List of fields to not ignore/not ingest
+         * </pre>
+         *
+         * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+         */
+        public com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder getExcludeOrBuilder() {
+          if (excludeBuilder_ != null) {
+            return excludeBuilder_.getMessageOrBuilder();
+          } else {
+            return exclude_ == null ?
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.getDefaultInstance() : exclude_;
+          }
+        }
+        /**
+         * <pre>
+         * List of fields to not ignore/not ingest
+         * </pre>
+         *
+         * <code>.public.Schema.GenericSchema.FieldDescriptor exclude = 13;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder> 
+            getExcludeFieldBuilder() {
+          if (excludeBuilder_ == null) {
+            excludeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptor.Builder, com.arize.protocol.Public.Schema.GenericSchema.FieldDescriptorOrBuilder>(
+                    getExclude(),
+                    getParentForChildren(),
+                    isClean());
+            exclude_ = null;
+          }
+          return excludeBuilder_;
         }
         @java.lang.Override
         public final Builder setUnknownFields(
@@ -32468,6 +35496,26 @@ public final class Public {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_public_Record_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_Record_EnvironmentParams_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_Record_EnvironmentParams_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_Record_EnvironmentParams_Training_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_Record_EnvironmentParams_Training_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_Record_EnvironmentParams_Validation_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_Record_EnvironmentParams_Validation_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_public_Record_EnvironmentParams_Production_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_public_Record_EnvironmentParams_Production_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_public_PreProductionRecord_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -32642,131 +35690,141 @@ public final class Public {
       "kRecord\022\034\n\020organization_key\030\001 \001(\tB\002\030\001\022\020\n" +
       "\010model_id\030\002 \001(\t\022\025\n\rmodel_version\030\003 \001(\t\022\037" +
       "\n\007records\030\005 \003(\0132\016.public.Record\022\021\n\tspace" +
-      "_key\030\006 \001(\tJ\004\010\004\020\005R\ttimestamp\"\267\002\n\006Record\022\034" +
+      "_key\030\006 \001(\tJ\004\010\004\020\005R\ttimestamp\"\231\005\n\006Record\022\034" +
       "\n\020organization_key\030\001 \001(\tB\002\030\001\022\020\n\010model_id" +
       "\030\002 \001(\t\022\025\n\rprediction_id\030\003 \001(\t\022&\n\npredict" +
       "ion\030\010 \001(\0132\022.public.Prediction\022\036\n\006actual\030" +
       "\t \001(\0132\016.public.Actual\0227\n\023feature_importa" +
       "nces\030\n \001(\0132\032.public.FeatureImportances\022:" +
       "\n\025prediction_and_actual\030\013 \001(\0132\033.public.P" +
-      "redictionAndActual\022\021\n\tspace_key\030\014 \001(\tJ\004\010" +
-      "\004\020\005J\004\010\005\020\006J\004\010\006\020\007J\004\010\007\020\010\"\256\002\n\023PreProductionR" +
-      "ecord\022E\n\017training_record\030\001 \001(\0132*.public." +
-      "PreProductionRecord.TrainingRecordH\000\022I\n\021" +
-      "validation_record\030\002 \001(\0132,.public.PreProd" +
-      "uctionRecord.ValidationRecordH\000\032D\n\020Valid" +
-      "ationRecord\022\020\n\010batch_id\030\001 \001(\t\022\036\n\006record\030" +
-      "\002 \001(\0132\016.public.Record\0320\n\016TrainingRecord\022" +
-      "\036\n\006record\030\001 \001(\0132\016.public.RecordB\r\n\013recor" +
-      "d_type\"\251\002\n\020ScoreCategorical\022\027\n\013categoric" +
-      "al\030\001 \001(\tB\002\030\001\022\021\n\005score\030\002 \001(\001B\002\030\001\0225\n\010categ" +
-      "ory\030\003 \001(\0132!.public.ScoreCategorical.Cate" +
-      "goryH\000\022@\n\016score_category\030\004 \001(\0132&.public." +
-      "ScoreCategorical.ScoreCategoryH\000\032\034\n\010Cate" +
-      "gory\022\020\n\010category\030\001 \001(\t\032J\n\rScoreCategory\022" +
-      "\020\n\010category\030\001 \001(\t\022\r\n\005score\030\002 \001(\001\022\030\n\020nume" +
-      "ric_sequence\030\003 \003(\001B\006\n\004type\"\202\001\n\005Label\022\020\n\006" +
-      "binary\030\001 \001(\010H\000\022\025\n\013categorical\030\002 \001(\tH\000\022\021\n" +
-      "\007numeric\030\003 \001(\001H\000\0225\n\021score_categorical\030\004 " +
-      "\001(\0132\030.public.ScoreCategoricalH\000B\006\n\004data\"" +
-      "\314\002\n\nPrediction\022-\n\ttimestamp\030\001 \001(\0132\032.goog" +
-      "le.protobuf.Timestamp\022\025\n\rmodel_version\030\002" +
-      " \001(\t\022\034\n\005label\030\003 \001(\0132\r.public.Label\0222\n\010fe" +
-      "atures\030\004 \003(\0132 .public.Prediction.Feature" +
-      "sEntry\022*\n\004tags\030\005 \003(\0132\034.public.Prediction" +
-      ".TagsEntry\032>\n\rFeaturesEntry\022\013\n\003key\030\001 \001(\t" +
-      "\022\034\n\005value\030\002 \001(\0132\r.public.Value:\0028\001\032:\n\tTa" +
-      "gsEntry\022\013\n\003key\030\001 \001(\t\022\034\n\005value\030\002 \001(\0132\r.pu" +
-      "blic.Value:\0028\001\"\225\001\n\005Value\022\020\n\006string\030\001 \001(\t" +
-      "H\000\022\r\n\003int\030\002 \001(\003H\000\022\020\n\006double\030\003 \001(\001H\000\022)\n\013m" +
-      "ulti_value\030\004 \001(\0132\022.public.MultiValueH\000\022&" +
-      "\n\tembedding\030\005 \001(\0132\021.public.EmbeddingH\000B\006" +
-      "\n\004data\"\034\n\nMultiValue\022\016\n\006values\030\001 \003(\t\"\355\001\n" +
-      "\tEmbedding\022\016\n\006vector\030\001 \003(\001\0222\n\014link_to_da" +
-      "ta\030\003 \001(\0132\034.google.protobuf.StringValue\022+" +
-      "\n\010raw_data\030\004 \001(\0132\031.public.Embedding.RawD" +
-      "ata\032K\n\007RawData\0222\n\ntokenArray\030\002 \001(\0132\034.pub" +
-      "lic.Embedding.TokenArrayH\000B\006\n\004typeJ\004\010\001\020\002" +
-      "\032\034\n\nTokenArray\022\016\n\006tokens\030\001 \003(\tJ\004\010\002\020\003\"\271\001\n" +
-      "\006Actual\022-\n\ttimestamp\030\001 \001(\0132\032.google.prot" +
-      "obuf.Timestamp\022\034\n\005label\030\002 \001(\0132\r.public.L" +
-      "abel\022&\n\004tags\030\003 \003(\0132\030.public.Actual.TagsE" +
-      "ntry\032:\n\tTagsEntry\022\013\n\003key\030\001 \001(\t\022\034\n\005value\030" +
-      "\002 \001(\0132\r.public.Value:\0028\001\"\346\001\n\022FeatureImpo" +
-      "rtances\022-\n\ttimestamp\030\001 \001(\0132\032.google.prot" +
-      "obuf.Timestamp\022\025\n\rmodel_version\030\002 \001(\t\022O\n" +
-      "\023feature_importances\030\003 \003(\01322.public.Feat" +
-      "ureImportances.FeatureImportancesEntry\0329" +
-      "\n\027FeatureImportancesEntry\022\013\n\003key\030\001 \001(\t\022\r" +
-      "\n\005value\030\002 \001(\001:\0028\001\"]\n\023PredictionAndActual" +
-      "\022&\n\nprediction\030\001 \001(\0132\022.public.Prediction" +
-      "\022\036\n\006actual\030\002 \001(\0132\016.public.Actual\"\213\001\n\nFil" +
-      "eHeader\0223\n\013environment\030\001 \001(\0162\036.public.Fi" +
-      "leHeader.Environment\"H\n\013Environment\022\013\n\007U" +
-      "NKNOWN\020\000\022\014\n\010TRAINING\020\001\022\016\n\nVALIDATION\020\002\022\016" +
-      "\n\nPRODUCTION\020\003\"\206\022\n\006Schema\022+\n\tconstants\030\001" +
-      " \001(\0132\030.public.Schema.Constants\022<\n\021arize_" +
-      "conclusions\030\002 \001(\0132\037.public.Schema.ArizeC" +
-      "onclusionsH\000\022>\n\022arize_explanations\030\003 \001(\013" +
-      "2 .public.Schema.ArizeExplanationsH\000\0222\n\014" +
-      "arrow_schema\030\004 \001(\0132\032.public.Schema.Arrow" +
-      "SchemaH\000\0226\n\016generic_schema\030\005 \001(\0132\034.publi" +
-      "c.Schema.GenericSchemaH\000\032\245\001\n\tConstants\022\020" +
-      "\n\010model_id\030\001 \001(\t\022\025\n\rmodel_version\030\002 \001(\t\022" +
-      "\020\n\010batch_id\030\003 \001(\t\022/\n\013environment\030\004 \001(\0162\032" +
-      ".public.Schema.Environment\022,\n\nmodel_type" +
-      "\030\005 \001(\0162\030.public.Schema.ModelType\032\022\n\020Ariz" +
-      "eConclusions\032\023\n\021ArizeExplanations\032\250\004\n\013Ar" +
-      "rowSchema\022!\n\031prediction_id_column_name\030\001" +
-      " \001(\t\022\034\n\024feature_column_names\030\002 \003(\t\022\035\n\025ti" +
-      "mestamp_column_name\030\003 \001(\t\022$\n\034prediction_" +
-      "label_column_name\030\004 \001(\t\022$\n\034prediction_sc" +
-      "ore_column_name\030\005 \001(\t\022 \n\030actual_label_co" +
-      "lumn_name\030\006 \001(\t\022 \n\030actual_score_column_n" +
-      "ame\030\007 \001(\t\022W\n\030shap_values_column_names\030\010 " +
-      "\003(\01325.public.Schema.ArrowSchema.ShapValu" +
-      "esColumnNamesEntry\022\030\n\020tag_column_names\030\t" +
-      " \003(\t\022+\n#actual_numeric_sequence_column_n" +
-      "ame\030\n \001(\t\022K\n\036embedding_feature_column_na" +
-      "mes\030\013 \003(\0132#.public.Schema.EmbeddingColum" +
-      "nNames\032<\n\032ShapValuesColumnNamesEntry\022\013\n\003" +
-      "key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032n\n\024Embeddin" +
-      "gColumnNames\022\032\n\022vector_column_name\030\001 \001(\t" +
-      "\022\030\n\020data_column_name\030\002 \001(\t\022 \n\030link_to_da" +
-      "ta_column_name\030\003 \001(\t\032\263\007\n\rGenericSchema\022C" +
-      "\n\rprediction_id\030\001 \001(\0132,.public.Schema.Ge" +
-      "nericSchema.FieldDescriptor\022C\n\010features\030" +
-      "\002 \001(\01321.public.Schema.GenericSchema.Grou" +
-      "pFieldDescriptor\022?\n\ttimestamp\030\003 \001(\0132,.pu" +
+      "redictionAndActual\022\021\n\tspace_key\030\014 \001(\t\022<\n" +
+      "\022environment_params\030\r \001(\0132 .public.Recor" +
+      "d.EnvironmentParams\032\241\002\n\021EnvironmentParam" +
+      "s\022=\n\010training\030\001 \001(\0132).public.Record.Envi" +
+      "ronmentParams.TrainingH\000\022A\n\nvalidation\030\002" +
+      " \001(\0132+.public.Record.EnvironmentParams.V" +
+      "alidationH\000\022A\n\nproduction\030\003 \001(\0132+.public" +
+      ".Record.EnvironmentParams.ProductionH\000\032\n" +
+      "\n\010Training\032\036\n\nValidation\022\020\n\010batch_id\030\001 \001" +
+      "(\t\032\014\n\nProductionB\r\n\013environmentJ\004\010\004\020\005J\004\010" +
+      "\005\020\006J\004\010\006\020\007J\004\010\007\020\010\"\256\002\n\023PreProductionRecord\022" +
+      "E\n\017training_record\030\001 \001(\0132*.public.PrePro" +
+      "ductionRecord.TrainingRecordH\000\022I\n\021valida" +
+      "tion_record\030\002 \001(\0132,.public.PreProduction" +
+      "Record.ValidationRecordH\000\032D\n\020ValidationR" +
+      "ecord\022\020\n\010batch_id\030\001 \001(\t\022\036\n\006record\030\002 \001(\0132" +
+      "\016.public.Record\0320\n\016TrainingRecord\022\036\n\006rec" +
+      "ord\030\001 \001(\0132\016.public.RecordB\r\n\013record_type" +
+      "\"\251\002\n\020ScoreCategorical\022\027\n\013categorical\030\001 \001" +
+      "(\tB\002\030\001\022\021\n\005score\030\002 \001(\001B\002\030\001\0225\n\010category\030\003 " +
+      "\001(\0132!.public.ScoreCategorical.CategoryH\000" +
+      "\022@\n\016score_category\030\004 \001(\0132&.public.ScoreC" +
+      "ategorical.ScoreCategoryH\000\032\034\n\010Category\022\020" +
+      "\n\010category\030\001 \001(\t\032J\n\rScoreCategory\022\020\n\010cat" +
+      "egory\030\001 \001(\t\022\r\n\005score\030\002 \001(\001\022\030\n\020numeric_se" +
+      "quence\030\003 \003(\001B\006\n\004type\"\202\001\n\005Label\022\020\n\006binary" +
+      "\030\001 \001(\010H\000\022\025\n\013categorical\030\002 \001(\tH\000\022\021\n\007numer" +
+      "ic\030\003 \001(\001H\000\0225\n\021score_categorical\030\004 \001(\0132\030." +
+      "public.ScoreCategoricalH\000B\006\n\004data\"\314\002\n\nPr" +
+      "ediction\022-\n\ttimestamp\030\001 \001(\0132\032.google.pro" +
+      "tobuf.Timestamp\022\025\n\rmodel_version\030\002 \001(\t\022\034" +
+      "\n\005label\030\003 \001(\0132\r.public.Label\0222\n\010features" +
+      "\030\004 \003(\0132 .public.Prediction.FeaturesEntry" +
+      "\022*\n\004tags\030\005 \003(\0132\034.public.Prediction.TagsE" +
+      "ntry\032>\n\rFeaturesEntry\022\013\n\003key\030\001 \001(\t\022\034\n\005va" +
+      "lue\030\002 \001(\0132\r.public.Value:\0028\001\032:\n\tTagsEntr" +
+      "y\022\013\n\003key\030\001 \001(\t\022\034\n\005value\030\002 \001(\0132\r.public.V" +
+      "alue:\0028\001\"\225\001\n\005Value\022\020\n\006string\030\001 \001(\tH\000\022\r\n\003" +
+      "int\030\002 \001(\003H\000\022\020\n\006double\030\003 \001(\001H\000\022)\n\013multi_v" +
+      "alue\030\004 \001(\0132\022.public.MultiValueH\000\022&\n\tembe" +
+      "dding\030\005 \001(\0132\021.public.EmbeddingH\000B\006\n\004data" +
+      "\"\034\n\nMultiValue\022\016\n\006values\030\001 \003(\t\"\355\001\n\tEmbed" +
+      "ding\022\016\n\006vector\030\001 \003(\001\0222\n\014link_to_data\030\003 \001" +
+      "(\0132\034.google.protobuf.StringValue\022+\n\010raw_" +
+      "data\030\004 \001(\0132\031.public.Embedding.RawData\032K\n" +
+      "\007RawData\0222\n\ntokenArray\030\002 \001(\0132\034.public.Em" +
+      "bedding.TokenArrayH\000B\006\n\004typeJ\004\010\001\020\002\032\034\n\nTo" +
+      "kenArray\022\016\n\006tokens\030\001 \003(\tJ\004\010\002\020\003\"\271\001\n\006Actua" +
+      "l\022-\n\ttimestamp\030\001 \001(\0132\032.google.protobuf.T" +
+      "imestamp\022\034\n\005label\030\002 \001(\0132\r.public.Label\022&" +
+      "\n\004tags\030\003 \003(\0132\030.public.Actual.TagsEntry\032:" +
+      "\n\tTagsEntry\022\013\n\003key\030\001 \001(\t\022\034\n\005value\030\002 \001(\0132" +
+      "\r.public.Value:\0028\001\"\346\001\n\022FeatureImportance" +
+      "s\022-\n\ttimestamp\030\001 \001(\0132\032.google.protobuf.T" +
+      "imestamp\022\025\n\rmodel_version\030\002 \001(\t\022O\n\023featu" +
+      "re_importances\030\003 \003(\01322.public.FeatureImp" +
+      "ortances.FeatureImportancesEntry\0329\n\027Feat" +
+      "ureImportancesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005valu" +
+      "e\030\002 \001(\001:\0028\001\"]\n\023PredictionAndActual\022&\n\npr" +
+      "ediction\030\001 \001(\0132\022.public.Prediction\022\036\n\006ac" +
+      "tual\030\002 \001(\0132\016.public.Actual\"\213\001\n\nFileHeade" +
+      "r\0223\n\013environment\030\001 \001(\0162\036.public.FileHead" +
+      "er.Environment\"H\n\013Environment\022\013\n\007UNKNOWN" +
+      "\020\000\022\014\n\010TRAINING\020\001\022\016\n\nVALIDATION\020\002\022\016\n\nPROD" +
+      "UCTION\020\003\"\305\022\n\006Schema\022+\n\tconstants\030\001 \001(\0132\030" +
+      ".public.Schema.Constants\022<\n\021arize_conclu" +
+      "sions\030\002 \001(\0132\037.public.Schema.ArizeConclus" +
+      "ionsH\000\022>\n\022arize_explanations\030\003 \001(\0132 .pub" +
+      "lic.Schema.ArizeExplanationsH\000\0222\n\014arrow_" +
+      "schema\030\004 \001(\0132\032.public.Schema.ArrowSchema" +
+      "H\000\0226\n\016generic_schema\030\005 \001(\0132\034.public.Sche" +
+      "ma.GenericSchemaH\000\032\245\001\n\tConstants\022\020\n\010mode" +
+      "l_id\030\001 \001(\t\022\025\n\rmodel_version\030\002 \001(\t\022\020\n\010bat" +
+      "ch_id\030\003 \001(\t\022/\n\013environment\030\004 \001(\0162\032.publi" +
+      "c.Schema.Environment\022,\n\nmodel_type\030\005 \001(\016" +
+      "2\030.public.Schema.ModelType\032\022\n\020ArizeConcl" +
+      "usions\032\023\n\021ArizeExplanations\032\250\004\n\013ArrowSch" +
+      "ema\022!\n\031prediction_id_column_name\030\001 \001(\t\022\034" +
+      "\n\024feature_column_names\030\002 \003(\t\022\035\n\025timestam" +
+      "p_column_name\030\003 \001(\t\022$\n\034prediction_label_" +
+      "column_name\030\004 \001(\t\022$\n\034prediction_score_co" +
+      "lumn_name\030\005 \001(\t\022 \n\030actual_label_column_n" +
+      "ame\030\006 \001(\t\022 \n\030actual_score_column_name\030\007 " +
+      "\001(\t\022W\n\030shap_values_column_names\030\010 \003(\01325." +
+      "public.Schema.ArrowSchema.ShapValuesColu" +
+      "mnNamesEntry\022\030\n\020tag_column_names\030\t \003(\t\022+" +
+      "\n#actual_numeric_sequence_column_name\030\n " +
+      "\001(\t\022K\n\036embedding_feature_column_names\030\013 " +
+      "\003(\0132#.public.Schema.EmbeddingColumnNames" +
+      "\032<\n\032ShapValuesColumnNamesEntry\022\013\n\003key\030\001 " +
+      "\001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032n\n\024EmbeddingColum" +
+      "nNames\022\032\n\022vector_column_name\030\001 \001(\t\022\030\n\020da" +
+      "ta_column_name\030\002 \001(\t\022 \n\030link_to_data_col" +
+      "umn_name\030\003 \001(\t\032\362\007\n\rGenericSchema\022C\n\rpred" +
+      "iction_id\030\001 \001(\0132,.public.Schema.GenericS" +
+      "chema.FieldDescriptor\022C\n\010features\030\002 \001(\0132" +
+      "1.public.Schema.GenericSchema.GroupField" +
+      "Descriptor\022?\n\ttimestamp\030\003 \001(\0132,.public.S" +
+      "chema.GenericSchema.FieldDescriptor\022F\n\020p" +
+      "rediction_label\030\004 \001(\0132,.public.Schema.Ge" +
+      "nericSchema.FieldDescriptor\022F\n\020predictio" +
+      "n_score\030\005 \001(\0132,.public.Schema.GenericSch" +
+      "ema.FieldDescriptor\022B\n\014actual_label\030\006 \001(" +
+      "\0132,.public.Schema.GenericSchema.FieldDes" +
+      "criptor\022B\n\014actual_score\030\007 \001(\0132,.public.S" +
+      "chema.GenericSchema.FieldDescriptor\022F\n\013s" +
+      "hap_values\030\010 \001(\01321.public.Schema.Generic" +
+      "Schema.GroupFieldDescriptor\022?\n\004tags\030\t \001(" +
+      "\01321.public.Schema.GenericSchema.GroupFie" +
+      "ldDescriptor\022G\n\021model_environment\030\n \001(\0132" +
+      ",.public.Schema.GenericSchema.FieldDescr" +
+      "iptor\022C\n\rmodel_version\030\013 \001(\0132,.public.Sc" +
+      "hema.GenericSchema.FieldDescriptor\022>\n\010ba" +
+      "tch_id\030\014 \001(\0132,.public.Schema.GenericSche" +
+      "ma.FieldDescriptor\022=\n\007exclude\030\r \001(\0132,.pu" +
       "blic.Schema.GenericSchema.FieldDescripto" +
-      "r\022F\n\020prediction_label\030\004 \001(\0132,.public.Sch" +
-      "ema.GenericSchema.FieldDescriptor\022F\n\020pre" +
-      "diction_score\030\005 \001(\0132,.public.Schema.Gene" +
-      "ricSchema.FieldDescriptor\022B\n\014actual_labe" +
-      "l\030\006 \001(\0132,.public.Schema.GenericSchema.Fi" +
-      "eldDescriptor\022B\n\014actual_score\030\007 \001(\0132,.pu" +
-      "blic.Schema.GenericSchema.FieldDescripto" +
-      "r\022F\n\013shap_values\030\010 \001(\01321.public.Schema.G" +
-      "enericSchema.GroupFieldDescriptor\022?\n\004tag" +
-      "s\030\t \001(\01321.public.Schema.GenericSchema.Gr" +
-      "oupFieldDescriptor\022G\n\021model_environment\030" +
-      "\n \001(\0132,.public.Schema.GenericSchema.Fiel" +
-      "dDescriptor\022C\n\rmodel_version\030\013 \001(\0132,.pub" +
-      "lic.Schema.GenericSchema.FieldDescriptor" +
-      "\022>\n\010batch_id\030\014 \001(\0132,.public.Schema.Gener" +
-      "icSchema.FieldDescriptor\032%\n\017FieldDescrip" +
-      "tor\022\022\n\nproperties\030\001 \003(\t\032A\n\024GroupFieldDes" +
-      "criptor\022\022\n\nproperties\030\001 \003(\t\022\025\n\rcapture_g" +
-      "roup\030\002 \001(\t\"T\n\013Environment\022\027\n\023UNKNOWN_ENV" +
-      "IRONMENT\020\000\022\014\n\010TRAINING\020\001\022\016\n\nVALIDATION\020\002" +
-      "\022\016\n\nPRODUCTION\020\003\"c\n\tModelType\022\025\n\021UNKNOWN" +
-      "_MODELTYPE\020\000\022\n\n\006BINARY\020\001\022\013\n\007NUMERIC\020\002\022\017\n" +
-      "\013CATEGORICAL\020\003\022\025\n\021SCORE_CATEGORICAL\020\004B\010\n" +
-      "\006schema\"I\n\027ArrowFileUploadResponse\022\r\n\005er" +
-      "ror\030\001 \001(\t\022\037\n\027real_time_ingestion_uri\030\002 \001" +
-      "(\tBO\n\022com.arize.protocolZ9github.com/Ari" +
-      "ze-ai/arize/go/pkg/receiver/protocol/pub" +
-      "licb\006proto3"
+      "r\032%\n\017FieldDescriptor\022\022\n\nproperties\030\001 \003(\t" +
+      "\032A\n\024GroupFieldDescriptor\022\022\n\nproperties\030\001" +
+      " \003(\t\022\025\n\rcapture_group\030\002 \001(\t\"T\n\013Environme" +
+      "nt\022\027\n\023UNKNOWN_ENVIRONMENT\020\000\022\014\n\010TRAINING\020" +
+      "\001\022\016\n\nVALIDATION\020\002\022\016\n\nPRODUCTION\020\003\"c\n\tMod" +
+      "elType\022\025\n\021UNKNOWN_MODELTYPE\020\000\022\n\n\006BINARY\020" +
+      "\001\022\013\n\007NUMERIC\020\002\022\017\n\013CATEGORICAL\020\003\022\025\n\021SCORE" +
+      "_CATEGORICAL\020\004B\010\n\006schema\"I\n\027ArrowFileUpl" +
+      "oadResponse\022\r\n\005error\030\001 \001(\t\022\037\n\027real_time_" +
+      "ingestion_uri\030\002 \001(\tBO\n\022com.arize.protoco" +
+      "lZ9github.com/Arize-ai/arize/go/pkg/rece" +
+      "iver/protocol/publicb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -32785,7 +35843,31 @@ public final class Public {
     internal_static_public_Record_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Record_descriptor,
-        new java.lang.String[] { "OrganizationKey", "ModelId", "PredictionId", "Prediction", "Actual", "FeatureImportances", "PredictionAndActual", "SpaceKey", });
+        new java.lang.String[] { "OrganizationKey", "ModelId", "PredictionId", "Prediction", "Actual", "FeatureImportances", "PredictionAndActual", "SpaceKey", "EnvironmentParams", });
+    internal_static_public_Record_EnvironmentParams_descriptor =
+      internal_static_public_Record_descriptor.getNestedTypes().get(0);
+    internal_static_public_Record_EnvironmentParams_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_Record_EnvironmentParams_descriptor,
+        new java.lang.String[] { "Training", "Validation", "Production", "Environment", });
+    internal_static_public_Record_EnvironmentParams_Training_descriptor =
+      internal_static_public_Record_EnvironmentParams_descriptor.getNestedTypes().get(0);
+    internal_static_public_Record_EnvironmentParams_Training_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_Record_EnvironmentParams_Training_descriptor,
+        new java.lang.String[] { });
+    internal_static_public_Record_EnvironmentParams_Validation_descriptor =
+      internal_static_public_Record_EnvironmentParams_descriptor.getNestedTypes().get(1);
+    internal_static_public_Record_EnvironmentParams_Validation_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_Record_EnvironmentParams_Validation_descriptor,
+        new java.lang.String[] { "BatchId", });
+    internal_static_public_Record_EnvironmentParams_Production_descriptor =
+      internal_static_public_Record_EnvironmentParams_descriptor.getNestedTypes().get(2);
+    internal_static_public_Record_EnvironmentParams_Production_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_public_Record_EnvironmentParams_Production_descriptor,
+        new java.lang.String[] { });
     internal_static_public_PreProductionRecord_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_public_PreProductionRecord_fieldAccessorTable = new
@@ -32959,7 +36041,7 @@ public final class Public {
     internal_static_public_Schema_GenericSchema_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_public_Schema_GenericSchema_descriptor,
-        new java.lang.String[] { "PredictionId", "Features", "Timestamp", "PredictionLabel", "PredictionScore", "ActualLabel", "ActualScore", "ShapValues", "Tags", "ModelEnvironment", "ModelVersion", "BatchId", });
+        new java.lang.String[] { "PredictionId", "Features", "Timestamp", "PredictionLabel", "PredictionScore", "ActualLabel", "ActualScore", "ShapValues", "Tags", "ModelEnvironment", "ModelVersion", "BatchId", "Exclude", });
     internal_static_public_Schema_GenericSchema_FieldDescriptor_descriptor =
       internal_static_public_Schema_GenericSchema_descriptor.getNestedTypes().get(0);
     internal_static_public_Schema_GenericSchema_FieldDescriptor_fieldAccessorTable = new
