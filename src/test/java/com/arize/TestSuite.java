@@ -6,6 +6,4 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({RecordUtilTest.class, ArizeClientTest.class})
-
-public class TestSuite {
-}
+public class TestSuite {}

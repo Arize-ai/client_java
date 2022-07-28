@@ -71,6 +71,7 @@ Initialize `arize` at the start of your service using your previously created AP
 ```java
 import com.arize.ArizeClient;
 import com.arize.Response;
+import com.arize.types.Embedding;
 
 ArizeClient arize = new ArizeClient("ARIZE_API_KEY", "ARIZE_SPACE_KEY");
 ```
@@ -81,7 +82,6 @@ ArizeClient arize = new ArizeClient("ARIZE_API_KEY", "ARIZE_SPACE_KEY");
 For a single real-time prediction, you can track all input features used at prediction time by logging them via a key:value map.
 
 ```java
-
 Map<String, String> features = new HashMap<>();
 features.put("feature name", "feature value");
 
@@ -91,7 +91,10 @@ eventMetadata.put("business metric", "business metric value");
 Map<String, Float> shapValues = new HashMap<>();
 shapValues.put("feature name", 0.856f);
 
-Response asyncResponse = arize.log("exampleModelId", "v1", UUID.randomUUID().toString(), features, eventMetadata, "pear", "apple", shapValues, System.currentTimeMillis());
+Map<String, Embedding> embeddingFeatures = new HashMap<>();
+embeddingFeatures.put("embedding feature name", new Embedding(Arrays.asList(1.0, 0.5), Arrays.asList("test", "token", "array"), "https://example.com/image.jpg"));
+
+Response asyncResponse = arize.log("exampleModelId", "v1", UUID.randomUUID().toString(), features, embeddingFeatures, eventMetadata, "pear", "apple", shapValues, System.currentTimeMillis());
 
 // This is a blocking call similar to future.get()
 asyncResponse.resolve();
@@ -129,6 +132,7 @@ When dealing with bulk predictions, you can pass in input features, prediction/a
 ```java
 import com.arize.ArizeClient;
 import com.arize.Response;
+import com.arize.types.Embedding;
 
 // You only need to instantiate the client once
 ArizeClient arize = new ArizeClient("ARIZE_API_KEY", "ARIZE_SPACE_KEY");
@@ -148,11 +152,16 @@ shapValues.add(new HashMap<String, Double>(){{ put("days", 1.0); put("is_organic
 shapValues.add(new HashMap<String, Double>(){{ put("days", 1.0); put("is_organic", -1.1);}});
 shapValues.add(new HashMap<String, Double>(){{ put("days", 1.0); put("is_organic", -1.1);}});
 
+final List<Map<String, Embedding>> embeddingFeatures = new ArrayList<Map<String, Embedding>>();
+embeddingFeatures.add(new HashMap<String, Embedding>() {{ put("embedding_feature_1", new Embedding(Arrays.asList(1.0, 0.5), Arrays.asList("test", "token", "array"), "https://example.com/image.jpg")); put("embedding_feature_2", new Embedding(Arrays.asList(1.0, 0.8), Arrays.asList("this", "is"), "https://example.com/image_3.jpg"));}});
+embeddingFeatures.add(new HashMap<String, Embedding>() {{ put("embedding_feature_1", new Embedding(Arrays.asList(0.0, 0.6), Arrays.asList("another", "example"), "https://example.com/image_2.jpg")); put("embedding_feature_2", new Embedding(Arrays.asList(0.1, 1.0), Arrays.asList("an", "example"), "https://example.com/image_4.jpg"));}});
+embeddingFeatures.add(new HashMap<String, Embedding>() {{ put("embedding_feature_1", new Embedding(Arrays.asList(1.0, 0.8), Arrays.asList("third"), "https://example.com/image_3.jpg")); put("embedding_feature_2", new Embedding(Arrays.asList(1.0, 0.4), Arrays.asList("token", "array"), "https://example.com/image_5.jpg"));}});
+
 final List<String> predictions = new ArrayList<String>(Arrays.asList("pear", "banana", "apple"));
 final List<String> actuals = new ArrayList<String>(Arrays.asList("pear", "pear", "apple"));
 final List<String> predictionIds = new ArrayList<String>(Arrays.asList(UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString()));
 
-final Response asyncResponse = arize.bulkLog("exampleModelId", "v1", predictionIds, features, tags, predictions, actuals, shapValues, null);
+final Response asyncResponse = arize.bulkLog("exampleModelId", "v1", predictionIds, features, embeddingFeatures, tags, predictions, actuals, shapValues, null);
 
 // This is a blocking call similar to future.get()
 asyncResponse.resolve();
