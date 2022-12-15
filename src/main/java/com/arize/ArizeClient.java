@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -154,7 +155,11 @@ public class ArizeClient implements ArizeAPI {
 
     if (predictionLabel != null) {
       Public.Prediction.Builder predictionBuilder = Public.Prediction.newBuilder();
-      predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabel));
+      if (predictionLabel.getClass() == Ranking.class) {
+        predictionBuilder.setPredictionLabel(RecordUtil.convertPredictionLabel(predictionLabel));
+      } else{
+        predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabel));
+      }
       if (modelVersion != null) {
         predictionBuilder.setModelVersion(modelVersion);
       }
@@ -174,7 +179,11 @@ public class ArizeClient implements ArizeAPI {
     }
     if (actualLabel != null) {
       Public.Actual.Builder actualBuilder = Public.Actual.newBuilder();
-      actualBuilder.setLabel(RecordUtil.convertLabel(actualLabel));
+      if (actualLabel.getClass() == Ranking.class) {
+        actualBuilder.setActualLabel(RecordUtil.convertActualLabel(actualLabel));
+      } else{
+        actualBuilder.setLabel(RecordUtil.convertLabel(actualLabel));
+      }
       if (predictionTimestamp != 0) {
         actualBuilder.setTimestamp(Timestamps.fromMillis(predictionTimestamp));
       }
@@ -263,7 +272,11 @@ public class ArizeClient implements ArizeAPI {
       recordBuilder.setPredictionId(predictionId);
       if (predictionLabels != null) {
         Public.Prediction.Builder predictionBuilder = Public.Prediction.newBuilder();
-        predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabels.get(index)));
+        if (predictionLabels.get(index) != null && predictionLabels.get(index).getClass() == Ranking.class) {
+          predictionBuilder.setPredictionLabel(RecordUtil.convertPredictionLabel(predictionLabels.get(index)));
+        }else{
+          predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabels.get(index)));
+        }
         if (modelVersion != null) {
           predictionBuilder.setModelVersion(modelVersion);
         }
@@ -284,7 +297,11 @@ public class ArizeClient implements ArizeAPI {
       }
       if (actualLabels != null) {
         Public.Actual.Builder actualBuilder = Public.Actual.newBuilder();
-        actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(index)));
+        if (actualLabels.get(index) != null && actualLabels.get(index).getClass() == Ranking.class) {
+          actualBuilder.setActualLabel(RecordUtil.convertActualLabel(actualLabels.get(index)));
+        } else{
+          actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(index)));
+        }
         if (predictionTimestamps != null) {
           actualBuilder.setTimestamp(Timestamps.fromMillis(predictionTimestamps.get(index)));
         }
@@ -356,7 +373,11 @@ public class ArizeClient implements ArizeAPI {
       recordBuilder.setModelId(modelId);
 
       Public.Prediction.Builder predictionBuilder = Public.Prediction.newBuilder();
-      predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabels.get(i)));
+      if (predictionLabels.get(i) != null && predictionLabels.get(i).getClass() == Ranking.class) {
+        predictionBuilder.setPredictionLabel(RecordUtil.convertPredictionLabel(predictionLabels.get(i)));
+      } else{
+        predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabels.get(i)));
+      }
       if (modelVersion != null) {
         predictionBuilder.setModelVersion(modelVersion);
       }
@@ -373,7 +394,11 @@ public class ArizeClient implements ArizeAPI {
       recordBuilder.setPrediction(predictionBuilder);
 
       Public.Actual.Builder actualBuilder = Public.Actual.newBuilder();
-      actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(i)));
+      if (actualLabels.get(i) != null && actualLabels.get(i).getClass() == Ranking.class) {
+        actualBuilder.setActualLabel(RecordUtil.convertActualLabel(actualLabels.get(i)));
+      } else{
+        actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(i)));
+      }
       recordBuilder.setActual(actualBuilder);
 
       trBuilder.setRecord(recordBuilder);
@@ -434,7 +459,11 @@ public class ArizeClient implements ArizeAPI {
       recordBuilder.setModelId(modelId);
 
       Public.Prediction.Builder predictionBuilder = Public.Prediction.newBuilder();
-      predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabels.get(i)));
+      if (predictionLabels.get(i) != null && predictionLabels.get(i).getClass() == Ranking.class) {
+        predictionBuilder.setPredictionLabel(RecordUtil.convertPredictionLabel(predictionLabels.get(i)));
+      } else{
+        predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabels.get(i)));
+      }
       if (modelVersion != null) {
         predictionBuilder.setModelVersion(modelVersion);
       }
@@ -451,7 +480,11 @@ public class ArizeClient implements ArizeAPI {
       recordBuilder.setPrediction(predictionBuilder);
 
       Public.Actual.Builder actualBuilder = Public.Actual.newBuilder();
-      actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(i)));
+      if (actualLabels.get(i) != null && actualLabels.get(i).getClass() == Ranking.class) {
+        actualBuilder.setActualLabel(RecordUtil.convertActualLabel(actualLabels.get(i)));
+      } else{
+        actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(i)));
+      }
       recordBuilder.setActual(actualBuilder);
 
       vrBuilder.setRecord(recordBuilder);
@@ -500,6 +533,147 @@ public class ArizeClient implements ArizeAPI {
 
     public List<Double> getNumericSequence() {
       return numSeq;
+    }
+  }
+  public static class Ranking {
+
+    /**
+     * Ranking Label is used same way as other labels, except some differences between prediction and actual labels.
+     * <p>
+     * Prediction labels MUST contain PredictionGroupID and Rank, and prediction score is optional:
+     * * PredictionGroupID: this is the query id for each query group of ranking, must not be null and length is between 1- 36.
+     * * Rank: this is an integer represents the rank of each item in the listing, it ranges from 1 to 100.
+     * * Scores: this is the output scores from the ranking model and used to generate in most use cases.
+     * <p>
+     * Actual labels MUST contain one of following:
+     * * ActualLabels: this is the engagements of each listing items. It's a string list, and must not be empty if provided.
+     * * Scores: this is relevance scores and should be differentiated from prediction scores.
+     **/
+
+    private String predictionGroupId;
+    private Public.MultiValue actualLabels;
+    private Public.MultiValue attributions;
+    private Double relevanceScore;
+    private Double predictionScore;
+    private Double score;
+    private final int rank;
+
+    private String label;
+
+    private Ranking(RankingBuilder builder) {
+      validation(builder);
+      this.predictionGroupId = builder.predictionGroupId;
+      this.actualLabels = builder.attributions == null ? builder.actualLabel : builder.attributions;
+      this.score = builder.score;
+      this.rank = builder.rank;
+      this.label = builder.label;
+      this.relevanceScore = builder.relevanceScore;
+      this.predictionScore = builder.predictionScore;
+    }
+
+    public String getPredictionGroupId() {
+      return predictionGroupId;
+    }
+
+    public Public.MultiValue getActualLabels() {
+      return actualLabels;
+    }
+
+    public Double getScore() {
+      return score;
+    }
+
+    public Double getRelevanceScoreScore() {
+      return relevanceScore;
+    }
+
+    public Double getPredictionScore() {
+      return predictionScore;
+    }
+
+    public int getRank() {
+      return rank;
+    }
+
+    public String getLabel() {
+      return label;
+    }
+
+    public void validation(RankingBuilder builder) {
+      // check valid field when they are not null or 0
+      if (builder.predictionGroupId != null && (builder.predictionGroupId.length() == 0 || builder.predictionGroupId.length() > 36)) {
+        throw new IllegalArgumentException("length of prediction group ID out of range (1-36)");
+      }
+      if (builder.rank != 0 && (builder.rank < 0 || builder.rank > 100)) {
+        throw new IllegalArgumentException("rank out of range (1-100)");
+      }
+      if (builder.actualLabel != null && builder.actualLabel.getValuesList().size() == 0) {
+        throw new IllegalArgumentException("actual label list cannot be empty");
+      }
+    }
+
+    public static final class RankingBuilder {
+      private String predictionGroupId;
+      private Public.MultiValue actualLabel;
+      private Public.MultiValue attributions;
+      private Double relevanceScore;
+      private Double predictionScore;
+      private Double score;
+      private int rank;
+      private String label;
+      public static RankingBuilder newBuilder() {
+        return new RankingBuilder();
+      }
+
+      public RankingBuilder setPredictionGroupId(String predictionGroupId) {
+        this.predictionGroupId = predictionGroupId;
+        return this;
+      }
+
+      public RankingBuilder setActualLabel(Public.MultiValue actualLabel) {
+        this.actualLabel = actualLabel;
+        return this;
+      }
+
+      public RankingBuilder setScore(double score) {
+        this.score = score;
+        return this;
+      }
+
+      public RankingBuilder setRank(int rank) {
+        this.rank = rank;
+        return this;
+      }
+
+      public RankingBuilder setPredictionScore(double predictionScore) {
+        this.predictionScore = predictionScore;
+        return this;
+      }
+
+      public RankingBuilder setAttributions(Public.MultiValue attributions) {
+        this.attributions = attributions;
+        return this;
+      }
+
+      public RankingBuilder setAttributions(String attribution) {
+        Public.MultiValue attributions = Public.MultiValue.newBuilder().addAllValues(Arrays.asList(attribution)).build();
+        this.attributions = attributions;
+        return this;
+      }
+
+      public RankingBuilder setRelevanceScore(double relevanceScore) {
+        this.relevanceScore = relevanceScore;
+        return this;
+      }
+
+      public RankingBuilder setLabel(String label) {
+        this.label = label;
+        return this;
+      }
+
+      public Ranking build() {
+        return new Ranking(this);
+      }
     }
   }
 }
