@@ -1,10 +1,12 @@
 package com.arize;
 
 import com.arize.ArizeClient.ScoredCategorical;
+import com.arize.ArizeClient.Ranking;
 import com.arize.protocol.Public;
 import com.arize.protocol.Public.Record;
 import com.arize.protocol.Public.Record.Builder;
 import com.arize.types.Embedding;
+import com.google.protobuf.DoubleValue;
 import com.google.protobuf.Timestamp;
 import com.google.protobuf.util.JsonFormat;
 import com.google.protobuf.util.Timestamps;
@@ -13,7 +15,9 @@ import com.sun.net.httpserver.HttpServer;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -1244,5 +1248,158 @@ public class ArizeClientTest {
           exchange.close();
         });
     return server;
+  }
+
+  @Test
+  public void testLogRankingModel() throws IOException, ExecutionException, InterruptedException {
+    Map<String, Object> features = new HashMap<>();
+    features.putAll(intFeatures);
+    features.putAll(doubleFeatures);
+    features.putAll(stringFeatures);
+    Ranking prediction = new Ranking.RankingBuilder().setPredictionGroupId("XX").setRank(1).build();
+    Ranking actual = new Ranking.RankingBuilder().setRelevanceScore(1).build();
+    Response response =
+            client.log(
+                    "modelId",
+                    "modelVersion",
+                    "predictionId",
+                    features,
+                    embFeatures,
+                    stringTags,
+                    prediction,
+                    actual,
+                    null,
+                    0);
+    try {
+      response.resolve(10, TimeUnit.SECONDS);
+    } catch (TimeoutException e) {
+      Assert.fail("timeout waiting for server");
+    }
+    Assert.assertEquals("apiKey", headers.get(0).get("Authorization").get(0));
+    Public.Record rec = posts.get(0);
+    Assert.assertEquals("spaceKey", rec.getSpaceKey());
+    Assert.assertEquals("modelId", rec.getModelId());
+    Assert.assertEquals("predictionId", rec.getPredictionId());
+    Assert.assertEquals("modelVersion", rec.getPrediction().getModelVersion());
+    Assert.assertEquals(
+            "XX",
+            rec.getPrediction().getPredictionLabel().getRanking().getPredictionGroupId());
+    Assert.assertEquals(
+            DoubleValue.newBuilder().build(),
+            rec.getPrediction().getPredictionLabel().getRanking().getPredictionScore());
+    Assert.assertEquals(
+            1,
+            rec.getPrediction().getPredictionLabel().getRanking().getRank());
+    Assert.assertEquals(
+            DoubleValue.newBuilder().setValue(1).build(),
+            rec.getActual().getActualLabel().getRanking().getRelevanceScore());
+    Assert.assertEquals(
+            12345,
+            rec.getPrediction()
+                    .getFeaturesOrDefault("int", Public.Value.getDefaultInstance())
+                    .getInt());
+    Assert.assertEquals(
+            "string",
+            rec.getPrediction()
+                    .getFeaturesOrDefault("string", Public.Value.getDefaultInstance())
+                    .getString());
+    Assert.assertEquals(
+            20.20,
+            rec.getPrediction()
+                    .getFeaturesOrDefault("double", Public.Value.getDefaultInstance())
+                    .getDouble(),
+            0.0);
+    Assert.assertEquals(
+            "string",
+            rec.getPrediction()
+                    .getTagsOrDefault("string", Public.Value.getDefaultInstance())
+                    .getString());
+    Assert.assertEquals(
+            1.0,
+            rec.getPrediction()
+                    .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+                    .getEmbedding()
+                    .getVector(0),
+            0.0);
+    Assert.assertEquals(
+            2.0,
+            rec.getPrediction()
+                    .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+                    .getEmbedding()
+                    .getVector(1),
+            0.0);
+    Assert.assertEquals(
+            "test",
+            rec.getPrediction()
+                    .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+                    .getEmbedding()
+                    .getRawData()
+                    .getTokenArray()
+                    .getTokens(0));
+    Assert.assertEquals(
+            "tokens",
+            rec.getPrediction()
+                    .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+                    .getEmbedding()
+                    .getRawData()
+                    .getTokenArray()
+                    .getTokens(1));
+    Assert.assertEquals(
+            "http://test.com/hey.jpg",
+            rec.getPrediction()
+                    .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+                    .getEmbedding()
+                    .getLinkToData()
+                    .getValue());
+
+    Assert.assertEquals("spaceKey", rec.getSpaceKey());
+    Assert.assertEquals("modelId", rec.getModelId());
+    Assert.assertEquals("predictionId", rec.getPredictionId());
+  }
+  @Rule
+  public final ExpectedException exception = ExpectedException.none();
+
+  @Test
+  public void testRankingValidation() throws IOException {
+    // missing predictionGroupID
+    Ranking prediction1 = new Ranking.RankingBuilder().setRank(1).build();
+    Ranking actual1 = new Ranking.RankingBuilder().setScore(1).build();
+    exception.expect(IllegalArgumentException.class);
+    client.log("modelId", "modelVersion", "predictionId", null,
+            null, null, prediction1, actual1, null, 0);
+
+    // rank out of range
+    Ranking prediction2 = new Ranking.RankingBuilder().setPredictionGroupId("XX").setRank(101).build();
+    exception.expect(IllegalArgumentException.class);
+    client.log("modelId", "modelVersion", "predictionId", null,
+            null, null, prediction2, actual1, null, 0);
+
+    // missing both actual labels and relevance scores
+    Ranking prediction3 = new Ranking.RankingBuilder().setPredictionGroupId("XX").setRank(101).build();
+    Ranking actual3 = new Ranking.RankingBuilder().build();
+    exception.expect(IllegalArgumentException.class);
+    client.log("modelId", "modelVersion", "predictionId", null,
+            null, null, prediction3, actual3, null, 0);
+
+    // 0 rank
+    Ranking prediction4 = new Ranking.RankingBuilder().setPredictionGroupId("XX").setRank(0).build();
+    Ranking actual4 = new Ranking.RankingBuilder().build();
+    exception.expect(IllegalArgumentException.class);
+    client.log("modelId", "modelVersion", "predictionId", null,
+            null, null, prediction4, actual4, null, 0);
+
+    // empty actual list
+    Ranking prediction5 = new Ranking.RankingBuilder().setPredictionGroupId("XX").setRank(0).build();
+    Ranking actual5 = new Ranking.RankingBuilder().setActualLabel(Public.MultiValue.newBuilder().build()).build();
+    exception.expect(IllegalArgumentException.class);
+    client.log("modelId", "modelVersion", "predictionId", null,
+            null, null, prediction5, actual5, null, 0);
+
+    // prediction group id length out of range
+    Ranking prediction6 = new Ranking.RankingBuilder().setPredictionGroupId("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX").setRank(0).build();
+    Ranking actual6 = new Ranking.RankingBuilder().setActualLabel(Public.MultiValue.newBuilder().build()).build();
+    exception.expect(IllegalArgumentException.class);
+    client.log("modelId", "modelVersion", "predictionId", null,
+            null, null, prediction6, actual6, null, 0);
   }
 }
