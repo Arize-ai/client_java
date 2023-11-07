@@ -13,7 +13,7 @@
     <groupId>com.arize</groupId>
     <artifactId>arize-api-client</artifactId>
     <name>arize-api-client</name>
-    <version>2.1.0</version>
+    <version>2.1.1</version>
     <url>https://github.com/Arize-ai/client_java/</url>
     <description>Java client library for Arize AI API</description>
     <licenses>
@@ -44,12 +44,12 @@
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>3.16.3</version>
+            <version>3.19.6</version>
         </dependency>
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java-util</artifactId>
-            <version>3.16.3</version>
+            <version>3.19.6</version>
         </dependency>
     </dependencies>
 

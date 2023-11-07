@@ -8,7 +8,6 @@ import java.util.Map;
 
 public interface ArizeAPI {
 
-    String SDK_VERSION = "2.1.0";
 
     /**
      * log builds and submits a record to the Arize API.
