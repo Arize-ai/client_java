@@ -20,6 +20,9 @@ import java.util.Map;
 
 public class ArizeClient implements ArizeAPI {
 
+  private static final String SDK_LANGUAGE = "jvm";
+  private static final String LANGUAGE_VERSION = getJavaVersion();
+  private static final String SDK_VERSION = "2.1.1";
   private static final String DEFAULT_URI = "https://api.arize.com/v1";
 
   /** The URI to which to connect for single records. */
@@ -100,7 +103,8 @@ public class ArizeClient implements ArizeAPI {
     request.setURI(host);
     request.addHeader("Authorization", apiKey);
     request.addHeader("Grpc-Metadata-space", spaceKey);
-    request.addHeader("Grpc-Metadata-sdk", "jvm");
+    request.addHeader("Grpc-Metadata-sdk-language", SDK_LANGUAGE);
+    request.addHeader("Grpc-Metadata-language-version", LANGUAGE_VERSION);
     request.addHeader("Grpc-Metadata-sdk-version", SDK_VERSION);
     return request;
   }
@@ -546,13 +550,13 @@ public class ArizeClient implements ArizeAPI {
      * * Scores: this is the output scores from the ranking model and used to generate in most use cases.
      * <p>
      * Actual labels MUST contain one of following:
-     * * ActualLabels: this is the engagements of each listing items. It's a string list, and must not be empty if provided.
+     * * ActualLabels/RelevanceLabels: this is the engagements of each listing items. It's a string list, and must not be empty if provided.
      * * Scores: this is relevance scores and should be differentiated from prediction scores.
      **/
 
     private String predictionGroupId;
     private Public.MultiValue actualLabels;
-    private Public.MultiValue attributions;
+    private Public.MultiValue relevanceLabels;
     private Double relevanceScore;
     private Double predictionScore;
     private Double score;
@@ -563,7 +567,7 @@ public class ArizeClient implements ArizeAPI {
     private Ranking(RankingBuilder builder) {
       validation(builder);
       this.predictionGroupId = builder.predictionGroupId;
-      this.actualLabels = builder.attributions == null ? builder.actualLabel : builder.attributions;
+      this.actualLabels = builder.relevanceLabels == null ? builder.actualLabel : builder.relevanceLabels;
       this.score = builder.score;
       this.rank = builder.rank;
       this.label = builder.label;
@@ -615,7 +619,7 @@ public class ArizeClient implements ArizeAPI {
     public static final class RankingBuilder {
       private String predictionGroupId;
       private Public.MultiValue actualLabel;
-      private Public.MultiValue attributions;
+      private Public.MultiValue relevanceLabels;
       private Double relevanceScore;
       private Double predictionScore;
       private Double score;
@@ -650,14 +654,14 @@ public class ArizeClient implements ArizeAPI {
         return this;
       }
 
-      public RankingBuilder setAttributions(Public.MultiValue attributions) {
-        this.attributions = attributions;
+      public RankingBuilder setRelevanceLabels(Public.MultiValue relevanceLabels) {
+        this.relevanceLabels = relevanceLabels;
         return this;
       }
 
-      public RankingBuilder setAttributions(String attribution) {
-        Public.MultiValue attributions = Public.MultiValue.newBuilder().addAllValues(Arrays.asList(attribution)).build();
-        this.attributions = attributions;
+      public RankingBuilder setRelevanceLabels(String relevanceLabel) {
+        Public.MultiValue relevanceLabels = Public.MultiValue.newBuilder().addAllValues(Arrays.asList(relevanceLabel)).build();
+        this.relevanceLabels = relevanceLabels;
         return this;
       }
 
@@ -675,5 +679,8 @@ public class ArizeClient implements ArizeAPI {
         return new Ranking(this);
       }
     }
+  }
+  private static String getJavaVersion() {
+    return System.getProperty("java.version");
   }
 }

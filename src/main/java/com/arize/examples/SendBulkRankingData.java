@@ -59,12 +59,12 @@ public class SendBulkRankingData {
 
         final List<ArizeClient.Ranking> actualLabels =
                 Arrays.asList(
-                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setAttributions(MultiValue.newBuilder().addAllValues(Arrays.asList("click", "purchase")).build()).build(),
-                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setAttributions(MultiValue.newBuilder().addAllValues(Collections.singletonList("click")).build()).build(),
-                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setAttributions(MultiValue.newBuilder().addAllValues(Collections.singletonList("no-event")).build()).build(),
-                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setAttributions(MultiValue.newBuilder().addAllValues(Collections.singletonList("click")).build()).build(),
-                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setAttributions(MultiValue.newBuilder().addAllValues(Collections.singletonList("no-event")).build()).build(),
-                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setAttributions(MultiValue.newBuilder().addAllValues(Arrays.asList("click", "purchase")).build()).build()
+                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setRelevanceLabels(MultiValue.newBuilder().addAllValues(Arrays.asList("click", "purchase")).build()).build(),
+                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setRelevanceLabels(MultiValue.newBuilder().addAllValues(Collections.singletonList("click")).build()).build(),
+                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setRelevanceLabels(MultiValue.newBuilder().addAllValues(Collections.singletonList("no-event")).build()).build(),
+                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setRelevanceLabels(MultiValue.newBuilder().addAllValues(Collections.singletonList("click")).build()).build(),
+                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setRelevanceLabels(MultiValue.newBuilder().addAllValues(Collections.singletonList("no-event")).build()).build(),
+                        new ArizeClient.Ranking.RankingBuilder().setRelevanceScore(1).setRelevanceLabels(MultiValue.newBuilder().addAllValues(Arrays.asList("click", "purchase")).build()).build()
 
                 );
         final List<Map<String, ?>> tags = new ArrayList<>();
