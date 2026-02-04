@@ -26,7 +26,11 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -35,6 +39,7 @@ import java.util.stream.Collectors;
 public class ArizeClientTest {
 
   protected ArizeClient client;
+  protected ArizeClient clientWithSpaceId;
   protected HttpServer server;
 
   protected List<Public.Record> posts;
@@ -68,6 +73,7 @@ public class ArizeClientTest {
     server.start();
     String uri = "http://localhost:" + server.getAddress().getPort() + "/v1";
     client = new ArizeClient("apiKey", "spaceKey", uri);
+    clientWithSpaceId = new ArizeClient.ClientBuilder().apiKey("apiKey").spaceId("spaceID").uri(uri).build();
     intFeatures = new HashMap<>();
     longFeatures = new HashMap<>();
     stringFeatures = new HashMap<>();
@@ -138,7 +144,7 @@ public class ArizeClientTest {
     Assert.assertEquals("modelId", rec.getModelId());
     Assert.assertEquals("predictionId", rec.getPredictionId());
     Assert.assertEquals("modelVersion", rec.getPrediction().getModelVersion());
-    Assert.assertEquals(20.20, rec.getPrediction().getLabel().getNumeric(), 0.0);
+    Assert.assertEquals(20.20, rec.getPrediction().getPredictionLabel().getNumeric(), 0.0);
     Assert.assertEquals(
         12345,
         rec.getPrediction()
@@ -201,7 +207,7 @@ public class ArizeClientTest {
     Assert.assertEquals("spaceKey", rec.getSpaceKey());
     Assert.assertEquals("modelId", rec.getModelId());
     Assert.assertEquals("predictionId", rec.getPredictionId());
-    Assert.assertEquals(20.21, rec.getActual().getLabel().getNumeric(), 0.0);
+    Assert.assertEquals(20.21, rec.getActual().getActualLabel().getNumeric(), 0.0);
   }
 
   @Test
@@ -236,11 +242,11 @@ public class ArizeClientTest {
     Assert.assertEquals("modelVersion", rec.getPrediction().getModelVersion());
     Assert.assertEquals(
         20.20,
-        rec.getPrediction().getLabel().getScoreCategorical().getScoreCategory().getScore(),
+        rec.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getScore(),
         0.0);
     Assert.assertEquals(
         "category",
-        rec.getPrediction().getLabel().getScoreCategorical().getScoreCategory().getCategory());
+        rec.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
     Assert.assertEquals(
         12345,
         rec.getPrediction()
@@ -500,7 +506,7 @@ public class ArizeClientTest {
       Assert.assertTrue(expectedIds.contains(record.getPredictionId()));
       Assert.assertTrue(
           expectedLabels.contains(
-              ((Double) record.getActual().getLabel().getNumeric()).intValue()));
+              ((Double) record.getActual().getActualLabel().getNumeric()).intValue()));
       Assert.assertEquals("modelId", record.getModelId());
       Assert.assertFalse("Failed timestamp", record.getActual().hasTimestamp());
     }
@@ -509,70 +515,20 @@ public class ArizeClientTest {
   @Test
   public void testBuildBulkPrediction()
       throws ExecutionException, InterruptedException, IOException {
-    List<Map<String, ?>> features = new ArrayList<>();
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            putAll(intFeatures);
-            putAll(doubleFeatures);
-            putAll(stringFeatures);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            putAll(intFeatures);
-            putAll(doubleFeatures);
-            putAll(stringFeatures);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            putAll(intFeatures);
-            putAll(doubleFeatures);
-            putAll(stringFeatures);
-          }
-        });
+    Map<String, Object> feature1 = new HashMap<>();
+    feature1.putAll(intFeatures);
+    feature1.putAll(doubleFeatures);
+    feature1.putAll(stringFeatures);
+    List<Map<String, ?>> features = List.of(feature1, feature1, feature1);
     List<Map<String, ?>> tags = new ArrayList<>();
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            putAll(stringTags);
-          }
-        });
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            putAll(stringTags);
-          }
-        });
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            putAll(stringTags);
-          }
-        });
+    tags.add(Map.copyOf(stringTags));
+    tags.add(Map.copyOf(stringTags));
+    tags.add(Map.copyOf(stringTags));
 
     List<Map<String, Embedding>> embeddingFeatures = new ArrayList<>();
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
 
     Response response =
         client.bulkLog(
@@ -604,7 +560,7 @@ public class ArizeClientTest {
       Assert.assertTrue(expectedIds.contains(record.getPredictionId()));
       Assert.assertTrue(
           expectedLabels.contains(
-              ((Double) record.getPrediction().getLabel().getNumeric()).intValue()));
+              ((Double) record.getPrediction().getPredictionLabel().getNumeric()).intValue()));
       Assert.assertEquals("modelVersion", record.getPrediction().getModelVersion());
       Assert.assertEquals("modelId", record.getModelId());
       Assert.assertFalse(record.getPrediction().hasTimestamp());
@@ -616,92 +572,23 @@ public class ArizeClientTest {
   @Test
   public void testFullLog() throws IOException, ExecutionException, InterruptedException {
     List<Map<String, ?>> features = new ArrayList<>();
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 5.0);
-            put("is_organic", 0L);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 4.5);
-            put("is_organic", 1L);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 2.0);
-            put("is_organic", 0L);
-          }
-        });
+    features.add(Map.of("days", 5.0, "is_organic", 0L));
+    features.add(Map.of("days", 4.5, "is_organic", 1L));
+    features.add(Map.of("days", 2.0, "is_organic", 0L));
     List<Map<String, ?>> tags = new ArrayList<>();
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("tag_1", 5.0);
-            put("tag_2", "tag_2");
-          }
-        });
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("tag_1", 5.0);
-            put("tag_2", "tag_2");
-          }
-        });
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("tag_1", 5.0);
-            put("tag_2", "tag_2");
-          }
-        });
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
     List<Map<String, Embedding>> embeddingFeatures = new ArrayList<>();
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
     List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
     List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
     List<Map<String, Double>> shapValues = new ArrayList<>();
-    shapValues.add(
-        new HashMap<String, Double>() {
-          {
-            put("days", 2.0);
-            put("is_organic", -1.2);
-          }
-        });
-    shapValues.add(
-        new HashMap<String, Double>() {
-          {
-            put("days", 2.2);
-            put("is_organic", -1.2);
-          }
-        });
-    shapValues.add(
-        new HashMap<String, Double>() {
-          {
-            put("days", 2.5);
-            put("is_organic", -1.2);
-          }
-        });
+    shapValues.add(Map.of("days", 2.0, "is_organic", -1.2));
+    shapValues.add(Map.of("days", 2.2, "is_organic", -1.2));
+    shapValues.add(Map.of("days", 2.5, "is_organic", -1.2));
 
     Response response =
         client.bulkLog(
@@ -801,10 +688,14 @@ public class ArizeClientTest {
               .getValue());
 
       // compare input prediction labels to posted Public.Record
-      Assert.assertEquals(predictionLabels.get(i), rec.getPrediction().getLabel().getCategorical());
+      Assert.assertEquals(
+          predictionLabels.get(i),
+          rec.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
 
       // compare input actual labels to posted Public.Record
-      Assert.assertEquals(actualLabels.get(i), rec.getActual().getLabel().getCategorical());
+      Assert.assertEquals(
+          actualLabels.get(i),
+          rec.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
 
       // compare input shap values to posted Public.Record
       Map<String, Double> s = shapValues.get(i);
@@ -826,68 +717,17 @@ public class ArizeClientTest {
   @Test
   public void testLogTraining() throws IOException, ExecutionException, InterruptedException {
     List<Map<String, ?>> features = new ArrayList<>();
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 5.0);
-            put("is_organic", 0L);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 4.5);
-            put("is_organic", 1L);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 2.0);
-            put("is_organic", 0L);
-          }
-        });
+    features.add(Map.of("days", 5.0, "is_organic", 0L));
+    features.add(Map.of("days", 4.5, "is_organic", 1L));
+    features.add(Map.of("days", 2.0, "is_organic", 0L));
     List<Map<String, ?>> tags = new ArrayList<>();
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("tag_1", 5.0);
-            put("tag_2", "tag_2");
-          }
-        });
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("tag_1", 5.0);
-            put("tag_2", "tag_2");
-          }
-        });
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("tag_1", 5.0);
-            put("tag_2", "tag_2");
-          }
-        });
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
     List<Map<String, Embedding>> embeddingFeatures = new ArrayList<>();
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
     List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
     List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
 
@@ -996,78 +836,30 @@ public class ArizeClientTest {
 
       // compare input prediction labels to posted Public.Record
       Assert.assertEquals(
-          predictionLabels.get(i), record.getPrediction().getLabel().getCategorical());
+          predictionLabels.get(i),
+          record.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
 
       // compare input actual labels to posted Public.Record
-      Assert.assertEquals(actualLabels.get(i), record.getActual().getLabel().getCategorical());
+      Assert.assertEquals(
+          actualLabels.get(i),
+          record.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
     }
   }
 
   @Test
   public void testLogValidation() throws IOException, ExecutionException, InterruptedException {
     List<Map<String, ?>> features = new ArrayList<>();
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 5.0);
-            put("is_organic", 0L);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 4.5);
-            put("is_organic", 1L);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 2.0);
-            put("is_organic", 0L);
-          }
-        });
+    features.add(Map.of("days", 5.0, "is_organic", 0L));
+    features.add(Map.of("days", 4.5, "is_organic", 1L));
+    features.add(Map.of("days", 2.0, "is_organic", 0L));
     List<Map<String, ?>> tags = new ArrayList<>();
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("tag_1", 5.0);
-            put("tag_2", "tag_2");
-          }
-        });
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("tag_1", 5.0);
-            put("tag_2", "tag_2");
-          }
-        });
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("tag_1", 5.0);
-            put("tag_2", "tag_2");
-          }
-        });
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
     List<Map<String, Embedding>> embeddingFeatures = new ArrayList<>();
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
-    embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            putAll(embFeatures);
-          }
-        });
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
     List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
     List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
 
@@ -1178,10 +970,13 @@ public class ArizeClientTest {
 
       // compare input prediction labels to posted Public.Record
       Assert.assertEquals(
-          predictionLabels.get(i), record.getPrediction().getLabel().getCategorical());
+          predictionLabels.get(i),
+          record.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
 
       // compare input actual labels to posted Public.Record
-      Assert.assertEquals(actualLabels.get(i), record.getActual().getLabel().getCategorical());
+      Assert.assertEquals(
+          actualLabels.get(i),
+          record.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
     }
   }
 
@@ -1402,4 +1197,521 @@ public class ArizeClientTest {
     client.log("modelId", "modelVersion", "predictionId", null,
             null, null, prediction6, actual6, null, 0);
   }
+
+  @Test
+  public void testLogWithSpaceId() throws IOException, ExecutionException, InterruptedException {
+    Map<String, Object> features = new HashMap<>();
+    features.putAll(intFeatures);
+    features.putAll(doubleFeatures);
+    features.putAll(stringFeatures);
+
+    Response response =
+        clientWithSpaceId.log(
+            "modelId",
+            "modelVersion",
+            "predictionId",
+            features,
+            embFeatures,
+            stringTags,
+            20.20,
+            20.21,
+            null,
+            0);
+    try {
+      response.resolve(10, TimeUnit.SECONDS);
+    } catch (TimeoutException e) {
+      Assert.fail("timeout waiting for server");
+    }
+
+    // Verify headers include spaceId
+    Assert.assertEquals("apiKey", headers.get(0).get("Authorization").get(0));
+    Assert.assertEquals("spaceID", headers.get(0).get("Grpc-Metadata-arize-space-id").get(0));
+
+    // Verify record contents
+    Public.Record rec = posts.get(0);
+    Assert.assertEquals("", rec.getSpaceKey()); // Space key should be empty
+    Assert.assertEquals("modelId", rec.getModelId());
+    Assert.assertEquals("predictionId", rec.getPredictionId());
+    Assert.assertEquals("modelVersion", rec.getPrediction().getModelVersion());
+    Assert.assertEquals(20.20, rec.getPrediction().getPredictionLabel().getNumeric(), 0.0);
+    Assert.assertEquals(20.21, rec.getActual().getActualLabel().getNumeric(), 0.0);
+    Assert.assertEquals(
+        12345,
+        rec.getPrediction()
+            .getFeaturesOrDefault("int", Public.Value.getDefaultInstance())
+            .getInt());
+    Assert.assertEquals(
+        "string",
+        rec.getPrediction()
+            .getFeaturesOrDefault("string", Public.Value.getDefaultInstance())
+            .getString());
+    Assert.assertEquals(
+        20.20,
+        rec.getPrediction()
+            .getFeaturesOrDefault("double", Public.Value.getDefaultInstance())
+            .getDouble(),
+        0.0);
+    Assert.assertEquals(
+        "string",
+        rec.getPrediction()
+            .getTagsOrDefault("string", Public.Value.getDefaultInstance())
+            .getString());
+    Assert.assertEquals(
+        1.0,
+        rec.getPrediction()
+            .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+            .getEmbedding()
+            .getVector(0),
+        0.0);
+    Assert.assertEquals(
+        2.0,
+        rec.getPrediction()
+            .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+            .getEmbedding()
+            .getVector(1),
+        0.0);
+    Assert.assertEquals(
+        "test",
+        rec.getPrediction()
+            .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+            .getEmbedding()
+            .getRawData()
+            .getTokenArray()
+            .getTokens(0));
+    Assert.assertEquals(
+        "tokens",
+        rec.getPrediction()
+            .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+            .getEmbedding()
+            .getRawData()
+            .getTokenArray()
+            .getTokens(1));
+    Assert.assertEquals(
+        "http://test.com/hey.jpg",
+        rec.getPrediction()
+            .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+            .getEmbedding()
+            .getLinkToData()
+            .getValue());
+  }
+
+  @Test
+  public void testBulkLogWithSpaceId() throws IOException, ExecutionException, InterruptedException {
+    List<Map<String, ?>> features = new ArrayList<>();
+    features.add(Map.of("days", 5.0, "is_organic", 0L));
+    features.add(Map.of("days", 4.5, "is_organic", 1L));
+    features.add(Map.of("days", 2.0, "is_organic", 0L));
+    List<Map<String, ?>> tags = new ArrayList<>();
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    List<Map<String, Embedding>> embeddingFeatures = new ArrayList<>();
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
+    List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
+    List<Map<String, Double>> shapValues = new ArrayList<>();
+    shapValues.add(Map.of("days", 2.0, "is_organic", -1.2));
+    shapValues.add(Map.of("days", 2.2, "is_organic", -1.2));
+    shapValues.add(Map.of("days", 2.5, "is_organic", -1.2));
+
+    Response response =
+        clientWithSpaceId.bulkLog(
+            "modelId",
+            "modelVersion",
+            expectedIds,
+            features,
+            embeddingFeatures,
+            tags,
+            predictionLabels,
+            actualLabels,
+            shapValues,
+            null);
+    try {
+      response.resolve(30, TimeUnit.SECONDS);
+    } catch (TimeoutException e) {
+      Assert.fail("timeout waiting for server: " + e.getMessage());
+    }
+
+    // Verify headers include spaceId
+    Assert.assertEquals("apiKey", headers.get(0).get("Authorization").get(0));
+    Assert.assertEquals("spaceID", headers.get(0).get("Grpc-Metadata-arize-space-id").get(0));
+
+    Public.BulkRecord bulk = bulkPosts.get(0);
+    Assert.assertEquals("modelId", bulk.getModelId());
+    Assert.assertEquals("", bulk.getSpaceKey()); // Space key should be empty
+    Assert.assertEquals("modelVersion", bulk.getModelVersion());
+    Assert.assertEquals(3, bulk.getRecordsCount());
+
+    List<Record> records = bulk.getRecordsList();
+    for (int i = 0; i < records.size(); i++) {
+      Public.Record rec = records.get(i);
+
+      // compare input prediction ids to posted Public.Record
+      Assert.assertEquals(expectedIds.get(i), rec.getPredictionId());
+
+      // compare input features to posted Public.Record
+      Map<String, ?> f = features.get(i);
+      Assert.assertEquals(
+          f.get("days"),
+          rec.getPrediction()
+              .getFeaturesOrDefault("days", Public.Value.getDefaultInstance())
+              .getDouble());
+      Assert.assertEquals(
+          f.get("is_organic"),
+          rec.getPrediction()
+              .getFeaturesOrDefault("is_organic", Public.Value.getDefaultInstance())
+              .getInt());
+
+      // compare input tags to posted Public.Record
+      Map<String, ?> t = tags.get(i);
+      Assert.assertEquals(
+          t.get("tag_1"),
+          rec.getPrediction()
+              .getTagsOrDefault("tag_1", Public.Value.getDefaultInstance())
+              .getDouble());
+      Assert.assertEquals(
+          t.get("tag_2"),
+          rec.getPrediction()
+              .getTagsOrDefault("tag_2", Public.Value.getDefaultInstance())
+              .getString());
+
+      // compare input embedding features to posted Public.Record
+      Map<String, ?> ef = embeddingFeatures.get(i);
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getVector().get(0),
+          rec.getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getVector(0),
+          0.0);
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getVector().get(1),
+          rec.getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getVector(1),
+          0.0);
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getRawData().get(0),
+          rec.getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getRawData()
+              .getTokenArray()
+              .getTokens(0));
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getRawData().get(1),
+          rec.getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getRawData()
+              .getTokenArray()
+              .getTokens(1));
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getLinkToData(),
+          rec.getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getLinkToData()
+              .getValue());
+
+      // compare input prediction labels to posted Public.Record
+      Assert.assertEquals(
+          predictionLabels.get(i),
+          rec.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
+
+      // compare input actual labels to posted Public.Record
+      Assert.assertEquals(
+          actualLabels.get(i),
+          rec.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
+
+      // compare input shap values to posted Public.Record
+      Map<String, Double> s = shapValues.get(i);
+      Assert.assertEquals(
+          s.get("days"),
+          rec.getFeatureImportances()
+              .getFeatureImportancesOrDefault(
+                  "days", Public.Value.getDefaultInstance().getDouble()),
+          0.0);
+      Assert.assertEquals(
+          s.get("is_organic"),
+          rec.getFeatureImportances()
+              .getFeatureImportancesOrDefault(
+                  "is_organic", Public.Value.getDefaultInstance().getDouble()),
+          0.0);
+    }
+
+  }
+
+  @Test
+  public void testLogTrainingRecordsWithSpaceId() throws IOException, ExecutionException, InterruptedException {
+    List<Map<String, ?>> features = new ArrayList<>();
+    features.add(Map.of("days", 5.0, "is_organic", 0L));
+    features.add(Map.of("days", 4.5, "is_organic", 1L));
+    features.add(Map.of("days", 2.0, "is_organic", 0L));
+    List<Map<String, ?>> tags = new ArrayList<>();
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    List<Map<String, Embedding>> embeddingFeatures = new ArrayList<>();
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
+    List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
+
+    Response response =
+        clientWithSpaceId.logTrainingRecords(
+            "modelId",
+            "modelVersion",
+            features,
+            embeddingFeatures,
+            tags,
+            predictionLabels,
+            actualLabels);
+    try {
+      response.resolve(10, TimeUnit.SECONDS);
+    } catch (TimeoutException e) {
+      Assert.fail("timeout waiting for server: " + e.getMessage());
+    }
+
+    // Verify headers include spaceId
+    Headers requestHeaders = this.headers.get(0);
+    Assert.assertEquals("apiKey", requestHeaders.get("Authorization").get(0));
+    Assert.assertEquals("spaceID", requestHeaders.get("Grpc-Metadata-arize-space-id").get(0));
+
+    for (int i = 0; i < preProductionRecords.size(); i++) {
+      Public.PreProductionRecord preprodRec = preProductionRecords.get(i);
+      Record record = preprodRec.getTrainingRecord().getRecord();
+      Assert.assertEquals("modelId", record.getModelId());
+      Assert.assertEquals("modelVersion", record.getPrediction().getModelVersion());
+
+      // For now training records dont include a prediction id
+      Assert.assertEquals("", record.getPredictionId());
+
+      // compare input features to posted Public.Record
+      Map<String, ?> f = features.get(i);
+      Assert.assertEquals(
+          f.get("days"),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("days", Public.Value.getDefaultInstance())
+              .getDouble());
+      Assert.assertEquals(
+          f.get("is_organic"),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("is_organic", Public.Value.getDefaultInstance())
+              .getInt());
+
+      // compare input tags to posted Public.Record
+      Map<String, ?> t = tags.get(i);
+      Assert.assertEquals(
+          t.get("tag_1"),
+          record
+              .getPrediction()
+              .getTagsOrDefault("tag_1", Public.Value.getDefaultInstance())
+              .getDouble());
+      Assert.assertEquals(
+          t.get("tag_2"),
+          record
+              .getPrediction()
+              .getTagsOrDefault("tag_2", Public.Value.getDefaultInstance())
+              .getString());
+
+      // compare input embedding features to posted Public.Record
+      Map<String, ?> ef = embeddingFeatures.get(i);
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getVector().get(0),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getVector(0),
+          0.0);
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getVector().get(1),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getVector(1),
+          0.0);
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getRawData().get(0),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getRawData()
+              .getTokenArray()
+              .getTokens(0));
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getRawData().get(1),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getRawData()
+              .getTokenArray()
+              .getTokens(1));
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getLinkToData(),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getLinkToData()
+              .getValue());
+
+      // compare input prediction labels to posted Public.Record
+      Assert.assertEquals(
+          predictionLabels.get(i),
+          record.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
+
+      // compare input actual labels to posted Public.Record
+      Assert.assertEquals(
+          actualLabels.get(i),
+          record.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
+    }
+
+  }
+
+  @Test
+  public void testLogValidationRecordsWithSpaceId() throws IOException, ExecutionException, InterruptedException {
+    List<Map<String, ?>> features = new ArrayList<>();
+    features.add(Map.of("days", 5.0, "is_organic", 0L));
+    features.add(Map.of("days", 4.5, "is_organic", 1L));
+    features.add(Map.of("days", 2.0, "is_organic", 0L));
+    List<Map<String, ?>> tags = new ArrayList<>();
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    tags.add(Map.of("tag_1", 5.0, "tag_2", "tag_2"));
+    List<Map<String, Embedding>> embeddingFeatures = new ArrayList<>();
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    embeddingFeatures.add(Map.copyOf(embFeatures));
+    List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
+    List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
+
+    Response response =
+        clientWithSpaceId.logValidationRecords(
+            "modelId",
+            "modelVersion",
+            "offline-1",
+            features,
+            embeddingFeatures,
+            tags,
+            predictionLabels,
+            actualLabels);
+    try {
+      response.resolve(10, TimeUnit.SECONDS);
+    } catch (TimeoutException e) {
+      Assert.fail("timeout waiting for server: " + e.getMessage());
+    }
+
+    // Verify headers include spaceId
+    Headers requestHeaders = this.headers.get(0);
+    Assert.assertEquals("apiKey", requestHeaders.get("Authorization").get(0));
+    Assert.assertEquals("spaceID", requestHeaders.get("Grpc-Metadata-arize-space-id").get(0));
+
+    for (int i = 0; i < preProductionRecords.size(); i++) {
+      Public.PreProductionRecord preprodRec = preProductionRecords.get(i);
+      Assert.assertEquals("offline-1", preprodRec.getValidationRecord().getBatchId());
+      Record record = preprodRec.getValidationRecord().getRecord();
+      Assert.assertEquals("modelId", record.getModelId());
+      Assert.assertEquals("modelVersion", record.getPrediction().getModelVersion());
+
+      // For now training records dont include a prediction id
+      Assert.assertEquals("", record.getPredictionId());
+
+      // compare input features to posted Public.Record
+      Map<String, ?> f = features.get(i);
+      Assert.assertEquals(
+          f.get("days"),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("days", Public.Value.getDefaultInstance())
+              .getDouble());
+      Assert.assertEquals(
+          f.get("is_organic"),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("is_organic", Public.Value.getDefaultInstance())
+              .getInt());
+
+      // compare input tags to posted Public.Record
+      Map<String, ?> t = tags.get(i);
+      Assert.assertEquals(
+          t.get("tag_1"),
+          record
+              .getPrediction()
+              .getTagsOrDefault("tag_1", Public.Value.getDefaultInstance())
+              .getDouble());
+      Assert.assertEquals(
+          t.get("tag_2"),
+          record
+              .getPrediction()
+              .getTagsOrDefault("tag_2", Public.Value.getDefaultInstance())
+              .getString());
+
+      // compare input embedding features to posted Public.Record
+      Map<String, ?> ef = embeddingFeatures.get(i);
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getVector().get(0),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getVector(0),
+          0.0);
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getVector().get(1),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getVector(1),
+          0.0);
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getRawData().get(0),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getRawData()
+              .getTokenArray()
+              .getTokens(0));
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getRawData().get(1),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getRawData()
+              .getTokenArray()
+              .getTokens(1));
+      Assert.assertEquals(
+          ((Embedding) ef.get("embedding")).getLinkToData(),
+          record
+              .getPrediction()
+              .getFeaturesOrDefault("embedding", Public.Value.getDefaultInstance())
+              .getEmbedding()
+              .getLinkToData()
+              .getValue());
+
+      // compare input prediction labels to posted Public.Record
+      Assert.assertEquals(
+          predictionLabels.get(i),
+          record.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
+
+      // compare input actual labels to posted Public.Record
+      Assert.assertEquals(
+          actualLabels.get(i),
+          record.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
+      }
+  }
+
 }

@@ -22,7 +22,7 @@ public class ArizeClient implements ArizeAPI {
 
   private static final String SDK_LANGUAGE = "jvm";
   private static final String LANGUAGE_VERSION = getJavaVersion();
-  private static final String SDK_VERSION = "2.1.1";
+  private static final String SDK_VERSION = "2.2.1";
   private static final String DEFAULT_URI = "https://api.arize.com/v1";
 
   /** The URI to which to connect for single records. */
@@ -40,69 +40,121 @@ public class ArizeClient implements ArizeAPI {
   /** The Arize space key */
   private final String spaceKey;
 
+  /** The Arize space ID */
+  private final String spaceId;
+
   /** The HTTP client. */
   private final CloseableHttpAsyncClient client;
 
-  /**
-   * Constructor for passing in an httpClient, typically for mocking.
-   *
-   * @param client an Apache CloseableHttpAsyncClient
-   * @param uri uri for Arize endpoint
-   * @throws URISyntaxException if uri string violates RFC 2396
-   */
-  public ArizeClient(
+  // Private constructor that static factory methods use
+  private ArizeClient(
       final CloseableHttpAsyncClient client,
       final String apiKey,
       final String spaceKey,
+      final String spaceId,
       final String uri)
       throws URISyntaxException {
     this.client = client;
     if (apiKey == null || apiKey.isEmpty()) {
       throw new IllegalArgumentException("apiKey cannot be null or empty");
     }
-    if (spaceKey == null || spaceKey.isEmpty()) {
-      throw new IllegalArgumentException("spaceKey cannot be null or empty");
+    boolean hasSpaceKey = spaceKey != null && !spaceKey.isEmpty();
+    boolean hasSpaceId = spaceId != null && !spaceId.isEmpty();
+    if (!hasSpaceKey && !hasSpaceId) {
+      throw new IllegalArgumentException("Either spaceKey or spaceId must be provided");
+    }
+    if (hasSpaceKey && hasSpaceId) {
+      throw new IllegalArgumentException("Cannot provide both spaceKey and spaceId");
     }
     this.apiKey = apiKey;
     this.spaceKey = spaceKey;
+    this.spaceId = spaceId;
     this.host = new URI(uri + "/log");
     this.bulkHost = new URI(uri + "/bulk");
     this.trainingValidationHost = new URI(uri + "/preprod");
     this.client.start();
   }
 
-  /**
-   * Construct a new API wrapper.
-   *
-   * @param apiKey your Arize API Key
-   * @param spaceKey your Arize space key
-   * @throws URISyntaxException if uri string violates RFC 2396
-   */
-  public ArizeClient(final String apiKey, final String spaceKey) throws URISyntaxException {
-    this(HttpAsyncClients.createDefault(), apiKey, spaceKey, DEFAULT_URI);
-  }
+    /**
+     * Constructor for passing in an httpClient, typically for mocking.
+     * @deprecated use {@link ClientBuilder} instead. For example:
+     * <pre>{@code
+     * ArizeClient client = new ArizeClient.ClientBuilder()
+     *     .httpClient(httpClient)
+     *     .apiKey(apiKey)
+     *     .SpaceId(SpaceId)
+     *     .uri(uri)
+     *     .build();
+     * }</pre>
+     *
+     * @param client an Apache CloseableHttpAsyncClient
+     * @param uri uri for Arize endpoint
+     * @throws URISyntaxException if uri string violates RFC 2396
+     */
+    @Deprecated
+    public ArizeClient(
+        final CloseableHttpAsyncClient client,
+        final String apiKey,
+        final String spaceKey,
+        final String uri
+    ) throws URISyntaxException {
+        this(client, apiKey, spaceKey, null, uri);
+    }
 
   /**
-   * Construct a new API wrapper while overwriting the Arize endpoint, typically for custom
-   * integrations and e2e testing.
+   * Construct a new API wrapper.
+   * @deprecated use {@link ClientBuilder} instead. For example:
+   * <pre>{@code
+   * ArizeClient client = new ArizeClient.ClientBuilder()
+   *     .apiKey(apiKey)
+   *     .SpaceId(SpaceId)
+   *     .build();
+   * }</pre>
    *
    * @param apiKey your Arize API Key
    * @param spaceKey your Arize space key
-   * @param uri uri for Arize endpoint
    * @throws URISyntaxException if uri string violates RFC 2396
    */
+  @Deprecated
+  public ArizeClient(final String apiKey, final String spaceKey) throws URISyntaxException {
+    this(HttpAsyncClients.createDefault(), apiKey, spaceKey, null, DEFAULT_URI);
+  }
+
+    /**
+     * Construct a new API wrapper while overwriting the Arize endpoint, typically for custom
+     * integrations and e2e testing.
+     * @deprecated use {@link ClientBuilder} instead. For example:
+     * <pre>{@code
+     * ArizeClient client = new ArizeClient.ClientBuilder()
+     *     .apiKey(apiKey)
+     *     .SpaceId(SpaceId)
+     *     .uri(uri)
+     *     .build();
+     * }</pre>
+     *
+     * @param apiKey your Arize API Key
+     * @param spaceKey your Arize space key
+     * @param uri uri for Arize endpoint
+     * @throws URISyntaxException if uri string violates RFC 2396
+     */
+  @Deprecated
   public ArizeClient(final String apiKey, final String spaceKey, final String uri)
       throws URISyntaxException {
-    this(HttpAsyncClients.createDefault(), apiKey, spaceKey, uri);
+    this(HttpAsyncClients.createDefault(), apiKey, spaceKey, null, uri);
   }
 
   protected static HttpPost buildRequest(
-      final String body, final URI host, String apiKey, String spaceKey) {
+      final String body, final URI host, String apiKey, String spaceKey, String spaceId) {
     final HttpPost request = new HttpPost();
     request.setEntity(new StringEntity(body, StandardCharsets.UTF_8));
     request.setURI(host);
     request.addHeader("Authorization", apiKey);
-    request.addHeader("Grpc-Metadata-space", spaceKey);
+    if (spaceKey != null) {
+        request.addHeader("Grpc-Metadata-space", spaceKey);
+    }
+    if (spaceId != null) {
+        request.addHeader("Grpc-Metadata-arize-space-id", spaceId);
+    }
     request.addHeader("Grpc-Metadata-sdk-language", SDK_LANGUAGE);
     request.addHeader("Grpc-Metadata-language-version", LANGUAGE_VERSION);
     request.addHeader("Grpc-Metadata-sdk-version", SDK_VERSION);
@@ -125,6 +177,48 @@ public class ArizeClient implements ArizeAPI {
    */
   public String getSpaceKey() {
     return spaceKey;
+  }
+
+  public static class ClientBuilder {
+    private CloseableHttpAsyncClient client;
+    private String apiKey;
+    private String spaceKey;
+    private String spaceId;
+    // set default URI
+    private String uri = DEFAULT_URI;
+
+    public ClientBuilder apiKey(String apiKey) {
+      this.apiKey = apiKey;
+      return this;
+    }
+
+    public ClientBuilder spaceId(String spaceId) {
+      this.spaceId = spaceId;
+      return this;
+    }
+
+    @Deprecated
+    public ClientBuilder spaceKey(String spaceKey) {
+      this.spaceKey = spaceKey;
+      return this;
+    }
+
+    public ClientBuilder uri(String uri) {
+      this.uri = uri;
+      return this;
+    }
+
+    public ClientBuilder httpClient(CloseableHttpAsyncClient client) {
+      this.client = client;
+      return this;
+    }
+
+    public ArizeClient build() throws URISyntaxException {
+      if (client == null) {
+        client = HttpAsyncClients.createDefault();
+      }
+      return new ArizeClient(client, apiKey, spaceKey, spaceId, uri);
+    }
   }
 
   /**
@@ -155,15 +249,11 @@ public class ArizeClient implements ArizeAPI {
     Record.Builder builder = Record.newBuilder();
     builder.setModelId(modelId);
     builder.setPredictionId(predictionId);
-    builder.setSpaceKey(this.spaceKey);
+    builder.setSpaceKey(this.spaceKey != null ? this.spaceKey : "");
 
     if (predictionLabel != null) {
       Public.Prediction.Builder predictionBuilder = Public.Prediction.newBuilder();
-      if (predictionLabel.getClass() == Ranking.class) {
-        predictionBuilder.setPredictionLabel(RecordUtil.convertPredictionLabel(predictionLabel));
-      } else{
-        predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabel));
-      }
+      predictionBuilder.setPredictionLabel(RecordUtil.convertPredictionLabel(predictionLabel));
       if (modelVersion != null) {
         predictionBuilder.setModelVersion(modelVersion);
       }
@@ -183,11 +273,7 @@ public class ArizeClient implements ArizeAPI {
     }
     if (actualLabel != null) {
       Public.Actual.Builder actualBuilder = Public.Actual.newBuilder();
-      if (actualLabel.getClass() == Ranking.class) {
-        actualBuilder.setActualLabel(RecordUtil.convertActualLabel(actualLabel));
-      } else{
-        actualBuilder.setLabel(RecordUtil.convertLabel(actualLabel));
-      }
+      actualBuilder.setActualLabel(RecordUtil.convertActualLabel(actualLabel));
       if (predictionTimestamp != 0) {
         actualBuilder.setTimestamp(Timestamps.fromMillis(predictionTimestamp));
       }
@@ -210,7 +296,7 @@ public class ArizeClient implements ArizeAPI {
       builder.setFeatureImportances(featureImportancesBuilder);
     }
     HttpPost req =
-        buildRequest(RecordUtil.toJSON(builder.build()), this.host, this.apiKey, this.spaceKey);
+        buildRequest(RecordUtil.toJSON(builder.build()), this.host, this.apiKey, this.spaceKey, this.spaceId);
     return new Response(client.execute(req, null));
   }
 
@@ -265,7 +351,7 @@ public class ArizeClient implements ArizeAPI {
     RecordUtil.validateBulkPredictionActualMatches(predictionLabels, actualLabels);
     BulkRecord.Builder builder = BulkRecord.newBuilder();
     builder.setModelId(modelId);
-    builder.setSpaceKey(spaceKey);
+    builder.setSpaceKey(spaceKey != null ? spaceKey : "");
     if (modelVersion != null) {
       builder.setModelVersion(modelVersion);
     }
@@ -276,10 +362,8 @@ public class ArizeClient implements ArizeAPI {
       recordBuilder.setPredictionId(predictionId);
       if (predictionLabels != null) {
         Public.Prediction.Builder predictionBuilder = Public.Prediction.newBuilder();
-        if (predictionLabels.get(index) != null && predictionLabels.get(index).getClass() == Ranking.class) {
+        if (predictionLabels.get(index) != null) {
           predictionBuilder.setPredictionLabel(RecordUtil.convertPredictionLabel(predictionLabels.get(index)));
-        }else{
-          predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabels.get(index)));
         }
         if (modelVersion != null) {
           predictionBuilder.setModelVersion(modelVersion);
@@ -301,11 +385,9 @@ public class ArizeClient implements ArizeAPI {
       }
       if (actualLabels != null) {
         Public.Actual.Builder actualBuilder = Public.Actual.newBuilder();
-        if (actualLabels.get(index) != null && actualLabels.get(index).getClass() == Ranking.class) {
+        if (actualLabels.get(index) != null) {
           actualBuilder.setActualLabel(RecordUtil.convertActualLabel(actualLabels.get(index)));
-        } else{
-          actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(index)));
-        }
+        } 
         if (predictionTimestamps != null) {
           actualBuilder.setTimestamp(Timestamps.fromMillis(predictionTimestamps.get(index)));
         }
@@ -331,7 +413,7 @@ public class ArizeClient implements ArizeAPI {
       builder.addRecords(recordBuilder);
     }
     final HttpPost request =
-        buildRequest(RecordUtil.toJSON(builder.build()), this.bulkHost, this.apiKey, this.spaceKey);
+        buildRequest(RecordUtil.toJSON(builder.build()), this.bulkHost, this.apiKey, this.spaceKey, this.spaceId);
     return new Response(client.execute(request, null));
   }
 
@@ -377,10 +459,8 @@ public class ArizeClient implements ArizeAPI {
       recordBuilder.setModelId(modelId);
 
       Public.Prediction.Builder predictionBuilder = Public.Prediction.newBuilder();
-      if (predictionLabels.get(i) != null && predictionLabels.get(i).getClass() == Ranking.class) {
+      if (predictionLabels.get(i) != null) {
         predictionBuilder.setPredictionLabel(RecordUtil.convertPredictionLabel(predictionLabels.get(i)));
-      } else{
-        predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabels.get(i)));
       }
       if (modelVersion != null) {
         predictionBuilder.setModelVersion(modelVersion);
@@ -398,10 +478,8 @@ public class ArizeClient implements ArizeAPI {
       recordBuilder.setPrediction(predictionBuilder);
 
       Public.Actual.Builder actualBuilder = Public.Actual.newBuilder();
-      if (actualLabels.get(i) != null && actualLabels.get(i).getClass() == Ranking.class) {
+      if (actualLabels.get(i) != null) {
         actualBuilder.setActualLabel(RecordUtil.convertActualLabel(actualLabels.get(i)));
-      } else{
-        actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(i)));
       }
       recordBuilder.setActual(actualBuilder);
 
@@ -412,7 +490,7 @@ public class ArizeClient implements ArizeAPI {
       sb.append('\n');
     }
     final HttpPost request =
-        buildRequest(sb.toString(), this.trainingValidationHost, this.apiKey, this.spaceKey);
+        buildRequest(sb.toString(), this.trainingValidationHost, this.apiKey, this.spaceKey, this.spaceId);
     return new Response(client.execute(request, null));
   }
 
@@ -463,11 +541,9 @@ public class ArizeClient implements ArizeAPI {
       recordBuilder.setModelId(modelId);
 
       Public.Prediction.Builder predictionBuilder = Public.Prediction.newBuilder();
-      if (predictionLabels.get(i) != null && predictionLabels.get(i).getClass() == Ranking.class) {
+      if (predictionLabels.get(i) != null) {
         predictionBuilder.setPredictionLabel(RecordUtil.convertPredictionLabel(predictionLabels.get(i)));
-      } else{
-        predictionBuilder.setLabel(RecordUtil.convertLabel(predictionLabels.get(i)));
-      }
+      } 
       if (modelVersion != null) {
         predictionBuilder.setModelVersion(modelVersion);
       }
@@ -484,10 +560,8 @@ public class ArizeClient implements ArizeAPI {
       recordBuilder.setPrediction(predictionBuilder);
 
       Public.Actual.Builder actualBuilder = Public.Actual.newBuilder();
-      if (actualLabels.get(i) != null && actualLabels.get(i).getClass() == Ranking.class) {
+      if (actualLabels.get(i) != null) {
         actualBuilder.setActualLabel(RecordUtil.convertActualLabel(actualLabels.get(i)));
-      } else{
-        actualBuilder.setLabel(RecordUtil.convertLabel(actualLabels.get(i)));
       }
       recordBuilder.setActual(actualBuilder);
 
@@ -498,7 +572,7 @@ public class ArizeClient implements ArizeAPI {
       sb.append('\n');
     }
     final HttpPost request =
-        buildRequest(sb.toString(), this.trainingValidationHost, this.apiKey, this.spaceKey);
+        buildRequest(sb.toString(), this.trainingValidationHost, this.apiKey, this.spaceKey, this.spaceId);
     return new Response(client.execute(request, null));
   }
 

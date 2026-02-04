@@ -3,6 +3,8 @@ package com.arize;
 import com.arize.protocol.Public;
 import com.arize.protocol.Public.Embedding;
 import com.arize.protocol.Public.Label;
+import com.arize.protocol.Public.PredictionLabel;
+import com.arize.protocol.Public.ActualLabel;
 import com.arize.protocol.Public.MultiValue;
 import com.arize.protocol.Public.ScoreCategorical;
 import com.arize.protocol.Public.Value;
@@ -21,23 +23,41 @@ import static org.junit.Assert.fail;
 
 public class RecordUtilTest {
 
-    protected Label binaryLabel, categoricalLabel, numericLabel, scoreCategoricalLabel;
+    protected PredictionLabel binaryPredLabel, categoricalPredLabel, numericPredLabel, scoreCategoricalPredLabel;
+    protected ActualLabel binaryActLabel, categoricalActLabel, numericActLabel, scoreCategoricalActLabel;
     protected Map<String, Value> objMap;
     protected Map<String, Value> embeddingMap, embeddingMapNullRawData, embeddingMapNullLinkToData;
 
     @Before
     public void setup() {
-        binaryLabel = Label.newBuilder().setBinary(true).build();
-        categoricalLabel = Label.newBuilder().setCategorical("value").build();
-        numericLabel = Label.newBuilder().setNumeric(20.20).build();
+        binaryPredLabel = PredictionLabel.newBuilder().setBinary(true).build();
+        ScoreCategorical.ScoreCategory.Builder stringScb = ScoreCategorical.ScoreCategory.newBuilder();
+        stringScb.setCategory("prediction");
+        categoricalPredLabel = PredictionLabel.newBuilder().setScoreCategorical(ScoreCategorical.newBuilder().setScoreCategory(stringScb)).build();
+        numericPredLabel = PredictionLabel.newBuilder().setNumeric(20.20).build();
 
         ScoreCategorical.ScoreCategory.Builder scb = ScoreCategorical.ScoreCategory.newBuilder();
         scb.setCategory("apple");
         scb.setScore(3.14);
         scb.addAllNumericSequence(Arrays.asList(0.12, 0.23, 0.34));
-        scoreCategoricalLabel =
-                Label.newBuilder()
+        scoreCategoricalPredLabel =
+                PredictionLabel.newBuilder()
                         .setScoreCategorical(ScoreCategorical.newBuilder().setScoreCategory(scb))
+                        .build();
+
+        binaryActLabel = ActualLabel.newBuilder().setBinary(false).build();
+        ScoreCategorical.ScoreCategory.Builder stringActScb = ScoreCategorical.ScoreCategory.newBuilder();
+        stringActScb.setCategory("actual");
+        categoricalActLabel = ActualLabel.newBuilder().setScoreCategorical(ScoreCategorical.newBuilder().setScoreCategory(stringActScb)).build();
+        numericActLabel = ActualLabel.newBuilder().setNumeric(20.20).build();
+
+        ScoreCategorical.ScoreCategory.Builder scbAct = ScoreCategorical.ScoreCategory.newBuilder();
+        scbAct.setCategory("pear");
+        scbAct.setScore(4.17);
+        scbAct.addAllNumericSequence(Arrays.asList(0.12, 0.23, 0.34));
+        scoreCategoricalActLabel =
+                ActualLabel.newBuilder()
+                        .setScoreCategorical(ScoreCategorical.newBuilder().setScoreCategory(scbAct))
                         .build();
 
         List<String> asList = Arrays.asList("first", "second");
@@ -91,14 +111,25 @@ public class RecordUtilTest {
     }
 
     @Test
-    public void testConvertLabel() {
-        assertEquals(binaryLabel, RecordUtil.convertLabel(true));
-        assertEquals(categoricalLabel, RecordUtil.convertLabel("value"));
-        assertEquals(numericLabel, RecordUtil.convertLabel(20.20));
+    public void testConvertPredictionLabel() {
+        assertEquals(binaryPredLabel, RecordUtil.convertPredictionLabel(true));
+        assertEquals(categoricalPredLabel, RecordUtil.convertPredictionLabel("prediction"));
+        assertEquals(numericPredLabel, RecordUtil.convertPredictionLabel(20.20));
         assertEquals(
-                scoreCategoricalLabel,
-                RecordUtil.convertLabel(
+                scoreCategoricalPredLabel,
+                RecordUtil.convertPredictionLabel(
                         new ArizeClient.ScoredCategorical("apple", 3.14, Arrays.asList(0.12, 0.23, 0.34))));
+    }
+
+    @Test
+    public void testConvertActualLabel() {
+        assertEquals(binaryActLabel, RecordUtil.convertActualLabel(false));
+        assertEquals(categoricalActLabel, RecordUtil.convertActualLabel("actual"));
+        assertEquals(numericActLabel, RecordUtil.convertActualLabel(20.20));
+        assertEquals(
+                scoreCategoricalActLabel,
+                RecordUtil.convertActualLabel(
+                        new ArizeClient.ScoredCategorical("pear", 4.17, Arrays.asList(0.12, 0.23, 0.34))));
     }
 
     @Test

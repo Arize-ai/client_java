@@ -58,76 +58,108 @@ public class RecordUtil {
         return converted;
     }
 
-    protected static <T> Label convertLabel(final T rawLabel) throws IllegalArgumentException {
-        Label.Builder label = Label.newBuilder();
-        if (rawLabel instanceof Boolean) {
-            return label.setBinary((Boolean) rawLabel).build();
-        } else if (rawLabel instanceof String) {
-            return label.setCategorical((String) rawLabel).build();
-        } else if (rawLabel instanceof Integer
-                || rawLabel instanceof Long
-                || rawLabel instanceof Short
-                || rawLabel instanceof Float
-                || rawLabel instanceof Double) {
-            return label.setNumeric(Double.parseDouble(String.valueOf(rawLabel))).build();
-        } else if (rawLabel instanceof ArizeClient.ScoredCategorical) {
-            ArizeClient.ScoredCategorical sc = (ArizeClient.ScoredCategorical) rawLabel;
-            ScoreCategorical.Builder builder = ScoreCategorical.newBuilder();
-            ScoreCategorical.ScoreCategory.Builder scb = ScoreCategorical.ScoreCategory.newBuilder();
-            scb.setScore(sc.getScore());
-            scb.setCategory(sc.getCategory());
-            if (sc.getNumericSequence() != null && sc.getNumericSequence().size() > 0) {
-                scb.addAllNumericSequence(sc.getNumericSequence());
-            }
-            builder.setScoreCategory(scb);
-            return label.setScoreCategorical(builder).build();
+    private static ScoreCategorical buildScoreCategoricalFromString(String value) {
+        ScoreCategorical.Builder scBuilder = ScoreCategorical.newBuilder();
+        ScoreCategorical.ScoreCategory.Builder categoryBuilder = ScoreCategorical.ScoreCategory.newBuilder();
+        categoryBuilder.setCategory(value);
+        scBuilder.setScoreCategory(categoryBuilder);
+        return scBuilder.build();
+    }
+
+    private static ScoreCategorical buildScoreCategoricalFromSC(ArizeClient.ScoredCategorical sc) {
+        ScoreCategorical.Builder scBuilder = ScoreCategorical.newBuilder();
+        ScoreCategorical.ScoreCategory.Builder categoryBuilder = ScoreCategorical.ScoreCategory.newBuilder();
+        categoryBuilder.setScore(sc.getScore());
+        categoryBuilder.setCategory(sc.getCategory());
+        if (sc.getNumericSequence() != null && sc.getNumericSequence().size() > 0) {
+            categoryBuilder.addAllNumericSequence(sc.getNumericSequence());
         }
-        throw new IllegalArgumentException(
-                "Illegal label "
-                        + rawLabel
-                        + ", must be oneof: boolean, String, int, long, short, float, double, ScoreCategorical");
+        scBuilder.setScoreCategory(categoryBuilder);
+        return scBuilder.build();
+    }
+
+    private static <T> Boolean isNumeric(T rawLabel) {
+        if(rawLabel instanceof Integer
+            || rawLabel instanceof Long
+            || rawLabel instanceof Short
+            || rawLabel instanceof Float
+            || rawLabel instanceof Double) {
+                return true; 
+        } else {
+            return false;
+        }
     }
 
     protected static <T> PredictionLabel convertPredictionLabel(final T rawLabel) throws IllegalArgumentException {
         PredictionLabel.Builder labelBuilder = PredictionLabel.newBuilder();
-        ArizeClient.Ranking r = (ArizeClient.Ranking) rawLabel;
-        // checking missing required prediction column: prediction group id, rank
-        if (r.getPredictionGroupId() == null) {
-            throw new IllegalArgumentException("prediction group id for ranking prediction label cannot be null");
-        }
-        if (r.getRank() == 0) {
-            throw new IllegalArgumentException("rank for ranking prediction label cannot be 0");
-        }
-        RankingPrediction.Builder builder = RankingPrediction.newBuilder();
-        if (r.getPredictionScore() != null) {
-            builder.setPredictionScore(convertToProtoDoubleValue(r.getPredictionScore()));
-        } else if (r.getScore() != null) {
-            builder.setPredictionScore(convertToProtoDoubleValue(r.getScore()));
-        }
-        if (r.getLabel() != null) {
-            builder.setLabel(r.getLabel());
-        }
-        builder.setRank(r.getRank());
-        builder.setPredictionGroupId(r.getPredictionGroupId());
-        return labelBuilder.setRanking(builder).build();
+ 
+        if (rawLabel instanceof ArizeClient.Ranking){
+            ArizeClient.Ranking r = (ArizeClient.Ranking) rawLabel;
+            // checking missing required prediction column: prediction group id, rank
+            if (r.getPredictionGroupId() == null) {
+                throw new IllegalArgumentException("prediction group id for ranking prediction label cannot be null");
+            }
+            if (r.getRank() == 0) {
+                throw new IllegalArgumentException("rank for ranking prediction label cannot be 0");
+            }
+            RankingPrediction.Builder builder = RankingPrediction.newBuilder();
+            if (r.getPredictionScore() != null) {
+                builder.setPredictionScore(convertToProtoDoubleValue(r.getPredictionScore()));
+            } else if (r.getScore() != null) {
+                builder.setPredictionScore(convertToProtoDoubleValue(r.getScore()));
+            }
+            if (r.getLabel() != null) {
+                builder.setLabel(r.getLabel());
+            }
+            builder.setRank(r.getRank());
+            builder.setPredictionGroupId(r.getPredictionGroupId());
+            return labelBuilder.setRanking(builder).build();
+        } else if (rawLabel instanceof Boolean) {
+            return labelBuilder.setBinary((Boolean) rawLabel).build();
+        } else if (rawLabel instanceof String) {
+            return labelBuilder.setScoreCategorical(buildScoreCategoricalFromString((String) rawLabel)).build();
+        } else if (rawLabel instanceof ArizeClient.ScoredCategorical) {
+            return labelBuilder.setScoreCategorical(buildScoreCategoricalFromSC((ArizeClient.ScoredCategorical) rawLabel)).build();         
+        } else if (isNumeric(rawLabel)) {
+            return labelBuilder.setNumeric(Double.parseDouble(String.valueOf(rawLabel))).build();
+        } 
+        throw new IllegalArgumentException(
+            "Illegal prediction label "
+                    + rawLabel
+                    + ", must be oneof: boolean, String, int, long, short, float, double, ScoredCategorical, Ranking");
     }
 
     protected static <T> ActualLabel convertActualLabel(final T rawLabel) throws IllegalArgumentException {
         ActualLabel.Builder labelBuilder = ActualLabel.newBuilder();
-        ArizeClient.Ranking r = (ArizeClient.Ranking) rawLabel;
-        if (r.getActualLabels() == null && r.getScore() == null && r.getRelevanceScoreScore() == null) {
-            throw new IllegalArgumentException("one of attributions or relevanceScore is needed for ranking actual label");
-        }
-        RankingActual.Builder builder = RankingActual.newBuilder();
-        if (r.getRelevanceScoreScore() != null) {
-            builder.setRelevanceScore(convertToProtoDoubleValue(r.getRelevanceScoreScore()));
-        } else if (r.getScore() != null) {
-            builder.setRelevanceScore(convertToProtoDoubleValue(r.getScore()));
-        }
-        if (r.getActualLabels() != null) {
-            builder.setCategory(r.getActualLabels());
-        }
-        return labelBuilder.setRanking(builder).build();
+        
+        if (rawLabel instanceof ArizeClient.Ranking) {
+            ArizeClient.Ranking r = (ArizeClient.Ranking) rawLabel;
+            if (r.getActualLabels() == null && r.getScore() == null && r.getRelevanceScoreScore() == null) {
+                throw new IllegalArgumentException("one of attributions or relevanceScore is needed for ranking actual label");
+            }
+            RankingActual.Builder builder = RankingActual.newBuilder();
+            if (r.getRelevanceScoreScore() != null) {
+                builder.setRelevanceScore(convertToProtoDoubleValue(r.getRelevanceScoreScore()));
+            } else if (r.getScore() != null) {
+                builder.setRelevanceScore(convertToProtoDoubleValue(r.getScore()));
+            }
+            if (r.getActualLabels() != null) {
+                builder.setCategory(r.getActualLabels());
+            }
+            return labelBuilder.setRanking(builder).build();
+        } else if (rawLabel instanceof Boolean) {
+            return labelBuilder.setBinary((Boolean) rawLabel).build();
+        } else if (rawLabel instanceof String) {
+            return labelBuilder.setScoreCategorical(buildScoreCategoricalFromString((String) rawLabel)).build();
+        } else if (rawLabel instanceof ArizeClient.ScoredCategorical) {
+            return labelBuilder.setScoreCategorical(buildScoreCategoricalFromSC((ArizeClient.ScoredCategorical) rawLabel)).build();         
+        } else if (isNumeric(rawLabel)) {
+            return labelBuilder.setNumeric(Double.parseDouble(String.valueOf(rawLabel))).build();
+        } 
+        throw new IllegalArgumentException(
+            "Illegal actual label "
+                    + rawLabel
+                    + ", must be oneof: boolean, String, int, long, short, float, double, ScoredCategorical, Ranking");
     }
 
     protected static <T> void validatePredictionActualMatches(

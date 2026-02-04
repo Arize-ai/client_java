@@ -69,11 +69,7 @@ public class SendBulkRankingData {
                 );
         final List<Map<String, ?>> tags = new ArrayList<>();
         for (ArizeClient.Ranking predictionLabel : predictionLabels) {
-            tags.add(new HashMap<String, Object>() {
-                {
-                    put("Rank", predictionLabel.getRank());
-                }
-            });
+            tags.add(Map.of("Rank", predictionLabel.getRank()));
         }
 
         final Response asyncResponse =

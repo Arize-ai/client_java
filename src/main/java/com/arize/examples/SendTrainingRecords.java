@@ -5,7 +5,10 @@ import com.arize.Response;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class SendTrainingRecords {
@@ -17,27 +20,9 @@ public class SendTrainingRecords {
         new ArizeClient(System.getenv("ARIZE_API_KEY"), System.getenv("ARIZE_SPACE_KEY"));
 
     final List<Map<String, ?>> features = new ArrayList<Map<String, ?>>();
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 5);
-            put("is_organic", 1);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 3);
-            put("is_organic", 0);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 7);
-            put("is_organic", 0);
-          }
-        });
+    features.add(Map.of("days", 5, "is_organic", 1));
+    features.add(Map.of("days", 3, "is_organic", 0));
+    features.add(Map.of("days", 7, "is_organic", 0));
 
     final List<String> predictionLabels = new ArrayList<>(Arrays.asList("pear", "banana", "apple"));
     final List<String> actualLabels = new ArrayList<>(Arrays.asList("pear", "strawberry", "apple"));

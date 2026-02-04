@@ -7,11 +7,13 @@
 [![openjdk](https://img.shields.io/badge/opendjk-%3E=1.8-green)](https://openjdk.java.net)
 [![Slack](https://img.shields.io/badge/slack-@arize-yellow.svg?logo=slack)](https://join.slack.com/t/arize-ai/shared_invite/zt-g9c1j1xs-aQEwOAkU4T2x5K8cqI1Xqg)
 [![license](https://img.shields.io/github/license/arize-ai/client_java)](https://github.com/Arize-ai/client_java/blob/main/LICENSE)
-----
+
 ## Overview
+
 A helper library to interact with Arize AI APIs.
 
 Arize is an end-to-end ML observability and model monitoring platform. The platform is designed to help ML engineers and data science practitioners surface and fix issues with ML models in production faster with:
+
 - Automated ML monitoring and model monitoring
 - Workflows to troubleshoot model performance
 - Real-time visualizations for model performance monitoring, data quality monitoring, and drift monitoring
@@ -19,37 +21,39 @@ Arize is an end-to-end ML observability and model monitoring platform. The platf
 - Pre-deployment model validation
 - Integrated model explainability
 
----
 ## Quickstart
+
 This guide will help you instrument your code to log observability data for model monitoring and ML observability. The types of data supported include prediction labels, human readable/debuggable model features and tags, actual labels (once the ground truth is learned), and other model-related data. Logging model data allows you to generate powerful visualizations in the Arize platform to better monitor model performance, understand issues that arise, and debug your model's behavior. Additionally, Arize provides data quality monitoring, data drift detection, and performance management of your production models.
 
 Start logging your model data with the following steps:
 
 ### 1. Sign up for your account
-Sign up for a free account at https://arize.com/join.
+
+Sign up for a free account at https://app.arize.com/auth/join.
 
 <div align="center">
   <img src="https://storage.googleapis.com/arize-assets/Arize%20UI%20platform.jpg" /><br><br>
 </div>
 
-### 2. Get your service API key
-When you create an account, we generate a service API key. You will need this API Key and your Space Key for logging authentication.
+### 2. Get your API key and Space ID
 
-<div align="center">
-  <img src="https://storage.googleapis.com/arize-assets/fixtures/copy-keys.png" /><br><br>
-</div>
+After you create your account, you can create either a [User API key](https://arize.com/docs/ax/security-and-settings/api-keys) or [Service API key](https://arize.com/docs/ax/security-and-settings/service-keys).
+You'll need this API key, in addition to the Space ID. You can find the Space ID under
+Settings > API Keys.
 
-### 3. Instrument your code
+### 3. Add the Arize package to your project
+
 If you are using the Arize Java client, add a few lines to your code to log predictions and actuals. Logs are sent to Arize asynchronously.
 
 ### Importing Library
 
 #### Maven Project
+
 ```
 <dependency>
   <groupId>com.arize</groupId>
   <artifactId>arize-api-client</artifactId>
-  <version>2.0.1</version>
+  <version>YOUR_DESIRED_VERSION</version>
 </dependency>
 ```
 
@@ -57,14 +61,14 @@ If you are using the Arize Java client, add a few lines to your code to log pred
 ```
 maven_jar(
     name = "arize-api-client",
-    artifact = "com.arize:arize-api-client:2.0.1",
-    sha1 = "2df6860c04899d9c1f508043388b5351ae2ee61c",
+    artifact = "com.arize:arize-api-client:YOUR_DESIRED_VERSION",
+    sha1 = "CORRESPONDING_SHA1_HASH",
 )
 ```
 
 ### Initialize Java Client
 
-Initialize `arize` at the start of your service using your previously created API Key and Space Key.
+Initialize `arize` at the start of your service using your previously created API Key and Space ID.
 
 > **_NOTE:_** We strongly suggest storing the API key as a secret.
 
@@ -73,7 +77,7 @@ import com.arize.ArizeClient;
 import com.arize.Response;
 import com.arize.types.Embedding;
 
-ArizeClient arize = new ArizeClient("ARIZE_API_KEY", "ARIZE_SPACE_KEY");
+ArizeClient arizeClient = new ArizeClient.ClientBuilder().apiKey("API_KEY").spaceId("SPACE_ID").build();
 ```
 
 ### Collect your model input features and labels you'd like to track
@@ -135,7 +139,7 @@ import com.arize.Response;
 import com.arize.types.Embedding;
 
 // You only need to instantiate the client once
-ArizeClient arize = new ArizeClient("ARIZE_API_KEY", "ARIZE_SPACE_KEY");
+ArizeClient arizeClient = new ArizeClient.ClientBuilder().apiKey("API_KEY").spaceId("SPACE_ID").build();
 
 final List<Map<String, ?>> features = new ArrayList<Map<String, ?>>();
 features.add(new HashMap<String, Object>() {{ put("days", 5); put("is_organic", 1);}});
@@ -196,7 +200,7 @@ arize.close();
 System.out.println("Done");
 ```
 
-### 3. Log In for Analytics
+### 4. Log In for Analytics
 That's it! Once your service is deployed and predictions are logged you'll be able to log into your Arize account and dive into your data, slicing it by features, tags, models, time, etc.
 
 #### Analytics Dashboard

@@ -6,7 +6,11 @@ import com.arize.types.Embedding;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 public class SendBulkPrediction {
@@ -18,126 +22,57 @@ public class SendBulkPrediction {
         new ArizeClient(System.getenv("ARIZE_API_KEY"), System.getenv("ARIZE_SPACE_KEY"));
 
     final List<Map<String, ?>> features = new ArrayList<>();
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 5);
-            put("is_organic", 1);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 3);
-            put("is_organic", 0);
-          }
-        });
-    features.add(
-        new HashMap<String, Object>() {
-          {
-            put("days", 7);
-            put("is_organic", 0);
-          }
-        });
+    features.add(Map.of("days", 5, "is_organic", 1));
+    features.add(Map.of("days", 3, "is_organic", 0));
+    features.add(Map.of("days", 7, "is_organic", 0));
 
     final List<Map<String, ?>> tags = new ArrayList<>();
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("region", 5);
-            put("age", 1);
-          }
-        });
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("region", 3);
-            put("age", 0);
-          }
-        });
-    tags.add(
-        new HashMap<String, Object>() {
-          {
-            put("region", 7);
-            put("age", 0);
-          }
-        });
+    tags.add(Map.of("region", 5, "age", 1));
+    tags.add(Map.of("region", 3, "age", 0));
+    tags.add(Map.of("region", 7, "age", 0));
 
     final List<Map<String, Double>> shapValues = new ArrayList<>();
-    shapValues.add(
-        new HashMap<String, Double>() {
-          {
-            put("days", 1.0);
-            put("is_organic", -1.5);
-          }
-        });
-    shapValues.add(
-        new HashMap<String, Double>() {
-          {
-            put("days", 1.0);
-            put("is_organic", -1.1);
-          }
-        });
-    shapValues.add(
-        new HashMap<String, Double>() {
-          {
-            put("days", 1.0);
-            put("is_organic", -1.1);
-          }
-        });
+    shapValues.add(Map.of("days", 1.0, "is_organic", -1.5));
+    shapValues.add(Map.of("days", 1.0, "is_organic", -1.1));
+    shapValues.add(Map.of("days", 1.0, "is_organic", -1.1));
 
     final List<Map<String, Embedding>> embeddingFeatures = new ArrayList<Map<String, Embedding>>();
     embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            put(
-                "embedding_feature_1",
-                new Embedding(
-                    Arrays.asList(1.0, 0.5),
-                    Arrays.asList("test", "token", "array"),
-                    "https://example.com/image.jpg"));
-            put(
-                "embedding_feature_2",
-                new Embedding(
-                    Arrays.asList(1.0, 0.8),
-                    Arrays.asList("this", "is"),
-                    "https://example.com/image_3.jpg"));
-          }
-        });
+        Map.of(
+            "embedding_feature_1",
+            new Embedding(
+                Arrays.asList(1.0, 0.5),
+                Arrays.asList("test", "token", "array"),
+                "https://example.com/image.jpg"),
+            "embedding_feature_2",
+            new Embedding(
+                Arrays.asList(1.0, 0.8),
+                Arrays.asList("this", "is"),
+                "https://example.com/image_3.jpg")));
     embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            put(
-                "embedding_feature_1",
-                new Embedding(
-                    Arrays.asList(0.0, 0.6),
-                    Arrays.asList("another", "example"),
-                    "https://example.com/image_2.jpg"));
-            put(
-                "embedding_feature_2",
-                new Embedding(
-                    Arrays.asList(0.1, 1.0),
-                    Arrays.asList("an", "example"),
-                    "https://example.com/image_4.jpg"));
-          }
-        });
+      Map.of(
+          "embedding_feature_1",
+          new Embedding(
+              Arrays.asList(0.0, 0.6),
+              Arrays.asList("another", "example"),
+              "https://example.com/image_2.jpg"),
+          "embedding_feature_2",
+          new Embedding(
+              Arrays.asList(0.1, 1.0),
+              Arrays.asList("an", "example"),
+              "https://example.com/image_4.jpg")));
     embeddingFeatures.add(
-        new HashMap<String, Embedding>() {
-          {
-            put(
-                "embedding_feature_1",
-                new Embedding(
-                    Arrays.asList(1.0, 0.8),
-                    Arrays.asList("third"),
-                    "https://example.com/image_3.jpg"));
-            put(
-                "embedding_feature_2",
-                new Embedding(
-                    Arrays.asList(1.0, 0.4),
-                    Arrays.asList("token", "array"),
-                    "https://example.com/image_5.jpg"));
-          }
-        });
+      Map.of(
+          "embedding_feature_1",
+          new Embedding(
+              Arrays.asList(1.0, 0.8),
+              Arrays.asList("third"),
+              "https://example.com/image_3.jpg"),
+          "embedding_feature_2",
+          new Embedding(
+              Arrays.asList(1.0, 0.4),
+              Arrays.asList("token", "array"),
+              "https://example.com/image_5.jpg")));
 
     final List<String> labels = new ArrayList<>(Arrays.asList("pear", "banana", "apple"));
     final List<String> predictionIds =
