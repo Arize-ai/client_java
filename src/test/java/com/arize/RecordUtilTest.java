@@ -30,12 +30,20 @@ public class RecordUtilTest {
 
     @Before
     public void setup() {
-        binaryPredLabel = PredictionLabel.newBuilder().setBinary(true).build();
-        ScoreCategorical.ScoreCategory.Builder stringScb = ScoreCategorical.ScoreCategory.newBuilder();
+        // Boolean pred labels
+        ScoreCategorical.Category.Builder binaryScb = ScoreCategorical.Category.newBuilder();
+        binaryScb.setCategory("true");
+        binaryPredLabel = PredictionLabel.newBuilder().setScoreCategorical(ScoreCategorical.newBuilder().setCategory(binaryScb)).build();
+
+        // String pred labels
+        ScoreCategorical.Category.Builder stringScb = ScoreCategorical.Category.newBuilder();
         stringScb.setCategory("prediction");
-        categoricalPredLabel = PredictionLabel.newBuilder().setScoreCategorical(ScoreCategorical.newBuilder().setScoreCategory(stringScb)).build();
+        categoricalPredLabel = PredictionLabel.newBuilder().setScoreCategorical(ScoreCategorical.newBuilder().setCategory(stringScb)).build();
+
+        // Numeric pred labels
         numericPredLabel = PredictionLabel.newBuilder().setNumeric(20.20).build();
 
+        // ScoreCategorical pred labels
         ScoreCategorical.ScoreCategory.Builder scb = ScoreCategorical.ScoreCategory.newBuilder();
         scb.setCategory("apple");
         scb.setScore(3.14);
@@ -45,12 +53,20 @@ public class RecordUtilTest {
                         .setScoreCategorical(ScoreCategorical.newBuilder().setScoreCategory(scb))
                         .build();
 
-        binaryActLabel = ActualLabel.newBuilder().setBinary(false).build();
-        ScoreCategorical.ScoreCategory.Builder stringActScb = ScoreCategorical.ScoreCategory.newBuilder();
+        // Boolean actual labels
+        ScoreCategorical.Category.Builder binaryAct = ScoreCategorical.Category.newBuilder();
+        binaryAct.setCategory("false");
+        binaryActLabel = ActualLabel.newBuilder().setScoreCategorical(ScoreCategorical.newBuilder().setCategory(binaryAct)).build();
+
+        // String actual labels
+        ScoreCategorical.Category.Builder stringActScb = ScoreCategorical.Category.newBuilder();
         stringActScb.setCategory("actual");
-        categoricalActLabel = ActualLabel.newBuilder().setScoreCategorical(ScoreCategorical.newBuilder().setScoreCategory(stringActScb)).build();
+        categoricalActLabel = ActualLabel.newBuilder().setScoreCategorical(ScoreCategorical.newBuilder().setCategory(stringActScb)).build();
+
+        // Numeric actual labels
         numericActLabel = ActualLabel.newBuilder().setNumeric(20.20).build();
 
+        // ScoreCategorical actual labels
         ScoreCategorical.ScoreCategory.Builder scbAct = ScoreCategorical.ScoreCategory.newBuilder();
         scbAct.setCategory("pear");
         scbAct.setScore(4.17);

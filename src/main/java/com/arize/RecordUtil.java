@@ -60,9 +60,9 @@ public class RecordUtil {
 
     private static ScoreCategorical buildScoreCategoricalFromString(String value) {
         ScoreCategorical.Builder scBuilder = ScoreCategorical.newBuilder();
-        ScoreCategorical.ScoreCategory.Builder categoryBuilder = ScoreCategorical.ScoreCategory.newBuilder();
+        ScoreCategorical.Category.Builder categoryBuilder = ScoreCategorical.Category.newBuilder();
         categoryBuilder.setCategory(value);
-        scBuilder.setScoreCategory(categoryBuilder);
+        scBuilder.setCategory(categoryBuilder);
         return scBuilder.build();
     }
 
@@ -84,7 +84,7 @@ public class RecordUtil {
             || rawLabel instanceof Short
             || rawLabel instanceof Float
             || rawLabel instanceof Double) {
-                return true; 
+                return true;
         } else {
             return false;
         }
@@ -92,7 +92,7 @@ public class RecordUtil {
 
     protected static <T> PredictionLabel convertPredictionLabel(final T rawLabel) throws IllegalArgumentException {
         PredictionLabel.Builder labelBuilder = PredictionLabel.newBuilder();
- 
+
         if (rawLabel instanceof ArizeClient.Ranking){
             ArizeClient.Ranking r = (ArizeClient.Ranking) rawLabel;
             // checking missing required prediction column: prediction group id, rank
@@ -115,14 +115,14 @@ public class RecordUtil {
             builder.setPredictionGroupId(r.getPredictionGroupId());
             return labelBuilder.setRanking(builder).build();
         } else if (rawLabel instanceof Boolean) {
-            return labelBuilder.setBinary((Boolean) rawLabel).build();
+            return labelBuilder.setScoreCategorical(buildScoreCategoricalFromString(((Boolean) rawLabel).toString())).build();
         } else if (rawLabel instanceof String) {
             return labelBuilder.setScoreCategorical(buildScoreCategoricalFromString((String) rawLabel)).build();
         } else if (rawLabel instanceof ArizeClient.ScoredCategorical) {
-            return labelBuilder.setScoreCategorical(buildScoreCategoricalFromSC((ArizeClient.ScoredCategorical) rawLabel)).build();         
+            return labelBuilder.setScoreCategorical(buildScoreCategoricalFromSC((ArizeClient.ScoredCategorical) rawLabel)).build();
         } else if (isNumeric(rawLabel)) {
             return labelBuilder.setNumeric(Double.parseDouble(String.valueOf(rawLabel))).build();
-        } 
+        }
         throw new IllegalArgumentException(
             "Illegal prediction label "
                     + rawLabel
@@ -131,7 +131,7 @@ public class RecordUtil {
 
     protected static <T> ActualLabel convertActualLabel(final T rawLabel) throws IllegalArgumentException {
         ActualLabel.Builder labelBuilder = ActualLabel.newBuilder();
-        
+
         if (rawLabel instanceof ArizeClient.Ranking) {
             ArizeClient.Ranking r = (ArizeClient.Ranking) rawLabel;
             if (r.getActualLabels() == null && r.getScore() == null && r.getRelevanceScoreScore() == null) {
@@ -148,14 +148,14 @@ public class RecordUtil {
             }
             return labelBuilder.setRanking(builder).build();
         } else if (rawLabel instanceof Boolean) {
-            return labelBuilder.setBinary((Boolean) rawLabel).build();
+            return labelBuilder.setScoreCategorical(buildScoreCategoricalFromString(((Boolean) rawLabel).toString())).build();
         } else if (rawLabel instanceof String) {
             return labelBuilder.setScoreCategorical(buildScoreCategoricalFromString((String) rawLabel)).build();
         } else if (rawLabel instanceof ArizeClient.ScoredCategorical) {
-            return labelBuilder.setScoreCategorical(buildScoreCategoricalFromSC((ArizeClient.ScoredCategorical) rawLabel)).build();         
+            return labelBuilder.setScoreCategorical(buildScoreCategoricalFromSC((ArizeClient.ScoredCategorical) rawLabel)).build();
         } else if (isNumeric(rawLabel)) {
             return labelBuilder.setNumeric(Double.parseDouble(String.valueOf(rawLabel))).build();
-        } 
+        }
         throw new IllegalArgumentException(
             "Illegal actual label "
                     + rawLabel

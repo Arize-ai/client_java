@@ -583,8 +583,16 @@ public class ArizeClientTest {
     embeddingFeatures.add(Map.copyOf(embFeatures));
     embeddingFeatures.add(Map.copyOf(embFeatures));
     embeddingFeatures.add(Map.copyOf(embFeatures));
-    List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
-    List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
+    List<ScoredCategorical> predictionLabels = Arrays.asList(
+            new ScoredCategorical("ripe", 1.0),
+            new ScoredCategorical("not-ripe", 2.0),
+            new ScoredCategorical("not-ripe", 3.0)
+    );
+    List<ScoredCategorical> actualLabels = Arrays.asList(
+            new ScoredCategorical("not-ripe", 1.0),
+            new ScoredCategorical("not-ripe", 2.0),
+            new ScoredCategorical("not-ripe", 3.0)
+    );
     List<Map<String, Double>> shapValues = new ArrayList<>();
     shapValues.add(Map.of("days", 2.0, "is_organic", -1.2));
     shapValues.add(Map.of("days", 2.2, "is_organic", -1.2));
@@ -689,13 +697,27 @@ public class ArizeClientTest {
 
       // compare input prediction labels to posted Public.Record
       Assert.assertEquals(
-          predictionLabels.get(i),
+          predictionLabels.get(i).getCategory(),
           rec.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
+
+      // compare input prediction scores to posted Public.Record
+      Assert.assertEquals(
+          predictionLabels.get(i).getScore(),
+          rec.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getScore(),
+          0.0
+      );
 
       // compare input actual labels to posted Public.Record
       Assert.assertEquals(
-          actualLabels.get(i),
+          actualLabels.get(i).getCategory(),
           rec.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
+
+      // compare input actual scores to posted Public.Record
+      Assert.assertEquals(
+          actualLabels.get(i).getScore(),
+          rec.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getScore(),
+          0.0
+      );
 
       // compare input shap values to posted Public.Record
       Map<String, Double> s = shapValues.get(i);
@@ -837,12 +859,12 @@ public class ArizeClientTest {
       // compare input prediction labels to posted Public.Record
       Assert.assertEquals(
           predictionLabels.get(i),
-          record.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
+          record.getPrediction().getPredictionLabel().getScoreCategorical().getCategory().getCategory());
 
       // compare input actual labels to posted Public.Record
       Assert.assertEquals(
           actualLabels.get(i),
-          record.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
+          record.getActual().getActualLabel().getScoreCategorical().getCategory().getCategory());
     }
   }
 
@@ -971,12 +993,12 @@ public class ArizeClientTest {
       // compare input prediction labels to posted Public.Record
       Assert.assertEquals(
           predictionLabels.get(i),
-          record.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
+          record.getPrediction().getPredictionLabel().getScoreCategorical().getCategory().getCategory());
 
       // compare input actual labels to posted Public.Record
       Assert.assertEquals(
           actualLabels.get(i),
-          record.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
+          record.getActual().getActualLabel().getScoreCategorical().getCategory().getCategory());
     }
   }
 
@@ -1309,8 +1331,16 @@ public class ArizeClientTest {
     embeddingFeatures.add(Map.copyOf(embFeatures));
     embeddingFeatures.add(Map.copyOf(embFeatures));
     embeddingFeatures.add(Map.copyOf(embFeatures));
-    List<String> predictionLabels = Arrays.asList("ripe", "not-ripe", "not-ripe");
-    List<String> actualLabels = Arrays.asList("not-ripe", "not-ripe", "not-ripe");
+    List<ScoredCategorical> predictionLabels = Arrays.asList(
+            new ScoredCategorical("ripe", 1.0),
+            new ScoredCategorical("not-ripe", 2.0),
+            new ScoredCategorical("not-ripe", 3.0)
+    );
+    List<ScoredCategorical> actualLabels = Arrays.asList(
+            new ScoredCategorical("not-ripe", 1.0),
+            new ScoredCategorical("not-ripe", 2.0),
+            new ScoredCategorical("not-ripe", 3.0)
+    );
     List<Map<String, Double>> shapValues = new ArrayList<>();
     shapValues.add(Map.of("days", 2.0, "is_organic", -1.2));
     shapValues.add(Map.of("days", 2.2, "is_organic", -1.2));
@@ -1419,13 +1449,27 @@ public class ArizeClientTest {
 
       // compare input prediction labels to posted Public.Record
       Assert.assertEquals(
-          predictionLabels.get(i),
+          predictionLabels.get(i).getCategory(),
           rec.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
+
+      // compare input prediction scores to posted Public.Record
+      Assert.assertEquals(
+          predictionLabels.get(i).getScore(),
+          rec.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getScore(),
+          0.0
+      );
 
       // compare input actual labels to posted Public.Record
       Assert.assertEquals(
-          actualLabels.get(i),
+          actualLabels.get(i).getCategory(),
           rec.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
+
+      // compare input actual scores to posted Public.Record
+      Assert.assertEquals(
+          actualLabels.get(i).getScore(),
+          rec.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getScore(),
+          0.0
+      );
 
       // compare input shap values to posted Public.Record
       Map<String, Double> s = shapValues.get(i);
@@ -1569,12 +1613,12 @@ public class ArizeClientTest {
       // compare input prediction labels to posted Public.Record
       Assert.assertEquals(
           predictionLabels.get(i),
-          record.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
+          record.getPrediction().getPredictionLabel().getScoreCategorical().getCategory().getCategory());
 
       // compare input actual labels to posted Public.Record
       Assert.assertEquals(
           actualLabels.get(i),
-          record.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
+          record.getActual().getActualLabel().getScoreCategorical().getCategory().getCategory());
     }
 
   }
@@ -1705,12 +1749,12 @@ public class ArizeClientTest {
       // compare input prediction labels to posted Public.Record
       Assert.assertEquals(
           predictionLabels.get(i),
-          record.getPrediction().getPredictionLabel().getScoreCategorical().getScoreCategory().getCategory());
+          record.getPrediction().getPredictionLabel().getScoreCategorical().getCategory().getCategory());
 
       // compare input actual labels to posted Public.Record
       Assert.assertEquals(
           actualLabels.get(i),
-          record.getActual().getActualLabel().getScoreCategorical().getScoreCategory().getCategory());
+          record.getActual().getActualLabel().getScoreCategorical().getCategory().getCategory());
       }
   }
 
