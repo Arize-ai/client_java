@@ -33,6 +33,14 @@ java_binary(
 )
 
 java_binary(
+    name = "SendBulkPredictionWithSurrogate",
+    srcs = ["SendBulkPredictionWithSurrogate.java"],
+    deps = [
+        "//sdk/java/api-client:java_api_lib",
+    ],
+)
+
+java_binary(
     name = "SendTrainingRecords",
     srcs = ["SendTrainingRecords.java"],
     deps = [

@@ -210,7 +210,7 @@ That's it! Once your service is deployed and predictions are logged you'll be ab
 
 ---
 ### Arize Documentation
-For further SDK documentation and product user guides, check out our [SDK documentation](https://docs.arize.com/arize/data-ingestion/api-reference/java-sdk).
+For further SDK documentation and product user guides, check out our [SDK documentation](https://arize.com/docs/ax/machine-learning/machine-learning/api-reference-ml/java-sdk).
 
 ---
 ### Website

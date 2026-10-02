@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.0](https://github.com/Arize-ai/arize/compare/arize-java-sdk/v2.2.6...arize-java-sdk/v2.3.0) (2026-10-02)
+
+
+### 🎁 New Features
+
+* **java:** add surrogate SHAP explainability to Java SDK ([#89287](https://github.com/Arize-ai/arize/issues/89287)) ([59a49f6](https://github.com/Arize-ai/arize/commit/59a49f615fef42a80cb01190e59fc05ea41a7683))
+
+
+### 📚 Documentation
+
+* update Java SDK README documentation link ([#74605](https://github.com/Arize-ai/arize/issues/74605)) ([d144451](https://github.com/Arize-ai/arize/commit/d144451b925b1d96bac51b0339fe1a3f97a03447))
+
 ## [2.2.6](https://github.com/Arize-ai/arize/compare/arize-java-sdk/v2.2.5...arize-java-sdk/v2.2.6) (2026-02-12)
 
 ### 🐛 Bug Fixes
