@@ -1,6 +1,7 @@
 package com.arize;
 
 import com.arize.ArizeClient.ScoredCategorical;
+import com.arize.ArizeClient.MultiClass;
 import com.arize.ArizeClient.Ranking;
 import com.arize.protocol.Public;
 import com.arize.protocol.Public.Record;
@@ -1173,6 +1174,214 @@ public class ArizeClientTest {
     Assert.assertEquals("modelId", rec.getModelId());
     Assert.assertEquals("predictionId", rec.getPredictionId());
   }
+
+  @Test
+  public void testLogMultiClassSingleLabelModel()
+      throws IOException, ExecutionException, InterruptedException {
+    MultiClass prediction =
+        MultiClass.MultiClassBuilder.newBuilder()
+            .setPredictionScores(Map.of("economy", 0.81, "business", 0.42, "first", 0.35))
+            .build();
+    MultiClass actual =
+        MultiClass.MultiClassBuilder.newBuilder()
+            .setActualScores(Map.of("economy", 0, "business", 0, "first", 1))
+            .build();
+    Response response =
+        client.log(
+            "modelId",
+            "modelVersion",
+            "predictionId",
+            stringFeatures,
+            null,
+            null,
+            prediction,
+            actual,
+            null,
+            0);
+    try {
+      response.resolve(10, TimeUnit.SECONDS);
+    } catch (TimeoutException e) {
+      Assert.fail("timeout waiting for server");
+    }
+    Public.Record rec = posts.get(0);
+    Public.MultiClassPrediction.SingleLabel singleLabel =
+        rec.getPrediction().getPredictionLabel().getMultiClass().getSingleLabel();
+    Assert.assertEquals(3, singleLabel.getPredictionScoresCount());
+    Assert.assertEquals(0.81, singleLabel.getPredictionScoresOrThrow("economy").getValue(), 0.0);
+    Assert.assertEquals(0.42, singleLabel.getPredictionScoresOrThrow("business").getValue(), 0.0);
+    Assert.assertEquals(0.35, singleLabel.getPredictionScoresOrThrow("first").getValue(), 0.0);
+    Assert.assertEquals(
+        List.of("first"), rec.getActual().getActualLabel().getMultiClass().getActualLabelsList());
+  }
+
+  @Test
+  public void testLogMultiClassDelayedActual()
+      throws IOException, ExecutionException, InterruptedException {
+    MultiClass actual =
+        MultiClass.MultiClassBuilder.newBuilder()
+            .setActualScores(Map.of("economy", 0, "business", 1))
+            .build();
+    Response response =
+        client.log("modelId", null, "predictionId", null, null, null, null, actual, null, 0);
+    try {
+      response.resolve(10, TimeUnit.SECONDS);
+    } catch (TimeoutException e) {
+      Assert.fail("timeout waiting for server");
+    }
+    Public.Record rec = posts.get(0);
+    Assert.assertFalse(rec.hasPrediction());
+    Assert.assertEquals(
+        List.of("business"), rec.getActual().getActualLabel().getMultiClass().getActualLabelsList());
+  }
+
+  @Test
+  public void testLogMultiClassMultiLabelModel()
+      throws IOException, ExecutionException, InterruptedException {
+    MultiClass prediction =
+        MultiClass.MultiClassBuilder.newBuilder()
+            .setPredictionScores(Map.of("action", 0.9, "comedy", 0.6))
+            .setThresholdScores(Map.of("action", 0.5, "comedy", 0.7))
+            .build();
+    MultiClass actual =
+        MultiClass.MultiClassBuilder.newBuilder()
+            .setActualScores(Map.of("action", 1, "comedy", 0))
+            .build();
+    Response response =
+        client.log(
+            "modelId",
+            "modelVersion",
+            "predictionId",
+            stringFeatures,
+            null,
+            null,
+            prediction,
+            actual,
+            null,
+            0);
+    try {
+      response.resolve(10, TimeUnit.SECONDS);
+    } catch (TimeoutException e) {
+      Assert.fail("timeout waiting for server");
+    }
+    Public.Record rec = posts.get(0);
+    Public.MultiClassPrediction multiClass = rec.getPrediction().getPredictionLabel().getMultiClass();
+    Assert.assertTrue(multiClass.hasMultiLabel());
+    Public.MultiClassPrediction.MultiLabel multiLabel = multiClass.getMultiLabel();
+    Assert.assertEquals(2, multiLabel.getPredictionThresholdScoresCount());
+    Public.MultiClassPrediction.MultiLabel.MultiLabelScores action =
+        multiLabel.getPredictionThresholdScoresOrThrow("action");
+    Assert.assertEquals(0.9, action.getPredictionScore().getValue(), 0.0);
+    Assert.assertEquals(0.5, action.getThresholdScore().getValue(), 0.0);
+    Public.MultiClassPrediction.MultiLabel.MultiLabelScores comedy =
+        multiLabel.getPredictionThresholdScoresOrThrow("comedy");
+    Assert.assertEquals(0.6, comedy.getPredictionScore().getValue(), 0.0);
+    Assert.assertEquals(0.7, comedy.getThresholdScore().getValue(), 0.0);
+    Assert.assertEquals(
+        List.of("action"), rec.getActual().getActualLabel().getMultiClass().getActualLabelsList());
+  }
+
+  @Test
+  public void testBulkLogMultiClassMultiLabelModel()
+      throws IOException, ExecutionException, InterruptedException {
+    List<String> predictionIds = Arrays.asList("one", "two");
+    List<MultiClass> predictions =
+        Arrays.asList(
+            MultiClass.MultiClassBuilder.newBuilder()
+                .setPredictionScores(Map.of("action", 0.9, "comedy", 0.6))
+                .setThresholdScores(Map.of("action", 0.5, "comedy", 0.7))
+                .build(),
+            MultiClass.MultiClassBuilder.newBuilder()
+                .setPredictionScores(Map.of("action", 0.1, "comedy", 0.8))
+                .setThresholdScores(Map.of("action", 0.5, "comedy", 0.7))
+                .build());
+    List<MultiClass> actuals =
+        Arrays.asList(
+            MultiClass.MultiClassBuilder.newBuilder()
+                .setActualScores(Map.of("action", 1, "comedy", 1))
+                .build(),
+            MultiClass.MultiClassBuilder.newBuilder()
+                .setActualScores(Map.of("action", 0, "comedy", 1))
+                .build());
+    Response response =
+        client.bulkLog(
+            "modelId", "modelVersion", predictionIds, null, null, null, predictions, actuals, null, null);
+    try {
+      response.resolve(10, TimeUnit.SECONDS);
+    } catch (TimeoutException e) {
+      Assert.fail("timeout waiting for server");
+    }
+    List<Record> records = bulkPosts.get(0).getRecordsList();
+    Assert.assertEquals(2, records.size());
+
+    Public.MultiClassPrediction.MultiLabel multiLabel =
+        records.get(0).getPrediction().getPredictionLabel().getMultiClass().getMultiLabel();
+    Assert.assertEquals(2, multiLabel.getPredictionThresholdScoresCount());
+    Public.MultiClassPrediction.MultiLabel.MultiLabelScores comedy =
+        multiLabel.getPredictionThresholdScoresOrThrow("comedy");
+    Assert.assertEquals(0.6, comedy.getPredictionScore().getValue(), 0.0);
+    Assert.assertEquals(0.7, comedy.getThresholdScore().getValue(), 0.0);
+    Assert.assertEquals(
+        2, records.get(0).getActual().getActualLabel().getMultiClass().getActualLabelsCount());
+    Assert.assertEquals(
+        List.of("comedy"),
+        records.get(1).getActual().getActualLabel().getMultiClass().getActualLabelsList());
+  }
+
+  @Test
+  public void testLogTrainingRecordsMultiClass() throws IOException, ExecutionException, InterruptedException {
+    List<MultiClass> predictions =
+        List.of(
+            MultiClass.MultiClassBuilder.newBuilder()
+                .setPredictionScores(Map.of("a", 0.7, "b", 0.3))
+                .build());
+    List<MultiClass> actuals =
+        List.of(MultiClass.MultiClassBuilder.newBuilder().setActualScores(Map.of("a", 1, "b", 0)).build());
+    Response response =
+        client.logTrainingRecords("modelId", "modelVersion", null, null, null, predictions, actuals);
+    try {
+      response.resolve(10, TimeUnit.SECONDS);
+    } catch (TimeoutException e) {
+      Assert.fail("timeout waiting for server");
+    }
+    Record record = preProductionRecords.get(0).getTrainingRecord().getRecord();
+    Assert.assertTrue(record.getPrediction().getPredictionLabel().getMultiClass().hasSingleLabel());
+    Assert.assertEquals(
+        List.of("a"), record.getActual().getActualLabel().getMultiClass().getActualLabelsList());
+  }
+
+  @Test
+  public void testLogValidationRecordsMultiClass() throws IOException, ExecutionException, InterruptedException {
+    List<MultiClass> predictions =
+        List.of(
+            MultiClass.MultiClassBuilder.newBuilder()
+                .setPredictionScores(Map.of("a", 0.7, "b", 0.3))
+                .setThresholdScores(Map.of("a", 0.5, "b", 0.5))
+                .build());
+    List<MultiClass> actuals =
+        List.of(MultiClass.MultiClassBuilder.newBuilder().setActualScores(Map.of("a", 1, "b", 1)).build());
+    Response response =
+        client.logValidationRecords(
+            "modelId", "modelVersion", "batchId", null, null, null, predictions, actuals);
+    try {
+      response.resolve(10, TimeUnit.SECONDS);
+    } catch (TimeoutException e) {
+      Assert.fail("timeout waiting for server");
+    }
+    Public.PreProductionRecord.ValidationRecord validationRecord =
+        preProductionRecords.get(0).getValidationRecord();
+    Assert.assertEquals("batchId", validationRecord.getBatchId());
+    Public.MultiClassPrediction.MultiLabel multiLabel =
+        validationRecord.getRecord().getPrediction().getPredictionLabel().getMultiClass().getMultiLabel();
+    Assert.assertEquals(2, multiLabel.getPredictionThresholdScoresCount());
+    Assert.assertEquals(
+        0.7, multiLabel.getPredictionThresholdScoresOrThrow("a").getPredictionScore().getValue(), 0.0);
+    Assert.assertEquals(
+        0.5, multiLabel.getPredictionThresholdScoresOrThrow("a").getThresholdScore().getValue(), 0.0);
+    Assert.assertEquals(
+        2,
+        validationRecord.getRecord().getActual().getActualLabel().getMultiClass().getActualLabelsCount());
+  }
+
   @Rule
   public final ExpectedException exception = ExpectedException.none();
 

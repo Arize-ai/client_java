@@ -15,6 +15,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -751,6 +753,157 @@ public class ArizeClient implements ArizeAPI {
 
       public Ranking build() {
         return new Ranking(this);
+      }
+    }
+  }
+
+  public static class MultiClass {
+
+    private static final int MAX_NUMBER_OF_CLASSES = 500;
+    private static final int MAX_CLASS_NAME_BYTES = 100;
+
+    private final Map<String, Double> predictionScores;
+    private final Map<String, Double> thresholdScores;
+    private final Map<String, Double> actualScores;
+
+    private MultiClass(MultiClassBuilder builder) {
+      this.predictionScores = copyScores("prediction", builder.predictionScores);
+      this.thresholdScores =
+          builder.thresholdScores == null || builder.thresholdScores.isEmpty()
+              ? null
+              : copyScores("threshold", builder.thresholdScores);
+      this.actualScores = copyScores("actual", builder.actualScores);
+      validation();
+    }
+
+    public Map<String, Double> getPredictionScores() {
+      return predictionScores;
+    }
+
+    public Map<String, Double> getThresholdScores() {
+      return thresholdScores;
+    }
+
+    public Map<String, Double> getActualScores() {
+      return actualScores;
+    }
+
+    private void validation() {
+      if (thresholdScores != null && predictionScores == null) {
+        throw new IllegalArgumentException("multi-class threshold scores require prediction scores");
+      }
+      if (predictionScores == null && actualScores == null) {
+        throw new IllegalArgumentException("multi-class label must contain prediction scores or actual scores");
+      }
+      if (predictionScores != null && actualScores != null) {
+        throw new IllegalArgumentException(
+            "multi-class label must contain either prediction scores or actual scores, not both; build one object for each");
+      }
+      if (predictionScores != null) {
+        predictionScores.forEach((className, score) -> validateProbability("prediction", className, score));
+      }
+      if (thresholdScores != null) {
+        if (!predictionScores.keySet().equals(thresholdScores.keySet())) {
+          throw new IllegalArgumentException(
+              "multi-class prediction scores and threshold scores must contain the same classes. prediction classes: "
+                  + predictionScores.keySet()
+                  + " threshold classes: "
+                  + thresholdScores.keySet());
+        }
+        thresholdScores.forEach((className, score) -> validateProbability("threshold", className, score));
+      }
+      if (actualScores != null) {
+        actualScores.forEach(
+            (className, score) -> {
+              if (score != 0.0 && score != 1.0) {
+                throw new IllegalArgumentException(
+                    "multi-class actual scores must be either 0 or 1. Found class '"
+                        + className
+                        + "' has score "
+                        + score);
+              }
+            });
+      }
+    }
+
+    private static void validateProbability(String kind, String className, double score) {
+      if (Double.isNaN(score) || score < 0 || score > 1) {
+        throw new IllegalArgumentException(
+            "multi-class "
+                + kind
+                + " scores must be between 0 and 1, inclusive. Found class '"
+                + className
+                + "' has score "
+                + score);
+      }
+    }
+
+    private static Map<String, Double> copyScores(String kind, Map<String, ? extends Number> scores) {
+      if (scores == null) {
+        return null;
+      }
+      if (scores.isEmpty() || scores.size() > MAX_NUMBER_OF_CLASSES) {
+        throw new IllegalArgumentException(
+            "multi-class "
+                + kind
+                + " scores must contain at least 1 class and at most "
+                + MAX_NUMBER_OF_CLASSES
+                + " classes. Found "
+                + scores.size()
+                + " classes.");
+      }
+      Map<String, Double> copy = new LinkedHashMap<>();
+      for (Map.Entry<String, ? extends Number> entry : scores.entrySet()) {
+        String className = entry.getKey();
+        if (className == null || className.isEmpty()) {
+          throw new IllegalArgumentException(
+              "multi-class " + kind + " scores must have non-empty class names");
+        }
+        int classNameBytes = className.getBytes(StandardCharsets.UTF_8).length;
+        if (classNameBytes > MAX_CLASS_NAME_BYTES) {
+          throw new IllegalArgumentException(
+              "multi-class class name '"
+                  + className
+                  + "' is "
+                  + classNameBytes
+                  + " bytes in UTF-8, more than the limit of "
+                  + MAX_CLASS_NAME_BYTES);
+        }
+        if (entry.getValue() == null) {
+          throw new IllegalArgumentException(
+              "multi-class " + kind + " score for class '" + className + "' cannot be null");
+        }
+        copy.put(className, entry.getValue().doubleValue());
+      }
+      return Collections.unmodifiableMap(copy);
+    }
+
+    public static final class MultiClassBuilder {
+      private Map<String, ? extends Number> predictionScores;
+      private Map<String, ? extends Number> thresholdScores;
+      private Map<String, ? extends Number> actualScores;
+
+      public static MultiClassBuilder newBuilder() {
+        return new MultiClassBuilder();
+      }
+
+      public MultiClassBuilder setPredictionScores(Map<String, ? extends Number> predictionScores) {
+        this.predictionScores = predictionScores;
+        return this;
+      }
+
+      public MultiClassBuilder setThresholdScores(Map<String, ? extends Number> thresholdScores) {
+        this.thresholdScores = thresholdScores;
+        return this;
+      }
+
+      public MultiClassBuilder setActualScores(Map<String, ? extends Number> actualScores) {
+        this.actualScores = actualScores;
+        return this;
+      }
+
+      public MultiClass build() {
+        return new MultiClass(this);
       }
     }
   }

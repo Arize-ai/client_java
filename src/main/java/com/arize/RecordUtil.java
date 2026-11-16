@@ -6,6 +6,8 @@ import com.arize.protocol.Public.PredictionLabel;
 import com.arize.protocol.Public.RankingPrediction;
 import com.arize.protocol.Public.RankingActual;
 import com.arize.protocol.Public.ActualLabel;
+import com.arize.protocol.Public.MultiClassActual;
+import com.arize.protocol.Public.MultiClassPrediction;
 import com.arize.protocol.Public.MultiValue;
 import com.arize.protocol.Public.ScoreCategorical;
 import com.arize.protocol.Public.Value;
@@ -78,6 +80,44 @@ public class RecordUtil {
         return scBuilder.build();
     }
 
+    private static MultiClassPrediction buildMultiClassPrediction(ArizeClient.MultiClass mc) {
+        Map<String, Double> predictionScores = mc.getPredictionScores();
+        if (predictionScores == null) {
+            throw new IllegalArgumentException("prediction scores for multi-class prediction label cannot be null");
+        }
+        Map<String, Double> thresholdScores = mc.getThresholdScores();
+        if (thresholdScores != null) {
+            MultiClassPrediction.MultiLabel.Builder builder = MultiClassPrediction.MultiLabel.newBuilder();
+            predictionScores.forEach(
+                    (className, score) ->
+                            builder.putPredictionThresholdScores(
+                                    className,
+                                    MultiClassPrediction.MultiLabel.MultiLabelScores.newBuilder()
+                                            .setPredictionScore(convertToProtoDoubleValue(score))
+                                            .setThresholdScore(convertToProtoDoubleValue(thresholdScores.get(className)))
+                                            .build()));
+            return MultiClassPrediction.newBuilder().setMultiLabel(builder).build();
+        }
+        MultiClassPrediction.SingleLabel.Builder builder = MultiClassPrediction.SingleLabel.newBuilder();
+        predictionScores.forEach((className, score) -> builder.putPredictionScores(className, convertToProtoDoubleValue(score)));
+        return MultiClassPrediction.newBuilder().setSingleLabel(builder).build();
+    }
+
+    private static MultiClassActual buildMultiClassActual(ArizeClient.MultiClass mc) {
+        Map<String, Double> actualScores = mc.getActualScores();
+        if (actualScores == null) {
+            throw new IllegalArgumentException("actual scores for multi-class actual label cannot be null");
+        }
+        MultiClassActual.Builder builder = MultiClassActual.newBuilder();
+        actualScores.forEach(
+                (className, score) -> {
+                    if (score == 1.0) {
+                        builder.addActualLabels(className);
+                    }
+                });
+        return builder.build();
+    }
+
     private static <T> Boolean isNumeric(T rawLabel) {
         if(rawLabel instanceof Integer
             || rawLabel instanceof Long
@@ -114,6 +154,8 @@ public class RecordUtil {
             builder.setRank(r.getRank());
             builder.setPredictionGroupId(r.getPredictionGroupId());
             return labelBuilder.setRanking(builder).build();
+        } else if (rawLabel instanceof ArizeClient.MultiClass) {
+            return labelBuilder.setMultiClass(buildMultiClassPrediction((ArizeClient.MultiClass) rawLabel)).build();
         } else if (rawLabel instanceof Boolean) {
             return labelBuilder.setScoreCategorical(buildScoreCategoricalFromString(((Boolean) rawLabel).toString())).build();
         } else if (rawLabel instanceof String) {
@@ -126,7 +168,7 @@ public class RecordUtil {
         throw new IllegalArgumentException(
             "Illegal prediction label "
                     + rawLabel
-                    + ", must be oneof: boolean, String, int, long, short, float, double, ScoredCategorical, Ranking");
+                    + ", must be oneof: boolean, String, int, long, short, float, double, ScoredCategorical, Ranking, MultiClass");
     }
 
     protected static <T> ActualLabel convertActualLabel(final T rawLabel) throws IllegalArgumentException {
@@ -147,6 +189,8 @@ public class RecordUtil {
                 builder.setCategory(r.getActualLabels());
             }
             return labelBuilder.setRanking(builder).build();
+        } else if (rawLabel instanceof ArizeClient.MultiClass) {
+            return labelBuilder.setMultiClass(buildMultiClassActual((ArizeClient.MultiClass) rawLabel)).build();
         } else if (rawLabel instanceof Boolean) {
             return labelBuilder.setScoreCategorical(buildScoreCategoricalFromString(((Boolean) rawLabel).toString())).build();
         } else if (rawLabel instanceof String) {
@@ -159,7 +203,7 @@ public class RecordUtil {
         throw new IllegalArgumentException(
             "Illegal actual label "
                     + rawLabel
-                    + ", must be oneof: boolean, String, int, long, short, float, double, ScoredCategorical, Ranking");
+                    + ", must be oneof: boolean, String, int, long, short, float, double, ScoredCategorical, Ranking, MultiClass");
     }
 
     protected static <T> void validatePredictionActualMatches(

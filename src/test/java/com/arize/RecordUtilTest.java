@@ -5,20 +5,26 @@ import com.arize.protocol.Public.Embedding;
 import com.arize.protocol.Public.Label;
 import com.arize.protocol.Public.PredictionLabel;
 import com.arize.protocol.Public.ActualLabel;
+import com.arize.protocol.Public.MultiClassActual;
+import com.arize.protocol.Public.MultiClassPrediction;
 import com.arize.protocol.Public.MultiValue;
 import com.arize.protocol.Public.ScoreCategorical;
 import com.arize.protocol.Public.Value;
+import com.google.protobuf.DoubleValue;
 import com.google.protobuf.StringValue;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class RecordUtilTest {
@@ -146,6 +152,253 @@ public class RecordUtilTest {
                 scoreCategoricalActLabel,
                 RecordUtil.convertActualLabel(
                         new ArizeClient.ScoredCategorical("pear", 4.17, Arrays.asList(0.12, 0.23, 0.34))));
+    }
+
+    @Test
+    public void testConvertMultiClassSingleLabelPrediction() {
+        Map<String, Double> predictionScores = new LinkedHashMap<>();
+        predictionScores.put("economy", 0.7);
+        predictionScores.put("business", 0.2);
+        predictionScores.put("first", 0.1);
+        ArizeClient.MultiClass mc =
+                ArizeClient.MultiClass.MultiClassBuilder.newBuilder().setPredictionScores(predictionScores).build();
+
+        MultiClassPrediction expected =
+                MultiClassPrediction.newBuilder()
+                        .setSingleLabel(
+                                MultiClassPrediction.SingleLabel.newBuilder()
+                                        .putPredictionScores("economy", DoubleValue.of(0.7))
+                                        .putPredictionScores("business", DoubleValue.of(0.2))
+                                        .putPredictionScores("first", DoubleValue.of(0.1)))
+                        .build();
+        assertEquals(
+                PredictionLabel.newBuilder().setMultiClass(expected).build(),
+                RecordUtil.convertPredictionLabel(mc));
+    }
+
+    @Test
+    public void testConvertMultiClassMultiLabelPrediction() {
+        Map<String, Double> predictionScores = new HashMap<>();
+        predictionScores.put("action", 0.9);
+        predictionScores.put("comedy", 0.4);
+        Map<String, Integer> thresholdScores = new HashMap<>();
+        thresholdScores.put("action", 1);
+        thresholdScores.put("comedy", 0);
+        ArizeClient.MultiClass mc =
+                ArizeClient.MultiClass.MultiClassBuilder.newBuilder()
+                        .setPredictionScores(predictionScores)
+                        .setThresholdScores(thresholdScores)
+                        .build();
+
+        MultiClassPrediction expected =
+                MultiClassPrediction.newBuilder()
+                        .setMultiLabel(
+                                MultiClassPrediction.MultiLabel.newBuilder()
+                                        .putPredictionThresholdScores(
+                                                "action",
+                                                MultiClassPrediction.MultiLabel.MultiLabelScores.newBuilder()
+                                                        .setPredictionScore(DoubleValue.of(0.9))
+                                                        .setThresholdScore(DoubleValue.of(1.0))
+                                                        .build())
+                                        .putPredictionThresholdScores(
+                                                "comedy",
+                                                MultiClassPrediction.MultiLabel.MultiLabelScores.newBuilder()
+                                                        .setPredictionScore(DoubleValue.of(0.4))
+                                                        .setThresholdScore(DoubleValue.of(0.0))
+                                                        .build()))
+                        .build();
+        assertEquals(
+                PredictionLabel.newBuilder().setMultiClass(expected).build(),
+                RecordUtil.convertPredictionLabel(mc));
+    }
+
+    @Test
+    public void testConvertMultiClassEmptyThresholdsIsSingleLabel() {
+        ArizeClient.MultiClass mc =
+                ArizeClient.MultiClass.MultiClassBuilder.newBuilder()
+                        .setPredictionScores(Collections.singletonMap("a", 0.5))
+                        .setThresholdScores(Collections.<String, Double>emptyMap())
+                        .build();
+        assertTrue(RecordUtil.convertPredictionLabel(mc).getMultiClass().hasSingleLabel());
+    }
+
+    @Test
+    public void testConvertMultiClassActual() {
+        Map<String, Integer> actualScores = new LinkedHashMap<>();
+        actualScores.put("action", 1);
+        actualScores.put("comedy", 0);
+        actualScores.put("drama", 1);
+        ArizeClient.MultiClass mc =
+                ArizeClient.MultiClass.MultiClassBuilder.newBuilder().setActualScores(actualScores).build();
+
+        ActualLabel expected =
+                ActualLabel.newBuilder()
+                        .setMultiClass(MultiClassActual.newBuilder().addActualLabels("action").addActualLabels("drama"))
+                        .build();
+        assertEquals(expected, RecordUtil.convertActualLabel(mc));
+    }
+
+    @Test
+    public void testConvertMultiClassMissingScoresForSide() {
+        ArizeClient.MultiClass actualOnly =
+                ArizeClient.MultiClass.MultiClassBuilder.newBuilder()
+                        .setActualScores(Collections.singletonMap("a", 1))
+                        .build();
+        expectIllegalArgument(
+                "actual-only label as prediction",
+                "prediction scores for multi-class prediction label cannot be null",
+                () -> RecordUtil.convertPredictionLabel(actualOnly));
+
+        ArizeClient.MultiClass predictionOnly =
+                ArizeClient.MultiClass.MultiClassBuilder.newBuilder()
+                        .setPredictionScores(Collections.singletonMap("a", 0.5))
+                        .build();
+        expectIllegalArgument(
+                "prediction-only label as actual",
+                "actual scores for multi-class actual label cannot be null",
+                () -> RecordUtil.convertActualLabel(predictionOnly));
+    }
+
+    @Test
+    public void testMultiClassRejectsPredictionAndActualScoresTogether() {
+        expectIllegalArgument(
+                "prediction and actual scores on one object",
+                "not both",
+                () ->
+                        ArizeClient.MultiClass.MultiClassBuilder.newBuilder()
+                                .setPredictionScores(Collections.singletonMap("a", 0.5))
+                                .setActualScores(Collections.singletonMap("a", 1))
+                                .build());
+    }
+
+    @Test
+    public void testMultiClassPredictionScoreValidation() {
+        Map<String, Double> tooManyClasses = new HashMap<>();
+        for (int i = 0; i < 501; i++) {
+            tooManyClasses.put("class" + i, 0.5);
+        }
+        Map<String, Double> nullScore = new HashMap<>();
+        nullScore.put("a", null);
+
+        expectInvalidPrediction("empty", "at least 1 class", Collections.<String, Double>emptyMap());
+        expectInvalidPrediction("501 classes", "at most 500 classes", tooManyClasses);
+        expectInvalidPrediction("empty class name", "non-empty class names", Collections.singletonMap("", 0.5));
+        expectInvalidPrediction("null class name", "non-empty class names", Collections.singletonMap(null, 0.5));
+        expectInvalidPrediction("101-char class name", "bytes in UTF-8", Collections.singletonMap(repeat("x", 101), 0.5));
+        expectInvalidPrediction("null score", "cannot be null", nullScore);
+        expectInvalidPrediction("score 1.1", "prediction scores must be between 0 and 1", Collections.singletonMap("a", 1.1));
+        expectInvalidPrediction("score -0.1", "prediction scores must be between 0 and 1", Collections.singletonMap("a", -0.1));
+        expectInvalidPrediction("score NaN", "prediction scores must be between 0 and 1", Collections.singletonMap("a", Double.NaN));
+        expectInvalidPrediction(
+                "score +Infinity",
+                "prediction scores must be between 0 and 1",
+                Collections.singletonMap("a", Double.POSITIVE_INFINITY));
+    }
+
+    @Test
+    public void testMultiClassClassNameLimitIsUtf8Bytes() {
+        String thirtyThreeCjkChars = repeat("中", 33);
+        ArizeClient.MultiClass.MultiClassBuilder.newBuilder()
+                .setPredictionScores(Collections.singletonMap(thirtyThreeCjkChars, 0.5))
+                .build();
+
+        expectInvalidPrediction(
+                "34 CJK chars (102 bytes)",
+                "bytes in UTF-8",
+                Collections.singletonMap(repeat("中", 34), 0.5));
+    }
+
+    @Test
+    public void testMultiClassThresholdScoreValidation() {
+        Map<String, Double> twoClasses = new HashMap<>();
+        twoClasses.put("a", 0.5);
+        twoClasses.put("b", 0.5);
+
+        expectInvalidThreshold("fewer classes than predictions", "must contain the same classes", twoClasses, Collections.singletonMap("a", 0.5));
+        expectInvalidThreshold(
+                "different classes",
+                "must contain the same classes",
+                Collections.singletonMap("a", 0.5),
+                Collections.singletonMap("b", 0.5));
+        expectInvalidThreshold(
+                "threshold 1.1",
+                "threshold scores must be between 0 and 1",
+                Collections.singletonMap("a", 0.5),
+                Collections.singletonMap("a", 1.1));
+        expectInvalidThreshold(
+                "threshold -0.1",
+                "threshold scores must be between 0 and 1",
+                Collections.singletonMap("a", 0.5),
+                Collections.singletonMap("a", -0.1));
+        expectInvalidThreshold(
+                "threshold NaN",
+                "threshold scores must be between 0 and 1",
+                Collections.singletonMap("a", 0.5),
+                Collections.singletonMap("a", Double.NaN));
+        expectInvalidThreshold(
+                "threshold without predictions",
+                "threshold scores require prediction scores",
+                null,
+                Collections.singletonMap("a", 0.5));
+    }
+
+    @Test
+    public void testMultiClassActualScoreValidation() {
+        expectInvalidActual("empty", "at least 1 class", Collections.<String, Double>emptyMap());
+        expectInvalidActual("empty class name", "non-empty class names", Collections.singletonMap("", 1.0));
+        expectInvalidActual("101-char class name", "bytes in UTF-8", Collections.singletonMap(repeat("x", 101), 1.0));
+        expectInvalidActual("score 0.5", "must be either 0 or 1", Collections.singletonMap("a", 0.5));
+        expectInvalidActual("score 2.0", "must be either 0 or 1", Collections.singletonMap("a", 2.0));
+        expectInvalidActual("score NaN", "must be either 0 or 1", Collections.singletonMap("a", Double.NaN));
+    }
+
+    @Test
+    public void testMultiClassWithoutScoresIsRejected() {
+        expectIllegalArgument(
+                "no scores",
+                "must contain prediction scores or actual scores",
+                () -> ArizeClient.MultiClass.MultiClassBuilder.newBuilder().build());
+    }
+
+    private static void expectInvalidPrediction(String caseName, String messageFragment, Map<String, Double> scores) {
+        expectIllegalArgument(
+                caseName,
+                messageFragment,
+                () -> ArizeClient.MultiClass.MultiClassBuilder.newBuilder().setPredictionScores(scores).build());
+    }
+
+    private static void expectInvalidThreshold(
+            String caseName, String messageFragment, Map<String, Double> predictionScores, Map<String, Double> thresholdScores) {
+        expectIllegalArgument(
+                caseName,
+                messageFragment,
+                () -> ArizeClient.MultiClass.MultiClassBuilder.newBuilder()
+                        .setPredictionScores(predictionScores)
+                        .setThresholdScores(thresholdScores)
+                        .build());
+    }
+
+    private static void expectInvalidActual(String caseName, String messageFragment, Map<String, Double> scores) {
+        expectIllegalArgument(
+                caseName,
+                messageFragment,
+                () -> ArizeClient.MultiClass.MultiClassBuilder.newBuilder().setActualScores(scores).build());
+    }
+
+    private static void expectIllegalArgument(String caseName, String messageFragment, Runnable runnable) {
+        try {
+            runnable.run();
+        } catch (IllegalArgumentException e) {
+            assertTrue(
+                    caseName + ": expected message containing '" + messageFragment + "' but was '" + e.getMessage() + "'",
+                    e.getMessage().contains(messageFragment));
+            return;
+        }
+        fail(caseName + ": expected IllegalArgumentException");
+    }
+
+    private static String repeat(String s, int times) {
+        return String.join("", Collections.nCopies(times, s));
     }
 
     @Test

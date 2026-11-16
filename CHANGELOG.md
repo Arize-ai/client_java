@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/Arize-ai/arize/compare/arize-java-sdk/v2.3.0...arize-java-sdk/v2.4.0) (2026-11-12)
+
+
+### 🎁 New Features
+
+* add multi-class ingestion support to java sdk ([#93093](https://github.com/Arize-ai/arize/issues/93093)) ([4076bb1](https://github.com/Arize-ai/arize/commit/4076bb1706a7239b64ad0a21c679716384d55a95))
+
 ## [2.3.0](https://github.com/Arize-ai/arize/compare/arize-java-sdk/v2.2.6...arize-java-sdk/v2.3.0) (2026-10-02)
 
 
